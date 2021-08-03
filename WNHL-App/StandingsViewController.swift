@@ -1,13 +1,13 @@
 //
-//  MoreViewController.swift
+//  StandingsViewController.swift
 //  WNHL-App
 //
-//  Created by Daniel Figueroa on 2021-08-02.
+//  Created by Daniel Figueroa on 2021-08-03.
 //
 
 import UIKit
 
-class MoreViewController: UIViewController {
+class StandingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
