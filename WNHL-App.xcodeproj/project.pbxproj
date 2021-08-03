@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		9810CF4F26AF6E6900442CD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF4E26AF6E6900442CD1 /* AppDelegate.swift */; };
 		9810CF5126AF6E6900442CD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF5026AF6E6900442CD1 /* SceneDelegate.swift */; };
-		9810CF5326AF6E6900442CD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF5226AF6E6900442CD1 /* ViewController.swift */; };
+		9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF5226AF6E6900442CD1 /* HomeViewController.swift */; };
 		9810CF5626AF6E6900442CD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9810CF5426AF6E6900442CD1 /* Main.storyboard */; };
 		9810CF5826AF6E6F00442CD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9810CF5726AF6E6F00442CD1 /* Assets.xcassets */; };
 		9810CF5B26AF6E6F00442CD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9810CF5926AF6E6F00442CD1 /* LaunchScreen.storyboard */; };
 		9810CF6626AF6E7000442CD1 /* WNHL_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF6526AF6E7000442CD1 /* WNHL_AppTests.swift */; };
 		9810CF7126AF6E7000442CD1 /* WNHL_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF7026AF6E7000442CD1 /* WNHL_AppUITests.swift */; };
+		9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF8026B7BB0900442CD1 /* MoreViewController.swift */; };
+		9810CF8326B97D0500442CD1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF8226B97D0500442CD1 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,7 @@
 		9810CF4B26AF6E6900442CD1 /* WNHL-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WNHL-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9810CF4E26AF6E6900442CD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9810CF5026AF6E6900442CD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9810CF5226AF6E6900442CD1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9810CF5226AF6E6900442CD1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9810CF5526AF6E6900442CD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9810CF5726AF6E6F00442CD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9810CF5A26AF6E6F00442CD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		9810CF6C26AF6E7000442CD1 /* WNHL-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WNHL-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9810CF7026AF6E7000442CD1 /* WNHL_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WNHL_AppUITests.swift; sourceTree = "<group>"; };
 		9810CF7226AF6E7000442CD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9810CF8026B7BB0900442CD1 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		9810CF8226B97D0500442CD1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +104,14 @@
 			isa = PBXGroup;
 			children = (
 				9810CF4E26AF6E6900442CD1 /* AppDelegate.swift */,
+				9810CF8226B97D0500442CD1 /* BaseViewController.swift */,
 				9810CF5026AF6E6900442CD1 /* SceneDelegate.swift */,
-				9810CF5226AF6E6900442CD1 /* ViewController.swift */,
+				9810CF5226AF6E6900442CD1 /* HomeViewController.swift */,
 				9810CF5426AF6E6900442CD1 /* Main.storyboard */,
 				9810CF5726AF6E6F00442CD1 /* Assets.xcassets */,
 				9810CF5926AF6E6F00442CD1 /* LaunchScreen.storyboard */,
 				9810CF5C26AF6E6F00442CD1 /* Info.plist */,
+				9810CF8026B7BB0900442CD1 /* MoreViewController.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -258,7 +264,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9810CF5326AF6E6900442CD1 /* ViewController.swift in Sources */,
+				9810CF8326B97D0500442CD1 /* BaseViewController.swift in Sources */,
+				9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */,
+				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
 				9810CF4F26AF6E6900442CD1 /* AppDelegate.swift in Sources */,
 				9810CF5126AF6E6900442CD1 /* SceneDelegate.swift in Sources */,
 			);
