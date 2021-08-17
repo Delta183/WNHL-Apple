@@ -18,6 +18,8 @@
 		9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF8026B7BB0900442CD1 /* MoreViewController.swift */; };
 		9810CF8526B9B78500442CD1 /* TeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF8426B9B78500442CD1 /* TeamsViewController.swift */; };
 		9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF8626B9B7AE00442CD1 /* StandingsViewController.swift */; };
+		98C3987226C472D7007D226E /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987126C472D7007D226E /* MyCollectionViewCell.swift */; };
+		98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987526C476F9007D226E /* SpreadsheetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		9810CF8026B7BB0900442CD1 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		9810CF8426B9B78500442CD1 /* TeamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsViewController.swift; sourceTree = "<group>"; };
 		9810CF8626B9B7AE00442CD1 /* StandingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsViewController.swift; sourceTree = "<group>"; };
+		98C3987126C472D7007D226E /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		98C3987526C476F9007D226E /* SpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				9810CF5026AF6E6900442CD1 /* SceneDelegate.swift */,
 				9810CF5226AF6E6900442CD1 /* HomeViewController.swift */,
 				9810CF5426AF6E6900442CD1 /* Main.storyboard */,
+				98C3987526C476F9007D226E /* SpreadsheetViewController.swift */,
+				98C3987126C472D7007D226E /* MyCollectionViewCell.swift */,
 				9810CF5726AF6E6F00442CD1 /* Assets.xcassets */,
 				9810CF5926AF6E6F00442CD1 /* LaunchScreen.storyboard */,
 				9810CF5C26AF6E6F00442CD1 /* Info.plist */,
@@ -268,6 +274,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */,
+				98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */,
+				98C3987226C472D7007D226E /* MyCollectionViewCell.swift in Sources */,
 				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
 				9810CF4F26AF6E6900442CD1 /* AppDelegate.swift in Sources */,
