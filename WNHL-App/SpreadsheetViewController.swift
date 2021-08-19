@@ -32,7 +32,7 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             var cellWidth:CGFloat = CGFloat()
 
         if indexPath.row == 1 || ((indexPath.row - 1) % 9) == 0 {
-            cellWidth = 160
+            cellWidth = 162
            }
         else if indexPath.row == 2 || indexPath.row == 7 || indexPath.row == 8 || ((indexPath.row - 2) % 9) == 0 || ((indexPath.row - 7) % 9) == 0 || ((indexPath.row - 8) % 9) == 0{
             cellWidth = 27
@@ -63,8 +63,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
     
     // MARK: - UICollectionViewDelegate protocol
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
           
