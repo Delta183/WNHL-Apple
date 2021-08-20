@@ -21,3 +21,7 @@ class MyCollectionViewCell:  UICollectionViewCell {
     */
 
 }
+
+class SpreadsheetCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var posLabel2: UILabel!
+}
