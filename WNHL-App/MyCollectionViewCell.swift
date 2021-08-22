@@ -7,21 +7,24 @@
 
 import UIKit
 
-class MyCollectionViewCell:  UICollectionViewCell {
-    
+class SpreadsheetCollectionViewCell1:  UICollectionViewCell {
     @IBOutlet weak var posLabel: UILabel!
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
-class SpreadsheetCollectionViewCell: UICollectionViewCell {
+class SpreadsheetCollectionViewCell2: UICollectionViewCell {
     @IBOutlet weak var posLabel2: UILabel!
+}
+
+class SpreadsheetCollectionViewCell3: UICollectionViewCell{
+    @IBOutlet weak var posLabel3: UILabel!
+}
+
+class SpreadsheetCollectionViewCell4
+: UICollectionViewCell{
+    @IBOutlet weak var posLabel4: UILabel!
+}
+
+class SpreadsheetCollectionViewCell5
+: UICollectionViewCell{
+    @IBOutlet weak var posLabel5: UILabel!
 }
