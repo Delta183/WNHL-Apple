@@ -59,7 +59,12 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
         else if collectionView == CollectionView3{
             return self.positions3.count
         }
-        return self.positions4.count
+        else if collectionView == CollectionView4 {
+            return self.positions4.count
+        }
+        else{
+            return self.positions5.count
+        }
     }
     
     

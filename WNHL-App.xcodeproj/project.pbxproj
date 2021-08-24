@@ -20,7 +20,8 @@
 		9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9810CF8626B9B7AE00442CD1 /* StandingsViewController.swift */; };
 		9827C6BD26D482CE005A062B /* TeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827C6BC26D482CE005A062B /* TeamTableViewController.swift */; };
 		9827C6BF26D4AFCC005A062B /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */; };
-		98C3987226C472D7007D226E /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987126C472D7007D226E /* MyCollectionViewCell.swift */; };
+		9827C6C326D4E39C005A062B /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827C6C226D4E39C005A062B /* ScheduleTableViewCell.swift */; };
+		98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */; };
 		98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987526C476F9007D226E /* SpreadsheetViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +62,8 @@
 		9810CF8626B9B7AE00442CD1 /* StandingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsViewController.swift; sourceTree = "<group>"; };
 		9827C6BC26D482CE005A062B /* TeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewController.swift; sourceTree = "<group>"; };
 		9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
-		98C3987126C472D7007D226E /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		9827C6C226D4E39C005A062B /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCells.swift; sourceTree = "<group>"; };
 		98C3987526C476F9007D226E /* SpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,7 +120,7 @@
 				9810CF5226AF6E6900442CD1 /* HomeViewController.swift */,
 				9810CF5426AF6E6900442CD1 /* Main.storyboard */,
 				98C3987526C476F9007D226E /* SpreadsheetViewController.swift */,
-				98C3987126C472D7007D226E /* MyCollectionViewCell.swift */,
+				98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */,
 				9810CF5726AF6E6F00442CD1 /* Assets.xcassets */,
 				9810CF5926AF6E6F00442CD1 /* LaunchScreen.storyboard */,
 				9810CF5C26AF6E6F00442CD1 /* Info.plist */,
@@ -127,6 +129,7 @@
 				9810CF8626B9B7AE00442CD1 /* StandingsViewController.swift */,
 				9827C6BC26D482CE005A062B /* TeamTableViewController.swift */,
 				9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */,
+				9827C6C226D4E39C005A062B /* ScheduleTableViewCell.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -281,7 +284,8 @@
 			files = (
 				9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */,
 				98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */,
-				98C3987226C472D7007D226E /* MyCollectionViewCell.swift in Sources */,
+				9827C6C326D4E39C005A062B /* ScheduleTableViewCell.swift in Sources */,
+				98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */,
 				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
 				9827C6BD26D482CE005A062B /* TeamTableViewController.swift in Sources */,

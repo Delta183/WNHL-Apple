@@ -38,10 +38,14 @@ class ScheduleTableViewController: UITableViewController {
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            
-        let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-        cell.textLabel?.numberOfLines = 0
+        
+        let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
+        cell.scheduleText.numberOfLines = 0
        // note that indexPath.section is used rather than indexPath.row
-       cell.textLabel?.text = self.games[indexPath.section]
+       cell.scheduleText.text = self.games[indexPath.section]
+        cell.scheduleText.textAlignment = NSTextAlignment.center
+        cell.HomeImage.image = UIImage(named: "WNHL_Logo.png")
+        cell.AwayImage.image = UIImage(named: "WNHL_Logo.png")
 
        // add border and color
         //cell.imageView?.image = UIImage(named: "WNHL_Logo.png")
@@ -49,7 +53,6 @@ class ScheduleTableViewController: UITableViewController {
        cell.layer.borderColor = UIColor.black.cgColor
        cell.layer.borderWidth = 1
        cell.layer.cornerRadius = 8
-        cell.textLabel?.textAlignment = NSTextAlignment.center
        cell.clipsToBounds = true
         
        
@@ -58,8 +61,8 @@ class ScheduleTableViewController: UITableViewController {
 
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        self.ScheduleTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
         // Do any additional setup after loading the view.
