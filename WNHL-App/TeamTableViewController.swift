@@ -9,6 +9,7 @@ import UIKit
 
 class TeamTableViewController: UITableViewController {
     
+    @IBOutlet var teamTableView: UITableView!
     var teams = ["Atlas Steelers", "Townline Tunnelers", "Crown Room Kings", "Dain City Dusters",  "Lincoln Street Legends"]
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -20,11 +21,13 @@ class TeamTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "teamCell", for: indexPath)
-        cell.textLabel?.text = teams[indexPath.row]
-        cell.textLabel?.textColor = UIColor.white
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        let cell = teamTableView.dequeueReusableCell(withIdentifier: "teamCell", for: indexPath) as! TeamTableViewCell
+        cell.teamNameLabel.text = teams[indexPath.row]
+        cell.teamNameLabel.textColor = UIColor.white
+        cell.teamNameLabel.font = UIFont.boldSystemFont(ofSize: 24)
         cell.backgroundColor = UIColor.systemOrange
+        cell.chevronImage.image = UIImage(systemName: "chevron.right")
+        cell.chevronImage.tintColor = UIColor.white
         return cell
     }
     

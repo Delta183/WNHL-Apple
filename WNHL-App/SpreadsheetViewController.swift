@@ -101,8 +101,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell.posLabel.text = self.positions[indexPath.row] // The row value is the same as the index of the desired text within the array.
             cell.backgroundColor = UIColor.white // make cell more visible in our example project
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.borderWidth = 1
             return cell
         }
         else if collectionView == self.CollectionView2{
@@ -112,8 +110,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell2.posLabel2.text = self.positions2[indexPath.row] // The row value is the same as the index of the desired text within the array.
             cell2.backgroundColor = UIColor.white // make cell more visible in our example project
-            cell2.layer.borderColor = UIColor.black.cgColor
-            cell2.layer.borderWidth = 1
             return cell2
         }
         else if collectionView == self.CollectionView3{
@@ -122,8 +118,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell3.posLabel3.text = self.positions3[indexPath.row] // The row value is the same as the index of the desired text within the array.
             cell3.backgroundColor = UIColor.white // make cell more visible in our example project
-            cell3.layer.borderColor = UIColor.black.cgColor
-            cell3.layer.borderWidth = 1
             return cell3
         }
         else if collectionView == self.CollectionView4{
@@ -132,8 +126,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell4.posLabel4.text = self.positions4[indexPath.row] // The row value is the same as the index of the desired text within the array.
             cell4.backgroundColor = UIColor.white // make cell more visible in our example project
-            cell4.layer.borderColor = UIColor.black.cgColor
-            cell4.layer.borderWidth = 1
             return cell4
         }
         else{
@@ -142,8 +134,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell5.posLabel5.text = self.positions5[indexPath.row] // The row value is the same as the index of the desired text within the array.
             cell5.backgroundColor = UIColor.white // make cell more visible in our example project
-            cell5.layer.borderColor = UIColor.black.cgColor
-            cell5.layer.borderWidth = 1
             return cell5
         }
         
