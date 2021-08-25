@@ -22,6 +22,8 @@
 		9827C6BF26D4AFCC005A062B /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */; };
 		9827C6C326D4E39C005A062B /* CustomTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827C6C226D4E39C005A062B /* CustomTableCells.swift */; };
 		982E765C26D5D9FD0050F2DA /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */; };
+		982E766026D5FBC60050F2DA /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E765F26D5FBC60050F2DA /* PlayersViewController.swift */; };
+		982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */; };
 		98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */; };
 		98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987526C476F9007D226E /* SpreadsheetViewController.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +67,8 @@
 		9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
 		9827C6C226D4E39C005A062B /* CustomTableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableCells.swift; sourceTree = "<group>"; };
 		982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		982E765F26D5FBC60050F2DA /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
+		982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewController.swift; sourceTree = "<group>"; };
 		98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCells.swift; sourceTree = "<group>"; };
 		98C3987526C476F9007D226E /* SpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +137,8 @@
 				9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */,
 				9827C6C226D4E39C005A062B /* CustomTableCells.swift */,
 				982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */,
+				982E765F26D5FBC60050F2DA /* PlayersViewController.swift */,
+				982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				982E766026D5FBC60050F2DA /* PlayersViewController.swift in Sources */,
 				9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */,
 				98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */,
 				9827C6C326D4E39C005A062B /* CustomTableCells.swift in Sources */,
@@ -292,6 +299,7 @@
 				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
 				9827C6BD26D482CE005A062B /* TeamTableViewController.swift in Sources */,
+				982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */,
 				9827C6BF26D4AFCC005A062B /* ScheduleTableViewController.swift in Sources */,
 				9810CF4F26AF6E6900442CD1 /* AppDelegate.swift in Sources */,
 				9810CF8526B9B78500442CD1 /* TeamsViewController.swift in Sources */,
