@@ -10,9 +10,9 @@ import UIKit
 class ScheduleTableViewController: UITableViewController {
 
     let cellReuseIdentifier = "scheduleCell"
-    let cellSpacingHeight: CGFloat = 10
+    let cellSpacingHeight: CGFloat = 20
     @IBOutlet var ScheduleTableView: UITableView!
-    var games: [String] = ["Thu Dec 31, 2020\n12:52 AM\nPelham - Duliban\n bababooey", "Thu Dec 31, 2020\n12:52 AM\nPelham - Duliban\n bababooey", "Thu Dec 31, 2020\n12:52 AM\nPelham - Duliban\n bababooey", "Thu Dec 31, 2020\n12:52 AM\nPelham - Duliban\n bababooey", "Thu Dec 31, 2020\n12:52 AM\nPelham - Duliban\n bababooey"]
+    var games: [String] = ["Wed. Oct 7, 2020\n2 - 2\nNiagara Falls - Gale Center\nCrown Room Kings vs Townline Tunnelers", "Wed. Oct 7, 2020\n2 - 2\nNiagara Falls - Gale Center\nCrown Room Kings vs Townline Tunnelers","Wed. Oct 7, 2020\n2 - 2\nNiagara Falls - Gale Center\nCrown Room Kings vs Townline Tunnelers","Wed. Oct 7, 2020\n2 - 2\nNiagara Falls - Gale Center\nCrown Room Kings vs Townline Tunnelers","Wed. Oct 7, 2020\n2 - 2\nNiagara Falls - Gale Center\nCrown Room Kings vs Townline Tunnelers",]
     
     override func numberOfSections(in tableView: UITableView) -> Int {
            return self.games.count
@@ -41,6 +41,7 @@ class ScheduleTableViewController: UITableViewController {
         
         let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
         cell.scheduleText.numberOfLines = 0
+        cell.scheduleText.font = UIFont.systemFont(ofSize: 16)
        // note that indexPath.section is used rather than indexPath.row
        cell.scheduleText.text = self.games[indexPath.section]
         cell.scheduleText.textAlignment = NSTextAlignment.center
@@ -48,11 +49,9 @@ class ScheduleTableViewController: UITableViewController {
         cell.AwayImage.image = UIImage(named: "WNHL_Logo.png")
 
        // add border and color
-        //cell.imageView?.image = UIImage(named: "WNHL_Logo.png")
        cell.backgroundColor = UIColor.white
-       cell.layer.borderColor = UIColor.black.cgColor
-       cell.layer.borderWidth = 1
-       cell.layer.cornerRadius = 8
+       cell.layer.borderWidth = 0
+       cell.layer.cornerRadius = 24
        cell.clipsToBounds = true
         
        
