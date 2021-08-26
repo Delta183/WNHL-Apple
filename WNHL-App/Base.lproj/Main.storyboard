@@ -374,11 +374,12 @@
                         <outlet property="MoreTableView" destination="tME-wr-UZL" id="Zld-Pc-55M"/>
                         <segue destination="mtE-x4-TMC" kind="presentation" identifier="playersSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="aEa-yT-A6p"/>
                         <segue destination="e86-Ts-sEQ" kind="presentation" identifier="statisticsSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="ewN-QD-hDB"/>
+                        <segue destination="PoO-AS-q3f" kind="presentation" identifier="notificationSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="2Em-yF-I9E"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izC-cV-BC3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="2053"/>
+            <point key="canvasLocation" x="1943" y="2068"/>
         </scene>
         <!--Statistics View Controller-->
         <scene sceneID="ui1-bc-kJ3">
@@ -466,7 +467,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkb-cp-S1H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3062.3188405797105" y="2345.7589285714284"/>
+            <point key="canvasLocation" x="3059" y="2199"/>
         </scene>
         <!--Statistics Spreadsheet View Controller-->
         <scene sceneID="Bmz-m3-9LB">
@@ -524,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5F0-Vh-fxF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3823" y="2166"/>
+            <point key="canvasLocation" x="3822" y="2086"/>
         </scene>
         <!--Statistics Spreadsheet View Controller-->
         <scene sceneID="nXQ-nN-wOK">
@@ -582,7 +583,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G38-uv-DRg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3822" y="2346"/>
+            <point key="canvasLocation" x="3822" y="2262"/>
         </scene>
         <!--Statistics Spreadsheet View Controller-->
         <scene sceneID="AIy-pd-ObZ">
@@ -640,7 +641,116 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IAK-es-ruh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3823" y="2540"/>
+            <point key="canvasLocation" x="3822" y="2486"/>
+        </scene>
+        <!--Notifications View Controller-->
+        <scene sceneID="Cfl-kX-nbH">
+            <objects>
+                <viewController id="PoO-AS-q3f" customClass="NotificationsViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Tk-0n-lgZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" id="mAA-1i-rGT">
+                                <rect key="frame" x="79" y="70" width="256" height="256"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NOTIFICATIONS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZd-a1-bTy">
+                                <rect key="frame" x="82" y="334" width="251" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Team.." textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOv-2c-983">
+                                <rect key="frame" x="20" y="372" width="374" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-QO-qzB">
+                                <rect key="frame" x="20" y="70" width="68" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Back" image="chevron.left" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-Cf-OUj">
+                                <rect key="frame" x="0.0" y="-150" width="414" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="2FJ-kR-SIr" kind="embed" id="cyb-qa-lUp"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="K9n-2a-Bt0"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="g3q-QO-qzB" id="nFZ-pM-aFH"/>
+                        <outlet property="infoLabel" destination="JOv-2c-983" id="a07-Y1-1Fg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0cp-WT-g78" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3056.521739130435" y="3113.8392857142858"/>
+        </scene>
+        <!--Notifications Table View Controller-->
+        <scene sceneID="faO-mh-lbI">
+            <objects>
+                <tableViewController id="2FJ-kR-SIr" customClass="NotificationsTableViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fKB-1i-OvU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationTableCell" id="Mub-dK-11k" customClass="NotificationTableViewCell" customModule="WNHL_App" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mub-dK-11k" id="FWR-MI-dkM">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AQ-fD-TJQ">
+                                            <rect key="frame" x="12" y="10" width="35" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" backgroundImage="square" catalog="system">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vD-nl-Lbd">
+                                            <rect key="frame" x="55" y="11" width="339" height="28"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <connections>
+                                    <outlet property="checkButton" destination="1AQ-fD-TJQ" id="DSv-XS-PZw"/>
+                                    <outlet property="teamLabel" destination="1vD-nl-Lbd" id="7Dk-c5-V02"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2FJ-kR-SIr" id="TJU-Jj-A2a"/>
+                            <outlet property="delegate" destination="2FJ-kR-SIr" id="aV2-nx-dee"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="NotificationsTableView" destination="fKB-1i-OvU" id="ntg-59-ZtK"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxQ-sb-FrL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3851" y="3114"/>
         </scene>
         <!--Item-->
         <scene sceneID="iPJ-0h-eeL">
@@ -1124,6 +1234,7 @@
         <image name="gamecontroller" catalog="system" width="128" height="80"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="square" catalog="system" width="128" height="114"/>
         <image name="waveform.path.ecg" catalog="system" width="128" height="124"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

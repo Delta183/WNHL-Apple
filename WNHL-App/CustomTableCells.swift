@@ -74,3 +74,19 @@ class PlayerTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 }
+
+class NotificationTableViewCell: UITableViewCell{
+    
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var teamLabel: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+}

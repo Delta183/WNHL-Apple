@@ -1,19 +1,17 @@
 //
-//  MoreTableViewController.swift
+//  NotificationsTableViewController.swift
 //  WNHL-App
 //
-//  Created by Daniel Figueroa on 2021-08-24.
+//  Created by Daniel Figueroa on 2021-08-26.
 //
 
 import UIKit
 
-class MoreTableViewController: UITableViewController {
+class NotificationsTableViewController: UITableViewController {
 
-    @IBOutlet var MoreTableView: UITableView!
-    
-    var entries = ["PLAYERS", "STATISTICS","YOUTUBE", "WNHL FANTASY", "NOTIFICATION SETTINGS", "UPDATE"]
-    var iconNames = ["person.fill", "waveform.path.ecg", "play.circle", "star.circle.fill", "bell.fill","clock.arrow.circlepath"]
-    var reuseIdentifier = "MoreCell"
+    @IBOutlet var NotificationsTableView: UITableView!
+    var reuseIdentifier = "notificationTableCell"
+    var teams = ["Atlas Steelers", "Townline Tunnelers", "Crown Room Kings", "Dain City Dusters", "Lincoln Street Legends","Merritt Islanders"]
 
     // MARK: - Table view data source
 
@@ -22,53 +20,38 @@ class MoreTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entries.count
+        // #warning Incomplete implementation, return the number of rows
+        return teams.count
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Segue to the second view controller
-        let indexPath = MoreTableView.indexPathForSelectedRow
-        let rowNumber:Int = indexPath!.row as Int
-        //print(rowNumber)
-        if rowNumber == 0 {
-            self.performSegue(withIdentifier: "playersSegue", sender: self)
-        }
-        else if rowNumber == 1 {
-            self.performSegue(withIdentifier: "statisticsSegue", sender: self)
-        }
-        else if rowNumber == 4 {
-            self.performSegue(withIdentifier: "notificationSegue", sender: self)
-        }
-        else{
-            print(rowNumber)
-        }
+            // Segue to the second view controller
+        print("bababooey")
+            // self.performSegue(withIdentifier: "playersSegue", sender: self)
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = MoreTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! MoreTableViewCell
-        cell.moreTextLabel.text = entries[indexPath.row]
-        cell.moreTextLabel.textColor = UIColor.white
-        cell.moreTextLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-
-        cell.chevronImage.image = UIImage(systemName: "chevron.right")
-        cell.chevronImage.tintColor = UIColor.white
-        
-        cell.iconImage.image = UIImage(systemName: iconNames[indexPath.row])
-        cell.iconImage.tintColor = UIColor.white
-
+        let cell = NotificationsTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! NotificationTableViewCell
+        cell.teamLabel.text = teams[indexPath.row]
+        cell.teamLabel.textColor = UIColor.white
+        cell.teamLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        cell.backgroundColor = UIColor.systemOrange
         return cell
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
+    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
