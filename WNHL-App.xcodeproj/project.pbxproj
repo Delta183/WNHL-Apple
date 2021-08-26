@@ -26,6 +26,8 @@
 		982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */; };
 		98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */; };
 		98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987526C476F9007D226E /* SpreadsheetViewController.swift */; };
+		98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */; };
+		98FC0C7E26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7D26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewController.swift; sourceTree = "<group>"; };
 		98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCells.swift; sourceTree = "<group>"; };
 		98C3987526C476F9007D226E /* SpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewController.swift; sourceTree = "<group>"; };
+		98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		98FC0C7D26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSpreadsheetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 				982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */,
 				982E765F26D5FBC60050F2DA /* PlayersViewController.swift */,
 				982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */,
+				98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */,
+				98FC0C7D26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -297,6 +303,8 @@
 				9827C6C326D4E39C005A062B /* CustomTableCells.swift in Sources */,
 				98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */,
 				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
+				98FC0C7E26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift in Sources */,
+				98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
 				9827C6BD26D482CE005A062B /* TeamTableViewController.swift in Sources */,
 				982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */,

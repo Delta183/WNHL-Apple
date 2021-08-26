@@ -28,3 +28,13 @@ class SpreadsheetCollectionViewCell5
 : UICollectionViewCell{
     @IBOutlet weak var posLabel5: UILabel!
 }
+
+class GoalsCollectionViewCell: UICollectionViewCell{
+    @IBOutlet weak var rankLabel1: UILabel!
+}
+class AssistsCollectionViewCell: UICollectionViewCell{
+    @IBOutlet weak var rankLabel2: UILabel!
+}
+class PointsCollectionViewCell: UICollectionViewCell{
+    @IBOutlet weak var rankLabel3: UILabel!
+}

@@ -18,6 +18,8 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
     let reuseIdentifier2 = "cell2"
     let reuseIdentifier3 = "cell3"
     let reuseIdentifier4 = "cell4"
+    let reuseIdentifier5 = "cell5"
+
     var positions = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA",
                      "1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",
                      "2", "Townline Tunnelers", "11", "5", "2", "4", "14", "30", "26",
@@ -96,7 +98,7 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.CollectionView1 {
             // get a reference to our storyboard cell
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell1
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell1
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell.posLabel.text = self.positions[indexPath.row] // The row value is the same as the index of the desired text within the array.
@@ -105,7 +107,7 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
         }
         else if collectionView == self.CollectionView2{
             // get a reference to our storyboard cell
-            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell2
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell2
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell2.posLabel2.text = self.positions2[indexPath.row] // The row value is the same as the index of the desired text within the array.
@@ -113,7 +115,7 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             return cell2
         }
         else if collectionView == self.CollectionView3{
-            let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell3
+            let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell3
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell3.posLabel3.text = self.positions3[indexPath.row] // The row value is the same as the index of the desired text within the array.
@@ -121,7 +123,7 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             return cell3
         }
         else if collectionView == self.CollectionView4{
-            let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell4
+            let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier4, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell4
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell4.posLabel4.text = self.positions4[indexPath.row] // The row value is the same as the index of the desired text within the array.
@@ -129,7 +131,7 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             return cell4
         }
         else{
-            let cell5 = collectionView.dequeueReusableCell(withReuseIdentifier: "cell5", for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell5
+            let cell5 = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier5, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell5
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell5.posLabel5.text = self.positions5[indexPath.row] // The row value is the same as the index of the desired text within the array.

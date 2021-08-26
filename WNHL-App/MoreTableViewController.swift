@@ -24,6 +24,22 @@ class MoreTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return entries.count
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Segue to the second view controller
+        let indexPath = MoreTableView.indexPathForSelectedRow
+        let rowNumber:Int = indexPath!.row as Int
+        //print(rowNumber)
+        if rowNumber == 0 {
+            self.performSegue(withIdentifier: "playersSegue", sender: self)
+        }
+        else if rowNumber == 1 {
+            self.performSegue(withIdentifier: "statisticsSegue", sender: self)
+        }
+        else{
+            print(rowNumber)
+        }
+    }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
