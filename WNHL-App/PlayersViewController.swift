@@ -9,12 +9,18 @@ import UIKit
 
 class PlayersViewController: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let button = backButton;
+        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        
         // Do any additional setup after loading the view.
     }
     
+    @objc func buttonClicked() {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

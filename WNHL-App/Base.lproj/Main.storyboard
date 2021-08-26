@@ -360,7 +360,7 @@
                                     <outlet property="chevronImage" destination="GiI-iR-neF" id="1D3-FV-Au4"/>
                                     <outlet property="iconImage" destination="VUH-6r-w1S" id="pzE-Z1-b38"/>
                                     <outlet property="moreTextLabel" destination="LrD-No-93U" id="aE8-hp-cBj"/>
-                                    <segue destination="mtE-x4-TMC" kind="presentation" identifier="playersSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="n7e-La-x1r"/>
+                                    <segue destination="mtE-x4-TMC" kind="presentation" identifier="playersSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="0PE-vJ-Hb3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -388,46 +388,63 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PLAYERS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jU4-b6-emk">
-                                <rect key="frame" x="135" y="73" width="144" height="44"/>
+                                <rect key="frame" x="135" y="120" width="144" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="personFill2" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GH0-4h-LG3">
-                                <rect key="frame" x="287" y="69.5" width="50" height="50"/>
+                                <rect key="frame" x="287" y="108.5" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="personFill1" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8Ip-c5-pQS">
-                                <rect key="frame" x="77" y="69.5" width="50" height="50"/>
+                                <rect key="frame" x="77" y="109.5" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9N-Jq-m48">
-                                <rect key="frame" x="0.0" y="-412" width="414" height="710"/>
+                                <rect key="frame" x="0.0" y="-429" width="414" height="727"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="TQS-yl-Cb1" kind="embed" id="J2Q-8n-xrJ"/>
                                 </connections>
                             </containerView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sPU-iX-idB">
+                                <rect key="frame" x="344" y="45" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B00-ji-PPV">
+                                <rect key="frame" x="18" y="44" width="68" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Back" image="chevron.left" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="S1X-Qk-TkF"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="UvT-ky-cAn"/>
                     <navigationItem key="navigationItem" id="U2s-Hk-9Ht"/>
+                    <connections>
+                        <outlet property="backButton" destination="B00-ji-PPV" id="Nhj-db-mwc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6HS-oY-GeO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3084" y="1683"/>
+            <point key="canvasLocation" x="3082.608695652174" y="1682.8125"/>
         </scene>
         <!--Players Table View Controller-->
         <scene sceneID="hxW-Ks-pfC">
             <objects>
                 <tableViewController id="TQS-yl-Cb1" customClass="PlayersTableViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mev-zh-ecQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="710"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="727"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <prototypes>
@@ -839,8 +856,10 @@
         <image name="WNHL_Logo" width="512" height="512"/>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="chart.bar.xaxis" catalog="system" width="128" height="98"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="gamecontroller" catalog="system" width="128" height="80"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
