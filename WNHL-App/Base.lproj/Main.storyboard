@@ -375,6 +375,7 @@
                         <segue destination="mtE-x4-TMC" kind="presentation" identifier="playersSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="aEa-yT-A6p"/>
                         <segue destination="e86-Ts-sEQ" kind="presentation" identifier="statisticsSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="ewN-QD-hDB"/>
                         <segue destination="PoO-AS-q3f" kind="presentation" identifier="notificationSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="2Em-yF-I9E"/>
+                        <segue destination="XVM-SR-fbA" kind="presentation" identifier="updateSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="7Xn-bh-H6X"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izC-cV-BC3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -697,7 +698,116 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0cp-WT-g78" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3056.521739130435" y="3113.8392857142858"/>
+            <point key="canvasLocation" x="3058" y="2843"/>
+        </scene>
+        <!--Update Table View Controller-->
+        <scene sceneID="g73-Ck-Be4">
+            <objects>
+                <tableViewController id="9x2-YO-PQh" customClass="UpdateTableViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Tx-bk-0bY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="updateTableCell" rowHeight="50" id="QZB-Af-bH3" customClass="UpdateTableViewCell" customModule="WNHL_App" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QZB-Af-bH3" id="SrC-x3-fpN">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PHU-uX-6ea">
+                                            <rect key="frame" x="20" y="11" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlL-2I-eTV">
+                                            <rect key="frame" x="67" y="11" width="288" height="28"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clock.arrow.circlepath" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QbA-7e-ib5">
+                                            <rect key="frame" x="372" y="11" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <connections>
+                                    <outlet property="iconImage" destination="PHU-uX-6ea" id="2cO-Md-zFe"/>
+                                    <outlet property="updateLabel" destination="BlL-2I-eTV" id="QW4-ei-RZP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9x2-YO-PQh" id="dKm-GG-xWH"/>
+                            <outlet property="delegate" destination="9x2-YO-PQh" id="8WE-iY-xYG"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="UpdateTableView" destination="4Tx-bk-0bY" id="nvM-Zt-5CT"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SNT-UB-1Kg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3821.739130434783" y="3415.8482142857142"/>
+        </scene>
+        <!--Update View Controller-->
+        <scene sceneID="hKt-51-gjR">
+            <objects>
+                <viewController id="XVM-SR-fbA" customClass="UpdateViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GKL-Y2-2cX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" id="TMd-Te-f6W">
+                                <rect key="frame" x="79" y="70" width="256" height="256"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UPDATES APP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwL-QJ-rCj">
+                                <rect key="frame" x="96" y="334" width="223" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Check for updates from the WNHL Site." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdq-s9-iwJ">
+                                <rect key="frame" x="20" y="386" width="374" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oga-mc-qHa">
+                                <rect key="frame" x="0.0" y="-166" width="414" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="9x2-YO-PQh" kind="embed" id="8t0-EV-YRg"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gM-9U-KnH">
+                                <rect key="frame" x="20" y="44" width="68" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Back" image="chevron.left" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yss-Q9-UEf"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="8gM-9U-KnH" id="vNP-UZ-7st"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bqn-U4-jUy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3056.521739130435" y="3415.8482142857142"/>
         </scene>
         <!--Notifications Table View Controller-->
         <scene sceneID="faO-mh-lbI">
@@ -750,7 +860,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxQ-sb-FrL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3851" y="3114"/>
+            <point key="canvasLocation" x="3851" y="2843"/>
         </scene>
         <!--Item-->
         <scene sceneID="iPJ-0h-eeL">
@@ -1230,6 +1340,7 @@
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="chart.bar.xaxis" catalog="system" width="128" height="98"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="clock.arrow.circlepath" catalog="system" width="128" height="110"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="gamecontroller" catalog="system" width="128" height="80"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
