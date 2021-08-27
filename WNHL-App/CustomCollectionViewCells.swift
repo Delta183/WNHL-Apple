@@ -38,3 +38,10 @@ class AssistsCollectionViewCell: UICollectionViewCell{
 class PointsCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var dataLabel3: UILabel!
 }
+
+class TeamSpreadsheetCollectionViewCell1: UICollectionViewCell{
+    @IBOutlet weak var dataLabel1: UILabel!
+}
+class TeamSpreadsheetCollectionViewCell2: UICollectionViewCell{
+    @IBOutlet weak var dataLabel2: UILabel!
+}

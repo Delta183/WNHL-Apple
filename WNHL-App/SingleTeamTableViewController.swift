@@ -1,21 +1,16 @@
 //
-//  ScheduleTableViewController.swift
+//  SingleTeamTableViewController.swift
 //  WNHL-App
 //
-//  Created by Daniel Figueroa on 2021-08-24.
+//  Created by Daniel Figueroa on 2021-08-27.
 //
 
 import UIKit
 
-// View Controllers represent each screen, A basic screen is known as a View Controller but a view entirely devoted to say a TableView is a TableViewController. Thus this class is responsible for affecting strictly the table on the Schedule screen.
-class ScheduleTableViewController: UITableViewController {
-
-    // The cells are part of a table or collection. In this case it is of a table which is composed of multiple rows and populates downwards much like in the More and Teams page. Much like variables, they must have some identifier or name that is unique.
-    let cellReuseIdentifier = "scheduleCell"
-    // This is responsible for the height of the spacing between each row in pixels
+class SingleTeamTableViewController: UITableViewController {
+    let reuseIdentifier = "gameListingCell"
+    @IBOutlet var TeamScheduleTableView: UITableView!
     let cellSpacingHeight: CGFloat = 30
-    @IBOutlet var ScheduleTableView: UITableView!
-    // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
     var dates: [String] = ["Wed. Oct 7, 2020",
                            "Wed. Oct 7, 2020",
                            "Wed. Oct 7, 2020",
@@ -36,16 +31,15 @@ class ScheduleTableViewController: UITableViewController {
                            "Crown Room Kings vs Townline Tunnelers",
                            "Crown Room Kings vs Townline Tunnelers",
                            "Crown Room Kings vs Townline Tunnelers",]
-    
-    // These are functions that act like attributes for the Table View. This responsible for the number of sections, for our purposes, all we need is 1
+    // MARK: - Table view data source
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-           return self.dates.count
-       }
-       
-       // There is just one row in every section
+        return self.dates.count
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return 1
-       }
+        return 1
+    }
     
     // Set the spacing between sections
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -58,15 +52,10 @@ class ScheduleTableViewController: UITableViewController {
             headerView.backgroundColor = UIColor.clear
             return headerView
         }
-    
-    // create a cell for each table view row
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // ScheduleTableViewCell is custom made by myself that has 2 image views one text label, highlighting and right clicking the ScheduleTableViewCell and jumping to Definition should display the outlets that the Custom cell class contains.
-        // Think classes in Java, housing a bunch of elements repeatedly used in a singular class.
-        let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
-        // Once the cell is fetched, modify it as needed
-        // The imageViews and text labels were given unique identifiers being HomeImage and AwayImage for the images and scheduleText for the text label.
+        let cell = self.TeamScheduleTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SingleTeamTableViewCell
+        // Configure the cell...
         cell.dateLabel.text = self.dates[indexPath.row]
         cell.dateLabel.font = UIFont.systemFont(ofSize: 16)
         cell.pointsLabel.text = self.points[indexPath.row]
@@ -77,30 +66,61 @@ class ScheduleTableViewController: UITableViewController {
         cell.teamsLabel.font = UIFont.systemFont(ofSize: 16)
         // The text label is populated with whatever data is at this index in the games array at the top of the file.
         // indexPath.row seems to start from 0 to n.
+       
         cell.dateLabel.textAlignment = NSTextAlignment.center
         cell.pointsLabel.textAlignment = NSTextAlignment.center
         cell.locationLabel.textAlignment = NSTextAlignment.center
         cell.teamsLabel.textAlignment = NSTextAlignment.center
-        cell.HomeImage.image = UIImage(named: "WNHL_Logo.png")
-        cell.AwayImage.image = UIImage(named: "WNHL_Logo.png")
+        cell.homeImage.image = UIImage(named: "WNHL_Logo.png")
+        cell.awayImage.image = UIImage(named: "WNHL_Logo.png")
         cell.backgroundColor = UIColor.white
         cell.layer.borderWidth = 0
         cell.layer.cornerRadius = 24
         cell.clipsToBounds = true
-        
-       
-       return cell
-       }
-
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        ScheduleTableView.delegate = self
-        ScheduleTableView.dataSource = self
-        // Do any additional setup after loading the view.
+        return cell
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        TeamScheduleTableView.delegate = self
+        TeamScheduleTableView.dataSource = self
+    }
+
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
 
     /*
     // MARK: - Navigation

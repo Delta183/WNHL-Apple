@@ -27,6 +27,9 @@
 		98A4D76726D853A100F77529 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76626D853A100F77529 /* UpdateViewController.swift */; };
 		98A4D76926D853B800F77529 /* UpdateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76826D853B800F77529 /* UpdateTableViewController.swift */; };
 		98A4D76B26D875F800F77529 /* SingleTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76A26D875F800F77529 /* SingleTeamViewController.swift */; };
+		98A4D76D26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76C26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift */; };
+		98A4D76F26D8AA2800F77529 /* SingleTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76E26D8AA2800F77529 /* SingleTeamTableViewController.swift */; };
+		98A4D77126D8B7B500F77529 /* SecondSingleTeamSpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D77026D8B7B500F77529 /* SecondSingleTeamSpreadsheetViewController.swift */; };
 		98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */; };
 		98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987526C476F9007D226E /* SpreadsheetViewController.swift */; };
 		98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */; };
@@ -79,6 +82,9 @@
 		98A4D76626D853A100F77529 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
 		98A4D76826D853B800F77529 /* UpdateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTableViewController.swift; sourceTree = "<group>"; };
 		98A4D76A26D875F800F77529 /* SingleTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTeamViewController.swift; sourceTree = "<group>"; };
+		98A4D76C26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSingleTeamSpreadsheetViewController.swift; sourceTree = "<group>"; };
+		98A4D76E26D8AA2800F77529 /* SingleTeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTeamTableViewController.swift; sourceTree = "<group>"; };
+		98A4D77026D8B7B500F77529 /* SecondSingleTeamSpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSingleTeamSpreadsheetViewController.swift; sourceTree = "<group>"; };
 		98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCells.swift; sourceTree = "<group>"; };
 		98C3987526C476F9007D226E /* SpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewController.swift; sourceTree = "<group>"; };
 		98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +166,9 @@
 				98A4D76626D853A100F77529 /* UpdateViewController.swift */,
 				98A4D76826D853B800F77529 /* UpdateTableViewController.swift */,
 				98A4D76A26D875F800F77529 /* SingleTeamViewController.swift */,
+				98A4D76C26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift */,
+				98A4D76E26D8AA2800F77529 /* SingleTeamTableViewController.swift */,
+				98A4D77026D8B7B500F77529 /* SecondSingleTeamSpreadsheetViewController.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -314,6 +323,7 @@
 			files = (
 				982E766026D5FBC60050F2DA /* PlayersViewController.swift in Sources */,
 				9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */,
+				98A4D76D26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift in Sources */,
 				98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */,
 				9827C6C326D4E39C005A062B /* CustomTableCells.swift in Sources */,
 				98A4D76926D853B800F77529 /* UpdateTableViewController.swift in Sources */,
@@ -321,6 +331,7 @@
 				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
 				98FC0C7E26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift in Sources */,
 				98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */,
+				98A4D76F26D8AA2800F77529 /* SingleTeamTableViewController.swift in Sources */,
 				98FC0C8226D7853A00E1F6E4 /* NotificationsTableViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
 				98A4D76726D853A100F77529 /* UpdateViewController.swift in Sources */,
@@ -332,6 +343,7 @@
 				9810CF8526B9B78500442CD1 /* TeamsViewController.swift in Sources */,
 				982E765C26D5D9FD0050F2DA /* MoreTableViewController.swift in Sources */,
 				98A4D76B26D875F800F77529 /* SingleTeamViewController.swift in Sources */,
+				98A4D77126D8B7B500F77529 /* SecondSingleTeamSpreadsheetViewController.swift in Sources */,
 				9810CF5126AF6E6900442CD1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

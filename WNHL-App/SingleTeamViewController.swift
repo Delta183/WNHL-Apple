@@ -9,11 +9,20 @@ import UIKit
 
 class SingleTeamViewController: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+440)
+        let button = backButton;
+        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         // Do any additional setup after loading the view.
     }
+    
+    @objc func buttonClicked() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     
 
     /*

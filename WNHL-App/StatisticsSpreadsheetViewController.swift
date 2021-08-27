@@ -15,10 +15,6 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     var reuseIdentifier1 = "goalsCell"
     var reuseIdentifier2 = "assistsCell"
     var reuseIdentifier3 = "pointsCell"
-    var rankTitle = "Rank"
-    var playerTitle = "Player"
-    var teamTitle = "Team"
-    var gTitle = "G"
     var data1 = ["Rank", "Player", "Team", "G",
                  "1", "Pat Riley", "Merritt Islanders", "12",
                  "2", "Cory Hutchinson", "Lincoln Street Legends", "10",
@@ -68,19 +64,20 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     // Max width is 374
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
-            var cellWidth:CGFloat = CGFloat()
+        var cellWidth:CGFloat = CGFloat()
+        // Rank Column
         if indexPath.row == 0 || ((indexPath.row) % 4) == 0 {
             cellWidth = 45
            }
-        // Team title
+        // Player Column
         else if indexPath.row == 1 || ((indexPath.row - 1) % 4) == 0 {
             cellWidth = 140
            }
-        // 2 letter title
+        // Team Column
         else if indexPath.row == 2 || ((indexPath.row - 2) % 4) == 0{
             cellWidth = 155
         }
-        // 3 letter title
+        // 4th column
        else{
         cellWidth = 34
        }
