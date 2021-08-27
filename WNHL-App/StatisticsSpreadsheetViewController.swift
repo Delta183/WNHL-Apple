@@ -15,7 +15,10 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     var reuseIdentifier1 = "goalsCell"
     var reuseIdentifier2 = "assistsCell"
     var reuseIdentifier3 = "pointsCell"
-
+    var rankTitle = "Rank"
+    var playerTitle = "Player"
+    var teamTitle = "Team"
+    var gTitle = "G"
     var data1 = ["Rank", "Player", "Team", "G",
                  "1", "Pat Riley", "Merritt Islanders", "12",
                  "2", "Cory Hutchinson", "Lincoln Street Legends", "10",
@@ -88,9 +91,11 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         if collectionView == self.GoalsCollectionView {
             // get a reference to our storyboard cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath as IndexPath) as! GoalsCollectionViewCell
-
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell.rankLabel1.text = self.data1[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.dataLabel1.text = self.data1[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            if indexPath.row < 4 {
+                cell.dataLabel1.font  = UIFont.boldSystemFont(ofSize: 12.0)
+            }
             //cell.layer.borderWidth = 1
             cell.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell
@@ -100,13 +105,19 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
             let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! AssistsCollectionViewCell
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell2.rankLabel2.text = self.data2[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell2.dataLabel2.text = self.data2[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            if indexPath.row < 4 {
+                cell2.dataLabel2.font  = UIFont.boldSystemFont(ofSize: 12.0)
+            }
             cell2.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell2
         }
         else{
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! PointsCollectionViewCell
-            cell3.rankLabel3.text = self.data3[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell3.dataLabel3.text = self.data3[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            if indexPath.row < 4 {
+                cell3.dataLabel3.font  = UIFont.boldSystemFont(ofSize: 12.0)
+            }
             cell3.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell3
         }

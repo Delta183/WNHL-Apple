@@ -30,11 +30,11 @@ class SpreadsheetCollectionViewCell5
 }
 
 class GoalsCollectionViewCell: UICollectionViewCell{
-    @IBOutlet weak var rankLabel1: UILabel!
+    @IBOutlet weak var dataLabel1: UILabel!
 }
 class AssistsCollectionViewCell: UICollectionViewCell{
-    @IBOutlet weak var rankLabel2: UILabel!
+    @IBOutlet weak var dataLabel2: UILabel!
 }
 class PointsCollectionViewCell: UICollectionViewCell{
-    @IBOutlet weak var rankLabel3: UILabel!
+    @IBOutlet weak var dataLabel3: UILabel!
 }
