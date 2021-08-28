@@ -7,29 +7,37 @@
 
 import UIKit
 
-class PlayersViewController: UIViewController {
+class PlayersViewController: UIViewController,UISearchBarDelegate {
 
+
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchBar.delegate = self // set delegate
         let button = backButton;
-        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         
+        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        //let tap = UITapGestureRecognizer(target: self, action: #selector(UISearchBar.textFe))
+        //view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
     
     @objc func buttonClicked() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // When button "Search" pressed
+      func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+          self.searchBar.endEditing(true)
+      }
+    
+    
+//    //Calls this function when the tap is recognized.
+//    @objc func dismissKeyboard() {
+//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//        view.endEditing(true)
+//    }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
