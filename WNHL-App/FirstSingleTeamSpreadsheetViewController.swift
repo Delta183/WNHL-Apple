@@ -10,7 +10,7 @@ import UIKit
 class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate{
     let reuseIdentifier = "teamSpreadsheetCell"
     @IBOutlet var singleTeamCollectionView: UICollectionView!
-    var data = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA",
+    var data = [
                      "1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -47,9 +47,6 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell.dataLabel1.text = self.data[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            if indexPath.row < 9 {
-                cell.dataLabel1.font  = UIFont.boldSystemFont(ofSize: 12.0)
-            }
             cell.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell
         }

@@ -20,30 +20,29 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
     let reuseIdentifier4 = "cell4"
     let reuseIdentifier5 = "cell5"
 
-    var positions = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA",
+    var positions = [ 
                      "1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",
                      "2", "Townline Tunnelers", "11", "5", "2", "4", "14", "30", "26",
                      "3", "Lincoln Street Legends", "11", "5", "4", "2", "12", "33", "34",
                      "4", "Atlas Steelers", "11", "4", "4", "3", "11", "37", "37",
                      "5", "Dain City Dusters", "11", "3", "6", "2", "8", "23", "33",
                      "6", "Crown Room Kings", "11", "1", "6", "4", "6", "22", "30",]
-    var positions2 = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA",
-                     "1", "Atlas Steelers", "6", "6", "0", "0", "12", "38", "11",
+    var positions2 = ["1", "Atlas Steelers", "6", "6", "0", "0", "12", "38", "11",
                      "2", "Townline Tunnelers", "6", "4", "2", "0", "8", "21", "20",
                      "3", "Welland Stelcobras", "6", "1", "5", "0", "2", "12", "25",
                      "4", "Crown Room Kings", "6", "1", "5", "0", "2", "14", "29",
                      ]
-    var positions3 = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA",
+    var positions3 = [
                      "1", "Atlas Steelers", "28", "18", "7", "3", "39", "166", "97",
                      "2", "Townline Tunnelers", "28", "18", "7", "3", "39", "159", "126",
                      "3", "Crown Room Kings", "28", "10", "13", "5", "25", "121", "141",
                      "4", "Welland Stelcobras", "28", "3", "22", "3", "9", "82", "164",
                      ]
-    var positions4 = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA",
+    var positions4 = [
                      "1", "Welland Undertakers", "6", "3", "2", "1", "7", "24", "21",
                      "2", "Welland River Rats", "6", "2", "3", "1", "5", "23", "26",
                      ]
-    var positions5 = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA",
+    var positions5 = [
                       "1", "Welland Undertakers", "30", "14", "9", "7", "35", "189", "161",
                       "2", "Welland River Rats", "30", "9", "17", "4", "22", "143", "179",
                      ]
@@ -102,9 +101,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell.posLabel.text = self.positions[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            if indexPath.row < 9 {
-                cell.posLabel.font  = UIFont.boldSystemFont(ofSize: 12.0)
-            }
             cell.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell
         }
@@ -114,9 +110,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell2.posLabel2.text = self.positions2[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            if indexPath.row < 9 {
-                cell2.posLabel2.font  = UIFont.boldSystemFont(ofSize: 12.0)
-            }
             cell2.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell2
         }
@@ -125,9 +118,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell3.posLabel3.text = self.positions3[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            if indexPath.row < 9 {
-                cell3.posLabel3.font  = UIFont.boldSystemFont(ofSize: 12.0)
-            }
             cell3.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell3
         }
@@ -136,9 +126,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell4.posLabel4.text = self.positions4[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            if indexPath.row < 9 {
-                cell4.posLabel4.font  = UIFont.boldSystemFont(ofSize: 12.0)
-            }
             cell4.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell4
         }
@@ -147,9 +134,6 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
 
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell5.posLabel5.text = self.positions5[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            if indexPath.row < 9 {
-                cell5.posLabel5.font  = UIFont.boldSystemFont(ofSize: 12.0)
-            }
             cell5.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell5
         }

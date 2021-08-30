@@ -10,7 +10,7 @@ import UIKit
 class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
     let reuseIdentifier = "teamSpreadsheetCell"
     @IBOutlet var singleTeamCollectionView: UICollectionView!
-    var data = ["Player", "P", "G", "A",
+    var data = [
                  "Podio", "3", "0", "3",
                  "Jon Campbell", "3", "0", "3",
                  "Scotty Mac", "3", "0", "3",
@@ -46,9 +46,6 @@ class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! TeamSpreadsheetCollectionViewCell2
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell.dataLabel2.text = self.data[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            if indexPath.row < 4 {
-                cell.dataLabel2.font  = UIFont.boldSystemFont(ofSize: 12.0)
-            }
             //cell.layer.borderWidth = 1
             cell.backgroundColor = UIColor.white // make cell more visible in our example project
             return cell

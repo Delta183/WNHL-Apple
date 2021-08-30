@@ -112,6 +112,22 @@ class ScheduleTableViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+
+// This is how you make a function header in Swift
+// func methodName(parameterNAme:Type) -> return Type
+extension UITableViewController{
     func getImageFromTeamName(teamName:String) -> String {
         if teamName == "Atlas Steelers"{
             return "steelers_logo"
@@ -125,8 +141,8 @@ class ScheduleTableViewController: UITableViewController {
         else if teamName == "Townline Tunnelers"{
             return "townline_logo"
         }
-        else if teamName == "Dain City Dusters"{
-            return "dusters_logo"
+        else if teamName == "Crown Room Kings"{
+            return "crownRoom_logo"
         }
         else if teamName == "Merritt Islanders"{
             return "islanders_logo"
@@ -135,15 +151,5 @@ class ScheduleTableViewController: UITableViewController {
             return "WNHL_Logo"
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
