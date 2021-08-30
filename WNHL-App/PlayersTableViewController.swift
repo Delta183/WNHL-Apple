@@ -26,7 +26,7 @@ class PlayersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             // Segue to the second view controller
-        print("bababooey")
+        self.performSegue(withIdentifier: "singlePlayerSegue", sender: self)
             // self.performSegue(withIdentifier: "playersSegue", sender: self)
     }
     

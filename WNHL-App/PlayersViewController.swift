@@ -24,7 +24,11 @@ class PlayersViewController: UIViewController,UISearchBarDelegate {
     }
     
     @objc func buttonClicked() {
-        self.dismiss(animated: true, completion: nil)
+        if let nav = self.navigationController {
+                    nav.popViewController(animated: true)
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
     }
     
     // When button "Search" pressed

@@ -11,7 +11,7 @@ class TeamTableViewController: UITableViewController {
     
     @IBOutlet var teamTableView: UITableView!
     var teams = ["ATLAS STEELERS", "TOWNLINE TUNNELERS", "CROWN ROOM KINGS", "DAIN CITY DUSTERS",  "LINCOLN STREET LEGENDS"]
-
+    var teamNameString:String!
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -24,8 +24,28 @@ class TeamTableViewController: UITableViewController {
         // Segue to the second view controller
         let indexPath = teamTableView.indexPathForSelectedRow
         let rowNumber:Int = indexPath!.row as Int
-        print(rowNumber)
-        self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
+        let currentCell = self.teamTableView.cellForRow(at:indexPath!) as! TeamTableViewCell
+        //print(rowNumber)
+        if rowNumber == 0 {
+            teamNameString = currentCell.teamNameLabel.text
+            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
+        }
+        else if rowNumber == 1 {
+            teamNameString = currentCell.teamNameLabel.text
+            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
+        }
+        else if rowNumber == 2 {
+            teamNameString = currentCell.teamNameLabel.text
+            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
+        }
+        else if rowNumber == 3 {
+            teamNameString = currentCell.teamNameLabel.text
+            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
+        }
+        else{
+            teamNameString = currentCell.teamNameLabel.text
+            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
+        }
      
     }
     
@@ -43,5 +63,13 @@ class TeamTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+           // Get a reference to the second view controller
+           let secondViewController = segue.destination as! SingleTeamViewController
+
+           // Set a variable in the second view controller with the String to pass
+            secondViewController.teamNameString = teamNameString
+       }
 
 }

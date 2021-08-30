@@ -31,11 +31,16 @@ class ScheduleTableViewController: UITableViewController {
                                "Niagara Falls - Gale Center",
                                "Niagara Falls - Gale Center",
                                "Niagara Falls - Gale Center",]
-    var teams: [String] = ["Crown Room Kings vs Townline Tunnelers",
-                           "Crown Room Kings vs Townline Tunnelers",
-                           "Crown Room Kings vs Townline Tunnelers",
-                           "Crown Room Kings vs Townline Tunnelers",
-                           "Crown Room Kings vs Townline Tunnelers",]
+    var teams1: [String] = ["Lincoln Street Legends",
+                            "Dain City Dusters",
+                            "Atlas Steelers",
+                            "Crown Room Kings",
+                            "Townline Tunnelers"]
+    var teams2: [String] = ["BOI",
+                            "Lincoln Street Legends",
+                            "Atlas Steelers",
+                            "Townline Tunnelers",
+                            "Merritt Islanders",]
     
     // These are functions that act like attributes for the Table View. This responsible for the number of sections, for our purposes, all we need is 1
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -67,22 +72,28 @@ class ScheduleTableViewController: UITableViewController {
         let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
         // Once the cell is fetched, modify it as needed
         // The imageViews and text labels were given unique identifiers being HomeImage and AwayImage for the images and scheduleText for the text label.
-        cell.dateLabel.text = self.dates[indexPath.row]
-        cell.dateLabel.font = UIFont.systemFont(ofSize: 16)
-        cell.pointsLabel.text = self.points[indexPath.row]
-        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        cell.locationLabel.text = self.locations[indexPath.row]
-        cell.locationLabel.font = UIFont.systemFont(ofSize: 16)
-        cell.teamsLabel.text = self.teams[indexPath.row]
-        cell.teamsLabel.font = UIFont.systemFont(ofSize: 16)
+        cell.dateLabel.text = self.dates[indexPath.section]
+        cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.pointsLabel.text = self.points[indexPath.section]
+        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        cell.locationLabel.text = self.locations[indexPath.section]
+        cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
+        
+        cell.homeTeamLabel.text = self.teams1[indexPath.section]
+        cell.homeTeamLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.awayTeamLabel.text = self.teams2[indexPath.section]
+        cell.awayTeamLabel.font = UIFont.systemFont(ofSize: 15)
         // The text label is populated with whatever data is at this index in the games array at the top of the file.
         // indexPath.row seems to start from 0 to n.
         cell.dateLabel.textAlignment = NSTextAlignment.center
         cell.pointsLabel.textAlignment = NSTextAlignment.center
         cell.locationLabel.textAlignment = NSTextAlignment.center
-        cell.teamsLabel.textAlignment = NSTextAlignment.center
-        cell.HomeImage.image = UIImage(named: "WNHL_Logo.png")
-        cell.AwayImage.image = UIImage(named: "WNHL_Logo.png")
+        
+        cell.homeTeamLabel.textAlignment = NSTextAlignment.right
+        cell.awayTeamLabel.textAlignment = NSTextAlignment.left
+    
+        cell.HomeImage.image = UIImage(named: getImageFromTeamName(teamName: self.teams1[indexPath.section]))
+        cell.AwayImage.image = UIImage(named: getImageFromTeamName(teamName: self.teams2[indexPath.section]))
         cell.backgroundColor = UIColor.white
         cell.layer.borderWidth = 0
         cell.layer.cornerRadius = 24
@@ -101,6 +112,29 @@ class ScheduleTableViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    func getImageFromTeamName(teamName:String) -> String {
+        if teamName == "Atlas Steelers"{
+            return "steelers_logo"
+        }
+        else if teamName == "Dain City Dusters"{
+            return "dusters_logo"
+        }
+        else if teamName == "Lincoln Street Legends"{
+            return "legends_logo"
+        }
+        else if teamName == "Townline Tunnelers"{
+            return "townline_logo"
+        }
+        else if teamName == "Dain City Dusters"{
+            return "dusters_logo"
+        }
+        else if teamName == "Merritt Islanders"{
+            return "islanders_logo"
+        }
+        else{
+            return "WNHL_Logo"
+        }
+    }
 
     /*
     // MARK: - Navigation

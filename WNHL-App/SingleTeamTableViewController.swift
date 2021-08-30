@@ -56,13 +56,13 @@ class SingleTeamTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.TeamScheduleTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SingleTeamTableViewCell
         // Configure the cell...
-        cell.dateLabel.text = self.dates[indexPath.row]
+        cell.dateLabel.text = self.dates[indexPath.section]
         cell.dateLabel.font = UIFont.systemFont(ofSize: 16)
-        cell.pointsLabel.text = self.points[indexPath.row]
+        cell.pointsLabel.text = self.points[indexPath.section]
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        cell.locationLabel.text = self.locations[indexPath.row]
+        cell.locationLabel.text = self.locations[indexPath.section]
         cell.locationLabel.font = UIFont.systemFont(ofSize: 16)
-        cell.teamsLabel.text = self.teams[indexPath.row]
+        cell.teamsLabel.text = self.teams[indexPath.section]
         cell.teamsLabel.font = UIFont.systemFont(ofSize: 16)
         // The text label is populated with whatever data is at this index in the games array at the top of the file.
         // indexPath.row seems to start from 0 to n.

@@ -24,6 +24,8 @@
 		982E765C26D5D9FD0050F2DA /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */; };
 		982E766026D5FBC60050F2DA /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E765F26D5FBC60050F2DA /* PlayersViewController.swift */; };
 		982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */; };
+		9867B90C26DA0C2E008E09B8 /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9867B90B26DA0C2D008E09B8 /* SinglePlayerViewController.swift */; };
+		9867B90E26DA13F0008E09B8 /* SinglePlayerBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9867B90D26DA13F0008E09B8 /* SinglePlayerBackViewController.swift */; };
 		98A4D76726D853A100F77529 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76626D853A100F77529 /* UpdateViewController.swift */; };
 		98A4D76926D853B800F77529 /* UpdateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76826D853B800F77529 /* UpdateTableViewController.swift */; };
 		98A4D76B26D875F800F77529 /* SingleTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76A26D875F800F77529 /* SingleTeamViewController.swift */; };
@@ -79,6 +81,8 @@
 		982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		982E765F26D5FBC60050F2DA /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewController.swift; sourceTree = "<group>"; };
+		9867B90B26DA0C2D008E09B8 /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerViewController.swift; sourceTree = "<group>"; };
+		9867B90D26DA13F0008E09B8 /* SinglePlayerBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerBackViewController.swift; sourceTree = "<group>"; };
 		98A4D76626D853A100F77529 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
 		98A4D76826D853B800F77529 /* UpdateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTableViewController.swift; sourceTree = "<group>"; };
 		98A4D76A26D875F800F77529 /* SingleTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTeamViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 				98A4D76C26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift */,
 				98A4D76E26D8AA2800F77529 /* SingleTeamTableViewController.swift */,
 				98A4D77026D8B7B500F77529 /* SecondSingleTeamSpreadsheetViewController.swift */,
+				9867B90B26DA0C2D008E09B8 /* SinglePlayerViewController.swift */,
+				9867B90D26DA13F0008E09B8 /* SinglePlayerBackViewController.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 				9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */,
 				98A4D76D26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift in Sources */,
 				98C3987626C476F9007D226E /* SpreadsheetViewController.swift in Sources */,
+				9867B90C26DA0C2E008E09B8 /* SinglePlayerViewController.swift in Sources */,
 				9827C6C326D4E39C005A062B /* CustomTableCells.swift in Sources */,
 				98A4D76926D853B800F77529 /* UpdateTableViewController.swift in Sources */,
 				98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */,
@@ -338,6 +345,7 @@
 				98FC0C8026D782A700E1F6E4 /* NotificationsViewController.swift in Sources */,
 				9827C6BD26D482CE005A062B /* TeamTableViewController.swift in Sources */,
 				982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */,
+				9867B90E26DA13F0008E09B8 /* SinglePlayerBackViewController.swift in Sources */,
 				9827C6BF26D4AFCC005A062B /* ScheduleTableViewController.swift in Sources */,
 				9810CF4F26AF6E6900442CD1 /* AppDelegate.swift in Sources */,
 				9810CF8526B9B78500442CD1 /* TeamsViewController.swift in Sources */,
