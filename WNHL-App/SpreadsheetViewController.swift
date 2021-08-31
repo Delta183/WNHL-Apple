@@ -21,7 +21,7 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
     let reuseIdentifier5 = "cell5"
 
     var positions = [ 
-                     "1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",
+                     "1", "Merritt Islanders", "11", "6", "2", "3", "15", "50", "35",
                      "2", "Townline Tunnelers", "11", "5", "2", "4", "14", "30", "26",
                      "3", "Lincoln Street Legends", "11", "5", "4", "2", "12", "33", "34",
                      "4", "Atlas Steelers", "11", "4", "4", "3", "11", "37", "37",

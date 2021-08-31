@@ -99,9 +99,9 @@ class ScheduleTableViewController: UITableViewController {
         cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
         
         cell.homeTeamLabel.text = self.teams1[indexPath.section]
-        cell.homeTeamLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.homeTeamLabel.font = UIFont.systemFont(ofSize: 14)
         cell.awayTeamLabel.text = self.teams2[indexPath.section]
-        cell.awayTeamLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.awayTeamLabel.font = UIFont.systemFont(ofSize: 14)
         // The text label is populated with whatever data is at this index in the games array at the top of the file.
         // indexPath.row seems to start from 0 to n.
         cell.dateLabel.textAlignment = NSTextAlignment.center
