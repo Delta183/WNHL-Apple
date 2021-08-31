@@ -1521,7 +1521,7 @@
                     </tableView>
                     <connections>
                         <outlet property="PlayerTableView" destination="mev-zh-ecQ" id="MT5-d2-dj0"/>
-                        <segue destination="hfv-Yb-3NB" kind="presentation" identifier="singlePlayerSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="eah-ds-f0H"/>
+                        <segue destination="bao-vQ-ZLx" kind="presentation" identifier="singlePlayerSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="eah-ds-f0H"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryq-VC-c7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2315,6 +2315,7 @@
                         <viewLayoutGuide key="safeArea" id="WvF-A3-7ma"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="K8H-Qi-71a"/>
                     <connections>
                         <outlet property="backButton" destination="3QZ-uT-lmY" id="gN1-2T-B3K"/>
                         <outlet property="playerDescription" destination="TMk-KM-qVE" id="VGV-Ge-BLD"/>
@@ -2325,7 +2326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbX-10-UZu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5656.521739130435" y="1930.5803571428571"/>
+            <point key="canvasLocation" x="6563.7681159420299" y="1930.2455357142856"/>
         </scene>
         <!--playerBackViewController-->
         <scene sceneID="OAc-cp-Qw2">
@@ -2361,26 +2362,14 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cxN-Qy-mbq">
-                                <rect key="frame" x="20" y="44" width="68" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Back" image="chevron.left" catalog="system">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xq7-Vy-Zgb"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                     </view>
-                    <connections>
-                        <outlet property="backButton" destination="cxN-Qy-mbq" id="8pX-9j-XC0"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZN-WR-l4M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6725" y="1985"/>
+            <point key="canvasLocation" x="7631.884057971015" y="1984.8214285714284"/>
         </scene>
         <!--StandingsViewController-->
         <scene sceneID="wXh-Tf-2sh">
@@ -2539,6 +2528,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qf4-DF-OKu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3117" y="57"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GVi-Sv-ijH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bao-vQ-ZLx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fRJ-M0-JXx">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hfv-Yb-3NB" kind="relationship" relationship="rootViewController" id="SDk-Vc-EEv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9a-3H-2EP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5656.521739130435" y="1930.2455357142856"/>
         </scene>
     </scenes>
     <resources>

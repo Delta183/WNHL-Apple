@@ -22,20 +22,14 @@ class SinglePlayerViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch")
-        
-        let mainStory = UIStoryboard(name: "Main", bundle: nil)
-        let secondVC = mainStory.instantiateViewController(withIdentifier: "playerBackViewController") as! SinglePlayerBackViewController
+        let secondVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "playerBackViewController") as! SinglePlayerBackViewController
         self.navigationController?.pushViewController(secondVC, animated: false)
         UIView.transition(from: self.view, to: secondVC.view, duration: 0.85, options: [.transitionFlipFromLeft])
+
     }
     
     @objc func buttonClicked() {
-        if let nav = self.navigationController {
-            nav.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
+      self.dismiss(animated: true, completion: nil)
     }
     /*
      // MARK: - Navigation

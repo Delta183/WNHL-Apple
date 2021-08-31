@@ -9,24 +9,18 @@ import UIKit
 
 class SinglePlayerBackViewController: UIViewController {
     
-    @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("boi")
-        print(type(of: self.view))
-        let button = backButton;
-        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
-        
+
         // Do any additional setup after loading the view.
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("youch")
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func buttonClicked() {
-        print("hey")
-        self.dismiss(animated: true, completion: nil)
+        let firstVC = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count ?? 2) - 2] as? SinglePlayerViewController
+        navigationController?.popViewController(animated: false)
+        UIView.transition(from: self.view, to: (firstVC?.view)!, duration: 0.85, options: [.transitionFlipFromRight])
+        
+        
+
     }
     
     
