@@ -12,6 +12,7 @@ class TeamTableViewController: UITableViewController {
     @IBOutlet var teamTableView: UITableView!
     var teams = ["ATLAS STEELERS", "TOWNLINE TUNNELERS", "CROWN ROOM KINGS", "DAIN CITY DUSTERS",  "LINCOLN STREET LEGENDS"]
     var teamNameString:String!
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -23,30 +24,9 @@ class TeamTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Segue to the second view controller
         let indexPath = teamTableView.indexPathForSelectedRow
-        let rowNumber:Int = indexPath!.row as Int
         let currentCell = self.teamTableView.cellForRow(at:indexPath!) as! TeamTableViewCell
-        //print(rowNumber)
-        if rowNumber == 0 {
-            teamNameString = currentCell.teamNameLabel.text
-            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
-        }
-        else if rowNumber == 1 {
-            teamNameString = currentCell.teamNameLabel.text
-            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
-        }
-        else if rowNumber == 2 {
-            teamNameString = currentCell.teamNameLabel.text
-            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
-        }
-        else if rowNumber == 3 {
-            teamNameString = currentCell.teamNameLabel.text
-            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
-        }
-        else{
-            teamNameString = currentCell.teamNameLabel.text
-            self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
-        }
-     
+        teamNameString = currentCell.teamNameLabel.text
+        self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,12 +45,12 @@ class TeamTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-           // Get a reference to the second view controller
-           let secondViewController = segue.destination as! SingleTeamViewController
-
-           // Set a variable in the second view controller with the String to pass
-            secondViewController.teamNameString = teamNameString
-       }
-
+        
+        // Get a reference to the second view controller
+        let secondViewController = segue.destination as! SingleTeamViewController
+        
+        // Set a variable in the second view controller with the String to pass
+        secondViewController.teamNameString = teamNameString
+    }
+    
 }

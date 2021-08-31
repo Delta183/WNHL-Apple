@@ -185,6 +185,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="8IH-gv-6ip" secondAttribute="trailing" constant="-21" id="yRG-Xh-j8C"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="AwayImage" destination="D0a-yR-JpG" id="Rmh-Q5-9Z7"/>
                                     <outlet property="HomeImage" destination="H5b-b3-BKq" id="1DJ-9W-2KP"/>
@@ -276,13 +277,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="gOo-Kg-X3W">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="gOo-Kg-X3W">
                                 <rect key="frame" x="79" y="70" width="256" height="256"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="N4m-5G-pv4"/>
+                                </constraints>
                             </imageView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sB-Nz-68R">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sB-Nz-68R">
                                 <rect key="frame" x="0.0" y="334" width="414" height="290"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="bQ6-4k-PXn" kind="embed" id="jvg-PK-W7F"/>
                                 </connections>
@@ -290,6 +292,15 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xc8-8t-PVT"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstItem="gOo-Kg-X3W" firstAttribute="top" secondItem="xc8-8t-PVT" secondAttribute="top" constant="26" id="6DN-Dm-hmV"/>
+                            <constraint firstItem="gOo-Kg-X3W" firstAttribute="leading" secondItem="xc8-8t-PVT" secondAttribute="leading" constant="79" id="98a-lD-drd"/>
+                            <constraint firstAttribute="trailing" secondItem="7sB-Nz-68R" secondAttribute="trailing" id="Hvq-7h-QZI"/>
+                            <constraint firstItem="xc8-8t-PVT" firstAttribute="bottom" secondItem="7sB-Nz-68R" secondAttribute="bottom" constant="189" id="JtY-Rc-QJ8"/>
+                            <constraint firstItem="7sB-Nz-68R" firstAttribute="leading" secondItem="4rF-zU-LLp" secondAttribute="leading" id="oiH-Rm-Kmh"/>
+                            <constraint firstItem="7sB-Nz-68R" firstAttribute="top" secondItem="gOo-Kg-X3W" secondAttribute="bottom" constant="8" symbolic="YES" id="sX2-hF-MF4"/>
+                            <constraint firstItem="gOo-Kg-X3W" firstAttribute="centerX" secondItem="7sB-Nz-68R" secondAttribute="centerX" id="zBV-dE-ztA"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Teams" id="f0g-5r-gzG">
                         <imageReference key="image" image="hockeySticks" symbolScale="small"/>
@@ -349,18 +360,18 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxM-Kp-vwq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1654" y="1196"/>
+            <point key="canvasLocation" x="1653.6231884057972" y="1195.9821428571429"/>
         </scene>
         <!--MoreTableViewController-->
         <scene sceneID="ty6-KJ-DZM">
             <objects>
                 <tableViewController title="MoreTableViewController" id="4f9-nc-ANL" customClass="MoreTableViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="tME-wr-UZL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="tME-wr-UZL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MoreCell" id="sdJ-jQ-iKa" customClass="MoreTableViewCell" customModule="WNHL_App" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MoreCell" rowHeight="50" id="sdJ-jQ-iKa" customClass="MoreTableViewCell" customModule="WNHL_App" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sdJ-jQ-iKa" id="OOF-Nc-iD0">
@@ -368,7 +379,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Donate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrD-No-93U">
-                                            <rect key="frame" x="53" y="1" width="313" height="49"/>
+                                            <rect key="frame" x="53" y="0.0" width="313" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -409,14 +420,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izC-cV-BC3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1081" y="2741"/>
+            <point key="canvasLocation" x="1079.7101449275362" y="2740.8482142857142"/>
         </scene>
         <!--Statistics View Controller-->
         <scene sceneID="ui1-bc-kJ3">
             <objects>
                 <viewController id="e86-Ts-sEQ" customClass="StatisticsViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y7O-R2-Hfg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STATISTICS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Nq-R1-dxO">
@@ -432,7 +443,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZ4-Fr-sYm">
-                                <rect key="frame" x="18" y="-403" width="374" height="199"/>
+                                <rect key="frame" x="18" y="-411" width="374" height="199"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="gsz-oZ-Oq4" kind="embed" id="ZNo-Ts-g47"/>
@@ -453,7 +464,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICV-iW-EcM">
-                                <rect key="frame" x="20" y="-158" width="374" height="188"/>
+                                <rect key="frame" x="20" y="-166" width="374" height="188"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="IZr-Tg-QD6" kind="embed" id="I9O-Av-GJx"/>
@@ -467,7 +478,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oBN-oP-fDh">
-                                <rect key="frame" x="20" y="76" width="374" height="188"/>
+                                <rect key="frame" x="20" y="68" width="374" height="188"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="R2w-IT-hjS" kind="embed" id="ifR-SS-gfF"/>
@@ -539,6 +550,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="hTA-oJ-wmv" secondAttribute="trailing" constant="7" id="ocI-7g-9WV"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataLabel1" destination="hTA-oJ-wmv" id="c5X-r9-d4Z"/>
                                         </connections>
@@ -629,6 +641,7 @@
                                                 <constraint firstItem="6Um-kX-5J2" firstAttribute="top" secondItem="abJ-XN-Lbw" secondAttribute="top" constant="4" id="lQA-Wh-ptp"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataLabel2" destination="6Um-kX-5J2" id="BqC-Ki-AW4"/>
                                         </connections>
@@ -719,6 +732,7 @@
                                                 <constraint firstItem="5bz-kw-nRz" firstAttribute="leading" secondItem="zLJ-Af-9xk" secondAttribute="leading" constant="7" id="jqc-MT-2FP"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataLabel3" destination="5bz-kw-nRz" id="JK6-4u-QSn"/>
                                         </connections>
@@ -774,7 +788,7 @@
             <objects>
                 <viewController id="PoO-AS-q3f" customClass="NotificationsViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Tk-0n-lgZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" id="mAA-1i-rGT">
@@ -806,7 +820,7 @@
                                 </state>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-Cf-OUj">
-                                <rect key="frame" x="0.0" y="-150" width="414" height="367"/>
+                                <rect key="frame" x="0.0" y="-158" width="414" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="2FJ-kR-SIr" kind="embed" id="cyb-qa-lUp"/>
@@ -884,7 +898,7 @@
             <objects>
                 <viewController id="XVM-SR-fbA" customClass="UpdateViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GKL-Y2-2cX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" id="TMd-Te-f6W">
@@ -907,7 +921,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oga-mc-qHa">
-                                <rect key="frame" x="0.0" y="-166" width="414" height="367"/>
+                                <rect key="frame" x="0.0" y="-174" width="414" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="9x2-YO-PQh" kind="embed" id="8t0-EV-YRg"/>
@@ -1063,6 +1077,7 @@
                                                 <constraint firstItem="VYH-8a-ueV" firstAttribute="leading" secondItem="eeG-N8-Aea" secondAttribute="leading" constant="4" id="MGv-YK-ocy"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataLabel2" destination="VYH-8a-ueV" id="FoX-xk-JZU"/>
                                         </connections>
@@ -1182,6 +1197,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="awayImage" destination="306-zy-5rD" id="xvH-A8-TnD"/>
                                     <outlet property="awayTeamLabel" destination="Xe0-H1-GwC" id="pZY-xo-vzY"/>
@@ -1246,6 +1262,7 @@
                                                 <constraint firstItem="Biv-jh-boW" firstAttribute="top" secondItem="8iE-x8-ghg" secondAttribute="top" constant="4" id="nSH-2Z-RCD"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataLabel1" destination="Biv-jh-boW" id="XAx-rt-Wj2"/>
                                         </connections>
@@ -1393,7 +1410,7 @@
             <objects>
                 <viewController id="mtE-x4-TMC" customClass="PlayersViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I6x-wt-Wd3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PLAYERS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jU4-b6-emk">
@@ -1414,7 +1431,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9N-Jq-m48">
-                                <rect key="frame" x="0.0" y="-355" width="414" height="653"/>
+                                <rect key="frame" x="0.0" y="-363" width="414" height="653"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="TQS-yl-Cb1" kind="embed" id="J2Q-8n-xrJ"/>
@@ -1490,6 +1507,7 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <connections>
                                     <outlet property="chevronImage" destination="KB0-1j-rD8" id="OC4-bf-bky"/>
                                     <outlet property="playerText" destination="Vxq-5n-Ihf" id="uiM-Ff-tqC"/>
@@ -1518,14 +1536,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" id="yf6-t4-Hs8">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="yf6-t4-Hs8">
                                 <rect key="frame" x="79" y="70" width="256" height="256"/>
-                                <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="aMQ-KM-XaT"/>
+                                </constraints>
                             </imageView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7kn-SZ-mau">
-                                <rect key="frame" x="0.0" y="334" width="414" height="298"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kn-SZ-mau">
+                                <rect key="frame" x="0.0" y="334" width="414" height="290"/>
                                 <connections>
                                     <segue destination="4f9-nc-ANL" kind="embed" id="h7D-mD-PVB"/>
                                 </connections>
@@ -1533,6 +1552,15 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JE7-5v-1vI"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstItem="yf6-t4-Hs8" firstAttribute="centerX" secondItem="7kn-SZ-mau" secondAttribute="centerX" id="2bn-Bh-82w"/>
+                            <constraint firstItem="JE7-5v-1vI" firstAttribute="bottom" secondItem="7kn-SZ-mau" secondAttribute="bottom" constant="189" id="FTT-I2-oUb"/>
+                            <constraint firstAttribute="trailing" secondItem="7kn-SZ-mau" secondAttribute="trailing" id="LAp-Xh-jRw"/>
+                            <constraint firstItem="yf6-t4-Hs8" firstAttribute="top" secondItem="JE7-5v-1vI" secondAttribute="top" constant="26" id="X67-aD-P4e"/>
+                            <constraint firstItem="7kn-SZ-mau" firstAttribute="top" secondItem="yf6-t4-Hs8" secondAttribute="bottom" constant="8" symbolic="YES" id="YUK-sK-C3x"/>
+                            <constraint firstItem="7kn-SZ-mau" firstAttribute="leading" secondItem="Aiq-Ts-oWx" secondAttribute="leading" id="e5J-Vl-Xoo"/>
+                            <constraint firstItem="yf6-t4-Hs8" firstAttribute="leading" secondItem="JE7-5v-1vI" secondAttribute="leading" constant="79" id="vAx-cb-c9a"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="More" image="ellipsis" catalog="system" id="gdC-d0-v2h"/>
                     <navigationItem key="navigationItem" id="UPf-bX-NUr"/>
@@ -1655,6 +1683,7 @@
                                                 <constraint firstItem="sMw-Ri-SEZ" firstAttribute="leading" secondItem="LoF-jx-zrA" secondAttribute="leading" constant="4" id="xA1-ss-4YE"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="36" height="24"/>
                                         <connections>
                                             <outlet property="posLabel" destination="sMw-Ri-SEZ" id="8ST-Z6-vEO"/>
@@ -1707,6 +1736,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sp2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buP-Ti-niW">
                                                     <rect key="frame" x="4" y="3" width="29" height="18"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                     </accessibility>
@@ -1844,6 +1874,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nn9-er-E5j">
                                                     <rect key="frame" x="4" y="3" width="29" height="18"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                     </accessibility>
@@ -1982,6 +2013,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXF-RN-pBG">
                                                     <rect key="frame" x="4" y="3" width="29" height="18"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                     </accessibility>
@@ -2120,6 +2152,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jr-mx-iWJ">
                                                     <rect key="frame" x="4" y="3" width="29" height="18"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                     </accessibility>

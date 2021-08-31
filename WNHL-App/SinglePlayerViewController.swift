@@ -8,7 +8,7 @@
 import UIKit
 
 class SinglePlayerViewController: UIViewController {
-
+    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerNameRank: UILabel!
@@ -23,28 +23,28 @@ class SinglePlayerViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touch")
-     
+        
         let mainStory = UIStoryboard(name: "Main", bundle: nil)
         let secondVC = mainStory.instantiateViewController(withIdentifier: "playerBackViewController") as! SinglePlayerBackViewController
         self.navigationController?.pushViewController(secondVC, animated: false)
         UIView.transition(from: self.view, to: secondVC.view, duration: 0.85, options: [.transitionFlipFromLeft])
-     }
+    }
     
     @objc func buttonClicked() {
         if let nav = self.navigationController {
-                    nav.popViewController(animated: true)
-                } else {
-                    self.dismiss(animated: true, completion: nil)
-            }
+            nav.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
