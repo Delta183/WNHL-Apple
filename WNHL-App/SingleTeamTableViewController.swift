@@ -57,10 +57,29 @@ class SingleTeamTableViewController: UITableViewController {
             headerView.backgroundColor = UIColor.clear
             return headerView
         }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Segue to the second view controller
+        let indexPath =
+            TeamScheduleTableView.indexPathForSelectedRow
+        let sectionNumber:String = String(indexPath!.section + 1)
+        //print(rowNumber)
+        let alert = UIAlertController(title: "Game " + sectionNumber, message: "", preferredStyle: UIAlertController.Style.alert)
+
+                // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+
+                // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.TeamScheduleTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SingleTeamTableViewCell
         // Configure the cell...
+        cell.noSelectionStyle()
         cell.dateLabel.text = self.dates[indexPath.section]
         cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
         cell.pointsLabel.text = self.points[indexPath.section]

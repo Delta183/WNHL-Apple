@@ -51,6 +51,7 @@ class TeamTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = teamTableView.dequeueReusableCell(withIdentifier: "teamCell", for: indexPath) as! TeamTableViewCell
+        cell.noSelectionStyle()
         cell.teamNameLabel.text = teams[indexPath.row]
         cell.teamNameLabel.textColor = UIColor.white
         cell.teamNameLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)

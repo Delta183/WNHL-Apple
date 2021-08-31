@@ -30,6 +30,7 @@ class UpdateTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UpdateTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UpdateTableViewCell
+        cell.noSelectionStyle()
         cell.updateLabel.text = categories[indexPath.row]
         cell.updateLabel.textColor = UIColor.white
         cell.updateLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)

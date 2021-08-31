@@ -32,6 +32,7 @@ class PlayersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PlayerTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! PlayerTableViewCell
+        cell.noSelectionStyle()
         cell.playerText.text = players[indexPath.row]
         cell.playerText.textColor = UIColor.white
         cell.playerText.font = UIFont.systemFont(ofSize: 16, weight: .bold)

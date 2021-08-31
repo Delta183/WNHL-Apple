@@ -42,6 +42,7 @@ class NotificationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = NotificationsTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! NotificationTableViewCell
         let rowNumber:String = String(indexPath.row)
+        cell.noSelectionStyle()
         cell.checkButton.isSelected = defaults.bool(forKey: "checkButton" + rowNumber)
         cell.teamLabel.text = teams[indexPath.row]
         cell.teamLabel.textColor = UIColor.white

@@ -50,6 +50,7 @@ class MoreTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = MoreTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! MoreTableViewCell
+        cell.noSelectionStyle()
         cell.moreTextLabel.text = entries[indexPath.row]
         cell.moreTextLabel.textColor = UIColor.white
         cell.moreTextLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)

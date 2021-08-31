@@ -64,6 +64,24 @@ class ScheduleTableViewController: UITableViewController {
             return headerView
         }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Segue to the second view controller
+        let indexPath =
+            ScheduleTableView.indexPathForSelectedRow
+        let sectionNumber:String = String(indexPath!.section + 1)
+        //print(rowNumber)
+        let alert = UIAlertController(title: "Game " + sectionNumber, message: "", preferredStyle: UIAlertController.Style.alert)
+
+                // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+
+                // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -72,6 +90,7 @@ class ScheduleTableViewController: UITableViewController {
         let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
         // Once the cell is fetched, modify it as needed
         // The imageViews and text labels were given unique identifiers being HomeImage and AwayImage for the images and scheduleText for the text label.
+        cell.noSelectionStyle()
         cell.dateLabel.text = self.dates[indexPath.section]
         cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
         cell.pointsLabel.text = self.points[indexPath.section]
@@ -105,13 +124,11 @@ class ScheduleTableViewController: UITableViewController {
 
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
         // Do any additional setup after loading the view.
     }
-    
     
     /*
     // MARK: - Navigation
@@ -153,3 +170,8 @@ extension UITableViewController{
     }
 }
 
+extension UITableViewCell {
+    func noSelectionStyle() {
+        self.selectionStyle = .none
+    }
+}
