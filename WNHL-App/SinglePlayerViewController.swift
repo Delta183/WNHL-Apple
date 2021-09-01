@@ -9,13 +9,16 @@ import UIKit
 
 class SinglePlayerViewController: UIViewController {
     
+    @IBOutlet weak var playerNumber: UILabel!
+    @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var playerImage: UIImageView!
-    @IBOutlet weak var playerNameRank: UILabel!
     @IBOutlet weak var playerTeam: UILabel!
     @IBOutlet weak var playerDescription: UITextView!
+    var playerNameString:String!
     override func viewDidLoad() {
         super.viewDidLoad()
+        playerNameLabel.text = playerNameString
         let button = backButton;
         button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         // Do any additional setup after loading the view.
@@ -23,6 +26,7 @@ class SinglePlayerViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let secondVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "playerBackViewController") as! SinglePlayerBackViewController
+        secondVC.playerNameString = self.playerNameString
         self.navigationController?.pushViewController(secondVC, animated: false)
         UIView.transition(from: self.view, to: secondVC.view, duration: 0.85, options: [.transitionFlipFromLeft])
 
@@ -31,6 +35,8 @@ class SinglePlayerViewController: UIViewController {
     @objc func buttonClicked() {
       self.dismiss(animated: true, completion: nil)
     }
+    
+    
     /*
      // MARK: - Navigation
      

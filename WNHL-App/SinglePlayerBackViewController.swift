@@ -9,7 +9,15 @@ import UIKit
 
 class SinglePlayerBackViewController: UIViewController {
     
+    @IBOutlet weak var playerImage: UIImageView!
+    @IBOutlet weak var playerNameLabel: UILabel!
+    @IBOutlet weak var whiteLabel: UILabel!
+    @IBOutlet weak var playerNumberLabel: UILabel!
+    var playerNameString:String!
     override func viewDidLoad() {
+        playerNameLabel.text = playerNameString
+        whiteLabel.layer.borderWidth = 10.0
+        whiteLabel.layer.borderColor = UIColor.systemOrange.cgColor
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

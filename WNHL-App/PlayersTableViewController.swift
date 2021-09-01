@@ -10,6 +10,7 @@ import UIKit
 class PlayersTableViewController: UITableViewController {
     
     @IBOutlet var PlayerTableView: UITableView!
+    var playerNameString:String!
     var players = ["Daniel Figueroa","Sawyer Fenwick","Ian Snow","Smittywerbenjeagermanjensen","John Locke", "Ferdinand von Aegir","Jim Raynor", "Acturus Mengsk","Sarah Kerrigan","Valerian Mengsk","Lucina Fire Emblem","Luz Angelica","Lysithea von Ordelia","Ann Takamaki","Han Solo","Darth Sidious"]
     let reuseIdentifier = "playerCell"
     
@@ -24,9 +25,11 @@ class PlayersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = PlayerTableView.indexPathForSelectedRow
+        let currentCell = self.PlayerTableView.cellForRow(at:indexPath!) as! PlayerTableViewCell
         // Segue to the second view controller
+        playerNameString = currentCell.playerText.text
         self.performSegue(withIdentifier: "singlePlayerSegue", sender: self)
-        // self.performSegue(withIdentifier: "playersSegue", sender: self)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,4 +46,15 @@ class PlayersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // Get a reference to the second view controller
+        let navigationController = segue.destination as! UINavigationController
+        let secondViewController = navigationController.viewControllers.first as! SinglePlayerViewController
+
+        // Set a variable in the second view controller with the String to pass
+        secondViewController.playerNameString = playerNameString
+    }
+    
 }
