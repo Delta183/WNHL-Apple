@@ -37,7 +37,8 @@ class MoreTableViewController: UITableViewController {
             self.performSegue(withIdentifier: "statisticsSegue", sender: self)
         }
         else if rowNumber == 2 {
-            print(rowNumber)
+            let youtubeChannelID:String = "UCklG51DEXWN6RodvW8Mj3cg"
+            goToYoutubeChannel(youtubeChannelId: youtubeChannelID)
             // Go to Youtube
         }
         else if rowNumber == 3 {
@@ -87,4 +88,19 @@ class MoreTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
         
     }
+}
+
+func goToYoutubeChannel(youtubeChannelId:String) {
+
+    let appURL = NSURL(string: "youtube://www.youtube.com/channel/\(youtubeChannelId)")!
+    let webURL = NSURL(string: "https://www.youtube.com/channel/\(youtubeChannelId)")!
+    let application = UIApplication.shared
+
+    if application.canOpenURL(appURL as URL) {
+        application.open(appURL as URL)
+    } else {
+        // if Youtube app is not installed, open URL inside Safari
+        application.open(webURL as URL)
+    }
+
 }
