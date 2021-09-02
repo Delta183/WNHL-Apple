@@ -51,11 +51,59 @@ class NotificationsTableViewController: UITableViewController {
         cell.teamLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        cell.checkButton.mk_addTapHandler { (btn) in
+             self.buttonClicked(cell: cell, rowNumberString: rowNumber)
+        }
+
         // Add toast analog
         return cell
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func buttonClicked(cell:NotificationTableViewCell, rowNumberString: String) {
+        if cell.checkButton.isSelected == false{
+            cell.checkButton.isSelected = true
+            defaults.setValue(true, forKey: "checkButton" + rowNumberString)
+        }
+        else{
+            cell.checkButton.isSelected = false
+            defaults.setValue(false, forKey: "checkButton" + rowNumberString)
+        }
+        
+    }
+}
+
+extension UIButton {
+
+    private class Action {
+        var action: (UIButton) -> Void
+
+        init(action: @escaping (UIButton) -> Void) {
+            self.action = action
+        }
+    }
+
+    private struct AssociatedKeys {
+        static var ActionTapped = "actionTapped"
+    }
+
+    private var tapAction: Action? {
+        set { objc_setAssociatedObject(self, &AssociatedKeys.ActionTapped, newValue, .OBJC_ASSOCIATION_RETAIN) }
+        get { return objc_getAssociatedObject(self, &AssociatedKeys.ActionTapped) as? Action }
+    }
+
+
+    @objc dynamic private func handleAction(_ recognizer: UIButton) {
+        tapAction?.action(recognizer)
+    }
+
+
+    func mk_addTapHandler(action: @escaping (UIButton) -> Void) {
+        self.addTarget(self, action: #selector(handleAction(_:)), for: .touchUpInside)
+        tapAction = Action(action: action)
+
     }
 }
