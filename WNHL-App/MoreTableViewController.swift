@@ -11,8 +11,8 @@ class MoreTableViewController: UITableViewController {
     
     @IBOutlet var MoreTableView: UITableView!
     
-    var entries = ["PLAYERS", "STATISTICS","YOUTUBE", "WNHL FANTASY", "NOTIFICATION SETTINGS", "UPDATE"]
-    var iconNames = ["person.fill", "waveform.path.ecg", "play.circle", "star.circle.fill", "bell.fill","clock.arrow.circlepath"]
+    var entries = ["PLAYERS", "STATISTICS","YOUTUBE", "TWITTER" ,"WNHL FANTASY", "NOTIFICATION SETTINGS", "UPDATE"]
+    var iconNames = ["person.fill", "waveform.path.ecg", "youtube_logo","twitter_logo", "star.circle.fill", "bell.fill","clock.arrow.circlepath"]
     var reuseIdentifier = "MoreCell"
     
     // MARK: - Table view data source
@@ -36,14 +36,23 @@ class MoreTableViewController: UITableViewController {
         else if rowNumber == 1 {
             self.performSegue(withIdentifier: "statisticsSegue", sender: self)
         }
+        else if rowNumber == 2 {
+            print(rowNumber)
+            // Go to Youtube
+        }
+        else if rowNumber == 3 {
+            print(rowNumber)
+            // Go to twitter
+        }
         else if rowNumber == 4 {
-            self.performSegue(withIdentifier: "notificationSegue", sender: self)
+            print(rowNumber)
+            // Go to WNHL Fantasy
         }
         else if rowNumber == 5 {
-            self.performSegue(withIdentifier: "updateSegue", sender: self)
+            self.performSegue(withIdentifier: "notificationSegue", sender: self)
         }
         else{
-            print(rowNumber)
+            self.performSegue(withIdentifier: "updateSegue", sender: self)
         }
     }
     
@@ -59,6 +68,14 @@ class MoreTableViewController: UITableViewController {
         cell.chevronImage.tintColor = UIColor.white
         
         cell.iconImage.image = UIImage(systemName: iconNames[indexPath.row])
+        if cell.iconImage.image == nil {
+            if iconNames[indexPath.row] == "youtube_logo"{
+                cell.iconImage.image = UIImage(named: "youtube_logo")
+            }
+            else{
+                cell.iconImage.image = UIImage(named: "twitter_logo")
+            }
+        }
         cell.iconImage.tintColor = UIColor.white
         
         return cell
