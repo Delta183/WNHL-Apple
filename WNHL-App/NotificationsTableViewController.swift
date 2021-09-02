@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Make button click also toggle
 class NotificationsTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     @IBOutlet var NotificationsTableView: UITableView!
@@ -50,7 +51,7 @@ class NotificationsTableViewController: UITableViewController {
         cell.teamLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
-
+        // Add toast analog
         return cell
     }
     

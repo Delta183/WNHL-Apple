@@ -45,3 +45,6 @@ class TeamSpreadsheetCollectionViewCell1: UICollectionViewCell{
 class TeamSpreadsheetCollectionViewCell2: UICollectionViewCell{
     @IBOutlet weak var dataLabel2: UILabel!
 }
+class SinglePlayerSpreadsheetCollectionViewCell: UICollectionViewCell{
+    @IBOutlet weak var dataLabel: UILabel!
+}

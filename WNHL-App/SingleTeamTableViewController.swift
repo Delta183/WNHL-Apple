@@ -98,8 +98,8 @@ class SingleTeamTableViewController: UITableViewController {
         cell.homeTeamLabel.textAlignment = NSTextAlignment.right
         cell.awayTeamLabel.textAlignment = NSTextAlignment.left
         
-        cell.homeImage.image = UIImage(named: getImageFromTeamName(teamName: self.teams1[indexPath.section]))
-        cell.awayImage.image = UIImage(named: getImageFromTeamName(teamName: self.teams2[indexPath.section]))
+        cell.homeImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams1[indexPath.section]))
+        cell.awayImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams2[indexPath.section]))
         
         cell.layer.borderWidth = 0
         cell.layer.cornerRadius = 24

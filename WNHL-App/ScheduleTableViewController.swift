@@ -69,6 +69,7 @@ class ScheduleTableViewController: UITableViewController {
         let indexPath = ScheduleTableView.indexPathForSelectedRow
         // What will be displayed on the notification will be the index + 1 to be more readable to users.
         let sectionNumber:String = String(indexPath!.section + 1)
+        // Team vs Team
         let alert = UIAlertController(title: "Game " + sectionNumber, message: "", preferredStyle: UIAlertController.Style.alert)
         
         // add the actions (buttons)
@@ -105,8 +106,8 @@ class ScheduleTableViewController: UITableViewController {
         cell.homeTeamLabel.textAlignment = NSTextAlignment.right
         cell.awayTeamLabel.textAlignment = NSTextAlignment.left
         
-        cell.HomeImage.image = UIImage(named: getImageFromTeamName(teamName: self.teams1[indexPath.section]))
-        cell.AwayImage.image = UIImage(named: getImageFromTeamName(teamName: self.teams2[indexPath.section]))
+        cell.HomeImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams1[indexPath.section]))
+        cell.AwayImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams2[indexPath.section]))
         
         cell.backgroundColor = UIColor.white
         cell.layer.borderWidth = 0
@@ -127,23 +128,23 @@ class ScheduleTableViewController: UITableViewController {
 // This is how you make a function header in Swift
 // func methodName(parameterNAme:Type) -> return Type
 extension UITableViewController{
-    func getImageFromTeamName(teamName:String) -> String {
-        if teamName == "Atlas Steelers"{
+    func getImageNameFromTeamNameTable(teamName:String) -> String {
+        if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
             return "steelers_logo"
         }
-        else if teamName == "Dain City Dusters"{
-            return "dusters_logo"
-        }
-        else if teamName == "Lincoln Street Legends"{
-            return "legends_logo"
-        }
-        else if teamName == "Townline Tunnelers"{
+        else if teamName.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
             return "townline_logo"
         }
-        else if teamName == "Crown Room Kings"{
+        else if teamName.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
             return "crownRoom_logo"
         }
-        else if teamName == "Merritt Islanders"{
+        else if teamName.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
+            return "dusters_logo"
+        }
+        else if teamName.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
+            return "legends_logo"
+        }
+        else if teamName.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
             return "islanders_logo"
         }
         else{
@@ -151,6 +152,34 @@ extension UITableViewController{
         }
     }
 }
+
+extension UIViewController{
+    func getImageNameFromTeamName(teamName:String) -> String {
+        if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
+            return "steelers_logo"
+        }
+        else if teamName.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
+            return "townline_logo"
+        }
+        else if teamName.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
+            return "crownRoom_logo"
+        }
+        else if teamName.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
+            return "dusters_logo"
+        }
+        else if teamName.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
+            return "legends_logo"
+        }
+        else if teamName.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
+            return "islanders_logo"
+        }
+        else{
+            return "WNHL_Logo"
+        }
+    }
+}
+
+
 
 extension UITableViewCell {
     func noSelectionStyle() {
