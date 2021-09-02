@@ -51,7 +51,7 @@ class PlayersTableViewController: UITableViewController {
         
         // Get a reference to the second view controller
         let navigationController = segue.destination as! UINavigationController
-        let secondViewController = navigationController.viewControllers.first as! SinglePlayerViewController
+        let secondViewController = navigationController.viewControllers.first as! SinglePlayerBackViewController
 
         // Set a variable in the second view controller with the String to pass
         secondViewController.playerNameString = playerNameString

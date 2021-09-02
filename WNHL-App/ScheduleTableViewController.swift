@@ -67,10 +67,10 @@ class ScheduleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Segue to the second view controller
         let indexPath = ScheduleTableView.indexPathForSelectedRow
-        // What will be displayed on the notification will be the index + 1 to be more readable to users.
-        let sectionNumber:String = String(indexPath!.section + 1)
+        let currentCell = tableView.cellForRow(at: indexPath!) as! ScheduleTableViewCell
+        let alertTitle:String = String(currentCell.homeTeamLabel.text!) + " vs " + String(currentCell.awayTeamLabel.text!)
         // Team vs Team
-        let alert = UIAlertController(title: "Game " + sectionNumber, message: "", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
         
         // add the actions (buttons)
         alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: nil))

@@ -9,6 +9,7 @@ import UIKit
 
 class SinglePlayerBackViewController: UIViewController {
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var whiteLabel: UILabel!
@@ -18,17 +19,23 @@ class SinglePlayerBackViewController: UIViewController {
         playerNameLabel.text = playerNameString
         whiteLabel.layer.borderWidth = 10.0
         whiteLabel.layer.borderColor = UIColor.systemOrange.cgColor
+        let button = backButton;
+        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let firstVC = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count ?? 2) - 2] as? SinglePlayerViewController
-        navigationController?.popViewController(animated: false)
-        UIView.transition(from: self.view, to: (firstVC?.view)!, duration: 0.85, options: [.transitionFlipFromRight])
-        
-        
+        let secondVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "playerFrontViewController") as! SinglePlayerViewController
+        secondVC.playerNameString = self.playerNameString
+        self.navigationController?.pushViewController(secondVC, animated: false)
+        UIView.transition(from: self.view, to: secondVC.view, duration: 0.85, options: [.transitionFlipFromLeft])
 
+    }
+    
+    
+    @objc func buttonClicked() {
+      self.dismiss(animated: true, completion: nil)
     }
     
     
