@@ -42,11 +42,12 @@ class MoreTableViewController: UITableViewController {
             // Go to Youtube
         }
         else if rowNumber == 3 {
-            print(rowNumber)
+            let twitterUserID:String = "WNHL2"
+            followOnTwitter(twitterUserID: twitterUserID)
             // Go to twitter
         }
         else if rowNumber == 4 {
-            print(rowNumber)
+            goToFantasySpreadsheet()
             // Go to WNHL Fantasy
         }
         else if rowNumber == 5 {
@@ -89,7 +90,6 @@ class MoreTableViewController: UITableViewController {
         
     }
 }
-
 func goToYoutubeChannel(youtubeChannelId:String) {
 
     let appURL = NSURL(string: "youtube://www.youtube.com/channel/\(youtubeChannelId)")!
@@ -104,3 +104,24 @@ func goToYoutubeChannel(youtubeChannelId:String) {
     }
 
 }
+
+func followOnTwitter(twitterUserID:String) {
+   let appURL = NSURL(string: "twitter://user?screen_name=\(twitterUserID)")!
+   let webURL = NSURL(string: "https://twitter.com/\(twitterUserID)")!
+
+   let application = UIApplication.shared
+
+   if application.canOpenURL(appURL as URL) {
+        application.open(appURL as URL)
+   } else {
+        application.open(webURL as URL)
+   }
+}
+
+func goToFantasySpreadsheet(){
+    let webURL = NSURL(string:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true")!
+    let application = UIApplication.shared
+    application.open(webURL as URL)
+}
+
+//https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true

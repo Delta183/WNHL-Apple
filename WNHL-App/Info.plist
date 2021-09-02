@@ -23,6 +23,7 @@
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>youtube</string>
+        <string>twitter</string>
     </array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
