@@ -7,6 +7,7 @@
 
 import UIKit
 
+// This class will create and populate the spreadsheets for the Statistics View
 class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet var GoalsCollectionView: UICollectionView?
@@ -15,6 +16,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     var reuseIdentifier1 = "goalsCell"
     var reuseIdentifier2 = "assistsCell"
     var reuseIdentifier3 = "pointsCell"
+    // The 3 arrays are for the Goals, Assists and Points spreadsheets respectively.
     var data1 = [
         "1", "Pat Riley", "Merritt Islanders", "12",
         "2", "Cory Hutchinson", "Lincoln Street Legends", "10",
@@ -61,9 +63,9 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         }
     }
     
-    // Max width is 374
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
+        // Max width of this component is 374
         var cellWidth:CGFloat = CGFloat()
         // Rank Column
         if indexPath.row == 0 || ((indexPath.row) % 4) == 0 {
@@ -93,15 +95,13 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
             return cell
         }
         else if collectionView == self.AssistsCollectionView{
-            // get a reference to our storyboard cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! AssistsCollectionViewCell
-            // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell.dataLabel2.text = self.data2[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.dataLabel2.text = self.data2[indexPath.row]
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! PointsCollectionViewCell
-            cell.dataLabel3.text = self.data3[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.dataLabel3.text = self.data3[indexPath.row]
             return cell
         }
     }

@@ -9,13 +9,13 @@ import UIKit
 
 // Make button click also toggle
 class NotificationsTableViewController: UITableViewController {
+    // Defaults are effectively the local storage of the app such that data can persist
     let defaults = UserDefaults.standard
     @IBOutlet var NotificationsTableView: UITableView!
     var reuseIdentifier = "notificationTableCell"
     var teams = ["Atlas Steelers", "Townline Tunnelers", "Crown Room Kings", "Dain City Dusters", "Lincoln Street Legends","Merritt Islanders"]
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -25,13 +25,17 @@ class NotificationsTableViewController: UITableViewController {
         return teams.count
     }
     
+    // When a button is selected on this table, the button will be toggled as opposed to taking the user to another view via segue
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Segue to the second view controller
         let indexPath = NotificationsTableView.indexPathForSelectedRow
+        // Get the cell at the particular row index
         let cell = NotificationsTableView.cellForRow(at: indexPath!) as! NotificationTableViewCell
+        // Track the number of the the button selected such that it can be used as the unique key
         let rowNumber:String = String(indexPath!.row)
+        // Check if the button has been toggled and toggle if it is not. Vice versa if it is not toggled.
         if cell.checkButton.isSelected == false{
             cell.checkButton.isSelected = true
+            // Set the state of the button to be preserved in the defaults given a unique key.
             defaults.setValue(true, forKey: "checkButton" + rowNumber)
         }
         else{
@@ -51,6 +55,7 @@ class NotificationsTableViewController: UITableViewController {
         cell.teamLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        // The same functionality at the didSelectRowAt yet for the actual checkbox button itself.
         cell.checkButton.mk_addTapHandler { (btn) in
              self.buttonClicked(cell: cell, rowNumberString: rowNumber)
         }

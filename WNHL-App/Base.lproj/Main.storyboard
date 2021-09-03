@@ -656,7 +656,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="se4-kn-CNF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="se4-kn-CNF">
                                 <rect key="frame" x="340" y="0.0" width="34" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -747,7 +747,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXc-B8-lzK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXc-B8-lzK">
                                 <rect key="frame" x="340" y="0.0" width="34" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1572,7 +1572,7 @@
         <!--SpreadsheetViewController-->
         <scene sceneID="4Xc-XB-DYl">
             <objects>
-                <viewController storyboardIdentifier="SpreadsheetViewController" title="SpreadsheetViewController" automaticallyAdjustsScrollViewInsets="NO" id="LXb-M8-CbQ" customClass="SpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpreadsheetViewController" title="SpreadsheetViewController" automaticallyAdjustsScrollViewInsets="NO" id="LXb-M8-CbQ" customClass="StandingsSpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cht-1H-4oI">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="175"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1711,7 +1711,7 @@
         <!--SpreadsheetViewController2-->
         <scene sceneID="2J8-2A-fd7">
             <objects>
-                <viewController title="SpreadsheetViewController2" id="R4y-nb-PJ6" customClass="SpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SpreadsheetViewController2" id="R4y-nb-PJ6" customClass="StandingsSpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LtF-KC-N3c">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1849,7 +1849,7 @@
         <!--SpreadsheetViewController3-->
         <scene sceneID="OY7-BU-sgH">
             <objects>
-                <viewController storyboardIdentifier="SpreadsheetViewController3" title="SpreadsheetViewController3" automaticallyAdjustsScrollViewInsets="NO" id="kfJ-91-fgL" customClass="SpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpreadsheetViewController3" title="SpreadsheetViewController3" automaticallyAdjustsScrollViewInsets="NO" id="kfJ-91-fgL" customClass="StandingsSpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GuQ-30-eko">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1988,7 +1988,7 @@
         <!--SpreadsheetViewController4-->
         <scene sceneID="hao-bN-bIv">
             <objects>
-                <viewController storyboardIdentifier="SpreadsheetViewController4" title="SpreadsheetViewController4" automaticallyAdjustsScrollViewInsets="NO" id="rZh-Fa-9eN" customClass="SpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpreadsheetViewController4" title="SpreadsheetViewController4" automaticallyAdjustsScrollViewInsets="NO" id="rZh-Fa-9eN" customClass="StandingsSpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nC5-uj-3Lt">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2127,7 +2127,7 @@
         <!--SpreadsheetViewController5-->
         <scene sceneID="NpS-1G-6V5">
             <objects>
-                <viewController storyboardIdentifier="SpreadsheetViewController5" title="SpreadsheetViewController5" automaticallyAdjustsScrollViewInsets="NO" id="deu-lp-lsy" customClass="SpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpreadsheetViewController5" title="SpreadsheetViewController5" automaticallyAdjustsScrollViewInsets="NO" id="deu-lp-lsy" customClass="StandingsSpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UQF-CM-t6Q">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2263,10 +2263,10 @@
             </objects>
             <point key="canvasLocation" x="4129" y="287"/>
         </scene>
-        <!--playerFrontViewController-->
+        <!--playerBackViewController-->
         <scene sceneID="Khc-uy-J0c">
             <objects>
-                <viewController storyboardIdentifier="playerFrontViewController" title="playerFrontViewController" id="hfv-Yb-3NB" customClass="SinglePlayerViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerBackViewController" title="playerBackViewController" id="hfv-Yb-3NB" customClass="SinglePlayerBackViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ahV-LE-r6v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2333,18 +2333,18 @@
                         <outlet property="playerDescription" destination="TMk-KM-qVE" id="VGV-Ge-BLD"/>
                         <outlet property="playerImage" destination="Hu1-bb-Wvo" id="HXW-E1-hIm"/>
                         <outlet property="playerNameLabel" destination="GwG-eh-3FI" id="Xxx-59-CCN"/>
-                        <outlet property="playerNumber" destination="rwp-cN-ovR" id="bYu-yr-xCi"/>
-                        <outlet property="playerTeam" destination="cBs-ar-CVx" id="74M-yu-reh"/>
+                        <outlet property="playerNumberLabel" destination="rwp-cN-ovR" id="bYu-yr-xCi"/>
+                        <outlet property="playerTeamLabel" destination="cBs-ar-CVx" id="74M-yu-reh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbX-10-UZu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7796" y="1943"/>
         </scene>
-        <!--playerBackViewController-->
+        <!--playerFrontViewController-->
         <scene sceneID="OAc-cp-Qw2">
             <objects>
-                <viewController storyboardIdentifier="playerBackViewController" title="playerBackViewController" id="gSS-HE-0Hr" customClass="SinglePlayerBackViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerFrontViewController" title="playerFrontViewController" id="gSS-HE-0Hr" customClass="SinglePlayerFrontViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="playerBackViewController" id="hfJ-TC-G3z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="653"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

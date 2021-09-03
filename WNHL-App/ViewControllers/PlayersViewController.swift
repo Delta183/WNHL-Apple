@@ -8,27 +8,20 @@
 import UIKit
 
 class PlayersViewController: UIViewController,UISearchBarDelegate {
-    
-    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchBar.delegate = self // set delegate
         let button = backButton;
         button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
-        // Do any additional setup after loading the view.
+        self.searchBar.delegate = self
     }
     
     @objc func buttonClicked() {
-        if let nav = self.navigationController {
-            nav.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
+        self.dismiss(animated: true, completion: nil)
     }
     
-    // When button "Search" pressed
+    // When button "Search" pressed, the keyboard will dismiss as well.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         self.searchBar.endEditing(true)
     }

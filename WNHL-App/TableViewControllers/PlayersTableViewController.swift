@@ -27,8 +27,8 @@ class PlayersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = PlayerTableView.indexPathForSelectedRow
         let currentCell = self.PlayerTableView.cellForRow(at:indexPath!) as! PlayerTableViewCell
-        // Segue to the second view controller
         playerNameString = currentCell.playerText.text
+        // This will segue to the Navigation controller for the Single Player Front and Back Views
         self.performSegue(withIdentifier: "singlePlayerSegue", sender: self)
     }
     
@@ -47,11 +47,13 @@ class PlayersTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    // This function will be called just prior to the segue performed in the didSelectRowAt function
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // Get a reference to the second view controller
+        // Get the navigation controller holding the View Controllers for Single Player selection
         let navigationController = segue.destination as! UINavigationController
-        let secondViewController = navigationController.viewControllers.first as! SinglePlayerBackViewController
+        // Get a reference to the second view controller now that we have the Navigation controller that contains it
+        let secondViewController = navigationController.viewControllers.first as! SinglePlayerFrontViewController
 
         // Set a variable in the second view controller with the String to pass
         secondViewController.playerNameString = playerNameString

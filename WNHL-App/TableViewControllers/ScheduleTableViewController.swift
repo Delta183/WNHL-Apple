@@ -14,6 +14,7 @@ class ScheduleTableViewController: UITableViewController {
     let cellReuseIdentifier = "scheduleCell"
     // This is responsible for the height of the spacing between each row in pixels
     let cellSpacingHeight: CGFloat = 30
+    // This IBOutlet variable is a strong variable and is connected to the TableView component in the Schedule View though it is embedded in a container view of said class.
     @IBOutlet var ScheduleTableView: UITableView!
     // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
     var dates: [String] = ["Wed. Oct 7, 2020",
@@ -47,8 +48,9 @@ class ScheduleTableViewController: UITableViewController {
         return self.dates.count
     }
     
-    // There is just one row in every section
+    // This function will set the number of rows in each section.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // There is just one row in every section and thus we return 1
         return 1
     }
     
@@ -65,19 +67,19 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Segue to the second view controller
         let indexPath = ScheduleTableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRow(at: indexPath!) as! ScheduleTableViewCell
         let alertTitle:String = String(currentCell.homeTeamLabel.text!) + " vs " + String(currentCell.awayTeamLabel.text!)
-        // Team vs Team
+        // Create the alert with Team vs Team String as a title and no message
         let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
         
-        // add the actions (buttons)
+        // Add actions for the alert when it is called. Directions and Set Reminder have default styling
         alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: nil))
         alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: nil))
+        // Cancel has unique styling to denote the level of action it is.
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         
-        // show the alert
+        // Present the alert once it is completely set.
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -88,8 +90,9 @@ class ScheduleTableViewController: UITableViewController {
         let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
         // Once the cell is fetched, modify it as needed
         // The imageViews and text labels were given unique identifiers being HomeImage and AwayImage for the images and scheduleText for the text label.
-        cell.noSelectionStyle()
+        // In this table, there are multiple sections with 1 row as opposed to 1 section with many rows and as a result, the indexPath is to be tracked by section and not row
         cell.dateLabel.text = self.dates[indexPath.section]
+        // Set the font of the dateLabel programmatically with a font of 15
         cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
         cell.pointsLabel.text = self.points[indexPath.section]
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
@@ -100,17 +103,21 @@ class ScheduleTableViewController: UITableViewController {
         cell.awayTeamLabel.text = self.teams2[indexPath.section]
         cell.awayTeamLabel.font = UIFont.systemFont(ofSize: 14)
         
+        // Set the alignment of the text with respect to the placements of the labels
         cell.dateLabel.textAlignment = NSTextAlignment.center
         cell.pointsLabel.textAlignment = NSTextAlignment.center
         cell.locationLabel.textAlignment = NSTextAlignment.center
         cell.homeTeamLabel.textAlignment = NSTextAlignment.right
         cell.awayTeamLabel.textAlignment = NSTextAlignment.left
         
+        // Setting the images of the Home Team and Away teams Logos
         cell.HomeImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams1[indexPath.section]))
         cell.AwayImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams2[indexPath.section]))
-        
+        // This makes it so that the selection of cells in the table views does not have a graphical effect.
+        cell.noSelectionStyle()
         cell.backgroundColor = UIColor.white
         cell.layer.borderWidth = 0
+        // Corner radius is used to make the edges much rounder than normal.
         cell.layer.cornerRadius = 24
         cell.clipsToBounds = true
         
@@ -127,8 +134,12 @@ class ScheduleTableViewController: UITableViewController {
 
 // This is how you make a function header in Swift
 // func methodName(parameterNAme:Type) -> return Type
+
+// extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
+    // This function will return a string of the image set name given a string of a team name.
     func getImageNameFromTeamNameTable(teamName:String) -> String {
+        // Each check of team name is case insensitive.
         if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
             return "steelers_logo"
         }
@@ -153,6 +164,7 @@ extension UITableViewController{
     }
 }
 
+// Repeat of above code but this will allow all UIViewControllers to use this class.
 extension UIViewController{
     func getImageNameFromTeamName(teamName:String) -> String {
         if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
@@ -179,9 +191,9 @@ extension UIViewController{
     }
 }
 
-
-
+// This extension will allow all UITableViewCells, even the customs ones made, use the functions within
 extension UITableViewCell {
+    // This function simply toggles the selection style to be that of none so that there won't be a grey highlight on click.
     func noSelectionStyle() {
         self.selectionStyle = .none
     }

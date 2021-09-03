@@ -7,19 +7,22 @@
 
 import UIKit
 
-class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
+class StandingsSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
     
+    // Outlets for all the collection views on the Standings View
     @IBOutlet var CollectionView1: UICollectionView?
     @IBOutlet var CollectionView2: UICollectionView?
     @IBOutlet var CollectionView3: UICollectionView?
     @IBOutlet var CollectionView4: UICollectionView?
     @IBOutlet var CollectionView5: UICollectionView?
+    // reuseIdentifiers for the respective cells of the collection views such that they can be referenced here
     let reuseIdentifier1 = "cell"
     let reuseIdentifier2 = "cell2"
     let reuseIdentifier3 = "cell3"
     let reuseIdentifier4 = "cell4"
     let reuseIdentifier5 = "cell5"
     
+    // The arrays housing the data for each respective collection view
     var positions = [ 
         "1", "Merritt Islanders", "11", "6", "2", "3", "15", "50", "35",
         "2", "Townline Tunnelers", "11", "5", "2", "4", "14", "30", "26",
@@ -27,10 +30,11 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
         "4", "Atlas Steelers", "11", "4", "4", "3", "11", "37", "37",
         "5", "Dain City Dusters", "11", "3", "6", "2", "8", "23", "33",
         "6", "Crown Room Kings", "11", "1", "6", "4", "6", "22", "30",]
-    var positions2 = ["1", "Atlas Steelers", "6", "6", "0", "0", "12", "38", "11",
-                      "2", "Townline Tunnelers", "6", "4", "2", "0", "8", "21", "20",
-                      "3", "Welland Stelcobras", "6", "1", "5", "0", "2", "12", "25",
-                      "4", "Crown Room Kings", "6", "1", "5", "0", "2", "14", "29",
+    var positions2 = [
+        "1", "Atlas Steelers", "6", "6", "0", "0", "12", "38", "11",
+        "2", "Townline Tunnelers", "6", "4", "2", "0", "8", "21", "20",
+        "3", "Welland Stelcobras", "6", "1", "5", "0", "2", "12", "25",
+        "4", "Crown Room Kings", "6", "1", "5", "0", "2", "14", "29",
     ]
     var positions3 = [
         "1", "Atlas Steelers", "28", "18", "7", "3", "39", "166", "97",
@@ -49,8 +53,10 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
     
     // MARK: - UICollectionViewDataSource protocol
     
-    // tell the collection view how many cells to make
+    // Set the number of items in the sole section, in other words, tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // Only make as many cells that the amount of the specific array for each collection view.
+        // This is because not all the spreadsheets will have the same amount of data
         if collectionView == CollectionView1 {
             return self.positions.count
         }
@@ -68,27 +74,29 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
         }
     }
     
-    
+    // This function will set the layout the cells for the 5 spreadsheets of this class
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
+        // Max width of this component is 374
         var cellWidth:CGFloat = CGFloat()
         // Team title
         if indexPath.row == 1 || ((indexPath.row - 1) % 9) == 0 {
             cellWidth = 145
         }
-        // 2 letter title
+        // 2 letter titles (GP, GF, GA)
         else if indexPath.row == 2 || indexPath.row == 7 || indexPath.row == 8 || ((indexPath.row - 2) % 9) == 0 || ((indexPath.row - 7) % 9) == 0 || ((indexPath.row - 8) % 9) == 0{
             cellWidth = 32
         }
-        // 1 Letter titles
+        // 1 Letter titles (W,L,T)
         else if indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5 ||
                     ((indexPath.row - 3) % 9) == 0 || ((indexPath.row - 4) % 9) == 0 || ((indexPath.row - 5) % 9) == 0{
             cellWidth = 23
         }
-        // 3 letter title
+        // 3 letter title (PTS, Pos)
         else{
             cellWidth = 32
         }
+        // Set the size of the cell to be of the determined width though all cells will have the exact same height of 24.
         return CGSize(width: cellWidth, height: 24)
     }
     
@@ -103,34 +111,28 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
             return cell
         }
         else if collectionView == self.CollectionView2{
-            // get a reference to our storyboard cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell2
-            // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell.posLabel2.text = self.positions2[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.posLabel2.text = self.positions2[indexPath.row]
             return cell
         }
         else if collectionView == self.CollectionView3{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell3
-            // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell.posLabel3.text = self.positions3[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.posLabel3.text = self.positions3[indexPath.row]
             return cell
         }
         else if collectionView == self.CollectionView4{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier4, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell4
-            // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell.posLabel4.text = self.positions4[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.posLabel4.text = self.positions4[indexPath.row]
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier5, for: indexPath as IndexPath) as! SpreadsheetCollectionViewCell5
-            // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell.posLabel5.text = self.positions5[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.posLabel5.text = self.positions5[indexPath.row]
             return cell
         }
         
     }
     // MARK: - UICollectionViewDelegate protocol
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         CollectionView1?.delegate = self;
@@ -144,14 +146,4 @@ class SpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowL
         CollectionView5?.delegate = self;
         CollectionView5?.dataSource = self;
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
