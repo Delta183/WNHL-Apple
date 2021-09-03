@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol ChildToParentProtocol:AnyObject {
+
+
+       func buttonClickedByUser()
+       func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String)
+
+}
 // Make button click also toggle
 class NotificationsTableViewController: UITableViewController {
     
+    weak var delegate:ChildToParentProtocol? = nil
     // Defaults are effectively the local storage of the app such that data can persist
     let defaults = UserDefaults.standard
     @IBOutlet var NotificationsTableView: UITableView!
@@ -40,12 +48,12 @@ class NotificationsTableViewController: UITableViewController {
             cell.checkButton.isSelected = true
             // Set the state of the button to be preserved in the defaults given a unique key.
             defaults.setValue(true, forKey: "checkButton" + rowNumber)
-            self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 15.0))
+            delegate?.needToPassInfoToParent(with: true, teamNameString: teamNameString)
         }
         else{
             cell.checkButton.isSelected = false
             defaults.setValue(false, forKey: "checkButton" + rowNumber)
-            self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 15.0))
+            delegate?.needToPassInfoToParent(with: false, teamNameString: teamNameString)
         }
     }
     
@@ -78,12 +86,12 @@ class NotificationsTableViewController: UITableViewController {
         if cell.checkButton.isSelected == false{
             cell.checkButton.isSelected = true
             defaults.setValue(true, forKey: "checkButton" + rowNumberString)
-            self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 15.0))
+            delegate?.needToPassInfoToParent(with: true, teamNameString: teamNameString)
         }
         else{
             cell.checkButton.isSelected = false
             defaults.setValue(false, forKey: "checkButton" + rowNumberString)
-            self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 15.0))
+            delegate?.needToPassInfoToParent(with: false, teamNameString: teamNameString)
         }
         
     }
@@ -121,23 +129,4 @@ extension UIButton {
     }
 }
 
-// Put to parent view
-extension UITableViewController{
-    func showToast(message : String, font: UIFont) {
-        let toastLabel = UILabel(frame: CGRect(x: 55, y: self.view.frame.size.height-50, width: 300, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = font
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 3.0, delay: 1.0, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }
-}
+

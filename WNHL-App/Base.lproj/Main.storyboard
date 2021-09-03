@@ -854,10 +854,10 @@
                                 </state>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-Cf-OUj">
-                                <rect key="frame" x="0.0" y="448" width="414" height="367"/>
+                                <rect key="frame" x="0.0" y="448" width="414" height="349"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="2FJ-kR-SIr" kind="embed" id="cyb-qa-lUp"/>
+                                    <segue destination="2FJ-kR-SIr" kind="embed" identifier="notificationTableSegue" id="cyb-qa-lUp"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -872,7 +872,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0cp-WT-g78" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2374" y="3187"/>
+            <point key="canvasLocation" x="2373.913043478261" y="3186.8303571428569"/>
         </scene>
         <!--Update Table View Controller-->
         <scene sceneID="g73-Ck-Be4">
@@ -1392,7 +1392,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="notificationsTableViewController" title="notificationsTableViewController" id="2FJ-kR-SIr" customClass="NotificationsTableViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fKB-1i-OvU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="349"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <prototypes>
