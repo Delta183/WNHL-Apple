@@ -20,6 +20,7 @@ class NotificationsViewController: UIViewController {
         infoLabel.text = "Select a Team to receive notifications for Upcoming Games.\nTo stop receiving notifications, deselect the Team."
         // Removing the limit is done through setting number of lines to 0 as labels initially can only do one line
         infoLabel.numberOfLines = 0
+    
     }
     
     @objc func buttonClicked() {

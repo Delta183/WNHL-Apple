@@ -783,12 +783,12 @@
             </objects>
             <point key="canvasLocation" x="3821.739130434783" y="2795.7589285714284"/>
         </scene>
-        <!--Notifications View Controller-->
+        <!--notificationsViewController-->
         <scene sceneID="Cfl-kX-nbH">
             <objects>
-                <viewController id="PoO-AS-q3f" customClass="NotificationsViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="notificationsViewController" title="notificationsViewController" id="PoO-AS-q3f" customClass="NotificationsViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Tk-0n-lgZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="345"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" id="mAA-1i-rGT">
@@ -820,7 +820,7 @@
                                 </state>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-Cf-OUj">
-                                <rect key="frame" x="0.0" y="-103" width="414" height="367"/>
+                                <rect key="frame" x="0.0" y="448" width="414" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="2FJ-kR-SIr" kind="embed" id="cyb-qa-lUp"/>
@@ -830,6 +830,7 @@
                         <viewLayoutGuide key="safeArea" id="K9n-2a-Bt0"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                     </view>
+                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="backButton" destination="g3q-QO-qzB" id="nFZ-pM-aFH"/>
                         <outlet property="infoLabel" destination="JOv-2c-983" id="a07-Y1-1Fg"/>
@@ -837,7 +838,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0cp-WT-g78" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2374" y="3059"/>
+            <point key="canvasLocation" x="2374" y="3187"/>
         </scene>
         <!--Update Table View Controller-->
         <scene sceneID="g73-Ck-Be4">
@@ -946,7 +947,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bqn-U4-jUy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2374" y="3439"/>
+            <point key="canvasLocation" x="2374" y="3767"/>
         </scene>
         <!--Item-->
         <scene sceneID="udb-M5-A9V">
@@ -1352,10 +1353,10 @@
             </objects>
             <point key="canvasLocation" x="3282.608695652174" y="967.63392857142856"/>
         </scene>
-        <!--Notifications Table View Controller-->
+        <!--notificationsTableViewController-->
         <scene sceneID="faO-mh-lbI">
             <objects>
-                <tableViewController id="2FJ-kR-SIr" customClass="NotificationsTableViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="notificationsTableViewController" title="notificationsTableViewController" id="2FJ-kR-SIr" customClass="NotificationsTableViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fKB-1i-OvU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

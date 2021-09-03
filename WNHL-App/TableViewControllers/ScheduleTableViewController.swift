@@ -189,6 +189,7 @@ extension UIViewController{
             return "WNHL_Logo"
         }
     }
+    
 }
 
 // This extension will allow all UITableViewCells, even the customs ones made, use the functions within
