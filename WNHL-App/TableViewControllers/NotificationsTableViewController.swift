@@ -14,7 +14,7 @@ class NotificationsTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     @IBOutlet var NotificationsTableView: UITableView!
     var reuseIdentifier = "notificationTableCell"
-    var teams = ["Atlas Steelers", "Townline Tunnelers", "Crown Room Kings", "Dain City Dusters", "Lincoln Street Legends","Merritt Islanders"]
+    var teams = ["Atlas Steelers", "Townline Tunnelers", "Crown Room Kings", "Dain City Dusters", "Lincoln Street Legends","Merritt Islanders","Merritt Islanders","Merritt Islanders","Merritt Islanders","Merritt Islanders"]
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -121,6 +121,7 @@ extension UIButton {
     }
 }
 
+// Put to parent view
 extension UITableViewController{
     func showToast(message : String, font: UIFont) {
         let toastLabel = UILabel(frame: CGRect(x: 55, y: self.view.frame.size.height-50, width: 300, height: 35))

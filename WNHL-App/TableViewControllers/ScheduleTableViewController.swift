@@ -199,3 +199,4 @@ extension UITableViewCell {
         self.selectionStyle = .none
     }
 }
+// Make all tables scroll

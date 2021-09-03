@@ -35,6 +35,10 @@
 		98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */; };
 		98C3987626C476F9007D226E /* StandingsSpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C3987526C476F9007D226E /* StandingsSpreadsheetViewController.swift */; };
 		98F0B2B626DF30A100B1B05D /* SinglePlayerSpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F0B2B526DF30A100B1B05D /* SinglePlayerSpreadsheetViewController.swift */; };
+		98F6E31C26E2B5BC00087C17 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6E31B26E2B5BC00087C17 /* LaunchViewController.swift */; };
+		98F6E32026E2C91B00087C17 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6E31F26E2C91B00087C17 /* ProgressView.swift */; };
+		98F6E32226E2C94700087C17 /* ProgressShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6E32126E2C94700087C17 /* ProgressShapeLayer.swift */; };
+		98F6E32426E2C97700087C17 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6E32326E2C97700087C17 /* StrokeAnimation.swift */; };
 		98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */; };
 		98FC0C7E26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7D26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift */; };
 		98FC0C8026D782A700E1F6E4 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7F26D782A700E1F6E4 /* NotificationsViewController.swift */; };
@@ -93,6 +97,10 @@
 		98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCells.swift; sourceTree = "<group>"; };
 		98C3987526C476F9007D226E /* StandingsSpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsSpreadsheetViewController.swift; sourceTree = "<group>"; };
 		98F0B2B526DF30A100B1B05D /* SinglePlayerSpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerSpreadsheetViewController.swift; sourceTree = "<group>"; };
+		98F6E31B26E2B5BC00087C17 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		98F6E31F26E2C91B00087C17 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		98F6E32126E2C94700087C17 /* ProgressShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShapeLayer.swift; sourceTree = "<group>"; };
+		98F6E32326E2C97700087C17 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		98FC0C7D26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSpreadsheetViewController.swift; sourceTree = "<group>"; };
 		98FC0C7F26D782A700E1F6E4 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -155,9 +163,13 @@
 				9810CF5926AF6E6F00442CD1 /* LaunchScreen.storyboard */,
 				98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */,
 				9827C6C226D4E39C005A062B /* CustomTableCells.swift */,
+				98F6E31B26E2B5BC00087C17 /* LaunchViewController.swift */,
 				985D4A0326E1953A003CBDD4 /* ViewControllers */,
 				985D4A0426E19695003CBDD4 /* TableViewControllers */,
 				985D4A0526E19716003CBDD4 /* SpreadsheetViewControllers */,
+				98F6E31F26E2C91B00087C17 /* ProgressView.swift */,
+				98F6E32126E2C94700087C17 /* ProgressShapeLayer.swift */,
+				98F6E32326E2C97700087C17 /* StrokeAnimation.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -360,11 +372,13 @@
 				98C3987626C476F9007D226E /* StandingsSpreadsheetViewController.swift in Sources */,
 				9867B90C26DA0C2E008E09B8 /* SinglePlayerBackViewController.swift in Sources */,
 				9827C6C326D4E39C005A062B /* CustomTableCells.swift in Sources */,
+				98F6E32026E2C91B00087C17 /* ProgressView.swift in Sources */,
 				98A4D76926D853B800F77529 /* UpdateTableViewController.swift in Sources */,
 				98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */,
 				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
 				98FC0C7E26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift in Sources */,
 				98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */,
+				98F6E32226E2C94700087C17 /* ProgressShapeLayer.swift in Sources */,
 				98A4D76F26D8AA2800F77529 /* SingleTeamTableViewController.swift in Sources */,
 				98FC0C8226D7853A00E1F6E4 /* NotificationsTableViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
@@ -373,7 +387,9 @@
 				9827C6BD26D482CE005A062B /* TeamTableViewController.swift in Sources */,
 				982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */,
 				9867B90E26DA13F0008E09B8 /* SinglePlayerFrontViewController.swift in Sources */,
+				98F6E31C26E2B5BC00087C17 /* LaunchViewController.swift in Sources */,
 				9827C6BF26D4AFCC005A062B /* ScheduleTableViewController.swift in Sources */,
+				98F6E32426E2C97700087C17 /* StrokeAnimation.swift in Sources */,
 				9810CF4F26AF6E6900442CD1 /* AppDelegate.swift in Sources */,
 				9810CF8526B9B78500442CD1 /* TeamsViewController.swift in Sources */,
 				98F0B2B626DF30A100B1B05D /* SinglePlayerSpreadsheetViewController.swift in Sources */,
