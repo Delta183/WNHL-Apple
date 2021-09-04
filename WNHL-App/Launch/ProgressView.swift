@@ -40,7 +40,7 @@ class ProgressView: UIView {
         let path = UIBezierPath(ovalIn:
                                     CGRect(
                                         x: -10,
-                                        y: 0,
+                                        y: 200,
                                         width: self.bounds.width,
                                         height: self.bounds.width
                                     )
