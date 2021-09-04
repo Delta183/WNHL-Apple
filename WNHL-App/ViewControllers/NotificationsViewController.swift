@@ -36,9 +36,6 @@ class NotificationsViewController: UIViewController {
 
 extension NotificationsViewController:ChildToParentProtocol {
     
-    func buttonClickedByUser() {
-        print("bababooey")
-    }
     func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String) {
         if isNowChecked{
             self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 15.0))

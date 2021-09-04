@@ -25,4 +25,13 @@ class PlayersViewController: UIViewController,UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         self.searchBar.endEditing(true)
     }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        (children.first as? PlayersTableViewController)?.searchTableView(searchText: searchText)
+    }
+    
+    
 }
+
+

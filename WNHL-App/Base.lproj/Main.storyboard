@@ -1469,7 +1469,7 @@
                                 <rect key="frame" x="0.0" y="-308" width="414" height="653"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="TQS-yl-Cb1" kind="embed" id="J2Q-8n-xrJ"/>
+                                    <segue destination="TQS-yl-Cb1" kind="embed" identifier="playerTableSegue" id="J2Q-8n-xrJ"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B00-ji-PPV">

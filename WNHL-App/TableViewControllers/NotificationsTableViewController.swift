@@ -8,11 +8,9 @@
 import UIKit
 
 protocol ChildToParentProtocol:AnyObject {
-
-
-       func buttonClickedByUser()
-       func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String)
-
+    
+        func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String)
+    
 }
 // Make button click also toggle
 class NotificationsTableViewController: UITableViewController {
