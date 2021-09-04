@@ -9,10 +9,11 @@ import UIKit
 
 class SinglePlayerFrontViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var playerImage: UIImageView!
+    @IBOutlet weak var playerImageView: UIImageView!
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var whiteLabel: UILabel!
     @IBOutlet weak var playerNumberLabel: UILabel!
+    var playerImageURL:String!
     // This is String variable used to transfer information from the previous table view in order to populate this view with the correct specific player data.
     // This will be sent to the SinglePlayerBackViewController to allow that view to populate its data with the correct player information.
     var playerNameString:String!
@@ -23,10 +24,37 @@ class SinglePlayerFrontViewController: UIViewController {
         // It has a thick border with an orange colour to simulate a sort of cell
         whiteLabel.layer.borderWidth = 10.0
         whiteLabel.layer.borderColor = UIColor.systemOrange.cgColor
+        playerImageURL = "http://www.wnhlwelland.ca/wp-content/uploads/2019/09/DSC_6338.jpg"
+        playerImageView.image = UIImage(url: URL(string: playerImageURL))
+      
+
+//        let config = URLSessionConfiguration.default
+//        let session = URLSession(configuration: config)
+//        if let url = NSURL(string: playerImageURL){
+//            let task = session.dataTask(with: url as URL, completionHandler: {data, response, error in
+//
+//                if let err = error {
+//                    print("Error: \(err)")
+//                    return
+//                }
+//
+//                if let http = response as? HTTPURLResponse {
+//                    if http.statusCode == 200 {
+//                        let downloadedImage = UIImage(data: data!)
+//                        DispatchQueue.main.async {
+//                            self.playerImageView.image = downloadedImage
+//                        };
+//                    }
+//                }
+//            })
+//            task.resume()
+//        }
+//
         let button = backButton;
         button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
-        super.viewDidLoad()
         // Do any additional setup after loading the view.
+        super.viewDidLoad()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,6 +69,20 @@ class SinglePlayerFrontViewController: UIViewController {
     }
     
     @objc func buttonClicked() {
-      self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension UIImage {
+    convenience init?(url: URL?) {
+        guard let url = url else { return nil }
+        
+        do {
+            self.init(data: try Data(contentsOf: url))
+        } catch {
+            print("Cannot load image from url: \(url) with error: \(error)")
+            return nil
+        }
     }
 }
