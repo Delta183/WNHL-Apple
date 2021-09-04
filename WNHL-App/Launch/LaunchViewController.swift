@@ -33,6 +33,7 @@ class LaunchViewController: UIViewController {
         }
         else{
             textLabel.text = "Downloading Data..."
+
         }
     }
     
