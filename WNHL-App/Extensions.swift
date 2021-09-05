@@ -64,6 +64,32 @@ extension UIViewController{
             return "WNHL_Logo"
         }
     }
+    
+    // Function to give the view a special background colour dependent on the team that was selected.
+    func getColorFromTeamId(teamNameString: String) -> UIColor{
+        if teamNameString.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
+            return UIColor(red: 200.0/255.0, green: 10.0/255.0, blue: 200.0/255.0, alpha: 1.0)
+        }
+        else if teamNameString.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
+            return UIColor.systemBlue
+        }
+        else if teamNameString.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
+            return UIColor.black
+        }
+        else if teamNameString.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
+            return UIColor.red
+        }
+        else if teamNameString.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
+            // This will allow the creation of custom colours through changing the numerators
+            return UIColor(red: 10.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0)
+        }
+        else if teamNameString.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
+            return UIColor.systemGray2
+        }
+        else{
+            return UIColor.systemOrange
+        }
+    }
 }
 
 
@@ -145,6 +171,48 @@ extension UITableViewController{
             NSLog("Can't open Apple Maps on this device")
         }
     }
+    
+    // This function will take the string given representing a Youtube Channel ID and use it to take the user to it
+    func goToYoutubeChannel(youtubeChannelId:String) {
+        // appURL is the url for the Youtube app in particular
+        let appURL = NSURL(string: "youtube://www.youtube.com/channel/\(youtubeChannelId)")!
+        // webURL is the url for initializing Youtube on the browser.
+        let webURL = NSURL(string: "https://www.youtube.com/channel/\(youtubeChannelId)")!
+        let application = UIApplication.shared
+        // Check if the Youtube app can be opened first. This means the user has it installed already.
+        if application.canOpenURL(appURL as URL) {
+            application.open(appURL as URL)
+        } else {
+            // if Youtube app is not installed, open URL inside Safari
+            application.open(webURL as URL)
+        }
+        
+    }
+
+    // This function will take the user to a Twitter account given the handle represented by a String
+    func goToTwitterAccount(twitterUserID:String) {
+        // appURL is the url for the Twitter app in particular
+        let appURL = NSURL(string: "twitter://user?screen_name=\(twitterUserID)")!
+        // webURL is the url for the browser variant of Twitter
+        let webURL = NSURL(string: "https://twitter.com/\(twitterUserID)")!
+        
+        let application = UIApplication.shared
+        
+        // Try to open the Twitter app first if it is installed, otherwise if that fails, open the Twitter account on browser.
+        if application.canOpenURL(appURL as URL) {
+            application.open(appURL as URL)
+        } else {
+            application.open(webURL as URL)
+        }
+    }
+
+    // This function will simply redirect the user to the Google Spreadsheet for WNHL Fantasy in browser.
+    func goToFantasySpreadsheet(){
+        let webURL = NSURL(string:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true")!
+        let application = UIApplication.shared
+        application.open(webURL as URL)
+    }
+
 }
 
 // This extension will allow all UITableViewCells, even the customs ones made, use the functions within

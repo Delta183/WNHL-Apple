@@ -27,38 +27,39 @@ class MoreTableViewController: UITableViewController {
         // Segue to the second view controller
         let indexPath = MoreTableView.indexPathForSelectedRow
         let rowNumber:Int = indexPath!.row as Int
-        // The if-else block is to give each button specific functionality based off their indices
         // Players button
-        if rowNumber == 0 {
+        switch rowNumber {
+        case 0:
             self.performSegue(withIdentifier: "playersSegue", sender: self)
-        }
+            break
         // Statistics button
-        else if rowNumber == 1 {
+        case 1:
             self.performSegue(withIdentifier: "statisticsSegue", sender: self)
-        }
+            break
         // Youtube button
-        else if rowNumber == 2 {
+        case 2:
             // This string represents the id part of the Youtube URL for channels
             let youtubeChannelID:String = "UCklG51DEXWN6RodvW8Mj3cg"
             goToYoutubeChannel(youtubeChannelId: youtubeChannelID)
-        }
+            break
         // Twitter button
-        else if rowNumber == 3 {
+        case 3:
             // This is a string representing the handle of the channel.
             let twitterUserID:String = "WNHL2"
             goToTwitterAccount(twitterUserID: twitterUserID)
-        }
+            break
         // WNHL Fantasy button
-        else if rowNumber == 4 {
+        case 4:
             goToFantasySpreadsheet()
-        }
+            break
         // Notifications Settings button
-        else if rowNumber == 5 {
+        case 5:
             self.performSegue(withIdentifier: "notificationSegue", sender: self)
-        }
+            break
         // Otherwise the last button by default is the Update button
-        else{
+        default:
             self.performSegue(withIdentifier: "updateSegue", sender: self)
+            break
         }
     }
     
@@ -91,45 +92,4 @@ class MoreTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-}
-
-// This function will take the string given representing a Youtube Channel ID and use it to take the user to it
-func goToYoutubeChannel(youtubeChannelId:String) {
-    // appURL is the url for the Youtube app in particular
-    let appURL = NSURL(string: "youtube://www.youtube.com/channel/\(youtubeChannelId)")!
-    // webURL is the url for initializing Youtube on the browser.
-    let webURL = NSURL(string: "https://www.youtube.com/channel/\(youtubeChannelId)")!
-    let application = UIApplication.shared
-    // Check if the Youtube app can be opened first. This means the user has it installed already.
-    if application.canOpenURL(appURL as URL) {
-        application.open(appURL as URL)
-    } else {
-        // if Youtube app is not installed, open URL inside Safari
-        application.open(webURL as URL)
-    }
-    
-}
-
-// This function will take the user to a Twitter account given the handle represented by a String
-func goToTwitterAccount(twitterUserID:String) {
-    // appURL is the url for the Twitter app in particular
-    let appURL = NSURL(string: "twitter://user?screen_name=\(twitterUserID)")!
-    // webURL is the url for the browser variant of Twitter
-    let webURL = NSURL(string: "https://twitter.com/\(twitterUserID)")!
-    
-    let application = UIApplication.shared
-    
-    // Try to open the Twitter app first if it is installed, otherwise if that fails, open the Twitter account on browser.
-    if application.canOpenURL(appURL as URL) {
-        application.open(appURL as URL)
-    } else {
-        application.open(webURL as URL)
-    }
-}
-
-// This function will simplt redirect the user to the Google Spreadsheet for WNHL Fantasy in browser.
-func goToFantasySpreadsheet(){
-    let webURL = NSURL(string:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true")!
-    let application = UIApplication.shared
-    application.open(webURL as URL)
 }
