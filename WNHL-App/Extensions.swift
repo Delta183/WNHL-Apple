@@ -107,6 +107,45 @@ extension UITableViewController{
             return "WNHL_Logo"
         }
     }
+    
+    func scheduleLocal() {
+           
+           let center = UNUserNotificationCenter.current()
+           let content = UNMutableNotificationContent()
+           content.title = "Late wake up call"
+           content.body = "The early bird catches the worm, but the second mouse gets the cheese."
+           content.categoryIdentifier = "alarm"
+           content.userInfo = ["customData": "fizzbuzz"]
+           content.sound = UNNotificationSound.default
+           
+           let date = Date()
+           let calendar = Calendar.current
+           let hourValue = calendar.component(.hour, from: date)
+           let minuteValue = calendar.component(.minute, from: date)
+           var dateComponents = DateComponents()
+           dateComponents.hour = hourValue
+           dateComponents.minute = minuteValue
+           let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+           
+           let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+           center.add(request)
+       }
+       
+       func showLocationOnMaps(primaryContactFullAddress: String) {
+           let testURL: NSURL = NSURL(string: "maps://maps.apple.com/?q=")!
+           if UIApplication.shared.canOpenURL(testURL as URL) {
+               if let address = primaryContactFullAddress.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+                   let directionsRequest: String = "maps://maps.apple.com/?q=" + (address)
+                   let directionsURL: NSURL = NSURL(string: directionsRequest)!
+                   let application:UIApplication = UIApplication.shared
+                   if (application.canOpenURL(directionsURL as URL)) {
+                       application.open(directionsURL as URL, options: [:], completionHandler: nil)
+                   }
+               }
+           } else {
+               NSLog("Can't open Apple Maps on this device")
+           }
+       }
 }
 
 // This extension will allow all UITableViewCells, even the customs ones made, use the functions within
