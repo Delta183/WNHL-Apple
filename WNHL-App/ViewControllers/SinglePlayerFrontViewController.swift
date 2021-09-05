@@ -32,8 +32,31 @@ class SinglePlayerFrontViewController: UIViewController {
         }else{
             playerImageView.image = playerImage
         }
-        // playerImageView.image = resizeImage(image: playerImage!, targetSize: CGSize(width: playerImageView.intrinsicContentSize.width,height: playerImageView.intrinsicContentSize.height))
-      
+        let button = backButton;
+        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        // Do any additional setup after loading the view.
+        super.viewDidLoad()
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Set the destination view controller to be that of the PlayerBackViewController
+        let secondVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "playerBackViewController") as! SinglePlayerBackViewController
+        // Set the data of that view controller's analog string from this class with data also from this class
+        secondVC.playerNameString = self.playerNameString
+        // Push that destination view controller onto the Navigation controller stack
+        self.navigationController?.pushViewController(secondVC, animated: false)
+        // Make the transition with the appropriate start and end points and animations.
+        UIView.transition(from: self.view, to: secondVC.view, duration: 0.85, options: [.transitionFlipFromLeft])
+    }
+    
+    @objc func buttonClicked() {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// playerImageView.image = resizeImage(image: playerImage!, targetSize: CGSize(width: playerImageView.intrinsicContentSize.width,height: playerImageView.intrinsicContentSize.height))
+
 
 //        let config = URLSessionConfiguration.default
 //        let session = URLSession(configuration: config)
@@ -57,64 +80,3 @@ class SinglePlayerFrontViewController: UIViewController {
 //            task.resume()
 //        }
 //
-        let button = backButton;
-        button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
-        // Do any additional setup after loading the view.
-        super.viewDidLoad()
-        
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Set the destination view controller to be that of the PlayerBackViewController
-        let secondVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "playerBackViewController") as! SinglePlayerBackViewController
-        // Set the data of that view controller's analog string from this class with data also from this class
-        secondVC.playerNameString = self.playerNameString
-        // Push that destination view controller onto the Navigation controller stack
-        self.navigationController?.pushViewController(secondVC, animated: false)
-        // Make the transition with the appropriate start and end points and animations.
-        UIView.transition(from: self.view, to: secondVC.view, duration: 0.85, options: [.transitionFlipFromLeft])
-    }
-    
-    @objc func buttonClicked() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
-}
-
-extension UIImage {
-    convenience init?(url: URL?) {
-        guard let url = url else { return nil }
-        
-        do {
-            self.init(data: try Data(contentsOf: url))
-        } catch {
-            print("Cannot load image from url: \(url) with error: \(error)")
-            return nil
-        }
-    }
-}

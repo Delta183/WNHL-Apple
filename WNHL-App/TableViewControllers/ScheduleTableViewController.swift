@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import UserNotifications
 // View Controllers represent each screen, A basic screen is known as a View Controller but a view entirely devoted to say a TableView is a TableViewController. Thus this class is responsible for affecting strictly the table on the Schedule screen.
 class ScheduleTableViewController: UITableViewController {
     
@@ -75,7 +75,9 @@ class ScheduleTableViewController: UITableViewController {
         
         // Add actions for the alert when it is called. Directions and Set Reminder have default styling
         alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+            self.scheduleLocal()
+        }))
         // Cancel has unique styling to denote the level of action it is.
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         
@@ -125,78 +127,41 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
+        super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    
+    @objc func scheduleLocal() {
+        
+        let center = UNUserNotificationCenter.current()
+        // For the sake of testing right now, this will delete any pending notifications
+        let content = UNMutableNotificationContent()
+        content.title = "Late wake up call"
+        content.body = "The early bird catches the worm, but the second mouse gets the cheese."
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = UNNotificationSound.default
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let hourValue = calendar.component(.hour, from: date)
+        let minuteValue = calendar.component(.minute, from: date)
+        var dateComponents = DateComponents()
+        dateComponents.hour = hourValue
+        dateComponents.minute = minuteValue
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
+    
+   
+    
 }
 
 // This is how you make a function header in Swift
 // func methodName(parameterNAme:Type) -> return Type
 
-// extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
-extension UITableViewController{
-    // This function will return a string of the image set name given a string of a team name.
-    func getImageNameFromTeamNameTable(teamName:String) -> String {
-        // Each check of team name is case insensitive.
-        if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
-            return "steelers_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
-            return "townline_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
-            return "crownRoom_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
-            return "dusters_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
-            return "legends_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
-            return "islanders_logo"
-        }
-        else{
-            return "WNHL_Logo"
-        }
-    }
-}
-
-// Repeat of above code but this will allow all UIViewControllers to use this class.
-extension UIViewController{
-    func getImageNameFromTeamName(teamName:String) -> String {
-        if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
-            return "steelers_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
-            return "townline_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
-            return "crownRoom_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
-            return "dusters_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
-            return "legends_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
-            return "islanders_logo"
-        }
-        else{
-            return "WNHL_Logo"
-        }
-    }
-    
-}
-
-// This extension will allow all UITableViewCells, even the customs ones made, use the functions within
-extension UITableViewCell {
-    // This function simply toggles the selection style to be that of none so that there won't be a grey highlight on click.
-    func noSelectionStyle() {
-        self.selectionStyle = .none
-    }
-}
-// Make all tables scroll

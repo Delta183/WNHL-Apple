@@ -34,35 +34,4 @@ class NotificationsViewController: UIViewController {
     }
 }
 
-extension NotificationsViewController:ChildToParentProtocol {
-    
-    func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String) {
-        if isNowChecked{
-            self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 15.0))
-        }
-        else{
-            self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 15.0))
-        }
-    }
-}
 
-// Put to parent view
-extension UIViewController{
-    func showToast(message : String, font: UIFont) {
-        let toastLabel = UILabel(frame: CGRect(x: 55, y: self.view.frame.size.height-100, width: 300, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = font
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 3.0, delay: 1.0, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }
-}
