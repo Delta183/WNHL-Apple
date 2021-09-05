@@ -74,9 +74,13 @@ class ScheduleTableViewController: UITableViewController {
         let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
         
         // Add actions for the alert when it is called. Directions and Set Reminder have default styling
-        alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+            let fullAddress = "Brock University, Sir Isaac Brock Way, St. Catharines, ON"
+            self.showLocationOnMaps(primaryContactFullAddress: fullAddress)
+        }))
         alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
             self.scheduleLocal()
+            //Brock University, Sir Isaac Brock Way, St. Catharines, ON
         }))
         // Cancel has unique styling to denote the level of action it is.
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
@@ -133,35 +137,7 @@ class ScheduleTableViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
-    
-    @objc func scheduleLocal() {
-        
-        let center = UNUserNotificationCenter.current()
-        // For the sake of testing right now, this will delete any pending notifications
-        let content = UNMutableNotificationContent()
-        content.title = "Late wake up call"
-        content.body = "The early bird catches the worm, but the second mouse gets the cheese."
-        content.categoryIdentifier = "alarm"
-        content.userInfo = ["customData": "fizzbuzz"]
-        content.sound = UNNotificationSound.default
-        
-        let date = Date()
-        let calendar = Calendar.current
-        let hourValue = calendar.component(.hour, from: date)
-        let minuteValue = calendar.component(.minute, from: date)
-        var dateComponents = DateComponents()
-        dateComponents.hour = hourValue
-        dateComponents.minute = minuteValue
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        center.add(request)
-    }
-    
-   
-    
 }
 
 // This is how you make a function header in Swift
 // func methodName(parameterNAme:Type) -> return Type
-

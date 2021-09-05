@@ -165,11 +165,11 @@
 				9810CF5926AF6E6F00442CD1 /* LaunchScreen.storyboard */,
 				98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */,
 				9827C6C226D4E39C005A062B /* CustomTableCells.swift */,
+				983E2D7826E486E500ED7043 /* Extensions.swift */,
 				98F6E32526E2EBC300087C17 /* Launch */,
 				985D4A0326E1953A003CBDD4 /* ViewControllers */,
 				985D4A0426E19695003CBDD4 /* TableViewControllers */,
 				985D4A0526E19716003CBDD4 /* SpreadsheetViewControllers */,
-				983E2D7826E486E500ED7043 /* Extensions.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
