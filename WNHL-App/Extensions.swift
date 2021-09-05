@@ -9,18 +9,6 @@ import Foundation
 import Swift
 import UIKit
 
-extension NotificationsViewController:ChildToParentProtocol {
-    
-    func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String) {
-        if isNowChecked{
-            self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 15.0))
-        }
-        else{
-            self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 15.0))
-        }
-    }
-}
-
 // Put to parent view
 extension UIViewController{
     func showToast(message : String, font: UIFont) {
@@ -93,19 +81,6 @@ extension UIViewController{
 }
 
 
-extension UIImage {
-    convenience init?(url: URL?) {
-        guard let url = url else { return nil }
-        
-        do {
-            self.init(data: try Data(contentsOf: url))
-        } catch {
-            print("Cannot load image from url: \(url) with error: \(error)")
-            return nil
-        }
-    }
-}
-
 // extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
     // This function will return a string of the image set name given a string of a team name.
@@ -134,7 +109,7 @@ extension UITableViewController{
         }
     }
     
-    func scheduleLocal() {
+    func scheduleLocalTest() {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
         content.title = "Late wake up call"
@@ -154,6 +129,25 @@ extension UITableViewController{
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
+    }
+    
+    func scheduleLocal(dateTimeString:String) {
+       
+        //let date = Date(timeIntervalSinceNow: 60) //Working Fine
+        let date = convertStringToDate(dateStr: dateTimeString) //log 2018-10-20 10:11:00 +0000
+        let content = UNMutableNotificationContent()
+        content.title = "Don't forget"
+        content.body = "Buy some milk"
+        content.sound = UNNotificationSound.default
+        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date) //log ▿ year: 2018 month: 10 day: 20 hour: 18 minute: 11 second: 0 isLeapMonth: false
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+            if let error = error {
+                // Something went wrong
+                print(error)
+            }
+        })
     }
     
     func showLocationOnMaps(primaryContactFullAddress: String) {
@@ -186,7 +180,6 @@ extension UITableViewController{
             // if Youtube app is not installed, open URL inside Safari
             application.open(webURL as URL)
         }
-        
     }
 
     // This function will take the user to a Twitter account given the handle represented by a String
@@ -208,9 +201,18 @@ extension UITableViewController{
 
     // This function will simply redirect the user to the Google Spreadsheet for WNHL Fantasy in browser.
     func goToFantasySpreadsheet(){
-        let webURL = NSURL(string:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true")!
+        let webURL = NSURL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true")!
         let application = UIApplication.shared
         application.open(webURL as URL)
+    }
+    
+    func convertStringToDate(dateStr: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current// (abbreviation: "GMT+0:00")
+        let dateFromString = dateFormatter.date(from: dateStr)
+        print("dateFromString: ", dateFromString!)
+        return dateFromString!
     }
 
 }
@@ -253,5 +255,30 @@ extension UIButton {
         self.addTarget(self, action: #selector(handleAction(_:)), for: .touchUpInside)
         tapAction = Action(action: action)
         
+    }
+}
+
+extension UIImage {
+    convenience init?(url: URL?) {
+        guard let url = url else { return nil }
+        
+        do {
+            self.init(data: try Data(contentsOf: url))
+        } catch {
+            print("Cannot load image from url: \(url) with error: \(error)")
+            return nil
+        }
+    }
+}
+
+extension NotificationsViewController:ChildToParentProtocol {
+    
+    func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String) {
+        if isNowChecked{
+            self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 15.0))
+        }
+        else{
+            self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 15.0))
+        }
     }
 }

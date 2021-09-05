@@ -79,8 +79,10 @@ class ScheduleTableViewController: UITableViewController {
             self.showLocationOnMaps(primaryContactFullAddress: fullAddress)
         }))
         alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-            self.scheduleLocal()
-            //Brock University, Sir Isaac Brock Way, St. Catharines, ON
+            //var dateString = String()
+            //dateString = "2021-09-05 16:22:50"
+            //self.scheduleLocal(dateTimeString: dateString)
+            self.scheduleLocalTest()
         }))
         // Cancel has unique styling to denote the level of action it is.
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
