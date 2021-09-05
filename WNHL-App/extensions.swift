@@ -108,8 +108,8 @@ extension UITableViewController{
         }
     }
     
+    // This handles the notifcations
     func scheduleLocal() {
-        
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
         content.title = "Late wake up call"
