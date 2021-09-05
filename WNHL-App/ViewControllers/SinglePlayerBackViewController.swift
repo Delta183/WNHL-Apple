@@ -11,13 +11,23 @@ class SinglePlayerBackViewController: UIViewController {
     @IBOutlet weak var playerNumberLabel: UILabel!
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var playerTeamLabel: UILabel!
-    @IBOutlet weak var playerImage: UIImageView!
+    @IBOutlet weak var playerImageView: UIImageView!
     @IBOutlet weak var playerDescription: UITextView!
     var playerNameString:String!
+    var playerImageURL:String!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playerNameLabel.text = playerNameString
+        playerImageView.layer.cornerRadius = 100
+        playerImageURL = "http://www.wnhlwelland.ca/wp-content/uploads/2019/09/DSC_6338.jpg"
+        let playerImage = UIImage(url: URL(string: playerImageURL))
+        if playerImage == nil{
+            playerImageView.image = UIImage(named: "WNHL_Logo")
+        }else{
+            playerImageView.image = playerImage
+        }
     }
     
     // This function is called when any spot on the screen has been touched that isn't an interactable component
