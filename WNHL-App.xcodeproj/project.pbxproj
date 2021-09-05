@@ -24,7 +24,7 @@
 		982E765C26D5D9FD0050F2DA /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */; };
 		982E766026D5FBC60050F2DA /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E765F26D5FBC60050F2DA /* PlayersViewController.swift */; };
 		982E766226D5FE2D0050F2DA /* PlayersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */; };
-		983E2D7926E486E500ED7043 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E2D7826E486E500ED7043 /* extensions.swift */; };
+		983E2D7926E486E500ED7043 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E2D7826E486E500ED7043 /* Extensions.swift */; };
 		9867B90C26DA0C2E008E09B8 /* SinglePlayerBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9867B90B26DA0C2D008E09B8 /* SinglePlayerBackViewController.swift */; };
 		9867B90E26DA13F0008E09B8 /* SinglePlayerFrontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9867B90D26DA13F0008E09B8 /* SinglePlayerFrontViewController.swift */; };
 		98A4D76726D853A100F77529 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4D76626D853A100F77529 /* UpdateViewController.swift */; };
@@ -87,7 +87,7 @@
 		982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		982E765F26D5FBC60050F2DA /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewController.swift; sourceTree = "<group>"; };
-		983E2D7826E486E500ED7043 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		983E2D7826E486E500ED7043 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9867B90B26DA0C2D008E09B8 /* SinglePlayerBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerBackViewController.swift; sourceTree = "<group>"; };
 		9867B90D26DA13F0008E09B8 /* SinglePlayerFrontViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerFrontViewController.swift; sourceTree = "<group>"; };
 		98A4D76626D853A100F77529 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 				9810CF5926AF6E6F00442CD1 /* LaunchScreen.storyboard */,
 				98C3987126C472D7007D226E /* CustomCollectionViewCells.swift */,
 				9827C6C226D4E39C005A062B /* CustomTableCells.swift */,
-				983E2D7826E486E500ED7043 /* extensions.swift */,
+				983E2D7826E486E500ED7043 /* Extensions.swift */,
 				98F6E32526E2EBC300087C17 /* Launch */,
 				985D4A0326E1953A003CBDD4 /* ViewControllers */,
 				985D4A0426E19695003CBDD4 /* TableViewControllers */,
@@ -404,7 +404,7 @@
 				9810CF4F26AF6E6900442CD1 /* AppDelegate.swift in Sources */,
 				9810CF8526B9B78500442CD1 /* TeamsViewController.swift in Sources */,
 				98F0B2B626DF30A100B1B05D /* SinglePlayerSpreadsheetViewController.swift in Sources */,
-				983E2D7926E486E500ED7043 /* extensions.swift in Sources */,
+				983E2D7926E486E500ED7043 /* Extensions.swift in Sources */,
 				982E765C26D5D9FD0050F2DA /* MoreTableViewController.swift in Sources */,
 				98A4D76B26D875F800F77529 /* SingleTeamViewController.swift in Sources */,
 				98A4D77126D8B7B500F77529 /* SecondSingleTeamSpreadsheetViewController.swift in Sources */,
