@@ -66,6 +66,8 @@ class ScheduleTableViewController: UITableViewController {
         return headerView
     }
     
+    // This function monitors the selection of a row in the table
+    // Depending on which game the user selected, then an alert will appear and prompt various choices. Directions, Set Reminder and Cancel
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = ScheduleTableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRow(at: indexPath!) as! ScheduleTableViewCell
@@ -79,10 +81,10 @@ class ScheduleTableViewController: UITableViewController {
             self.showLocationOnMaps(primaryContactFullAddress: fullAddress)
         }))
         alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-            //var dateString = String()
-            //dateString = "2021-09-05 16:22:50"
-            //self.scheduleLocal(dateTimeString: dateString)
-            self.scheduleLocalTest()
+            var dateString = String()
+            dateString = "2021-09-06 00:32:50"
+            self.scheduleLocal(dateTimeString: dateString)
+            //self.scheduleLocalTest()
         }))
         // Cancel has unique styling to denote the level of action it is.
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))

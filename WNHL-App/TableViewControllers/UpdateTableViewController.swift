@@ -23,6 +23,48 @@ class UpdateTableViewController: UITableViewController {
         return categories.count
     }
     
+    // This function monitors the selection of a row in the table
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = UpdateTableView.indexPathForSelectedRow
+        let rowNumber:Int = indexPath!.row as Int
+        switch rowNumber {
+        // Players
+        case 0:
+            // DO WORK HERE
+            
+            
+            break
+        // Game Schedule
+        case 1:
+            // DO WORK HERE
+
+            
+            
+            break
+        // Teams
+        case 2:
+            // DO WORK HERE
+
+            
+            
+            break
+        // Standings
+        case 3:
+            // DO WORK HERE
+
+            
+            
+            break
+        // Everything
+        default:
+            // DO WORK HERE
+
+            
+            
+            break
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UpdateTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UpdateTableViewCell
         cell.noSelectionStyle()
