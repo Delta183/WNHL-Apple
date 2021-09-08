@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SQLite
 
 class LaunchViewController: UIViewController {
     
@@ -56,7 +57,56 @@ class LaunchViewController: UIViewController {
     
     func do_stuff(onCompleted: () -> ()) {
         // This body not counting the onCompleted tag is where you will set up the database loading.
-        sleep(3)
+        //Create DB
+        SQLiteDatabase.init()
+        //Path to DB
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            //Column Names
+            //Table Column Names
+            let id = Expression<Int64>("id")
+            let name = Expression<String>("name")
+            let slug = Expression<String>("slug")
+            let seasonID = Expression<String>("seasonID")
+            let title = Expression<String>("title")
+            let home = Expression<Int64>("home")
+            let away = Expression<Int64>("away")
+            let homeScore = Expression<Int64>("homeScore")
+            let awayScore = Expression<Int64>("awayScore")
+            let date = Expression<String>("date")
+            let time = Expression<String>("time")
+            let location = Expression<Int64>("location")
+            let mediaID = Expression<Int64>("mediaID")
+            let mediaURL = Expression<String>("mediaURL")
+            let content = Expression<String>("content")
+            let leagues = Expression<String>("leagues")
+            let number = Expression<Int64>("number")
+            let prevTeams = Expression<String>("prevTeams")
+            let currTeam = Expression<Int64>("currTeam")
+            let goals = Expression<Int64>("goals")
+            let assists = Expression<Int64>("assists")
+            let points = Expression<Int64>("points")
+            //Table Names
+            let venues = Table("Venues")
+            let teams = Table("Teams")
+            let games = Table("Games")
+            for venue in try db.prepare(venues){
+                print("id: \(venue[id]), name: \(venue[name])")
+            }
+            for team in try db.prepare(teams){
+                print("id: \(team[id]), slug: \(team[slug])")
+            }
+            for game in try db.prepare(games){
+                print("date: \(game[date]), time: \(game[time]), location: \(game[location]) , title: \(game[title])")
+                let title = game[title]
+                print(title)
+            }
+            
+        }
+        catch {
+            print(error)
+        }
         // The onCompleted flag is necessary
         onCompleted()
     }
