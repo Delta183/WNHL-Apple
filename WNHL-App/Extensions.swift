@@ -84,28 +84,50 @@ extension UIViewController{
 // extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
     // This function will return a string of the image set name given a string of a team name.
-    func getImageNameFromTeamNameTable(teamName:String) -> String {
+    func getImageNameFromTeamNameTable(teamId:Int) -> String {
         // Each check of team name is case insensitive.
-        if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
+        if teamId == 940{
             return "steelers_logo"
         }
-        else if teamName.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
+        else if teamId == 1370{
             return "townline_logo"
         }
-        else if teamName.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
+        else if teamId == 1371{
             return "crownRoom_logo"
         }
-        else if teamName.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
+        else if teamId == 1810{
             return "dusters_logo"
         }
-        else if teamName.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
+        else if teamId == 1822{
             return "legends_logo"
         }
-        else if teamName.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
+        else if teamId == 1824{
             return "islanders_logo"
         }
         else{
             return "WNHL_Logo"
+        }
+    }
+    
+    func getLocationFromId(locationId:Int) -> String {
+        // Each check of team name is case insensitive.
+        if locationId == 15{
+            return "Welland"
+        }
+        else if locationId == 30{
+            return "Pelham - Accipiter"
+        }
+        else if locationId == 35{
+            return "Pelham - Duliban"
+        }
+        else if locationId == 39{
+            return "Welland - Youth Arena"
+        }
+        else if locationId == 41{
+            return "Port Colborne - Vale Center"
+        }
+        else{
+            return "Niagara Falls - Gale Center"
         }
     }
     
