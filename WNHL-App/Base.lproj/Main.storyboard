@@ -1156,23 +1156,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="vs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJe-ZW-McE">
-                                            <rect key="frame" x="175" y="80" width="25" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lincoln Street Legends" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMS-8F-5bC">
-                                            <rect key="frame" x="0.0" y="80" width="175" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lincoln Street Legends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xe0-H1-GwC">
-                                            <rect key="frame" x="200" y="80" width="175" height="25"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lincoln Street Legends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMS-8F-5bC">
+                                            <rect key="frame" x="0.0" y="80" width="374" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1183,12 +1168,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="awayImage" destination="306-zy-5rD" id="xvH-A8-TnD"/>
-                                    <outlet property="awayTeamLabel" destination="Xe0-H1-GwC" id="pZY-xo-vzY"/>
                                     <outlet property="dateLabel" destination="cBa-if-7Pg" id="fEt-iA-iW3"/>
                                     <outlet property="homeImage" destination="MM8-YH-o6i" id="zh6-Zw-wQt"/>
-                                    <outlet property="homeTeamLabel" destination="AMS-8F-5bC" id="aMU-vg-qR9"/>
                                     <outlet property="locationLabel" destination="VHm-vr-cRU" id="Osu-vV-BIO"/>
                                     <outlet property="pointsLabel" destination="ZiG-6g-gRE" id="a9y-iW-tzC"/>
+                                    <outlet property="titleLabel" destination="AMS-8F-5bC" id="aMU-vg-qR9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

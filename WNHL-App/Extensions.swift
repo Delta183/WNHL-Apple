@@ -8,6 +8,7 @@
 import Foundation
 import Swift
 import UIKit
+import SQLite
 
 // Put to parent view
 extension UIViewController{
@@ -131,6 +132,8 @@ extension UITableViewController{
         }
     }
     
+    
+    
     func scheduleLocalTest() {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
@@ -153,7 +156,7 @@ extension UITableViewController{
         center.add(request)
     }
     
-    func scheduleLocal(dateTimeString:String) {
+    func scheduleLocal(dateTimeString:String, notificationId:String) {
        
         //let date = Date(timeIntervalSinceNow: 60) //Working Fine
         let date = convertStringToDate(dateStr: dateTimeString) //log 2018-10-20 10:11:00 +0000
@@ -163,13 +166,42 @@ extension UITableViewController{
         content.sound = UNNotificationSound.default
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date) //log ▿ year: 2018 month: 10 day: 20 hour: 18 minute: 11 second: 0 isLeapMonth: false
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
             if let error = error {
                 // Something went wrong
                 print(error)
             }
         })
+    }
+    
+    func deleteNotification(notificationId:String){
+        print("Deleting: " + notificationId)
+        let idArray:[String] = [notificationId]
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: idArray)
+    }
+    
+    func deletePastSetNotifications(idList:[Int64],dateList:[String]){
+        let defaults = UserDefaults.standard
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        for n in 0..<idList.count {
+            // If there is some data here, it mean it still exists and there may be a possibility a cancelled notification had past its time or an active one past its time
+            if defaults.bool(forKey: String(idList[n])) == false || defaults.bool(forKey: String(idList[n])) == true{
+                let dateFromString = dateFormatter.date(from: dateList[n])
+                // Check if the date of this notification is prior to current date. As in this very instant
+                if dateFromString?.timeIntervalSinceNow.isLessThanOrEqualTo(0) == true{
+                    // if the time since this notification to now is 0 or a negative, it means the notification has passed.
+                    // Thus we remove the object entirely
+                    defaults.removeObject(forKey: String(idList[n]))
+                }
+            }
+        }
+           
+        
+      
+  
     }
     
     func showLocationOnMaps(primaryContactFullAddress: String) {
