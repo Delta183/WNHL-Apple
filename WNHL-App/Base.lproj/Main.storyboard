@@ -166,14 +166,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" id="oDY-sz-00s">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="WNHL_Logo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="oDY-sz-00s">
                                 <rect key="frame" x="79" y="320" width="256" height="256"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Checking for Updates..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vA-AfK">
-                                <rect key="frame" x="20" y="696" width="374" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="htN-qK-ZKj">
+                                <rect key="frame" x="177" y="684" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="wkB-St-cPj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking for Updates..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vA-AfK">
+                                <rect key="frame" x="96" y="779" width="222" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -181,6 +186,13 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rgp-qa-LEw"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstItem="htN-qK-ZKj" firstAttribute="leading" secondItem="Rgp-qa-LEw" secondAttribute="leading" constant="177" id="UH5-Qk-Mjt"/>
+                            <constraint firstItem="htN-qK-ZKj" firstAttribute="centerX" secondItem="oDY-sz-00s" secondAttribute="centerX" id="VHU-0r-VbG"/>
+                            <constraint firstItem="vc1-vA-AfK" firstAttribute="top" secondItem="htN-qK-ZKj" secondAttribute="bottom" constant="35" id="Zfe-JI-jVl"/>
+                            <constraint firstItem="htN-qK-ZKj" firstAttribute="centerX" secondItem="vc1-vA-AfK" secondAttribute="centerX" id="hvF-Mt-ki7"/>
+                            <constraint firstItem="Rgp-qa-LEw" firstAttribute="bottom" secondItem="vc1-vA-AfK" secondAttribute="bottom" constant="59" id="kz7-gv-AcX"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="textLabel" destination="vc1-vA-AfK" id="XVW-Wp-hcR"/>
@@ -189,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEG-Nk-75V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1159" y="842"/>
+            <point key="canvasLocation" x="-1159.4202898550725" y="841.74107142857144"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="m6P-xd-E7O">
