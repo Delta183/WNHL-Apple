@@ -224,5 +224,57 @@ extension UITableViewController{
         }
         return 0
     }
- 
+    
+    func getAllGameIdsFromTeamId(teamId:Int64) -> [Int64]{
+        var gameIdList:[Int64] = []
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let id = Expression<Int64>("id")
+            let home = Expression<Int64>("home")
+            let away = Expression<Int64>("away")
+            
+            //Table Names
+            let games = Table("Games")
+            for game in try db.prepare(games.select(id).filter(away == teamId || home == teamId)){
+                gameIdList.append(game[id])
+            }
+        }
+        catch {
+            print(error)
+        }
+        return gameIdList
+    }
+    
+    func scheduleAllTeamGames(idList:[Int64]){
+      
+        for n in 0..<idList.count {
+            // For all the games in the idList, schedule them, they will be overwritten if they are already set
+            scheduleLocal(dateTimeString: getFullDateTimeStringFromTeamId(gameId: idList[n]), notificationId: String(idList[n]))
+        }
+    }
+    
+    func deleteAllNotificationsOfTeamGames(idList:[Int64]){
+        let defaults = UserDefaults.standard
+        for n in 0..<idList.count {
+            // For all the games in the idList, schedule them, they will be overwritten if they are already set
+            deleteNotification(notificationId: String(idList[n]))
+            defaults.setValue(false, forKey: String(idList[n]))
+
+        }
+        updateScheduledGamesFromPreferences()
+    }
+    
+    // This function checks all the user defaults for the teams
+    func updateScheduledGamesFromPreferences(){
+        let defaults = UserDefaults.standard
+        let teams = getTeamsFromSeasonId(seasonIdString: "34")
+        for n in 0..<teams.count {
+            if defaults.bool(forKey: teams[n]){
+                let teamId = getTeamIdFromTeamName(teamName: teams[n])
+                let gameIdList = getAllGameIdsFromTeamId(teamId: teamId)
+                scheduleAllTeamGames(idList: gameIdList)
+            }
+        }
+    }
 }
