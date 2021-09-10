@@ -3,10 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		249395FD26E869480037CD8E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249395FC26E869480037CD8E /* Service.swift */; };
+		249395FF26E86A400037CD8E /* Standings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249395FE26E86A400037CD8E /* Standings.swift */; };
+		2493960126E86AB90037CD8E /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493960026E86AB90037CD8E /* Games.swift */; };
+		2493960326E86AEF0037CD8E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493960226E86AEF0037CD8E /* Game.swift */; };
+		2493960526E86B2E0037CD8E /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493960426E86B2E0037CD8E /* Players.swift */; };
+		2493960726E86B530037CD8E /* Seasons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493960626E86B530037CD8E /* Seasons.swift */; };
+		2493960926E86B730037CD8E /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493960826E86B730037CD8E /* Teams.swift */; };
+		2493960B26E86B8E0037CD8E /* Venues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493960A26E86B8E0037CD8E /* Venues.swift */; };
+		2493961326E9720B0037CD8E /* PlayerID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493961226E9720B0037CD8E /* PlayerID.swift */; };
 		24F2136226E8458D00EACC14 /* SQLiteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F2136126E8458D00EACC14 /* SQLiteDatabase.swift */; };
 		4FE48C3E8656A021DFD843A1 /* Pods_WNHL_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA4F6866EC2179F90D6754D /* Pods_WNHL_AppTests.framework */; };
 		6C4CDF286837EAA154E111BE /* Pods_WNHL_App_WNHL_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1222F25C187CA54CE68081 /* Pods_WNHL_App_WNHL_AppUITests.framework */; };
@@ -69,6 +78,15 @@
 
 /* Begin PBXFileReference section */
 		141266FAEDF065B4EB6DDE61 /* Pods-WNHL-App-WNHL-AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WNHL-App-WNHL-AppUITests.release.xcconfig"; path = "Target Support Files/Pods-WNHL-App-WNHL-AppUITests/Pods-WNHL-App-WNHL-AppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		249395FC26E869480037CD8E /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		249395FE26E86A400037CD8E /* Standings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standings.swift; sourceTree = "<group>"; };
+		2493960026E86AB90037CD8E /* Games.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Games.swift; sourceTree = "<group>"; };
+		2493960226E86AEF0037CD8E /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		2493960426E86B2E0037CD8E /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
+		2493960626E86B530037CD8E /* Seasons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seasons.swift; sourceTree = "<group>"; };
+		2493960826E86B730037CD8E /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teams.swift; sourceTree = "<group>"; };
+		2493960A26E86B8E0037CD8E /* Venues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venues.swift; sourceTree = "<group>"; };
+		2493961226E9720B0037CD8E /* PlayerID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerID.swift; sourceTree = "<group>"; };
 		24F2136126E8458D00EACC14 /* SQLiteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDatabase.swift; sourceTree = "<group>"; };
 		3CC1493115D9D80B2503AA64 /* Pods_WNHL_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WNHL_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D8B5F29C3060CEB4DB5E20C /* Pods-WNHL-AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WNHL-AppTests.debug.xcconfig"; path = "Target Support Files/Pods-WNHL-AppTests/Pods-WNHL-AppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +169,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		249395FB26E869150037CD8E /* JSON-Structs  */ = {
+			isa = PBXGroup;
+			children = (
+				249395FE26E86A400037CD8E /* Standings.swift */,
+				2493960026E86AB90037CD8E /* Games.swift */,
+				2493960226E86AEF0037CD8E /* Game.swift */,
+				2493960426E86B2E0037CD8E /* Players.swift */,
+				2493960626E86B530037CD8E /* Seasons.swift */,
+				2493960826E86B730037CD8E /* Teams.swift */,
+				2493960A26E86B8E0037CD8E /* Venues.swift */,
+				2493961226E9720B0037CD8E /* PlayerID.swift */,
+			);
+			path = "JSON-Structs ";
+			sourceTree = "<group>";
+		};
 		26685F7C778F99FDAB33CD83 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,13 +194,13 @@
 				7D8B5F29C3060CEB4DB5E20C /* Pods-WNHL-AppTests.debug.xcconfig */,
 				F9FE6AC5883F254B36F8AF95 /* Pods-WNHL-AppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		9810CF4226AF6E6900442CD1 = {
 			isa = PBXGroup;
 			children = (
+				249395FB26E869150037CD8E /* JSON-Structs  */,
 				9810CF4D26AF6E6900442CD1 /* WNHL-App */,
 				9810CF6426AF6E7000442CD1 /* WNHL-AppTests */,
 				9810CF6F26AF6E7000442CD1 /* WNHL-AppUITests */,
@@ -204,6 +237,7 @@
 				985D4A0426E19695003CBDD4 /* TableViewControllers */,
 				985D4A0526E19716003CBDD4 /* SpreadsheetViewControllers */,
 				24F2136126E8458D00EACC14 /* SQLiteDatabase.swift */,
+				249395FC26E869480037CD8E /* Service.swift */,
 			);
 			path = "WNHL-App";
 			sourceTree = "<group>";
@@ -532,20 +566,29 @@
 				982E766026D5FBC60050F2DA /* PlayersViewController.swift in Sources */,
 				9810CF5326AF6E6900442CD1 /* HomeViewController.swift in Sources */,
 				98A4D76D26D8A85400F77529 /* FirstSingleTeamSpreadsheetViewController.swift in Sources */,
+				2493960126E86AB90037CD8E /* Games.swift in Sources */,
 				98C3987626C476F9007D226E /* StandingsSpreadsheetViewController.swift in Sources */,
 				9867B90C26DA0C2E008E09B8 /* SinglePlayerBackViewController.swift in Sources */,
 				9827C6C326D4E39C005A062B /* CustomTableCells.swift in Sources */,
 				98F6E32026E2C91B00087C17 /* ProgressView.swift in Sources */,
 				98A4D76926D853B800F77529 /* UpdateTableViewController.swift in Sources */,
+				2493960726E86B530037CD8E /* Seasons.swift in Sources */,
 				24F2136226E8458D00EACC14 /* SQLiteDatabase.swift in Sources */,
+				2493960526E86B2E0037CD8E /* Players.swift in Sources */,
 				98C3987226C472D7007D226E /* CustomCollectionViewCells.swift in Sources */,
 				9810CF8126B7BB0900442CD1 /* MoreViewController.swift in Sources */,
+				249395FD26E869480037CD8E /* Service.swift in Sources */,
 				98FC0C7E26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift in Sources */,
+				2493960926E86B730037CD8E /* Teams.swift in Sources */,
 				98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */,
 				98F6E32226E2C94700087C17 /* ProgressShapeLayer.swift in Sources */,
+				2493960B26E86B8E0037CD8E /* Venues.swift in Sources */,
 				98A4D76F26D8AA2800F77529 /* SingleTeamTableViewController.swift in Sources */,
 				98FC0C8226D7853A00E1F6E4 /* NotificationsTableViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
+				2493960326E86AEF0037CD8E /* Game.swift in Sources */,
+				2493961326E9720B0037CD8E /* PlayerID.swift in Sources */,
+				249395FF26E86A400037CD8E /* Standings.swift in Sources */,
 				98A4D76726D853A100F77529 /* UpdateViewController.swift in Sources */,
 				98FC0C8026D782A700E1F6E4 /* NotificationsViewController.swift in Sources */,
 				9827C6BD26D482CE005A062B /* TeamTableViewController.swift in Sources */,
