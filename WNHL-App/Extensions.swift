@@ -13,7 +13,8 @@ import SQLite
 // Put to parent view
 extension UIViewController{
     func showToast(message : String, font: UIFont) {
-        let toastLabel = UILabel(frame: CGRect(x: 55, y: self.view.frame.size.height-100, width: 300, height: 35))
+        // This may have to change to be 1/10 of the width
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/10 , y: self.view.frame.size.height-100, width: 325, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.font = font
@@ -84,48 +85,30 @@ extension UIViewController{
 
 // extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
-   
-    func scheduleLocalTest() {
-        let center = UNUserNotificationCenter.current()
-        let content = UNMutableNotificationContent()
-        content.title = "Late wake up call"
-        content.body = "The early bird catches the worm, but the second mouse gets the cheese."
-        content.categoryIdentifier = "alarm"
-        content.userInfo = ["customData": "fizzbuzz"]
-        content.sound = UNNotificationSound.default
-        
-        let date = Date()
-        let calendar = Calendar.current
-        let hourValue = calendar.component(.hour, from: date)
-        let minuteValue = calendar.component(.minute, from: date)
-        var dateComponents = DateComponents()
-        dateComponents.hour = hourValue
-        dateComponents.minute = minuteValue
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        center.add(request)
-    }
     
     func scheduleLocal(dateTimeString:String, notificationId:String) {
-       
-        //let date = Date(timeIntervalSinceNow: 60) //Working Fine
-        let date = convertStringToDate(dateStr: dateTimeString) //log 2018-10-20 10:11:00 +0000
-        let content = UNMutableNotificationContent()
-        
-        content.title = "Don't forget"
-        content.body = "Buy some milk"
-        
-        content.sound = UNNotificationSound.default
-        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date) //log ▿ year: 2018 month: 10 day: 20 hour: 18 minute: 11 second: 0 isLeapMonth: false
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-        let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
-            if let error = error {
-                // Something went wrong
-                print(error)
-            }
-        })
+        let defaults = UserDefaults.standard
+        let date = convertStringToDate(dateStr: dateTimeString)
+        // This will make it impossible for any past games to be scheduled
+        if date.timeIntervalSinceNow.isLessThanOrEqualTo(0) == false {
+            let content = UNMutableNotificationContent()
+            
+            content.title = "Don't forget"
+            content.body = "Buy some milk"
+            
+            content.sound = UNNotificationSound.default
+            let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date) //log ▿ year: 2018 month: 10 day: 20 hour: 18 minute: 11 second: 0 isLeapMonth: false
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+            let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+                if let error = error {
+                    // Something went wrong
+                    print(error)
+                }
+            })
+            defaults.setValue(true, forKey: notificationId)
+
+        }
     }
     
     func deleteNotification(notificationId:String){
@@ -143,7 +126,6 @@ extension UITableViewController{
             let idString = String(idList[n])
             if defaults.object(forKey: idString) != nil{
                 let gameDate = getFullDateTimeStringFromTeamId(gameId: idList[n])
-                print(gameDate)
                 let dateFromString = dateFormatter.date(from: gameDate)
                 // Check if the date of this notification is prior to current date. As in this very instant
                 if dateFromString?.timeIntervalSinceNow.isLessThanOrEqualTo(0) == true{
@@ -216,7 +198,6 @@ extension UITableViewController{
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.timeZone = TimeZone.current// (abbreviation: "GMT+0:00")
         let dateFromString = dateFormatter.date(from: dateStr)
-        print("dateFromString: ", dateFromString!)
         return dateFromString!
     }
 
@@ -280,10 +261,10 @@ extension NotificationsViewController:ChildToParentProtocol {
     
     func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String) {
         if isNowChecked{
-            self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 15.0))
+            self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 13.0))
         }
         else{
-            self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 15.0))
+            self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 13.0))
         }
     }
 }

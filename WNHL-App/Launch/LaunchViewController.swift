@@ -91,18 +91,6 @@ class LaunchViewController: UIViewController {
             let venues = Table("Venues")
             let teams = Table("Teams")
             let games = Table("Games")
-            for venue in try db.prepare(venues){
-                print("id: \(venue[id]), name: \(venue[name])")
-            }
-            for team in try db.prepare(teams){
-                print("id: \(team[id]), slug: \(team[slug])")
-            }
-            for game in try db.prepare(games){
-                print("date: \(game[date]), time: \(game[time]), location: \(game[location]) , title: \(game[title])")
-                let title = game[title]
-                print(title)
-            }
-            
         }
         catch {
             print(error)

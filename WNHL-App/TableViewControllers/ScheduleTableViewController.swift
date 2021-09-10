@@ -145,6 +145,7 @@ class ScheduleTableViewController: UITableViewController {
         outputTimeFormatter.dateFormat = "h:mm a"
         getGameIds()
         deletePastSetNotifications(idList: self.ids)
+        updateScheduledGamesFromPreferences()
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
         super.viewDidLoad()
