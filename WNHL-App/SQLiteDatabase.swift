@@ -123,7 +123,16 @@ class SQLiteDatabase {
             }
             //GAMES
             do{
-                try db.run(games.insertMany([[id <- 2307, title <- "Crown Room Kings vs Townline Tunnelers", home <- 1371, away <- 1370, homeScore <- 2, awayScore <- 2, date <- "2020-10-07", time <- "22:00:05", location <- 42],[id <- 2313, title <- "Atlas Steelers vs Merritt Islanders", home <- 940, away <- 1824, homeScore <- 1, awayScore <- 9, date <- "2020-10-07", time <- "22:00:48", location <- 35], [id <- 2316, title <- "Dain City Dusters vs Lincoln Street Legends", home <- 1810, away <- 1822, homeScore <- 3, awayScore <- 1, date <- "2020-10-07", time <- "21:15:19", location <- 30]]))
+                try db.run(games.insertMany([
+                [id <- 2307, title <- "Crown Room Kings vs Townline Tunnelers", home <- 1371, away <- 1370, homeScore <- 2, awayScore <- 2, date <- "2021-09-09", time <- "20:40:05", location <- 42],
+                [id <- 2313, title <- "Atlas Steelers vs Merritt Islanders", home <- 940, away <- 1824, homeScore <- 1, awayScore <- 9, date <- "2021-09-09", time <- "20:40:48", location <- 35],
+                [id <- 2316, title <- "Dain City Dusters vs Lincoln Street Legends", home <- 1810, away <- 1822, homeScore <- 3, awayScore <- 1, date <- "2021-09-09", time <- "20:40:19", location <- 30],
+                [id <- 2315, title <- "Atlas Steelers vs Lincoln Street Legends", home <- 940, away <- 1822, homeScore <- 2, awayScore <- 1, date <- "2021-09-09", time <- "20:40:19", location <- 15],
+                [id <- 2314, title <- "Crown Room Kings vs Lincoln Street Legends", home <- 1371, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-09", time <- "20:40:19", location <- 41],
+                [id <- 2312, title <- "Merritt Islanders vs Lincoln Street Legends", home <- 1824, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-09", time <- "20:40:19", location <- 41],
+                [id <- 2311, title <- "Townline Tunnelers vs Lincoln Street Legends", home <- 1370, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-09", time <- "20:40:19", location <- 30],
+
+                ]))
             }
             catch {
                 print(error)

@@ -8,6 +8,7 @@
 import Foundation
 import Swift
 import UIKit
+import SQLite
 
 // Put to parent view
 extension UIViewController{
@@ -83,32 +84,7 @@ extension UIViewController{
 
 // extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
-    // This function will return a string of the image set name given a string of a team name.
-    func getImageNameFromTeamNameTable(teamName:String) -> String {
-        // Each check of team name is case insensitive.
-        if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
-            return "steelers_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
-            return "townline_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
-            return "crownRoom_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
-            return "dusters_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
-            return "legends_logo"
-        }
-        else if teamName.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
-            return "islanders_logo"
-        }
-        else{
-            return "WNHL_Logo"
-        }
-    }
-    
+   
     func scheduleLocalTest() {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
@@ -131,23 +107,52 @@ extension UITableViewController{
         center.add(request)
     }
     
-    func scheduleLocal(dateTimeString:String) {
+    func scheduleLocal(dateTimeString:String, notificationId:String) {
        
         //let date = Date(timeIntervalSinceNow: 60) //Working Fine
         let date = convertStringToDate(dateStr: dateTimeString) //log 2018-10-20 10:11:00 +0000
         let content = UNMutableNotificationContent()
+        
         content.title = "Don't forget"
         content.body = "Buy some milk"
+        
         content.sound = UNNotificationSound.default
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date) //log ▿ year: 2018 month: 10 day: 20 hour: 18 minute: 11 second: 0 isLeapMonth: false
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
             if let error = error {
                 // Something went wrong
                 print(error)
             }
         })
+    }
+    
+    func deleteNotification(notificationId:String){
+        let idArray:[String] = [notificationId]
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: idArray)
+    }
+    
+    func deletePastSetNotifications(idList:[Int64]){
+        let defaults = UserDefaults.standard
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        for n in 0..<idList.count {
+            // If there is some data here, it mean it still exists and there may be a possibility a cancelled notification had past its time or an active one past its time
+            let idString = String(idList[n])
+            if defaults.object(forKey: idString) != nil{
+                let gameDate = getFullDateTimeStringFromTeamId(gameId: idList[n])
+                print(gameDate)
+                let dateFromString = dateFormatter.date(from: gameDate)
+                // Check if the date of this notification is prior to current date. As in this very instant
+                if dateFromString?.timeIntervalSinceNow.isLessThanOrEqualTo(0) == true{
+                    // if the time since this notification to now is 0 or a negative, it means the notification has passed.
+                    // Thus we remove the object entirely
+                    defaults.removeObject(forKey: String(idList[n]))
+                }
+            }
+        } // end of for loop
     }
     
     func showLocationOnMaps(primaryContactFullAddress: String) {

@@ -15,6 +15,8 @@ class SingleTeamViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     // this string exists such that data can be passed to this class as opposed to outright setting the teamNameLabel from outside the class. It is not an outlet and exists in this class and not the storyboard
     var teamNameString:String!
+    var teamId:Int64!
+    // The teamId is successfully passed from the TeamTableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()

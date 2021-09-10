@@ -6,42 +6,25 @@
 //
 
 import UIKit
+import SQLite
 
 class SingleTeamTableViewController: UITableViewController {
+    let inputDateFormatter = DateFormatter()
+    let outputDateFormatter = DateFormatter()
+    let inputTimeFormatter = DateFormatter()
+    let outputTimeFormatter = DateFormatter()
+
+    let defaults = UserDefaults.standard
     let reuseIdentifier = "gameListingCell"
     @IBOutlet var TeamScheduleTableView: UITableView!
     let cellSpacingHeight: CGFloat = 30
     
-    var dates: [String] = ["Wed. Oct 7, 2020",
-                           "Wed. Oct 7, 2020",
-                           "Wed. Oct 7, 2020",
-                           "Wed. Oct 7, 2020",
-                           "Wed. Oct 7, 2020",]
-    var points: [String] = ["2 - 2",
-                            "2 - 2",
-                            "2 - 2",
-                            "2 - 2",
-                            "2 - 2",]
-    var locations: [String] = ["Niagara Falls - Gale Center",
-                               "Niagara Falls - Gale Center",
-                               "Niagara Falls - Gale Center",
-                               "Niagara Falls - Gale Center",
-                               "Niagara Falls - Gale Center",]
-    var teams1: [String] = ["Lincoln Street Legends",
-                            "Dain City Dusters",
-                            "Atlas Steelers",
-                            "Crown Room Kings",
-                            "Townline Tunnelers"]
-    var teams2: [String] = ["BOI",
-                            "Lincoln Street Legends",
-                            "Atlas Steelers",
-                            "Townline Tunnelers",
-                            "Merritt Islanders",]
+    var ids: [Int64] = []
     // MARK: - Table view data source
     
     // Set the number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.dates.count
+        return self.ids.count
     }
     
     // Set the number of rows in each section
@@ -64,13 +47,35 @@ class SingleTeamTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = TeamScheduleTableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRow(at: indexPath!) as! SingleTeamTableViewCell
-        let alertTitle:String = String(currentCell.homeTeamLabel.text!) + " vs " + String(currentCell.awayTeamLabel.text!)
+        let gameIdString = String(ids[indexPath!.section])
+        
+        let alertTitle:String = currentCell.titleLabel.text!
         // Create the alert with Team vs Team String as a title and no message
         let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
-        
+        var reminderTitle = "Set Reminder"
+        if defaults.bool(forKey: gameIdString) == true{
+            reminderTitle = "Cancel Reminder"
+        }
         // Add actions for the alert when it is called. Directions and Set Reminder have default styling
-        alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Set Reminder", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+            // We will have to make a function that could translate these to the exact locations
+            // *****
+            self.showLocationOnMaps(primaryContactFullAddress: currentCell.locationLabel.text!)
+        }))
+        alert.addAction(UIAlertAction(title: reminderTitle, style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+            if self.defaults.bool(forKey: gameIdString) == true{
+                self.deleteNotification(notificationId: gameIdString)
+                self.defaults.setValue(false, forKey: gameIdString)
+            }
+            else{
+                // var dateString = String()
+                // dateString = "2021-09-08 22:15:00"
+                let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
+                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString)
+                self.defaults.setValue(true, forKey: gameIdString)
+                //self.scheduleLocalTest()
+            }
+        }))
         // Cancel has unique styling to denote the level of action it is.
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         
@@ -80,28 +85,38 @@ class SingleTeamTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.TeamScheduleTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SingleTeamTableViewCell
-        cell.dateLabel.text = self.dates[indexPath.section]
+        let dateInputString = inputDateFormatter.date(from: getDateStringFromTeamId(gameId: self.ids[indexPath.section]))
+        let dateOutputString:String = outputDateFormatter.string(from: dateInputString!)
+        cell.dateLabel.text = dateOutputString
+        // Set the font of the dateLabel programmatically with a font of 15
         cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
-        cell.pointsLabel.text = self.points[indexPath.section]
-        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        cell.locationLabel.text = self.locations[indexPath.section]
-        cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
-        cell.homeTeamLabel.text = self.teams1[indexPath.section]
-        cell.homeTeamLabel.font = UIFont.systemFont(ofSize: 15)
-        cell.awayTeamLabel.text = self.teams2[indexPath.section]
-        cell.awayTeamLabel.font = UIFont.systemFont(ofSize: 15)
         
+        let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
+        let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
+        cell.pointsLabel.text = timeOutputString
+        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
+        cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.titleLabel.text = getTitleFromGameId(gameId: self.ids[indexPath.section])
+        cell.titleLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        // Set the alignment of the text with respect to the placements of the labels
         cell.dateLabel.textAlignment = NSTextAlignment.center
         cell.pointsLabel.textAlignment = NSTextAlignment.center
         cell.locationLabel.textAlignment = NSTextAlignment.center
-        cell.homeTeamLabel.textAlignment = NSTextAlignment.right
-        cell.awayTeamLabel.textAlignment = NSTextAlignment.left
+        cell.titleLabel.textAlignment = NSTextAlignment.center
         
-        cell.homeImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams1[indexPath.section]))
-        cell.awayImage.image = UIImage(named: getImageNameFromTeamNameTable(teamName: self.teams2[indexPath.section]))
+        // Setting the images of the Home Team and Away teams Logos
         
+        // The extension functions for this needs to be changed to the query function when possible
+        // *****
+        cell.homeImage.image = UIImage(named: getImageNameFromTeamId(teamId: getHomeIdFromGameId(gameId: self.ids[indexPath.section])))
+        cell.awayImage.image = UIImage(named: getImageNameFromTeamId(teamId: getAwayIdFromGameId(gameId: self.ids[indexPath.section])))
+        // This makes it so that the selection of cells in the table views does not have a graphical effect.
         cell.noSelectionStyle()
+        cell.backgroundColor = UIColor.white
         cell.layer.borderWidth = 0
+        // Corner radius is used to make the edges much rounder than normal.
         cell.layer.cornerRadius = 24
         cell.clipsToBounds = true
         
@@ -109,8 +124,33 @@ class SingleTeamTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        inputDateFormatter.dateFormat = "yyyy-MM-dd"
+        outputDateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        inputTimeFormatter.dateFormat = "HH:mm:ss"
+        outputTimeFormatter.dateFormat = "h:mm a"
+        getGameIds()
+        deletePastSetNotifications(idList: ids)
         TeamScheduleTableView.delegate = self
         TeamScheduleTableView.dataSource = self
+        super.viewDidLoad()
+        
+    }
+    
+    
+    func getGameIds(){
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            //Table Column Names
+            let id = Expression<Int64>("id")
+            //Table Names
+            let games = Table("Games")
+            for game in try db.prepare(games){
+                ids.append(game[id])
+            }
+        }
+        catch {
+            print(error)
+        }
     }
 }

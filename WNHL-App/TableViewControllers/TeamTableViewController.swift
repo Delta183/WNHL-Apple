@@ -10,9 +10,10 @@ import UIKit
 class TeamTableViewController: UITableViewController {
     
     @IBOutlet var teamTableView: UITableView!
-    var teams = ["ATLAS STEELERS", "TOWNLINE TUNNELERS", "CROWN ROOM KINGS", "DAIN CITY DUSTERS",  "LINCOLN STREET LEGENDS"]
+    var teams:[String] = []
     // This string will be used to preserve the string from the teams array such that it can be sent to the child view controller.
-    var teamNameString:String!
+    var passedTeamNameString:String!
+    var passedTeamId:Int64!
     
     // Set the number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,7 +32,8 @@ class TeamTableViewController: UITableViewController {
         // Using that index, get the cell object itself from the Table View
         let currentCell = self.teamTableView.cellForRow(at:indexPath!) as! TeamTableViewCell
         // Set the variable as the text of the teamNameLabel of that cell.
-        teamNameString = currentCell.teamNameLabel.text
+        passedTeamNameString = currentCell.teamNameLabel.text
+        passedTeamId = getTeamIdFromTeamName(teamName: teams[indexPath!.row])
         // Perform the segue to the next/child view controller
         self.performSegue(withIdentifier: "singleTeamSegue", sender: self)
     }
@@ -40,7 +42,9 @@ class TeamTableViewController: UITableViewController {
         let cell = teamTableView.dequeueReusableCell(withIdentifier: "teamCell", for: indexPath) as! TeamTableViewCell
         cell.noSelectionStyle()
         
-        cell.teamNameLabel.text = teams[indexPath.row]
+        var teamString = teams[indexPath.row]
+        teamString = teamString.replacingOccurrences(of: "-", with: " ")
+        cell.teamNameLabel.text = teamString.uppercased()
         cell.teamNameLabel.textColor = UIColor.white
         cell.teamNameLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         
@@ -51,6 +55,8 @@ class TeamTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        // Change this to call on the userdefault set for currSeason
+        teams = getTeamsFromSeasonId(seasonIdString: "34")
         super.viewDidLoad()
     }
     
@@ -61,7 +67,7 @@ class TeamTableViewController: UITableViewController {
         let secondViewController = segue.destination as! SingleTeamViewController
         
         // Set a variable in the second view controller with the String to pass
-        secondViewController.teamNameString = teamNameString
+        secondViewController.teamNameString = passedTeamNameString
+        secondViewController.teamId = passedTeamId
     }
-    
 }
