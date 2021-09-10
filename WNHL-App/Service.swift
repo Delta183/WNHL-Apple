@@ -18,7 +18,7 @@ class Service {
     var playerIDs: [Int] = []
     var eventIDs: [Int] = []
     
-    var topRequests = 4 as Int
+    var topRequests = 5 as Int
     var calendarRequests = 0 as Int
     var eventRequests = 0 as Int
     var playerRequests = 0 as Int
@@ -69,7 +69,7 @@ class Service {
         teamRequest(endPoint: "teams/")
         venueRequest(endPoint: "venues/")
         seasonRequest(endPoint: "seasons/")
-        //statsRequest(endPoint: "lists/1900")
+        statsRequest(endPoint: "lists/1900")
         standingsRequest(endPoint: "tables/")
     }
     
@@ -172,7 +172,27 @@ class Service {
     }
     
     func statsRequest(endPoint: String){
-        
+        AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+            (responseData) in
+            guard let data = responseData.data else{
+                return
+            }
+            do {
+                self.topRequests-=1
+                let keyArray = try JSONDecoder().decode(PlayerID.self, from: data).data.keys
+                for key in keyArray {
+                    if Int(key) != 0 {
+                        self.playerslist.append(String(key))
+                    }
+                }
+            }
+            catch{
+                print("Error decoding == \(error)")
+            }
+            if self.topRequests == 0 {
+                self.startLowerRequests()
+            }
+        }
     }
     
     func standingsRequest(endPoint: String){
@@ -205,38 +225,39 @@ class Service {
     
     func startLowerRequests(){
         print("LowerRequestsStarted!")
-//        do {
-//            let db = try Connection("\(self.path)/wnhl.sqlite3")
-//            let ven = try db.prepare(self.venues)
-//            let tea = try db.prepare(self.teams)
-//            let sea = try db.prepare(self.seasons)
-//            let sta = try db.prepare(self.standings)
-//            for v in ven {
-//                print(v[id] ?? 0 , v[name] ?? "name")
-//            }
-//            for t in tea {
-//                print(t[id] ?? 0 , t[name] ?? "name")
-//            }
-//            for s in sea {
-//                print(s[id] ?? 0 , s[name] ?? "name")
-//            }
-//            for s_ in sta {
-//                print(s_[id] ?? 0 , s_[seasonID] ?? "seasons")
-//            }
-//
-//        }
-//        catch {
-//            print(error)
-//        }
+        do {
+            let db = try Connection("\(self.path)/wnhl.sqlite3")
+            let ven = try db.prepare(self.venues)
+            let tea = try db.prepare(self.teams)
+            let sea = try db.prepare(self.seasons)
+            let sta = try db.prepare(self.standings)
+            for v in ven {
+                print(v[id] ?? 0 , v[name] ?? "name")
+            }
+            for t in tea {
+                print(t[id] ?? 0 , t[name] ?? "name")
+            }
+            for s in sea {
+                print(s[id] ?? 0 , s[name] ?? "name")
+            }
+            for s_ in sta {
+                print(s_[id] ?? 0 , s_[seasonID] ?? "seasons")
+            }
+
+        }
+        catch {
+            print(error)
+        }
         calendarRequests = sluglist.count
         print("count " , sluglist.count)
         for slug in sluglist {
             createCalendarRequest(endPoint: "calendars?slug="+slug)
         }
-//        playerRequests = playerslist.count
-//        for pid in playerslist {
-//            getPlayer(endPoint: "players/" , pid: pid)
-//        }
+        playerRequests = playerslist.count
+        print("Player Requests: " , playerRequests)
+        for pid in playerslist {
+            getPlayer(endPoint: "players/" , pid: pid)
+        }
     }
     
     func createCalendarRequest(endPoint: String){
@@ -313,50 +334,27 @@ class Service {
             catch{
                 print("Error decoding == \(error)")
             }
-        }
-        if self.eventRequests == 0 {
-            print("ALL DONE!!!")
+            if self.eventRequests == 0 && self.playerRequests == 0 {
+                print("DONE")
+                //THIS IS WHERE WE WILL SET SOMETHING THAT TELLS THE MAIN VIEW CONTROLLER TO
+                //STOP SHOWING THE SPLASH SCREEN AND MOVE TO THE SCHEDULE VIEW
+            }
         }
     }
     
     func getPlayer(endPoint: String, pid: String){
-        
-    }
-    
-    func getAllPlayers(endPoint: String){
-        AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
-            (responseData) in
-            guard let data = responseData.data else{
-                return
-            }
-            do {
-                let keyArray = try JSONDecoder().decode(PlayerID.self, from: data).data.keys
-                for key in keyArray {
-                    if Int(key) != 0 {
-                        print(key)
-                        self.getPlayer(key: key, endPoint: "players/")
-                    }
-                }
-            }
-            catch{
-                print("Error decoding == \(error)")
-            }
-        
-        }
-    }
-    
-    func getPlayer(key: String, endPoint: String){
         var points: Int64?
         var assists: Int64?
         var goals: Int64?
         let currSeason = self.sharedPref.integer(forKey: "currSeason")
         let prevSeason = self.sharedPref.integer(forKey: "prevSeason")
-        AF.request(self.baseUrl+endPoint+key, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+        AF.request(self.baseUrl+endPoint+pid, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
             guard let data = responseData.data else{
                 return
             }
             do {
+                self.playerRequests-=1
                 let db = try Connection("\(self.path)/wnhl.sqlite3")
                 let player = try JSONDecoder().decode(Players.self, from: data)
                 
@@ -379,12 +377,18 @@ class Service {
                 else{
                     assists = 0
                 }
-                try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- Int64(player.statistics?.three?[String(currSeason)]?.g ?? 0), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)]]))                
+                try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- Int64(player.statistics?.three?[String(currSeason)]?.g ?? 0), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)]]))
 
             }
             catch{
                 print("Error decoding == \(error)")
             }
+            if self.eventRequests == 0 && self.playerRequests == 0 {
+                print("DONE")
+                //THIS IS WHERE WE WILL SET SOMETHING THAT TELLS THE MAIN VIEW CONTROLLER TO
+                //STOP SHOWING THE SPLASH SCREEN AND MOVE TO THE SCHEDULE VIEW 
+            }
         }
     }
+    
 }
