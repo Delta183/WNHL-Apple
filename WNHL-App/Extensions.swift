@@ -84,57 +84,7 @@ extension UIViewController{
 
 // extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
-    // This function will return a string of the image set name given a string of a team name.
-    func getImageNameFromTeamNameTable(teamId:Int) -> String {
-        // Each check of team name is case insensitive.
-        if teamId == 940{
-            return "steelers_logo"
-        }
-        else if teamId == 1370{
-            return "townline_logo"
-        }
-        else if teamId == 1371{
-            return "crownRoom_logo"
-        }
-        else if teamId == 1810{
-            return "dusters_logo"
-        }
-        else if teamId == 1822{
-            return "legends_logo"
-        }
-        else if teamId == 1824{
-            return "islanders_logo"
-        }
-        else{
-            return "WNHL_Logo"
-        }
-    }
-    
-    func getLocationFromId(locationId:Int64) -> String {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        do{
-            let db = try Connection("\(path)/wnhl.sqlite3")
-            //Column Names
-            //Table Column Names
-            let id = Expression<Int64>("id")
-            let name = Expression<String>("name")
-            //Table Names
-            let venues = Table("Venues")
-           
-            // This is the more complex query
-            // SELECT name WHERE id == locationId
-            for venue in try db.prepare(venues.select(name).filter(id == locationId)){
-                return ("\(venue[name])")
-            }
-        }
-        catch {
-            print(error)
-        }
-        return "N/A"
-    }
-    
-    
-    
+   
     func scheduleLocalTest() {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
@@ -182,27 +132,7 @@ extension UITableViewController{
         center.removePendingNotificationRequests(withIdentifiers: idArray)
     }
     
-    func deletePastSetNotifications(idList:[Int64],dateList:[String]){
-        let defaults = UserDefaults.standard
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        for n in 0..<idList.count {
-            // If there is some data here, it mean it still exists and there may be a possibility a cancelled notification had past its time or an active one past its time
-            if defaults.bool(forKey: String(idList[n])) == false || defaults.bool(forKey: String(idList[n])) == true{
-                let dateFromString = dateFormatter.date(from: dateList[n])
-                // Check if the date of this notification is prior to current date. As in this very instant
-                if dateFromString?.timeIntervalSinceNow.isLessThanOrEqualTo(0) == true{
-                    // if the time since this notification to now is 0 or a negative, it means the notification has passed.
-                    // Thus we remove the object entirely
-                    defaults.removeObject(forKey: String(idList[n]))
-                }
-            }
-        }
-           
-        
-      
-  
-    }
+
     
     func showLocationOnMaps(primaryContactFullAddress: String) {
         let testURL: NSURL = NSURL(string: "maps://maps.apple.com/?q=")!

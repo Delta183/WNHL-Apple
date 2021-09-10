@@ -17,7 +17,6 @@ class SingleTeamTableViewController: UITableViewController {
     var ids: [Int64] = []
     var dates: [String] = []
     var points: [String] = []
-    var locations: [String] = []
     var homeTeamIds: [Int] = []
     var awayTeamIds: [Int] = []
     var dateObjects: [String] = []
@@ -92,7 +91,7 @@ class SingleTeamTableViewController: UITableViewController {
         cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
         cell.pointsLabel.text = self.points[indexPath.section]
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        cell.locationLabel.text = self.locations[indexPath.section]
+        cell.locationLabel.text = getLocationNameFromId(locationId: ids[indexPath.section])
         cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
         cell.titleLabel.text = self.titles[indexPath.section]
         cell.titleLabel.font = UIFont.systemFont(ofSize: 14)
@@ -107,8 +106,8 @@ class SingleTeamTableViewController: UITableViewController {
         
         // The extension functions for this needs to be changed to the query function when possible
         // *****
-        cell.homeImage.image = UIImage(named: getImageNameFromTeamNameTable(teamId: self.homeTeamIds[indexPath.section]))
-        cell.awayImage.image = UIImage(named: getImageNameFromTeamNameTable(teamId: self.awayTeamIds[indexPath.section]))
+        cell.homeImage.image = UIImage(named: getImageNameFromTeamId(teamId: self.homeTeamIds[indexPath.section]))
+        cell.awayImage.image = UIImage(named: getImageNameFromTeamId(teamId: self.awayTeamIds[indexPath.section]))
         // This makes it so that the selection of cells in the table views does not have a graphical effect.
         cell.noSelectionStyle()
         cell.backgroundColor = UIColor.white
@@ -165,7 +164,6 @@ class SingleTeamTableViewController: UITableViewController {
                 let newTime: String = dateFormatter2.string(from: dateFromString!) //pass Date here
                 points.append(newTime)
                 
-                locations.append(getLocationFromId(locationId: game[location]))
                 homeTeamIds.append(Int(game[home]))
                 awayTeamIds.append(Int(game[away]))
                 titles.append(game[title])

@@ -10,7 +10,11 @@ import SQLite
 import UserNotifications
 // View Controllers represent each screen, A basic screen is known as a View Controller but a view entirely devoted to say a TableView is a TableViewController. Thus this class is responsible for affecting strictly the table on the Schedule screen.
 class ScheduleTableViewController: UITableViewController {
-    
+    let inputDateFormatter = DateFormatter()
+    let outputDateFormatter = DateFormatter()
+    let inputTimeFormatter = DateFormatter()
+    let outputTimeFormatter = DateFormatter()
+
     let defaults = UserDefaults.standard
     // The cells are part of a table or collection. In this case it is of a table which is composed of multiple rows and populates downwards much like in the More and Teams page. Much like variables, they must have some identifier or name that is unique.
     let cellReuseIdentifier = "scheduleCell"
@@ -20,18 +24,11 @@ class ScheduleTableViewController: UITableViewController {
     @IBOutlet var ScheduleTableView: UITableView!
     // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
     var ids: [Int64] = []
-    var dates: [String] = []
-    var points: [String] = []
-    var locations: [String] = []
-    var homeTeamIds: [Int] = []
-    var awayTeamIds: [Int] = []
-    var dateObjects: [String] = []
-    var titles: [String] = []
 
     
     // These are functions that act like attributes for the Table View. This responsible for the number of sections, for our purposes, all we need is 1
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.dates.count
+        return self.ids.count
     }
     
     // This function will set the number of rows in each section.
@@ -58,13 +55,13 @@ class ScheduleTableViewController: UITableViewController {
         let indexPath = ScheduleTableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRow(at: indexPath!) as! ScheduleTableViewCell
         
-        let cellIdString = String(ids[indexPath!.section])
+        let gameIdString = String(ids[indexPath!.section])
         
         let alertTitle:String = currentCell.titleLabel.text!
         // Create the alert with Team vs Team String as a title and no message
         let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
         var reminderTitle = "Set Reminder"
-        if defaults.bool(forKey: cellIdString) == true{
+        if defaults.bool(forKey: gameIdString) == true{
             reminderTitle = "Cancel Reminder"
         }
         // Add actions for the alert when it is called. Directions and Set Reminder have default styling
@@ -74,15 +71,16 @@ class ScheduleTableViewController: UITableViewController {
             self.showLocationOnMaps(primaryContactFullAddress: currentCell.locationLabel.text!)
         }))
         alert.addAction(UIAlertAction(title: reminderTitle, style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-            if self.defaults.bool(forKey: cellIdString) == true{
-                self.deleteNotification(notificationId: cellIdString)
-                self.defaults.setValue(false, forKey: cellIdString)
+            if self.defaults.bool(forKey: gameIdString) == true{
+                self.deleteNotification(notificationId: gameIdString)
+                self.defaults.setValue(false, forKey: gameIdString)
             }
             else{
                 // var dateString = String()
                 // dateString = "2021-09-08 22:15:00"
-                self.scheduleLocal(dateTimeString: self.dateObjects[indexPath!.section], notificationId: cellIdString)
-                self.defaults.setValue(true, forKey: cellIdString)
+                let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
+                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString)
+                self.defaults.setValue(true, forKey: gameIdString)
                 //self.scheduleLocalTest()
             }
         }))
@@ -101,14 +99,19 @@ class ScheduleTableViewController: UITableViewController {
         // Once the cell is fetched, modify it as needed
         // The imageViews and text labels were given unique identifiers being HomeImage and AwayImage for the images and scheduleText for the text label.
         // In this table, there are multiple sections with 1 row as opposed to 1 section with many rows and as a result, the indexPath is to be tracked by section and not row
-        cell.dateLabel.text = self.dates[indexPath.section]
+        let dateInputString = inputDateFormatter.date(from: getDateStringFromTeamId(gameId: self.ids[indexPath.section]))
+        let dateOutputString:String = outputDateFormatter.string(from: dateInputString!)
+        cell.dateLabel.text = dateOutputString
         // Set the font of the dateLabel programmatically with a font of 15
         cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
-        cell.pointsLabel.text = self.points[indexPath.section]
+        
+        let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
+        let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
+        cell.pointsLabel.text = timeOutputString
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        cell.locationLabel.text = self.locations[indexPath.section]
+        cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
         cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
-        cell.titleLabel.text = self.titles[indexPath.section]
+        cell.titleLabel.text = getTitleFromGameId(gameId: self.ids[indexPath.section])
         cell.titleLabel.font = UIFont.systemFont(ofSize: 14)
         
         // Set the alignment of the text with respect to the placements of the labels
@@ -121,8 +124,8 @@ class ScheduleTableViewController: UITableViewController {
         
         // The extension functions for this needs to be changed to the query function when possible
         // *****
-        cell.HomeImage.image = UIImage(named: getImageNameFromTeamNameTable(teamId: self.homeTeamIds[indexPath.section]))
-        cell.AwayImage.image = UIImage(named: getImageNameFromTeamNameTable(teamId: self.awayTeamIds[indexPath.section]))
+        cell.HomeImage.image = UIImage(named: getImageNameFromTeamId(teamId: getHomeIdFromGameId(gameId: self.ids[indexPath.section])))
+        cell.AwayImage.image = UIImage(named: getImageNameFromTeamId(teamId: getAwayIdFromGameId(gameId: self.ids[indexPath.section])))
         // This makes it so that the selection of cells in the table views does not have a graphical effect.
         cell.noSelectionStyle()
         cell.backgroundColor = UIColor.white
@@ -135,8 +138,12 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        inputDateFormatter.dateFormat = "yyyy-MM-dd"
+        outputDateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        inputTimeFormatter.dateFormat = "HH:mm:ss"
+        outputTimeFormatter.dateFormat = "h:mm a"
         getGames()
-        deletePastSetNotifications(idList: ids, dateList: dateObjects)
+        //deletePastSetNotifications(idList: ids, dateList: dateObjects)
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
         super.viewDidLoad()
@@ -150,40 +157,14 @@ class ScheduleTableViewController: UITableViewController {
             //Column Names
             //Table Column Names
             let id = Expression<Int64>("id")
-            let title = Expression<String>("title")
-            let home = Expression<Int64>("home")
-            let away = Expression<Int64>("away")
             let homeScore = Expression<Int64>("homeScore")
             let awayScore = Expression<Int64>("awayScore")
-            let date = Expression<String>("date")
-            let time = Expression<String>("time")
-            let location = Expression<Int64>("location")
             //Table Names
             let games = Table("Games")
 //
-            let inputDateFormatter = DateFormatter()
-            inputDateFormatter.dateFormat = "yyyy-MM-dd"
-            let outputDateFormatter = DateFormatter()
-            outputDateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm:ss"
-            let dateFormatter2 = DateFormatter()
-            dateFormatter2.dateFormat = "h:mm a"
+          
             for game in try db.prepare(games){
                 ids.append(game[id])
-                
-                let dateString = inputDateFormatter.date(from: game[date])
-                dates.append(outputDateFormatter.string(from: dateString!))
-                
-                let dateFromString = dateFormatter.date(from: game[time])
-                let newTime: String = dateFormatter2.string(from: dateFromString!) //pass Date here
-                points.append(newTime)
-                
-                locations.append(getLocationFromId(locationId: game[location]))
-                homeTeamIds.append(Int(game[home]))
-                awayTeamIds.append(Int(game[away]))
-                titles.append(game[title])
-                dateObjects.append(game[date] + " " + game[time])
             }
         }
         catch {
