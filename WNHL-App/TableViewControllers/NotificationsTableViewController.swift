@@ -20,7 +20,7 @@ class NotificationsTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     @IBOutlet var NotificationsTableView: UITableView!
     var reuseIdentifier = "notificationTableCell"
-    var teams = ["Atlas Steelers", "Townline Tunnelers", "Crown Room Kings", "Dain City Dusters", "Lincoln Street Legends","Merritt Islanders","Merritt Islanders","Merritt Islanders","Merritt Islanders","Merritt Islanders"]
+    var teams:[String] = []
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,7 +61,9 @@ class NotificationsTableViewController: UITableViewController {
         
         cell.noSelectionStyle()
         cell.checkButton.isSelected = defaults.bool(forKey: "checkButton" + rowNumber)
-        cell.teamLabel.text = teams[indexPath.row]
+        var teamString = teams[indexPath.row]
+        teamString = teamString.replacingOccurrences(of: "-", with: " ")
+        cell.teamLabel.text = teamString.uppercased()
         cell.teamLabel.textColor = UIColor.white
         cell.teamLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
@@ -76,6 +78,8 @@ class NotificationsTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        // Similarly change this to call on the userDefaults
+        teams = getTeamsFromSeasonId(seasonIdString: "34")
         super.viewDidLoad()
     }
     

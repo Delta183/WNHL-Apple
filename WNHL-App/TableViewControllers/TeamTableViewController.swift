@@ -55,6 +55,7 @@ class TeamTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        // Change this to call on the userdefault set for currSeason
         teams = getTeamsFromSeasonId(seasonIdString: "34")
         super.viewDidLoad()
     }
@@ -69,9 +70,4 @@ class TeamTableViewController: UITableViewController {
         secondViewController.teamNameString = passedTeamNameString
         secondViewController.teamId = passedTeamId
     }
-    
-    // userdefaults key: "currSeason", int
-    //              key: "prevSeason", int
-    // given this, query SELECT name, id FROM teams WHERE seasonID LIKE currSeason
-    
 }
