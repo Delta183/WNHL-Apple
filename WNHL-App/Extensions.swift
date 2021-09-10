@@ -112,8 +112,10 @@ extension UITableViewController{
         //let date = Date(timeIntervalSinceNow: 60) //Working Fine
         let date = convertStringToDate(dateStr: dateTimeString) //log 2018-10-20 10:11:00 +0000
         let content = UNMutableNotificationContent()
+        
         content.title = "Don't forget"
         content.body = "Buy some milk"
+        
         content.sound = UNNotificationSound.default
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date) //log ▿ year: 2018 month: 10 day: 20 hour: 18 minute: 11 second: 0 isLeapMonth: false
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)

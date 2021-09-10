@@ -70,6 +70,7 @@ class ScheduleTableViewController: UITableViewController {
             // *****
             self.showLocationOnMaps(primaryContactFullAddress: currentCell.locationLabel.text!)
         }))
+        // somehow delete or disable this when dateTimeString < current
         alert.addAction(UIAlertAction(title: reminderTitle, style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
             if self.defaults.bool(forKey: gameIdString) == true{
                 self.deleteNotification(notificationId: gameIdString)
@@ -166,10 +167,6 @@ class ScheduleTableViewController: UITableViewController {
             print(error)
         }
     }
-    
-    
-    
-    
 }
 
 // This is how you make a function header in Swift

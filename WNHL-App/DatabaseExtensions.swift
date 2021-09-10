@@ -188,5 +188,41 @@ extension UITableViewController{
         return "N/A"
     }
     
+    func getTeamsFromSeasonId(seasonIdString:String) -> [String] {
+        var teamArray:[String] = []
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let slug = Expression<String>("slug")
+            let seasonID = Expression<String>("seasonID")
+            //Table Names
+            let teams = Table("Teams")
+            for team in try db.prepare(teams.select(slug).filter(seasonID.like("%" + seasonIdString + "%"))){
+                teamArray.append("\(team[slug])")
+            }
+        }
+        catch {
+            print(error)
+        }
+        return teamArray
+    }
+    
+    func getTeamIdFromTeamName(teamName:String) -> Int64 {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let slug = Expression<String>("slug")
+            let id = Expression<Int64>("id")
+            //Table Names
+            let teams = Table("Teams")
+            for team in try db.prepare(teams.select(id).filter(slug == teamName)){
+                return(team[id])
+            }
+        }
+        catch {
+            print(error)
+        }
+        return 0
+    }
  
 }
