@@ -132,7 +132,26 @@ extension UITableViewController{
         center.removePendingNotificationRequests(withIdentifiers: idArray)
     }
     
-
+    func deletePastSetNotifications(idList:[Int64]){
+        let defaults = UserDefaults.standard
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        for n in 0..<idList.count {
+            // If there is some data here, it mean it still exists and there may be a possibility a cancelled notification had past its time or an active one past its time
+            let idString = String(idList[n])
+            if defaults.object(forKey: idString) != nil{
+                let gameDate = getFullDateTimeStringFromTeamId(gameId: idList[n])
+                print(gameDate)
+                let dateFromString = dateFormatter.date(from: gameDate)
+                // Check if the date of this notification is prior to current date. As in this very instant
+                if dateFromString?.timeIntervalSinceNow.isLessThanOrEqualTo(0) == true{
+                    // if the time since this notification to now is 0 or a negative, it means the notification has passed.
+                    // Thus we remove the object entirely
+                    defaults.removeObject(forKey: String(idList[n]))
+                }
+            }
+        } // end of for loop
+    }
     
     func showLocationOnMaps(primaryContactFullAddress: String) {
         let testURL: NSURL = NSURL(string: "maps://maps.apple.com/?q=")!

@@ -188,21 +188,5 @@ extension UITableViewController{
         return "N/A"
     }
     
-    func deletePastSetNotifications(idList:[Int64],dateList:[String]){
-        let defaults = UserDefaults.standard
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        for n in 0..<idList.count {
-            // If there is some data here, it mean it still exists and there may be a possibility a cancelled notification had past its time or an active one past its time
-            if defaults.bool(forKey: String(idList[n])) == false || defaults.bool(forKey: String(idList[n])) == true{
-                let dateFromString = dateFormatter.date(from: dateList[n])
-                // Check if the date of this notification is prior to current date. As in this very instant
-                if dateFromString?.timeIntervalSinceNow.isLessThanOrEqualTo(0) == true{
-                    // if the time since this notification to now is 0 or a negative, it means the notification has passed.
-                    // Thus we remove the object entirely
-                    defaults.removeObject(forKey: String(idList[n]))
-                }
-            }
-        }
-    }
+ 
 }

@@ -121,7 +121,7 @@ class SingleTeamTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         getGames()
-        deletePastSetNotifications(idList: ids, dateList: dateObjects)
+        deletePastSetNotifications(idList: ids)
         TeamScheduleTableView.delegate = self
         TeamScheduleTableView.dataSource = self
         super.viewDidLoad()

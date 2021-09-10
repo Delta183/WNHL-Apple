@@ -142,27 +142,22 @@ class ScheduleTableViewController: UITableViewController {
         outputDateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         inputTimeFormatter.dateFormat = "HH:mm:ss"
         outputTimeFormatter.dateFormat = "h:mm a"
-        getGames()
-        //deletePastSetNotifications(idList: ids, dateList: dateObjects)
+        getGameIds()
+        deletePastSetNotifications(idList: self.ids)
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    func getGames(){
+    func getGameIds(){
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
             let db = try Connection("\(path)/wnhl.sqlite3")
-            //Column Names
             //Table Column Names
             let id = Expression<Int64>("id")
-            let homeScore = Expression<Int64>("homeScore")
-            let awayScore = Expression<Int64>("awayScore")
             //Table Names
             let games = Table("Games")
-//
-          
             for game in try db.prepare(games){
                 ids.append(game[id])
             }
