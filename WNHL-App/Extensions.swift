@@ -110,26 +110,27 @@ extension UITableViewController{
         }
     }
     
-    func getLocationFromId(locationId:Int) -> String {
-        // Each check of team name is case insensitive.
-        if locationId == 15{
-            return "Welland"
+    func getLocationFromId(locationId:Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            //Column Names
+            //Table Column Names
+            let id = Expression<Int64>("id")
+            let name = Expression<String>("name")
+            //Table Names
+            let venues = Table("Venues")
+           
+            // This is the more complex query
+            // SELECT name WHERE id == locationId
+            for venue in try db.prepare(venues.select(name).filter(id == locationId)){
+                return ("\(venue[name])")
+            }
         }
-        else if locationId == 30{
-            return "Pelham - Accipiter"
+        catch {
+            print(error)
         }
-        else if locationId == 35{
-            return "Pelham - Duliban"
-        }
-        else if locationId == 39{
-            return "Welland - Youth Arena"
-        }
-        else if locationId == 41{
-            return "Port Colborne - Vale Center"
-        }
-        else{
-            return "Niagara Falls - Gale Center"
-        }
+        return "N/A"
     }
     
     
@@ -176,7 +177,6 @@ extension UITableViewController{
     }
     
     func deleteNotification(notificationId:String){
-        print("Deleting: " + notificationId)
         let idArray:[String] = [notificationId]
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: idArray)

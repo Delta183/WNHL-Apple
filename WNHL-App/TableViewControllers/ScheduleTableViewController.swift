@@ -179,7 +179,7 @@ class ScheduleTableViewController: UITableViewController {
                 let newTime: String = dateFormatter2.string(from: dateFromString!) //pass Date here
                 points.append(newTime)
                 
-                locations.append(getLocationFromId(locationId: Int(game[location])))
+                locations.append(getLocationFromId(locationId: game[location]))
                 homeTeamIds.append(Int(game[home]))
                 awayTeamIds.append(Int(game[away]))
                 titles.append(game[title])
@@ -189,8 +189,9 @@ class ScheduleTableViewController: UITableViewController {
         catch {
             print(error)
         }
-        
     }
+    
+    
     
     
 }
