@@ -58,12 +58,19 @@ class LaunchViewController: UIViewController {
     }
     
     func do_stuff(onCompleted: () -> ()) {
-        //Create DB
-//        SQLiteDatabase.init()
-//        //Begin Network Calls
-//        let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
-//            service.buildDatabase()
-        // The onCompleted flag is necessary
+        let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
+        if isAppAlreadyLaunchedOnce() {
+            //Update DB
+            service.updateDatabase()
+        }
+        else {
+            //Create DB
+            SQLiteDatabase.init()
+            //Begin Network Calls
+            service.buildDatabase()
+            //The onCompleted flag is necessary
+        }
+        
         onCompleted()
     }
     
@@ -71,10 +78,8 @@ class LaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         
         if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
-            //print("App already launched : \(isAppAlreadyLaunchedOnce)")
             return true
         }else{
-            print("App launched first time")
             return false
         }
     }

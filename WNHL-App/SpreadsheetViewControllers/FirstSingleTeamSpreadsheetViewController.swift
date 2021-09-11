@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import SQLite
 
 class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate{
     @IBOutlet var singleTeamCollectionView: UICollectionView!
     let reuseIdentifier = "teamSpreadsheetCell"
-    var data = ["1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",]
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     
+    
+    //var data: [String] = []
+    var data = ["1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.data.count
@@ -47,6 +51,21 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
     }
     
     override func viewDidLoad() {
+        do {
+//            let db = try Connection("\(self.path)/wnhl.sqlite3")
+//
+//            for player in try db.prepare(players){
+//                if player[currTeam] == 1824 {   //sub 1842 for teamID passed from button
+//                    data.append(player[name])
+//                    data.append(String(player[points]))
+//                    data.append(String(player[goals]))
+//                    data.append(String(player[assists]))
+//                }
+//            }
+        }
+        catch {
+            print(error)
+        }
         super.viewDidLoad()
         singleTeamCollectionView?.delegate = self;
         singleTeamCollectionView?.dataSource = self;

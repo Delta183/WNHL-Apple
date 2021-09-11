@@ -37,4 +37,3 @@ class SingleTeamViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 }
-

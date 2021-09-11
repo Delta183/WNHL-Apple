@@ -6,24 +6,23 @@
 //
 
 import UIKit
+import SQLite
 
 class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
     @IBOutlet var singleTeamCollectionView: UICollectionView!
     let reuseIdentifier = "teamSpreadsheetCell"
-    var data = [
-        "Podio", "3", "0", "3",
-        "Jon Campbell", "3", "0", "3",
-        "Scotty Mac", "3", "0", "3",
-        "Mark Doyle", "3", "0", "3",
-        "Matt Dusso", "3", "0", "3",
-        "Eric Sinclair", "3", "0", "3",
-        "Curt Rousseau", "3", "0", "3",
-        "Justin Pupo", "3", "0", "3",
-        "Chris Paco", "3", "0", "3",
-        "Sawyer Smells", "3", "0", "3",
-        "Very Good", "3", "0", "3",
-        "Nah Just Kidding", "3", "0", "3",]
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    let id = Expression<Int64>("id")
+    let name = Expression<String>("name")
+    let seasonID = Expression<String>("seasonID")
+    let goals = Expression<Int64>("goals")
+    let assists = Expression<Int64>("assists")
+    let points = Expression<Int64>("points")
+    let currTeam = Expression<Int64>("currTeam")
+    let players = Table("Players")
     
+    var data: [String] = []
+        
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.data.count
     }
@@ -49,6 +48,21 @@ class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionV
     }
     
     override func viewDidLoad() {
+        do {
+            let db = try Connection("\(self.path)/wnhl.sqlite3")
+            
+            for player in try db.prepare(players){
+                if player[currTeam] == 1824 {   //sub 1842 for teamID passed from button
+                    data.append(player[name])
+                    data.append(String(player[points]))
+                    data.append(String(player[goals]))
+                    data.append(String(player[assists]))
+                }
+            }
+        }
+        catch {
+            print(error)
+        }
         super.viewDidLoad()
         singleTeamCollectionView?.delegate = self;
         singleTeamCollectionView?.dataSource = self;
