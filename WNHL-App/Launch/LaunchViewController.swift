@@ -37,7 +37,6 @@ class LaunchViewController: UIViewController {
         }
         else{
             textLabel.text = "Downloading Data..."
-
         }
     }
     
@@ -59,12 +58,11 @@ class LaunchViewController: UIViewController {
     }
     
     func do_stuff(onCompleted: () -> ()) {
-        // This body not counting the onCompleted tag is where you will set up the database loading.
         //Create DB
-        SQLiteDatabase.init()
-        //Begin Network Calls
-        let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
-        service.buildDatabase()
+//        SQLiteDatabase.init()
+//        //Begin Network Calls
+//        let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
+//            service.buildDatabase()
         // The onCompleted flag is necessary
         onCompleted()
     }

@@ -2,11 +2,14 @@
 //  Players.swift
 //  alamoTest
 //
-//  Created by sawyer on 2021-09-04.
+//  Created by Sawyer Fenwick on 2021-09-04.
 //
 
 import Foundation
 
+/**
+ Defines a Player Object
+ */
 struct Players: Decodable {
     var name: [String: String]?
     var id: Int?
@@ -28,7 +31,7 @@ struct Players: Decodable {
         case name = "title"
         case media = "featured_media"
         case team = "current_teams"
-    }
+    }//CodingKeys
     
     struct Content: Decodable {
         var rendered: String?
@@ -36,7 +39,7 @@ struct Players: Decodable {
         enum CodingKeys: String, CodingKey {
             case rendered
         }
-    }
+    }//Content
     
     struct Statistic: Decodable {
         var three: [String: Statistics]?
@@ -53,8 +56,8 @@ struct Players: Decodable {
             catch {
                 three = nil
             }
-        }
-    }
+        }//init
+    }//Statistic
     
     struct Statistics: Decodable {
         var name: String?
@@ -75,7 +78,7 @@ struct Players: Decodable {
             case gp
             case spercent
             case svpercent
-        }
+        }//CodingKeys
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -103,10 +106,6 @@ struct Players: Decodable {
             } catch DecodingError.typeMismatch {
                 a = try Int(container.decode(String.self, forKey: .a))
             }
-        }
-    }
-    
-    
-    
-}
-
+        }//init
+    }//Statistics
+}//Players

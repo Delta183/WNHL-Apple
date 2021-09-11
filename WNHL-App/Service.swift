@@ -1,14 +1,20 @@
 //
 //  Service.swift
-//  alamoTest
+//  WNHL-App
 //
-//  Created by sawyer on 2021-09-04.
+//  Created by Sawyer Fenwick on 2021-09-04.
 //
 
 import Foundation
-import Alamofire
-import SQLite
+import Alamofire    //Network Calls
+import SQLite       //Database SQLite Wrapper
 
+/**
+ Describes a service for downloading information off the WNHL Wordpress site
+ and saves to the local SQLite database
+ Build Database is run on first launch
+ Update Database is run on subsequent launches
+ */
 class Service {
     
     fileprivate var baseUrl = ""
@@ -63,20 +69,29 @@ class Service {
     
     init(baseUrl: String){
         self.baseUrl = baseUrl
-    }
+    }//init
     
+    /**
+     Begins the first 5 network requests
+     */
     func buildDatabase() {
         teamRequest(endPoint: "teams/")
         venueRequest(endPoint: "venues/")
         seasonRequest(endPoint: "seasons/")
         statsRequest(endPoint: "lists/1900")
         standingsRequest(endPoint: "tables/")
-    }
+    }//buildDatabase
     
+    /**
+     Updates the Games table - only call when there are games coming up
+     */
     func updateDatabase(){
         
-    }
+    }//updateDatabase
     
+    /**
+     Retrieves the Team Data from the WNHL Wordpress site and inserts it into the DB
+     */
     func teamRequest(endPoint: String){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
@@ -105,8 +120,11 @@ class Service {
                 self.startLowerRequests()
             }
         }
-    }
+    }//teamRequest
     
+    /**
+     Retrieves the Venue Data from the WNHL Wordpress site and inserts it into the DB
+     */
     func venueRequest(endPoint: String){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
@@ -134,8 +152,11 @@ class Service {
                 self.startLowerRequests()
             }
         }
-    }
+    }//venueRequest
     
+    /**
+     Retrieves the Seasons Data from the WNHL Wordpress site and inserts it into the DB
+     */
     func seasonRequest(endPoint: String){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
@@ -169,8 +190,11 @@ class Service {
                 self.startLowerRequests()
             }
         }
-    }
+    }//seasonRequest
     
+    /**
+     Retrieves the List of Players for the current season and stores it in an array for future use
+     */
     func statsRequest(endPoint: String){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
@@ -193,8 +217,11 @@ class Service {
                 self.startLowerRequests()
             }
         }
-    }
+    }//statsRequest
     
+    /**
+     Retrieves the Standings Data from the WNHL Wordpress site and inserts it into the DB
+     */
     func standingsRequest(endPoint: String){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
@@ -221,33 +248,13 @@ class Service {
                 self.startLowerRequests()
             }
         }
-    }
+    }//standingsRequest
     
+    /**
+     Downloads the last 2 Tables and inserts them into the database. These tables are reliant on the other tables having
+     downloaded first which is why they are "lower requests"
+     */
     func startLowerRequests(){
-        print("LowerRequestsStarted!")
-        do {
-            let db = try Connection("\(self.path)/wnhl.sqlite3")
-            let ven = try db.prepare(self.venues)
-            let tea = try db.prepare(self.teams)
-            let sea = try db.prepare(self.seasons)
-            let sta = try db.prepare(self.standings)
-            for v in ven {
-                print(v[id] ?? 0 , v[name] ?? "name")
-            }
-            for t in tea {
-                print(t[id] ?? 0 , t[name] ?? "name")
-            }
-            for s in sea {
-                print(s[id] ?? 0 , s[name] ?? "name")
-            }
-            for s_ in sta {
-                print(s_[id] ?? 0 , s_[seasonID] ?? "seasons")
-            }
-
-        }
-        catch {
-            print(error)
-        }
         calendarRequests = sluglist.count
         print("count " , sluglist.count)
         for slug in sluglist {
@@ -258,8 +265,11 @@ class Service {
         for pid in playerslist {
             getPlayer(endPoint: "players/" , pid: pid)
         }
-    }
+    }//startLowerRequests
     
+    /**
+     Retrieves the List of Events  for the current season and stores it in an array for future use
+     */
     func createCalendarRequest(endPoint: String){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
@@ -282,7 +292,7 @@ class Service {
                 }
             }
             catch{
-                print("Error decoding == \(error)")
+                print("Error DECODING == \(error)")
             }
             if self.calendarRequests == 0 {
                 self.eventRequests = self.eventIDs.count
@@ -291,8 +301,11 @@ class Service {
                 }
             }
         }
-    }
+    }//createCalendarsRequest
     
+    /**
+     Downloads a single games data from the WNHL Wordpress site and inserts it into the Games table
+     */
     func getEvent(endPoint: String, eid: Int){
         AF.request(self.baseUrl+endPoint+String(eid), method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
@@ -332,7 +345,7 @@ class Service {
                 try db.run(self.games.insertMany([[self.id <- Int64(game.id), self.title <- game.title["rendered"], self.home <- Int64(game.teams[0]) , self.away <- Int64(game.teams[1]) , self.homeScore <- hScore , self.awayScore <- aScore , self.date <- dateString, self.time <- timeString , self.location <- ven]]))
             }
             catch{
-                print("Error decoding == \(error)")
+                print("ERROR DECODING!!! == \(error)")
             }
             if self.eventRequests == 0 && self.playerRequests == 0 {
                 print("DONE")
@@ -340,8 +353,11 @@ class Service {
                 //STOP SHOWING THE SPLASH SCREEN AND MOVE TO THE SCHEDULE VIEW
             }
         }
-    }
+    }//getEvent
     
+    /**
+     Downloads a single Player object from the WNHL Wordpress site and inserts it into the Players Table
+     */
     func getPlayer(endPoint: String, pid: String){
         var points: Int64?
         var assists: Int64?
@@ -386,9 +402,8 @@ class Service {
             if self.eventRequests == 0 && self.playerRequests == 0 {
                 print("DONE")
                 //THIS IS WHERE WE WILL SET SOMETHING THAT TELLS THE MAIN VIEW CONTROLLER TO
-                //STOP SHOWING THE SPLASH SCREEN AND MOVE TO THE SCHEDULE VIEW 
+                //STOP SHOWING THE SPLASH SCREEN AND MOVE TO THE SCHEDULE VIEW
             }
         }
-    }
-    
+    }//getPlayer
 }

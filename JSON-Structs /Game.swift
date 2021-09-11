@@ -2,11 +2,14 @@
 //  Game.swift
 //  alamoTest
 //
-//  Created by sawyer on 2021-09-05.
+//  Created by Sawyer Fenwick on 2021-09-05.
 //
 
 import Foundation
 
+/**
+ Defines a Game Object
+ */
 struct Game: Decodable {
     
     let id: Int
@@ -25,5 +28,5 @@ struct Game: Decodable {
     case venues
     case teams
     case results = "main_results"
-  }
-}
+  }//CodingKeys
+}//Game
