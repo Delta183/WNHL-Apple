@@ -9,6 +9,7 @@ import UIKit
 
 class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
     @IBOutlet var singleTeamCollectionView: UICollectionView!
+    // This is the team Id passed from the parent SingleTeamViewController
     var teamId:Int64!
     let reuseIdentifier = "teamSpreadsheetCell"
     var data = [
