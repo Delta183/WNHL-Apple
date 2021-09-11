@@ -35,6 +35,11 @@ class SpreadsheetCollectionViewCell5
     @IBOutlet weak var posLabel5: UILabel!
 }
 
+class headerStandings
+: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
+}
+
 // The following 3 cells are used for the spreadsheets on the Statistics view
 class GoalsCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var dataLabel1: UILabel!
