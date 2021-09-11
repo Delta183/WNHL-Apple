@@ -54,7 +54,7 @@ class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionV
             let db = try Connection("\(self.path)/wnhl.sqlite3")
             
             for player in try db.prepare(players){
-                if player[currTeam] == 1824 {   //sub 1842 for teamID passed from button
+                if player[currTeam] == teamId {   //sub 1842 for teamID passed from button
                     data.append(player[name])
                     data.append(String(player[points]))
                     data.append(String(player[goals]))

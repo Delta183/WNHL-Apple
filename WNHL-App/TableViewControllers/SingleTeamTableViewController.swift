@@ -148,7 +148,7 @@ class SingleTeamTableViewController: UITableViewController {
             let games = Table("Games")
             for game in try db.prepare(games){
                 //if home or away id matches the team id add the game to the list
-                if game[home] == 940 || game[away] == 940{
+                if game[home] == teamId || game[away] == teamId{
                     ids.append(game[id])
                 }
             }
