@@ -63,8 +63,9 @@ class TeamTableViewController: UITableViewController {
     
     // This function will be called just prior to the segue performed in the didSelectRowAt function
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? SingleTeamViewController {
+        if (segue.identifier == "singleTeamSegue") {
             // save reference to VC embedded in Container View
+            let vc = segue.destination as? SingleTeamViewController
             self.SingleTeamViewController = vc
           self.SingleTeamViewController?.teamNameString = passedTeamNameString
             self.SingleTeamViewController?.teamId = passedTeamId

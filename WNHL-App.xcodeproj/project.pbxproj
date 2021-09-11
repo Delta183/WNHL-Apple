@@ -53,6 +53,7 @@
 		98F6E32026E2C91B00087C17 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6E31F26E2C91B00087C17 /* ProgressView.swift */; };
 		98F6E32226E2C94700087C17 /* ProgressShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6E32126E2C94700087C17 /* ProgressShapeLayer.swift */; };
 		98F6E32426E2C97700087C17 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6E32326E2C97700087C17 /* StrokeAnimation.swift */; };
+		98F839F526ECBAAB00E905C0 /* ScrollSingleTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F839F426ECBAAB00E905C0 /* ScrollSingleTeamViewController.swift */; };
 		98FC0C7C26D752F600E1F6E4 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */; };
 		98FC0C7E26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7D26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift */; };
 		98FC0C8026D782A700E1F6E4 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FC0C7F26D782A700E1F6E4 /* NotificationsViewController.swift */; };
@@ -131,6 +132,7 @@
 		98F6E31F26E2C91B00087C17 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		98F6E32126E2C94700087C17 /* ProgressShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShapeLayer.swift; sourceTree = "<group>"; };
 		98F6E32326E2C97700087C17 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
+		98F839F426ECBAAB00E905C0 /* ScrollSingleTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSingleTeamViewController.swift; sourceTree = "<group>"; };
 		98FC0C7B26D752F600E1F6E4 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		98FC0C7D26D7573B00E1F6E4 /* StatisticsSpreadsheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSpreadsheetViewController.swift; sourceTree = "<group>"; };
 		98FC0C7F26D782A700E1F6E4 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -235,7 +237,6 @@
 				9827C6C226D4E39C005A062B /* CustomTableCells.swift */,
 				983E2D7826E486E500ED7043 /* Extensions.swift */,
 				983DC8A326EAE81E000D7DE3 /* DatabaseExtensions.swift */,
-				24F2136126E8458D00EACC14 /* SQLiteDatabase.swift */,
 				98F6E32526E2EBC300087C17 /* Launch */,
 				985D4A0326E1953A003CBDD4 /* ViewControllers */,
 				985D4A0426E19695003CBDD4 /* TableViewControllers */,
@@ -278,6 +279,7 @@
 				98FC0C7F26D782A700E1F6E4 /* NotificationsViewController.swift */,
 				9867B90D26DA13F0008E09B8 /* SinglePlayerFrontViewController.swift */,
 				9867B90B26DA0C2D008E09B8 /* SinglePlayerBackViewController.swift */,
+				98F839F426ECBAAB00E905C0 /* ScrollSingleTeamViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -589,6 +591,7 @@
 				2493960B26E86B8E0037CD8E /* Venues.swift in Sources */,
 				98A4D76F26D8AA2800F77529 /* SingleTeamTableViewController.swift in Sources */,
 				98FC0C8226D7853A00E1F6E4 /* NotificationsTableViewController.swift in Sources */,
+				98F839F526ECBAAB00E905C0 /* ScrollSingleTeamViewController.swift in Sources */,
 				9810CF8726B9B7AE00442CD1 /* StandingsViewController.swift in Sources */,
 				2493960326E86AEF0037CD8E /* Game.swift in Sources */,
 				2493961326E9720B0037CD8E /* PlayerID.swift in Sources */,
