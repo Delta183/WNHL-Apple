@@ -9,6 +9,7 @@ import UIKit
 
 class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
     @IBOutlet var singleTeamCollectionView: UICollectionView!
+    var teamId:Int64!
     let reuseIdentifier = "teamSpreadsheetCell"
     var data = [
         "Podio", "3", "0", "3",
@@ -52,5 +53,6 @@ class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionV
         super.viewDidLoad()
         singleTeamCollectionView?.delegate = self;
         singleTeamCollectionView?.dataSource = self;
+       
     }
 }

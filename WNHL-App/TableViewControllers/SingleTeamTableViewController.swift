@@ -18,7 +18,7 @@ class SingleTeamTableViewController: UITableViewController {
     let reuseIdentifier = "gameListingCell"
     @IBOutlet var TeamScheduleTableView: UITableView!
     let cellSpacingHeight: CGFloat = 30
-    
+    var teamId:Int64!
     var ids: [Int64] = []
     // MARK: - Table view data source
     
@@ -133,7 +133,6 @@ class SingleTeamTableViewController: UITableViewController {
         TeamScheduleTableView.delegate = self
         TeamScheduleTableView.dataSource = self
         super.viewDidLoad()
-        
     }
     
     

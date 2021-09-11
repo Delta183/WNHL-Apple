@@ -10,6 +10,7 @@ import UIKit
 class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate{
     @IBOutlet var singleTeamCollectionView: UICollectionView!
     let reuseIdentifier = "teamSpreadsheetCell"
+    var teamId:Int64!
     var data = ["1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",]
     
     
@@ -50,5 +51,6 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
         super.viewDidLoad()
         singleTeamCollectionView?.delegate = self;
         singleTeamCollectionView?.dataSource = self;
+        
     }
 }

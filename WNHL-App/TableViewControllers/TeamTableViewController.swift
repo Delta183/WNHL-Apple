@@ -65,7 +65,8 @@ class TeamTableViewController: UITableViewController {
         
         // Get a reference to the second view controller
         let secondViewController = segue.destination as! SingleTeamViewController
-        
+        let vc = SingleTeamTableViewController()
+        vc.teamId = passedTeamId
         // Set a variable in the second view controller with the String to pass
         secondViewController.teamNameString = passedTeamNameString
         secondViewController.teamId = passedTeamId
