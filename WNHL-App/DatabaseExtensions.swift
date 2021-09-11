@@ -61,6 +61,77 @@ extension UITableViewController{
         return "N/A"
     }
    
+    func getGameDateString(gameId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let id = Expression<Int64>("id")
+            let date = Expression<String>("date")
+            //Table Names
+            let games = Table("Games")
+            for game in try db.prepare(games.select(date).filter(id == gameId)){
+                return game[date]
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "N/A"
+    }
+    
+    func getGameTimeString(gameId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let id = Expression<Int64>("id")
+            let time = Expression<String>("time")
+            //Table Names
+            let games = Table("Games")
+            for game in try db.prepare(games.select(time).filter(id == gameId)){
+                return game[time]
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "N/A"
+    }
+    
+    func getGameScoreString(gameId: Int64) -> String {
+        var returnstring = ""
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let id = Expression<Int64>("id")
+            let homeScore = Expression<Int64?>("homeScore")
+            let awayScore = Expression<Int64?>("awayScore")
+            var hScore = 0 as Int64
+            var aScore = 0 as Int64
+            //Table Names
+            let games = Table("Games")
+            for game in try db.prepare(games.select(homeScore).filter(id == gameId)){
+                hScore = game[homeScore] ?? -1
+                if hScore > -1 {
+                    returnstring.append(String(hScore))
+                    returnstring.append("  -  ")
+                }
+            }
+            for game in try db.prepare(games.select(awayScore).filter(id == gameId)){
+                aScore = game[awayScore] ?? -1
+                if aScore > -1 {
+                    returnstring.append(String(aScore))
+                }
+            }
+            if returnstring != "" {
+                return returnstring
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "No Score Available"
+    }
+    
     func getHomeIdFromGameId(gameId:Int64) -> Int {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{

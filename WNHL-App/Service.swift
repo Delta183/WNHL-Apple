@@ -332,7 +332,7 @@ class Service {
                 }
                 else{
                     hScore = Int64(game.results[0]) ?? -1
-                    aScore = Int64(game.results[0]) ?? -1
+                    aScore = Int64(game.results[1]) ?? -1
                 }
                 
                 if game.venues.isEmpty {
@@ -406,4 +406,16 @@ class Service {
             }
         }
     }//getPlayer
+    
+    func addNewGame(){
+        do {
+            let db = try Connection("\(self.path)/wnhl.sqlite3")
+            
+            try db.run(self.games.insertMany([[self.id <- 10000, self.title <- "test game vs test game", self.home <- 940 , self.away <- 940 , self.homeScore <- 0 , self.awayScore <- 0 , self.date <- "2021-09-30", self.time <- "20:30:00" , self.location <- 42]]))
+        }
+        catch {
+            print(error)
+        }
+        
+    }
 }

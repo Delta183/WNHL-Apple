@@ -13,7 +13,9 @@ class SingleTeamTableViewController: UITableViewController {
     let outputDateFormatter = DateFormatter()
     let inputTimeFormatter = DateFormatter()
     let outputTimeFormatter = DateFormatter()
-
+    let dateFormatter = ISO8601DateFormatter()
+    
+    let currentTime = Date()
     let defaults = UserDefaults.standard
     let reuseIdentifier = "gameListingCell"
     @IBOutlet var TeamScheduleTableView: UITableView!
@@ -93,7 +95,14 @@ class SingleTeamTableViewController: UITableViewController {
         
         let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
         let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
-        cell.pointsLabel.text = timeOutputString
+        let isoDate = getGameDateString(gameId: self.ids[indexPath.section])+"T"+getGameTimeString(gameId: self.ids[indexPath.section])+"+0000"
+        let gameDate = dateFormatter.date(from: isoDate)!
+        if currentTime < gameDate {
+            cell.pointsLabel.text = timeOutputString
+        }
+        else{
+            cell.pointsLabel.text = getGameScoreString(gameId: self.ids[indexPath.section])
+        }
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
         cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
         cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
@@ -134,7 +143,6 @@ class SingleTeamTableViewController: UITableViewController {
         TeamScheduleTableView.dataSource = self
         super.viewDidLoad()
     }
-    
     
     func getGameIds(){
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
