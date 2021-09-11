@@ -16,10 +16,12 @@ class SinglePlayerFrontViewController: UIViewController {
     var playerImageURL:String!
     // This is String variable used to transfer information from the previous table view in order to populate this view with the correct specific player data.
     // This will be sent to the SinglePlayerBackViewController to allow that view to populate its data with the correct player information.
-    var playerNameString:String!
+    var playerID:Int64!
+    var playerNameString:String! 
     
     override func viewDidLoad() {
         playerNameLabel.text = playerNameString
+        playerNumberLabel.text = String(playerID)
         // The white label is behind the playerNumberLabel and playerNameLabel
         // It has a thick border with an orange colour to simulate a sort of cell
         whiteLabel.layer.borderWidth = 10.0
@@ -54,29 +56,3 @@ class SinglePlayerFrontViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 }
-
-// playerImageView.image = resizeImage(image: playerImage!, targetSize: CGSize(width: playerImageView.intrinsicContentSize.width,height: playerImageView.intrinsicContentSize.height))
-
-
-//        let config = URLSessionConfiguration.default
-//        let session = URLSession(configuration: config)
-//        if let url = NSURL(string: playerImageURL){
-//            let task = session.dataTask(with: url as URL, completionHandler: {data, response, error in
-//
-//                if let err = error {
-//                    print("Error: \(err)")
-//                    return
-//                }
-//
-//                if let http = response as? HTTPURLResponse {
-//                    if http.statusCode == 200 {
-//                        let downloadedImage = UIImage(data: data!)
-//                        DispatchQueue.main.async {
-//                            self.playerImageView.image = downloadedImage
-//                        };
-//                    }
-//                }
-//            })
-//            task.resume()
-//        }
-//

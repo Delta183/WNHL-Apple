@@ -379,21 +379,22 @@ class Service {
                     points = Int64(player.statistics?.three?[String(prevSeason)]?.p ?? "0")
                 }
                 else{
-                    points = 0
+                    points = Int64(player.statistics?.three?[String(currSeason)]?.p ?? "0")
                 }
                 if player.statistics?.three?[String(currSeason)]?.g == nil {
                     goals = Int64(player.statistics?.three?[String(prevSeason)]?.g ?? 0)
                 }
                 else{
-                    goals = 0
+                    goals = Int64(player.statistics?.three?[String(currSeason)]?.g ?? 0)
                 }
                 if player.statistics?.three?[String(currSeason)]?.a == nil {
                     assists = Int64(player.statistics?.three?[String(prevSeason)]?.a ?? 0)
                 }
                 else{
-                    assists = 0
+                    assists = Int64(player.statistics?.three?[String(currSeason)]?.a ?? 0)
                 }
-                try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- Int64(player.statistics?.three?[String(currSeason)]?.g ?? 0), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)]]))
+                
+                try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)]]))
 
             }
             catch{

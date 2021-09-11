@@ -349,3 +349,23 @@ extension UITableViewController{
         }
     }
 }
+
+extension UIViewController {
+    func getTeamNameFromTeamId(teamId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let name = Expression<String>("name")
+            let id = Expression<Int64>("id")
+            //Table Names
+            let teams = Table("Teams")
+            for team in try db.prepare(teams.select(name).filter(id == teamId)){
+                return(team[name])
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "N/A"
+    }
+}
