@@ -25,7 +25,7 @@ class SingleTeamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(teamNameString)
         // Effectively allow the scroll view to actually scroll by increasing the size of the content to be bigger than the base height
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+440)
         teamNameLabel.text = teamNameString

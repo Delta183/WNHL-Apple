@@ -25,18 +25,24 @@ class SpreadsheetCollectionViewCell3: UICollectionViewCell{
     @IBOutlet weak var posLabel3: UILabel!
 }
 
-class SpreadsheetCollectionViewCell4
-: UICollectionViewCell{
+class SpreadsheetCollectionViewCell4: UICollectionViewCell{
     @IBOutlet weak var posLabel4: UILabel!
 }
 
-class SpreadsheetCollectionViewCell5
-: UICollectionViewCell{
+class SpreadsheetCollectionViewCell5: UICollectionViewCell{
     @IBOutlet weak var posLabel5: UILabel!
 }
 
-class headerStandings
-: UICollectionViewCell{
+class headerStandings: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
+}
+
+class headerFirstSingleTeam: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
+}
+
+class headerSecondSingleTeam: UICollectionViewCell{
+
     @IBOutlet weak var headerLabel: UILabel!
 }
 

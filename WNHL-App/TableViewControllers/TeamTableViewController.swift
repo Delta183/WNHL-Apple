@@ -10,6 +10,7 @@ import UIKit
 class TeamTableViewController: UITableViewController {
     
     @IBOutlet var teamTableView: UITableView!
+    var SingleTeamViewController: SingleTeamViewController?
     var teams:[String] = []
     // This string will be used to preserve the string from the teams array such that it can be sent to the child view controller.
     var passedTeamNameString:String!
@@ -62,13 +63,11 @@ class TeamTableViewController: UITableViewController {
     
     // This function will be called just prior to the segue performed in the didSelectRowAt function
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        // Get a reference to the second view controller
-        let secondViewController = segue.destination as! SingleTeamViewController
-        let vc = SingleTeamTableViewController()
-        vc.teamId = passedTeamId
-        // Set a variable in the second view controller with the String to pass
-        secondViewController.teamNameString = passedTeamNameString
-        secondViewController.teamId = passedTeamId
+        if let vc = segue.destination as? SingleTeamViewController {
+            // save reference to VC embedded in Container View
+            self.SingleTeamViewController = vc
+          self.SingleTeamViewController?.teamNameString = passedTeamNameString
+            self.SingleTeamViewController?.teamId = passedTeamId
+        }
     }
 }
