@@ -58,23 +58,22 @@ extension UIViewController{
     // Function to give the view a special background colour dependent on the team that was selected.
     func getColorFromTeamId(teamNameString: String) -> UIColor{
         if teamNameString.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
-            return UIColor(red: 200.0/255.0, green: 10.0/255.0, blue: 200.0/255.0, alpha: 1.0)
+            return UIColor(red: 216.0/255.0, green: 134.0/255.0, blue: 40.0/255.0, alpha: 1.0)
         }
         else if teamNameString.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
-            return UIColor.systemBlue
+            return UIColor(red: 0.0/255.0, green: 55.0/255.0, blue: 153.0/255.0, alpha: 1.0)
         }
         else if teamNameString.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
-            return UIColor.black
+            return UIColor(red: 21.0/255.0, green: 21.0/255.0, blue: 21.0/255.0, alpha: 1.0)
         }
         else if teamNameString.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
-            return UIColor.red
+            return UIColor(red: 224.0/255.0, green: 76.0/255.0, blue: 28.0/255.0, alpha: 1.0)
         }
         else if teamNameString.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
-            // This will allow the creation of custom colours through changing the numerators
-            return UIColor(red: 10.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1.0)
+            return UIColor(red: 96.0/255.0, green: 96.0/255.0, blue: 96.0/255.0, alpha: 1.0)
         }
         else if teamNameString.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
-            return UIColor.systemGray2
+            return UIColor(red: 241.0/255.0, green: 104.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         }
         else{
             return UIColor.systemOrange

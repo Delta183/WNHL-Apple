@@ -142,10 +142,15 @@ class SingleTeamTableViewController: UITableViewController {
             let db = try Connection("\(path)/wnhl.sqlite3")
             //Table Column Names
             let id = Expression<Int64>("id")
+            let home = Expression<Int64>("home")
+            let away = Expression<Int64>("away")
             //Table Names
             let games = Table("Games")
             for game in try db.prepare(games){
-                ids.append(game[id])
+                //if home or away id matches the team id add the game to the list
+                if game[home] == 940 || game[away] == 940{
+                    ids.append(game[id])
+                }
             }
         }
         catch {

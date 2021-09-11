@@ -37,7 +37,6 @@ class LaunchViewController: UIViewController {
         }
         else{
             textLabel.text = "Downloading Data..."
-
         }
     }
     
@@ -59,13 +58,19 @@ class LaunchViewController: UIViewController {
     }
     
     func do_stuff(onCompleted: () -> ()) {
-        // This body not counting the onCompleted tag is where you will set up the database loading.
-        //Create DB
-        SQLiteDatabase.init()
-        //Begin Network Calls
         let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
-        service.buildDatabase()
-        // The onCompleted flag is necessary
+        if isAppAlreadyLaunchedOnce() {
+            //Update DB
+            service.updateDatabase()
+        }
+        else {
+            //Create DB
+            SQLiteDatabase.init()
+            //Begin Network Calls
+            service.buildDatabase()
+            //The onCompleted flag is necessary
+        }
+        
         onCompleted()
     }
     
@@ -73,10 +78,8 @@ class LaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         
         if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
-            //print("App already launched : \(isAppAlreadyLaunchedOnce)")
             return true
         }else{
-            print("App launched first time")
             return false
         }
     }

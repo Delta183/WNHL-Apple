@@ -2,11 +2,14 @@
 //  Standings.swift
 //  alamoTest
 //
-//  Created by sawyer on 2021-09-06.
+//  Created by Sawyer Fenwick on 2021-09-06.
 //
 
 import Foundation
 
+/**
+ Defines a Standings Object
+ */
 struct Standings: Decodable {
     let id: Int
     let data: [String: StandingData]?
@@ -16,7 +19,7 @@ struct Standings: Decodable {
         case id
         case data
         case seasons
-    }
+    }//CodingKeys
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -28,7 +31,7 @@ struct Standings: Decodable {
         catch {
             data = nil
         }
-    }
+    }//init
     
     struct StandingData: Decodable {
         let pos: String?
@@ -51,7 +54,7 @@ struct Standings: Decodable {
             case gf
             case ga
             case pos
-        }
+        }//CodingKeys
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -68,7 +71,7 @@ struct Standings: Decodable {
             } catch DecodingError.typeMismatch {
                 pos = try container.decode(String.self, forKey: .pos)
             }
-        }
-    }
-}
+        }//init
+    }//StandingsData
+}//Standings
 
