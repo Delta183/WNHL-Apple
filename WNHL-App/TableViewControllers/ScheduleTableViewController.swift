@@ -24,7 +24,7 @@ class ScheduleTableViewController: UITableViewController {
     @IBOutlet var ScheduleTableView: UITableView!
     // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
     var ids: [Int64] = []
-
+    var seasonOver = false
     
     // These are functions that act like attributes for the Table View. This responsible for the number of sections, for our purposes, all we need is 1
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -108,7 +108,12 @@ class ScheduleTableViewController: UITableViewController {
         
         let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
         let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
-        cell.pointsLabel.text = timeOutputString
+        if seasonOver {
+            cell.pointsLabel.text = getGameScoreString(gameId: self.ids[indexPath.section])
+        }
+        else {
+            cell.pointsLabel.text = timeOutputString
+        }
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
         cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
         cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
@@ -155,15 +160,31 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     func getGameIds(){
+        let currentTime = Date()
+        let dateFormatter = ISO8601DateFormatter()
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
             let db = try Connection("\(path)/wnhl.sqlite3")
             //Table Column Names
             let id = Expression<Int64>("id")
+            let date = Expression<String>("date")
+            let time = Expression<String>("time")
             //Table Names
             let games = Table("Games")
+            //Check if the game has happened or not
             for game in try db.prepare(games){
-                ids.append(game[id])
+                //Get the Game Date and Time
+                let isoDate = game[date]+"T"+game[time]+"+0000"
+                let gameDate = dateFormatter.date(from: isoDate)!
+                if currentTime < gameDate {
+                    ids.append(game[id])
+                }
+            }
+            if ids.isEmpty {
+                seasonOver = true
+                for game in try db.prepare(games){
+                    ids.append(game[id])
+                }
             }
         }
         catch {
