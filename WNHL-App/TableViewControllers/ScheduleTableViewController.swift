@@ -148,6 +148,8 @@ class ScheduleTableViewController: UITableViewController {
         updateScheduledGamesFromPreferences()
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
+        // As the app has already launched once, this can be set as true.
+        defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }

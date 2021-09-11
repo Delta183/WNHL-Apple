@@ -74,8 +74,7 @@ class LaunchViewController: UIViewController {
             //print("App already launched : \(isAppAlreadyLaunchedOnce)")
             return true
         }else{
-            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
-            //print("App launched first time")
+            print("App launched first time")
             return false
         }
     }

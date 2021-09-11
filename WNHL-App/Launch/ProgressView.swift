@@ -33,15 +33,15 @@ class ProgressView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         self.layer.cornerRadius = (self.frame.width / 2);
-        
         // 3
         let path = UIBezierPath(ovalIn:
                                     CGRect(
                                         x: -10,
                                         y: 200,
+                                        // 60
                                         width: self.bounds.width,
+                                        // 60
                                         height: self.bounds.width
                                     )
         )
