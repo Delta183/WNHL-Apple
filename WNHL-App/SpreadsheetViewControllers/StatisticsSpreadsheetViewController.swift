@@ -79,7 +79,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         else{
             cellWidth = containerWidth * 0.09
         }
-        return CGSize(width: cellWidth, height: 24)
+        return CGSize(width: cellWidth, height: 22)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
