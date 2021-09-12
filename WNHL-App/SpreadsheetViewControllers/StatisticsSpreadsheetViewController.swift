@@ -199,6 +199,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     }
     
     override func viewDidLoad() {
+        // Populate the arrays with the pertinent data
         getGoals()
         getAssists()
         getPoints()
