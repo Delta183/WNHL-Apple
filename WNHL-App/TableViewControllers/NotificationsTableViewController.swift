@@ -69,7 +69,7 @@ class NotificationsTableViewController: UITableViewController {
         teamString = teamString.replacingOccurrences(of: "-", with: " ")
         cell.teamLabel.text = teamString.uppercased()
         cell.teamLabel.textColor = UIColor.white
-        cell.teamLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        cell.teamLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
         // The same functionality at the didSelectRowAt yet for the actual checkbox button itself.

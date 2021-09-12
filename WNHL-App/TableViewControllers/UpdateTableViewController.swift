@@ -13,6 +13,8 @@ class UpdateTableViewController: UITableViewController {
     var reuseIdentifier = "updateTableCell"
     var categories = ["PLAYERS","GAME SCHEDULE","TEAMS","STANDINGS","EVERYTHING",]
     var iconNames = ["person.fill", "calendar", "play.circle", "chart.bar.xaxis", "square.and.arrow.down",]
+    let cellSpacingHeight: CGFloat = 10
+
     
     func createSpinnerView(){
         let child = SpinnerViewController()

@@ -11,12 +11,26 @@ import SQLite
 // This class will create and populate the spreadsheets for the Statistics View
 class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    let screenSize: CGRect = UIScreen.main.bounds
     @IBOutlet var GoalsCollectionView: UICollectionView?
     @IBOutlet var AssistsCollectionView: UICollectionView?
     @IBOutlet var PointsCollectionView: UICollectionView?
+    @IBOutlet var headerCollectionView1: UICollectionView!
+    @IBOutlet var headerCollectionView2: UICollectionView!
+    @IBOutlet var headerCollectionView3: UICollectionView!
     var reuseIdentifier1 = "goalsCell"
     var reuseIdentifier2 = "assistsCell"
     var reuseIdentifier3 = "pointsCell"
+    var reuseIdentifierHeader1 = "headerCell1"
+    var reuseIdentifierHeader2 = "headerCell2"
+    var reuseIdentifierHeader3 = "headerCell3"
+    var fontSize:CGFloat!
+
+
+    var headerItems1 = ["Rank","Player","Team","G"]
+    var headerItems2 = ["Rank","Player","Team","A"]
+    var headerItems3 = ["Rank","Player","Team","P"]
+
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     let players = Table("Players")
     let name = Expression<String>("name")
@@ -36,50 +50,84 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         else if collectionView == AssistsCollectionView{
             return self.assists.count
         }
-        else{
+        else if collectionView == PointsCollectionView{
             return self.points.count
+        }
+        else{
+            return self.headerItems1.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
+        let containerWidth = view.frame.size.width
         // Max width of this component is 374
         var cellWidth:CGFloat = CGFloat()
-        // Rank Column
+        // Rank Column 45
         if indexPath.row == 0 || ((indexPath.row) % 4) == 0 {
-            cellWidth = 45
+            cellWidth = containerWidth * 0.1203
         }
-        // Player Column
+        // Player Column 140
         else if indexPath.row == 1 || ((indexPath.row - 1) % 4) == 0 {
-            cellWidth = 140
+            cellWidth = containerWidth * 0.374
         }
-        // Team Column
+        // Team Column 155
         else if indexPath.row == 2 || ((indexPath.row - 2) % 4) == 0{
-            cellWidth = 155
+            cellWidth = containerWidth * 0.414
         }
-        // 4th column
+        // 4th column 34
         else{
-            cellWidth = 34
+            cellWidth = containerWidth * 0.09
         }
-        return CGSize(width: cellWidth, height: 24)
+        return CGSize(width: cellWidth, height: 22)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if screenSize.width < 414 {
+            fontSize = 10
+        }
+        else{
+            fontSize = 12
+        }
         if collectionView == self.GoalsCollectionView {
             // get a reference to our storyboard cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath as IndexPath) as! GoalsCollectionViewCell
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell.dataLabel1.text = self.goals[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.dataLabel1.font = UIFont.systemFont(ofSize: fontSize)
+
             return cell
         }
         else if collectionView == self.AssistsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! AssistsCollectionViewCell
             cell.dataLabel2.text = self.assists[indexPath.row]
+            cell.dataLabel2.font = UIFont.systemFont(ofSize: fontSize)
+            return cell
+        }
+        else if collectionView == self.PointsCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! PointsCollectionViewCell
+            cell.dataLabel3.text = self.points[indexPath.row]
+            cell.dataLabel3.font = UIFont.systemFont(ofSize: fontSize)
+
+            return cell
+        }
+        // This is responsible for the headers
+        else if collectionView == self.headerCollectionView1{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader1, for: indexPath as IndexPath) as! headerGoals
+            cell.headerLabel.text = self.headerItems1[indexPath.row]
+            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            return cell
+        }
+        else if collectionView == self.headerCollectionView2{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader2, for: indexPath as IndexPath) as! headerAssists
+            cell.headerLabel.text = self.headerItems2[indexPath.row]
+            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
             return cell
         }
         else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! PointsCollectionViewCell
-            cell.dataLabel3.text = self.points[indexPath.row]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader3, for: indexPath as IndexPath) as! headerPoints
+            cell.headerLabel.text = self.headerItems3[indexPath.row]
+            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
             return cell
         }
     }
@@ -151,6 +199,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     }
     
     override func viewDidLoad() {
+        // Populate the arrays with the pertinent data
         getGoals()
         getAssists()
         getPoints()
@@ -161,5 +210,11 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         AssistsCollectionView?.dataSource = self;
         PointsCollectionView?.delegate = self;
         PointsCollectionView?.dataSource = self;
+        headerCollectionView1?.delegate = self;
+        headerCollectionView1?.dataSource = self;
+        headerCollectionView2?.delegate = self;
+        headerCollectionView2?.dataSource = self;
+        headerCollectionView3?.delegate = self;
+        headerCollectionView3?.dataSource = self;
     }
 }

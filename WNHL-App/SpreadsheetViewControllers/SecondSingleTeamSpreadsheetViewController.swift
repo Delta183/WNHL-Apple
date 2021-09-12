@@ -52,7 +52,7 @@ class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionV
         else{
             cellWidth = containerWidth * 0.213
         }
-        return CGSize(width: cellWidth, height: 24)
+        return CGSize(width: cellWidth, height: 22)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

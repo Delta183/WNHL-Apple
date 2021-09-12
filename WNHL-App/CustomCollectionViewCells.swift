@@ -42,10 +42,20 @@ class headerFirstSingleTeam: UICollectionViewCell{
 }
 
 class headerSecondSingleTeam: UICollectionViewCell{
-
     @IBOutlet weak var headerLabel: UILabel!
 }
 
+class headerGoals: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
+}
+
+class headerAssists: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
+}
+
+class headerPoints: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
+}
 // The following 3 cells are used for the spreadsheets on the Statistics view
 class GoalsCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var dataLabel1: UILabel!
@@ -68,4 +78,8 @@ class TeamSpreadsheetCollectionViewCell2: UICollectionViewCell{
 // This cell is used for the data on the spreadsheet on the view for an individual player.
 class SinglePlayerSpreadsheetCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var dataLabel: UILabel!
+}
+
+class headerSinglePlayer: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
 }
