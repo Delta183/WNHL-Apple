@@ -12,6 +12,8 @@ class MoreTableViewController: UITableViewController {
     var entries = ["PLAYERS", "STATISTICS","YOUTUBE", "TWITTER" ,"WNHL FANTASY", "NOTIFICATION SETTINGS", "UPDATE"]
     var iconNames = ["person.fill", "waveform.path.ecg", "youtube_logo","twitter_logo", "star.circle.fill", "bell.fill","clock.arrow.circlepath"]
     var reuseIdentifier = "MoreCell"
+    let youtubeChannelID:String = "UCklG51DEXWN6RodvW8Mj3cg"
+    let twitterUserID:String = "WNHL2"
     
     // MARK: - Table view data source
     
@@ -39,13 +41,11 @@ class MoreTableViewController: UITableViewController {
         // Youtube button
         case 2:
             // This string represents the id part of the Youtube URL for channels
-            let youtubeChannelID:String = "UCklG51DEXWN6RodvW8Mj3cg"
             goToYoutubeChannel(youtubeChannelId: youtubeChannelID)
             break
         // Twitter button
         case 3:
             // This is a string representing the handle of the channel.
-            let twitterUserID:String = "WNHL2"
             goToTwitterAccount(twitterUserID: twitterUserID)
             break
         // WNHL Fantasy button
