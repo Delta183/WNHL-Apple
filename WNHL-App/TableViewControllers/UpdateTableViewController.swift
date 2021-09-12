@@ -14,6 +14,21 @@ class UpdateTableViewController: UITableViewController {
     var categories = ["PLAYERS","GAME SCHEDULE","TEAMS","STANDINGS","EVERYTHING",]
     var iconNames = ["person.fill", "calendar", "play.circle", "chart.bar.xaxis", "square.and.arrow.down",]
     
+    func createSpinnerView(){
+        let child = SpinnerViewController()
+        
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+5){
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -31,12 +46,13 @@ class UpdateTableViewController: UITableViewController {
         // Players
         case 0:
             // DO WORK HERE
-            
-            
+            //ALERT DIALOG
+            createSpinnerView()
             break
         // Game Schedule
         case 1:
             // DO WORK HERE
+            //ALERT DIALOG
 
             
             
@@ -44,21 +60,21 @@ class UpdateTableViewController: UITableViewController {
         // Teams
         case 2:
             // DO WORK HERE
-
+            //ALERT DIALOG
             
             
             break
         // Standings
         case 3:
             // DO WORK HERE
-
+            //ALERT DIALOG
             
             
             break
         // Everything
         default:
             // DO WORK HERE
-
+            //ALERT DIALOG
             
             
             break
@@ -78,6 +94,5 @@ class UpdateTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }
