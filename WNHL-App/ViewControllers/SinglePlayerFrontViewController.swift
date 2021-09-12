@@ -24,6 +24,7 @@ class SinglePlayerFrontViewController: UIViewController {
 
     
     override func viewDidLoad() {
+        // This sets the values for all the labels in the view
         symbolLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         playerNameLabel.text = playerNameString
         playerNameLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
