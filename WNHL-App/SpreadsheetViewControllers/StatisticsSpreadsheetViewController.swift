@@ -133,7 +133,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
 
             return cell
         }
-        // This is responsible for the headers 
+        // This is responsible for the headers
         else if collectionView == self.headerCollectionView1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader1, for: indexPath as IndexPath) as! headerGoals
             cell.headerLabel.text = self.headerItems1[indexPath.row]
