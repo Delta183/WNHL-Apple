@@ -8,8 +8,14 @@
 import UIKit
 
 class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
+    let screenSize: CGRect = UIScreen.main.bounds
     @IBOutlet var SinglePlayerSpreadsheetCollectionView: UICollectionView!
+    @IBOutlet var headerCollectionView: UICollectionView!
     let reuseIdentifier =  "playerSpreadCell"
+    let headerIdentifier = "headerCell"
+    var fontSize:CGFloat = 12
+    var backgroundColor:UIColor = UIColor.systemOrange
+    var headerItems = ["Season", "Team", "P","G","A","S%","SV%","GP"]
     var positions = [
         "2030-2031", "Merritt Islanders", "11", "61", "21", "32", "15", "50",
         "2021-2022", "Townline Tunnelers", "11", "5", "2", "4", "14", "30",
@@ -19,40 +25,64 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
         "2025-2026", "Crown Room Kings", "11", "1", "6", "4", "6", "22", ]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.positions.count
+        if collectionView == self.SinglePlayerSpreadsheetCollectionView{
+            return self.positions.count
+        }
+        else{
+            return self.headerItems.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        let containerWidth = view.frame.size.width
         // Max width of this component is 374
         var cellWidth:CGFloat = CGFloat()
-        // Season Title
+        // Season Title = 73
         if indexPath.row == 0 || ((indexPath.row ) % 8) == 0 {
-            cellWidth = 73
+            cellWidth = containerWidth * 0.195
         }
-        // Team title
+        // Team title = 133
         else if indexPath.row == 1 || ((indexPath.row - 1) % 8) == 0 {
-            cellWidth = 133
+            cellWidth = containerWidth * 0.355
         }
-        // 1 letter title (P,G,A)
-        else if indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || ((indexPath.row - 2) % 8) == 0 || ((indexPath.row - 3) % 8) == 0 || ((indexPath.row - 4) % 8) == 0{
-            cellWidth = 28
-        }
-        // 2-3 letter title (S%, SV%, GP)
+        // 1 letter title (P,G,A) = 28
+        // 2-3 letter title (S%, SV%, GP) = 28
         else{
-            cellWidth = 28
+            cellWidth = containerWidth * 0.0748
         }
         return CGSize(width: cellWidth, height: 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = SinglePlayerSpreadsheetCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! SinglePlayerSpreadsheetCollectionViewCell
+        if screenSize.width <= 375 {
+            fontSize = 10
+            backgroundColor = UIColor.white
+        }
+        else if screenSize.width < 414{
+            fontSize = 10
+        }
+        SinglePlayerSpreadsheetCollectionView.backgroundColor = backgroundColor
+
+        if collectionView == self.SinglePlayerSpreadsheetCollectionView{
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! SinglePlayerSpreadsheetCollectionViewCell
             cell.dataLabel.text = self.positions[indexPath.row]
+            cell.dataLabel.font = UIFont.systemFont(ofSize: fontSize)
             return cell
         }
+        else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: headerIdentifier, for: indexPath as IndexPath) as! headerSinglePlayer
+            cell.headerLabel.text = self.headerItems[indexPath.row]
+            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            return cell
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SinglePlayerSpreadsheetCollectionView?.delegate = self;
         SinglePlayerSpreadsheetCollectionView?.dataSource = self;
+        headerCollectionView?.delegate = self;
+        headerCollectionView?.dataSource = self;
     }
 }

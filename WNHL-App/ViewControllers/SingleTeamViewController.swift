@@ -12,7 +12,10 @@ class SingleTeamViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var teamLogo: UIImageView!
     @IBOutlet weak var teamNameLabel: UILabel!
-    var ScrollSingleTeamViewController: ScrollSingleTeamViewController?
+    @IBOutlet weak var scrollView: UIScrollView!
+    var SingleTeamTableViewController: SingleTeamTableViewController?
+    var FirstSingleTeamSpreadsheetViewController: FirstSingleTeamSpreadsheetViewController?
+    var SecondSingleTeamSpreadsheetViewController: SecondSingleTeamSpreadsheetViewController?
 
     // this string exists such that data can be passed to this class as opposed to outright setting the teamNameLabel from outside the class. It is not an outlet and exists in this class and not the storyboard
     var teamNameString:String!
@@ -31,7 +34,8 @@ class SingleTeamViewController: UIViewController {
         teamLogo.image = UIImage(named: getImageNameFromTeamName(teamName: teamNameString))
         // Set colour of background
         self.view.backgroundColor = getColorFromTeamId(teamNameString: teamNameString)
-        
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+250)
+
         let button = backButton;
         // Add functionality of the onClick analog to the button specifically when the button has been pressed within its bounds (.touchUpInside)
         button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
@@ -46,11 +50,20 @@ class SingleTeamViewController: UIViewController {
     
     // singleTeamTableSegue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-          if let vc = segue.destination as? ScrollSingleTeamViewController {
-              // save reference to VC embedded in Container View
-              self.ScrollSingleTeamViewController = vc
-            self.ScrollSingleTeamViewController?.teamId = self.teamId
-            self.ScrollSingleTeamViewController?.teamNameString = self.teamNameString
-          }
+        if let vc = segue.destination as? SingleTeamTableViewController {
+            // save reference to VC embedded in Container View
+            self.SingleTeamTableViewController = vc
+          self.SingleTeamTableViewController?.teamId = self.teamId
+        }
+      if let vc = segue.destination as? FirstSingleTeamSpreadsheetViewController {
+          // save reference to VC embedded in Container View
+          self.FirstSingleTeamSpreadsheetViewController = vc
+          self.FirstSingleTeamSpreadsheetViewController?.teamId = self.teamId
+      }
+      if let vc = segue.destination as? SecondSingleTeamSpreadsheetViewController {
+          // save reference to VC embedded in Container View
+          self.SecondSingleTeamSpreadsheetViewController = vc
+          self.SecondSingleTeamSpreadsheetViewController?.teamId = self.teamId
+      }
     }
 }

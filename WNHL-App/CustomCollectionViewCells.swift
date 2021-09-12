@@ -79,3 +79,7 @@ class TeamSpreadsheetCollectionViewCell2: UICollectionViewCell{
 class SinglePlayerSpreadsheetCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var dataLabel: UILabel!
 }
+
+class headerSinglePlayer: UICollectionViewCell{
+    @IBOutlet weak var headerLabel: UILabel!
+}

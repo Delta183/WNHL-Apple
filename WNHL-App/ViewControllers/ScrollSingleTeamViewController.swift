@@ -9,7 +9,6 @@ import UIKit
 
 class ScrollSingleTeamViewController: UIViewController {
 
-    @IBOutlet weak var scrollView: UIScrollView!
     var teamNameString:String!
     var teamId:Int64!
 
@@ -18,7 +17,7 @@ class ScrollSingleTeamViewController: UIViewController {
     var SecondSingleTeamSpreadsheetViewController: SecondSingleTeamSpreadsheetViewController?
     override func viewDidLoad() {
         self.view.backgroundColor = getColorFromTeamId(teamNameString: teamNameString)
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+440)
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
