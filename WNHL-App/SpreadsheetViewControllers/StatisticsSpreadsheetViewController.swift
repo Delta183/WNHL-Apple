@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SQLite
 
 // This class will create and populate the spreadsheets for the Statistics View
 class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -30,50 +31,27 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     var headerItems2 = ["Rank","Player","Team","A"]
     var headerItems3 = ["Rank","Player","Team","P"]
 
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    let players = Table("Players")
+    let name = Expression<String>("name")
+    let currTeam = Expression<Int64>("currTeam")
+    let goal = Expression<Int64>("goals")
+    let assist = Expression<Int64>("assists")
+    let point = Expression<Int64>("points")
     // The 3 arrays are for the Goals, Assists and Points spreadsheets respectively.
-    var data1 = [
-        "1", "Pat Riley", "Merritt Islanders", "12",
-        "2", "Cory Hutchinson", "Lincoln Street Legends", "10",
-        "3", "Cockell", "Lincoln Street Legends", "8",
-        "4", "Eric Sinclair", "Atlas Steelers", "7",
-        "5", "Bryan Baz", "Dain City Dusters", "7",
-        "6", "Ryan Daniels", "Merritt Islanders", "7",
-        "7", "Chris Woods", "Townline Tunnelers", "7",
-        "8", "Sean Boychuck", "Merritt Islanders", "6",
-        "9", "Grant Vash", "Townline Tunnelers", "6",
-        "10", "Bryan Baz", "Atlas Steelers", "6",]
-    var data2 = [
-        "1", "Pat Riley", "Merritt Islanders", "12",
-        "2", "Cory Hutchinson", "Lincoln Street Legends", "10",
-        "3", "Cockell", "Lincoln Street Legends", "8",
-        "4", "Eric Sinclair", "Atlas Steelers", "7",
-        "5", "Bryan Baz", "Dain City Dusters", "7",
-        "6", "Ryan Daniels", "Merritt Islanders", "7",
-        "7", "Chris Woods", "Townline Tunnelers", "7",
-        "8", "Sean Boychuck", "Merritt Islanders", "6",
-        "9", "Grant Vash", "Townline Tunnelers", "6",
-        "10", "Bryan Baz", "Atlas Steelers", "6",]
-    var data3 = [
-        "1", "Pat Riley", "Merritt Islanders", "12",
-        "2", "Cory Hutchinson", "Lincoln Street Legends", "10",
-        "3", "Cockell", "Lincoln Street Legends", "8",
-        "4", "Eric Sinclair", "Atlas Steelers", "7",
-        "5", "Bryan Baz", "Dain City Dusters", "7",
-        "6", "Ryan Daniels", "Merritt Islanders", "7",
-        "7", "Chris Woods", "Townline Tunnelers", "7",
-        "8", "Sean Boychuck", "Merritt Islanders", "6",
-        "9", "Grant Vash", "Townline Tunnelers", "6",
-        "10", "Bryan Baz", "Atlas Steelers", "6",]
+    var goals: [String] = []
+    var assists: [String] = []
+    var points: [String] = []
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == GoalsCollectionView{
-            return self.data1.count
+            return self.goals.count
         }
         else if collectionView == AssistsCollectionView{
-            return self.data2.count
+            return self.assists.count
         }
-        else if collectionView == PointsCollectionView{
-            return self.data3.count
+        else{
+            return self.points.count
         }
         else{
             return self.headerItems1.count
@@ -115,19 +93,17 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
             // get a reference to our storyboard cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath as IndexPath) as! GoalsCollectionViewCell
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
-            cell.dataLabel1.text = self.data1[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            cell.dataLabel1.font = UIFont.systemFont(ofSize: fontSize)
-
+            cell.dataLabel1.text = self.goals[indexPath.row] // The row value is the same as the index of the desired text within the array.
             return cell
         }
         else if collectionView == self.AssistsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! AssistsCollectionViewCell
-            cell.dataLabel2.text = self.data2[indexPath.row]
-            cell.dataLabel2.font = UIFont.systemFont(ofSize: fontSize)
+            cell.dataLabel2.text = self.assists[indexPath.row]
             return cell
         }
         else if collectionView == self.PointsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! PointsCollectionViewCell
+            cell.dataLabel3.text = self.points[indexPath.row]
             cell.dataLabel3.text = self.data3[indexPath.row]
             cell.dataLabel3.font = UIFont.systemFont(ofSize: fontSize)
 
@@ -154,7 +130,76 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         }
     }
     
+    func getGoals(){
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            
+            let sortedPlayers = Table("Players").order(goal)
+            
+            var count = try! db.scalar(sortedPlayers.count)
+        
+            for player in try db.prepare(sortedPlayers) {
+                goals.append(String(player[goal]))
+                goals.append(getTeamNameFromTeamId(teamId: player[currTeam]))
+                goals.append(player[name])
+                goals.append(String(count))
+                count-=1
+            }
+            goals.reverse()
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func getAssists(){
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            
+            let sortedPlayers = Table("Players").order(assist)
+            
+            var count = try! db.scalar(sortedPlayers.count)
+            
+            for player in try db.prepare(sortedPlayers) {
+                assists.append(String(player[assist]))
+                assists.append(getTeamNameFromTeamId(teamId: player[currTeam]))
+                assists.append(player[name])
+                assists.append(String(count))
+                count-=1
+            }
+            assists.reverse()
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func getPoints(){
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            
+            let sortedPlayers = Table("Players").order(point)
+            
+            var count = try! db.scalar(sortedPlayers.count)
+            
+            for player in try db.prepare(sortedPlayers) {
+                points.append(String(player[point]))
+                points.append(getTeamNameFromTeamId(teamId: player[currTeam]))
+                points.append(player[name])
+                points.append(String(count))
+                count-=1
+            }
+            points.reverse()
+        }
+        catch {
+            print(error)
+        }
+    }
+    
     override func viewDidLoad() {
+        getGoals()
+        getAssists()
+        getPoints()
         super.viewDidLoad()
         GoalsCollectionView?.delegate = self;
         GoalsCollectionView?.dataSource = self;
