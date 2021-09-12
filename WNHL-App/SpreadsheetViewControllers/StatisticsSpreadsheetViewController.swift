@@ -50,7 +50,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         else if collectionView == AssistsCollectionView{
             return self.assists.count
         }
-        else{
+        else if collectionView == PointsCollectionView{
             return self.points.count
         }
         else{
@@ -94,17 +94,19 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath as IndexPath) as! GoalsCollectionViewCell
             // Use the outlet in our custom class to get a reference to the UILabel in the cell
             cell.dataLabel1.text = self.goals[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.dataLabel1.font = UIFont.systemFont(ofSize: fontSize)
+
             return cell
         }
         else if collectionView == self.AssistsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! AssistsCollectionViewCell
             cell.dataLabel2.text = self.assists[indexPath.row]
+            cell.dataLabel2.font = UIFont.systemFont(ofSize: fontSize)
             return cell
         }
         else if collectionView == self.PointsCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier3, for: indexPath as IndexPath) as! PointsCollectionViewCell
             cell.dataLabel3.text = self.points[indexPath.row]
-            cell.dataLabel3.text = self.data3[indexPath.row]
             cell.dataLabel3.font = UIFont.systemFont(ofSize: fontSize)
 
             return cell
