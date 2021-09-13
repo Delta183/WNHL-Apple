@@ -14,6 +14,9 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     let reuseIdentifier =  "playerSpreadCell"
     let headerIdentifier = "headerCell"
     var fontSize:CGFloat = 12
+    var iphoneOffsetSeasonTeam:CGFloat = 0.00
+    var iphoneOffsetLabel:CGFloat = 0.00
+
     var backgroundColor:UIColor = UIColor.systemOrange
     //STANDINGS DATA - player 
     var headerItems = ["Season", "Team", "P","G","A","S%","SV%","GP"]
@@ -35,21 +38,26 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        if screenSize.width > 375 && screenSize.width < 414 {
+            iphoneOffsetSeasonTeam = 0.0001
+            iphoneOffsetLabel = 0.00016
+        }
         let containerWidth = view.frame.size.width
         // Max width of this component is 374
         var cellWidth:CGFloat = CGFloat()
         // Season Title = 73
         if indexPath.row == 0 || ((indexPath.row ) % 8) == 0 {
-            cellWidth = containerWidth * 0.195
+            cellWidth = containerWidth * (0.195 + iphoneOffsetSeasonTeam)
         }
         // Team title = 133
         else if indexPath.row == 1 || ((indexPath.row - 1) % 8) == 0 {
-            cellWidth = containerWidth * 0.355
+            cellWidth = containerWidth * (0.355  + iphoneOffsetSeasonTeam)
         }
         // 1 letter title (P,G,A) = 28
         // 2-3 letter title (S%, SV%, GP) = 28
         else{
-            cellWidth = containerWidth * 0.0748
+            // 0.0748 to 0.07496
+            cellWidth = containerWidth * (0.0748 + iphoneOffsetLabel)
         }
         return CGSize(width: cellWidth, height: 24)
     }
