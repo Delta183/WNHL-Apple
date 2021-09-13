@@ -355,6 +355,65 @@ extension UITableViewController{
 }
 
 extension UIViewController {
+    
+    func getPlayerContentFromId(playerId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let content = Expression<String>("content")
+            let id = Expression<Int64>("id")
+            //Table Name
+            let players = Table("Players")
+            for player in try db.prepare(players.select(content).filter(id == playerId)){
+                return player[content]
+            }
+        }
+        catch {
+            print(error)
+        }
+        return ""
+    }
+    
+    func getPlayerCurrTeamFromId(playerId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let currTeam = Expression<Int64>("currTeam")
+            let name = Expression<String>("name")
+            let id = Expression<Int64>("id")
+            //Table Name
+            let players = Table("Players")
+            let teams = Table("Teams")
+            for player in try db.prepare(players.select(currTeam).filter(id == playerId)){
+                for team in try db.prepare(teams.select(name).filter(id == player[currTeam])){
+                    return team[name]
+                }
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "N/A"
+    }
+    
+    func getPlayerNumberFromId(playerId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let number = Expression<Int64>("number")
+            let id = Expression<Int64>("id")
+            //Table Name
+            let players = Table("Players")
+            for player in try db.prepare(players.select(number).filter(id == playerId)){
+                return String(player[number])
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "00"
+    }
+    
     func getTeamNameFromTeamId(teamId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
