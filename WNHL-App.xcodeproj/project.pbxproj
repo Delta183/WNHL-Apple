@@ -293,8 +293,8 @@
 		985D4A0426E19695003CBDD4 /* TableViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */,
 				9827C6BC26D482CE005A062B /* TeamTableViewController.swift */,
+				9827C6BE26D4AFCC005A062B /* ScheduleTableViewController.swift */,
 				982E765B26D5D9FD0050F2DA /* MoreTableViewController.swift */,
 				982E766126D5FE2D0050F2DA /* PlayersTableViewController.swift */,
 				98FC0C8126D7853A00E1F6E4 /* NotificationsTableViewController.swift */,

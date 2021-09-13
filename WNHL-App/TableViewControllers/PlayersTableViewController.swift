@@ -53,10 +53,10 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = PlayerTableView.indexPathForSelectedRow
-        let index = indexPath?[1] ?? -1
-        if index != -1 {
-            playerID = playerIDs[index]
-        }
+        //let index = indexPath?[1] ?? -1
+//        if index != -1 {
+//            playerID = playerIDs[index]
+//        }
         let currentCell = self.PlayerTableView.cellForRow(at:indexPath!) as! PlayerTableViewCell
         playerNameString = currentCell.playerText.text
         // This will segue to the Navigation controller for the Single Player Front and Back Views
@@ -83,7 +83,6 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
         let secondViewController = navigationController.viewControllers.first as! SinglePlayerFrontViewController
 
         // Set a variable in the second view controller with the String to pass
-        secondViewController.playerID = playerID
         secondViewController.playerNameString = playerNameString
     }
     
