@@ -76,6 +76,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Schedule" image="calendar" catalog="system" id="a4W-tO-2Py"/>
+                    <connections>
+                        <outlet property="scheduleTitleLabel" destination="hZR-o2-idI" id="nWW-jf-HWB"/>
+                        <outlet property="yearsLabel" destination="ois-um-JKd" id="Vxb-tt-Ove"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
