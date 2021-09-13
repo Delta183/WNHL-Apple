@@ -41,7 +41,7 @@ class SinglePlayerFrontViewController: UIViewController {
         whiteLabel.layer.borderColor = UIColor.systemOrange.cgColor
         
         // Setting the player image
-        playerImageURL = "http://www.wnhlwelland.ca/wp-content/uploads/2019/09/DSC_6338.jpg"
+        playerImageURL = getPlayerImageFromId(playerId: playerID)
         let playerImage = UIImage(url: URL(string: playerImageURL))
         if playerImage == nil{
             playerImageView.contentMode = .scaleAspectFit

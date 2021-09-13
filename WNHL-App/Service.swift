@@ -32,7 +32,9 @@ class Service {
     var eventRequests = 0 as Int
     var playerRequests = 0 as Int
     var updateRequests = 0 as Int
+    var mediaRequests = 0 as Int
     var updateAll = false as Bool
+    
     //Path to DB
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     //Shared Preferences
@@ -509,11 +511,15 @@ class Service {
             }
             else {
                 if self.eventRequests == 0 && self.playerRequests == 0 {
-                    if self.updateAll {
-                        self.tableView.hideSpinner()
+                    do {
+                        let db = try Connection("\(self.path)/wnhl.sqlite3")
+                        self.mediaRequests = try db.scalar(self.players.count)
+                        for player in try db.prepare(self.players){
+                            self.getMediaURLs(endPoint: String(player[self.mediaID]!), pid: player[self.id], update: update)
+                        }
                     }
-                    else {
-                        self.launchView.goToNext()
+                    catch {
+                        print(error)
                     }
                 }
             }
@@ -564,7 +570,6 @@ class Service {
                 else{
                     assists = Int64(player.statistics?.three?[String(currSeason)]?.a ?? 0)
                 }
-                
                 if update {
                     let row = self.players.filter(self.id == Int64(pid)!)
                     try db.run(row.update(self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)))
@@ -584,38 +589,48 @@ class Service {
             }
             else {
                 if self.eventRequests == 0 && self.playerRequests == 0 {
-                    if self.updateAll {
-                        self.tableView.hideSpinner()
+                    do {
+                        let db = try Connection("\(self.path)/wnhl.sqlite3")
+                        self.mediaRequests = try db.scalar(self.players.count)
+                        for player in try db.prepare(self.players){
+                            self.getMediaURLs(endPoint: String(player[self.mediaID]!), pid: player[self.id], update: update)
+                        }
                     }
-                    else {
-                        self.launchView.goToNext()
+                    catch {
+                        print(error)
                     }
                 }
             }
         }
     }//getPlayer
     
-    func addNewGame(){
-        do {
-            let db = try Connection("\(self.path)/wnhl.sqlite3")
-            
-            try db.run(self.games.insertMany([
-                [id <- 1119, title <- "Game 1", home <- 1371, away <- 1370, homeScore <- 2, awayScore <- 2, date <- "2021-09-12", time <- "19:55:00", location <- 42],
+    func getMediaURLs(endPoint: String, pid: Int64, update: Bool){
+        AF.request("http://www.wnhlwelland.ca/wp-json/wp/v2/media/"+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+            (responseData) in
+            guard let data = responseData.data else{
+                return
+            }
+            do {
+                self.mediaRequests-=1
+                let db = try Connection("\(self.path)/wnhl.sqlite3")
                 
-                [id <- 1120, title <- "Game 2", home <- 940, away <- 1824, homeScore <- 1, awayScore <- 9, date <- "2021-09-12", time <- "20:50:30", location <- 35],
-                [id <- 1121, title <- "Game 3", home <- 1810, away <- 1822, homeScore <- 3, awayScore <- 1, date <- "2021-09-12", time <- "20:50:00", location <- 30],
+                let mediaURL = try JSONDecoder().decode(MediaURL.self, from: data)
                 
-                [id <- 1122, title <- "Game 4", home <- 940, away <- 1822, homeScore <- 2, awayScore <- 1, date <- "2021-09-12", time <- "19:56:30", location <- 15],
-                [id <- 1123, title <- "Game 5", home <- 1371, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-12", time <- "20:50:00", location <- 41],
-                [id <- 1124, title <- "Game 6", home <- 1824, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-12", time <- "20:51:00", location <- 41],
-                [id <- 1125, title <- "Game 7", home <- 1370, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-12", time <- "19:51:00", location <- 30],
-                [id <- 1126, title <- "Game 8", home <- 940, away <- 1822, homeScore <- 2, awayScore <- 1, date <- "2021-09-12", time <- "19:52:30", location <- 15],
-                ]))
+                let row = self.players.filter(self.id == pid)
+                try db.run(row.update(self.mediaURL <- mediaURL.url?["rendered"] ?? ""))
+            }
+            catch {
+                print(error)
+            }
+            if self.mediaRequests == 0{
+                if self.updateAll || update {
+                    self.tableView.hideSpinner()
+                }
+                else {
+                    self.launchView.goToNext()
+                }
+            }
         }
-        catch {
-            print(error)
-        }
-        
     }
 }
 

@@ -374,6 +374,24 @@ extension UIViewController {
         return ""
     }
     
+    func getPlayerImageFromId(playerId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let mediaURL = Expression<String>("mediaURL")
+            let id = Expression<Int64>("id")
+            //Table Name
+            let players = Table("Players")
+            for player in try db.prepare(players.select(mediaURL).filter(id == playerId)){
+                return player[mediaURL]
+            }
+        }
+        catch {
+            print(error)
+        }
+        return ""
+    }
+    
     func getPlayerCurrTeamFromId(playerId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
