@@ -8,7 +8,7 @@
 import UIKit
 
 class SinglePlayerBackViewController: UIViewController {
-    @IBOutlet weak var playerNumberLabel: UILabel!
+    let screenSize: CGRect = UIScreen.main.bounds
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var playerTeamLabel: UILabel!
     @IBOutlet weak var playerImageView: UIImageView!
@@ -16,15 +16,24 @@ class SinglePlayerBackViewController: UIViewController {
     var playerNameString:String!
     var playerImageURL:String!
     var playerID: Int64!
+    var descriptionFontSize:CGFloat = 14
+    var fontSize:CGFloat = 22
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playerNameLabel.text = playerNameString
-        playerNumberLabel.text = getPlayerNumberFromId(playerId: playerID)
-        playerDescription.text = getPlayerContentFromId(playerId: playerID).replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "&#8212;", with: "-").replacingOccurrences(of: "<p style=\"text-align:left;\">", with: "").replacingOccurrences(of: "&#8220;", with: "\"").replacingOccurrences(of: "&#8221;", with: "\"").replacingOccurrences(of: "&#8217;", with: "'")
-        playerTeamLabel.text = getPlayerCurrTeamFromId(playerId: playerID)
         playerImageView.layer.cornerRadius = 100
         playerImageURL = getPlayerImageFromId(playerId: playerID)
+        if screenSize.width < 414 {
+            descriptionFontSize = 13
+            fontSize = 18
+        }
+        playerNameLabel.text = playerNameString + " | # 52"
+        playerNameLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        playerTeamLabel.text = getPlayerCurrTeamFromId(playerId: playerID)
+        playerTeamLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        playerDescription.text = getPlayerContentFromId(playerId: playerID).replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "&#8212;", with: "-").replacingOccurrences(of: "<p style=\"text-align:left;\">", with: "").replacingOccurrences(of: "&#8220;", with: "\"").replacingOccurrences(of: "&#8221;", with: "\"").replacingOccurrences(of: "&#8217;", with: "'")
+        playerDescription.font = UIFont.systemFont(ofSize: descriptionFontSize)
+       
         let playerImage = UIImage(url: URL(string: playerImageURL))
         if playerImage == nil{
             playerImageView.image = UIImage(named: "WNHL_Logo")
