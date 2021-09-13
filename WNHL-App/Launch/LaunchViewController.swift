@@ -12,6 +12,7 @@ class LaunchViewController: UIViewController {
     
     //Path to DB
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    public var downloading: Bool = true
     
     @IBOutlet weak var textLabel: UILabel!
     // Downloading Data for first time
@@ -48,30 +49,27 @@ class LaunchViewController: UIViewController {
     
     // Called once the view is prepared
     override func viewDidAppear(_ animated: Bool) {
-        //print("Before stuff")
         do_stuff {
             // Now the "function" has completed.
-            //print("After stuff")
+        
         }
-        self.performSegue(withIdentifier: "mainSegue", sender: self)
+        //self.performSegue(withIdentifier: "mainSegue", sender: self)
         
     }
-    
+        
     func do_stuff(onCompleted: () -> ()) {
-        let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
+        let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/", launchView: self)
         if isAppAlreadyLaunchedOnce() {
             //Update DB
-            service.updateDatabase()
-            // service.addNewGame()
+            service.updateDatabase(updateMain: true)
         }
         else {
             //Create DB
             SQLiteDatabase.init()
             //Begin Network Calls
-            service.buildDatabase()
+            service.buildDatabase(update: false)
             //The onCompleted flag is necessary
         }
-        
         onCompleted()
     }
     
@@ -82,6 +80,14 @@ class LaunchViewController: UIViewController {
             return true
         }else{
             return false
+        }
+    }
+    
+    func goToNext(){
+        self.textLabel.text = "Finishing Up..."
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.textLabel.text = "Complete!"
+            self.performSegue(withIdentifier: "mainSegue", sender: self)
         }
     }
 }

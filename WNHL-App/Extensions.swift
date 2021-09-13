@@ -331,3 +331,10 @@ extension Date {
         return ""
     }
 }
+
+extension UITableViewController {
+    
+    func hideSpinner(){
+        parent?.removeSpinner()
+    }
+}

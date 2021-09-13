@@ -14,7 +14,8 @@ class UpdateTableViewController: UITableViewController {
     var categories = ["PLAYERS","GAME SCHEDULE","TEAMS","STANDINGS","EVERYTHING",]
     var iconNames = ["person.fill", "calendar", "play.circle", "chart.bar.xaxis", "square.and.arrow.down",]
     let cellSpacingHeight: CGFloat = 10
-
+    let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -31,37 +32,34 @@ class UpdateTableViewController: UITableViewController {
         switch rowNumber {
         // Players
         case 0:
-            // DO WORK HERE
-            
-            
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updatePlayers(tableView: self)
             break
         // Game Schedule
         case 1:
-            // DO WORK HERE
-
-            
-            
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateEvents(tableView: self)
             break
         // Teams
         case 2:
-            // DO WORK HERE
-
-            
-            
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateTeams(tableView: self)
             break
         // Standings
         case 3:
-            // DO WORK HERE
-
-            
-            
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateStandings(tableView: self)
             break
         // Everything
         default:
-            // DO WORK HERE
-
-            
-            
+            //do nothing
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateApp(tableView: self)
             break
         }
     }
@@ -79,6 +77,5 @@ class UpdateTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }

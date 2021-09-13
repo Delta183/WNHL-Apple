@@ -18,6 +18,9 @@ import SQLite       //Database SQLite Wrapper
 class Service {
     
     fileprivate var baseUrl = ""
+    var launchView: LaunchViewController
+    var tableView: UITableViewController
+    
     var ids: [Int] = []
     var sluglist: [String] = []
     var playerslist: [String] = []
@@ -28,7 +31,8 @@ class Service {
     var calendarRequests = 0 as Int
     var eventRequests = 0 as Int
     var playerRequests = 0 as Int
-    
+    var updateRequests = 0 as Int
+    var updateAll = false as Bool
     //Path to DB
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     //Shared Preferences
@@ -69,44 +73,119 @@ class Service {
     
     init(baseUrl: String){
         self.baseUrl = baseUrl
+        self.launchView = LaunchViewController.init()
+        self.tableView = UITableViewController.init()
     }//init
+    
+    init(baseUrl: String, launchView: LaunchViewController){
+        self.baseUrl = baseUrl
+        self.launchView = launchView
+        self.tableView = UITableViewController.init()
+    }
     
     /**
      Begins the first 5 network requests
      */
-    func buildDatabase() {
-        teamRequest(endPoint: "teams/")
+    func buildDatabase(update: Bool) {
+        updateAll = update
+        teamRequest(endPoint: "teams/", update: false)
         venueRequest(endPoint: "venues/")
         seasonRequest(endPoint: "seasons/")
         statsRequest(endPoint: "lists/1900")
-        standingsRequest(endPoint: "tables/")
+        standingsRequest(endPoint: "tables/", update: false)
     }//buildDatabase
-    
+        
     /**
      Updates the Games table - only call when there are games coming up
      */
-    func updateDatabase(){
-        
+    func updateDatabase(updateMain: Bool){
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            updateRequests = try db.scalar(games.count)
+            
+            for event in try db.prepare(games) {
+                getEvent(endPoint: "events/", eid: event[self.id] ?? -1, update: true, updateMain: updateMain)
+            }
+        }
+        catch {
+            print(error)
+        }
     }//updateDatabase
     
+    func updateEvents(tableView: UITableViewController){
+        self.tableView = tableView
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            updateRequests = try db.scalar(games.count)
+            
+            for event in try db.prepare(games) {
+                getEvent(endPoint: "events/", eid: event[self.id] ?? -1, update: true, updateMain: false)
+            }
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func updatePlayers(tableView: UITableViewController){
+        self.tableView = tableView
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            updateRequests = try db.scalar(players.count)
+            for player in try db.prepare(players) {
+                getPlayer(endPoint: "players/", pid: String(player[self.id]!), update: true)
+            }
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func updateTeams(tableView: UITableViewController){
+        self.tableView = tableView
+        updateRequests = 1
+        teamRequest(endPoint: "teams/", update: true)
+    }
+    
+    func updateStandings(tableView: UITableViewController){
+        self.tableView = tableView
+        updateRequests = 1
+        standingsRequest(endPoint: "teams/", update: true)
+    }
+    
+    func updateApp(tableView: UITableViewController){
+        self.tableView = tableView
+        SQLiteDatabase.init()
+        buildDatabase(update: true)
+    }
     /**
      Retrieves the Team Data from the WNHL Wordpress site and inserts it into the DB
      */
-    func teamRequest(endPoint: String){
+    func teamRequest(endPoint: String, update: Bool){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
             guard let data = responseData.data else{
                 return
             }
             do {
-                self.topRequests-=1
+                if update {
+                    self.updateRequests-=1
+                }
+                else{
+                    self.topRequests-=1
+                }
                 let teamArray = try JSONDecoder().decode([Teams].self, from: data)
                 for teamObj in teamArray {
                     self.sluglist.append(teamObj.slug ?? "")
                     do{
                         let db = try Connection("\(self.path)/wnhl.sqlite3")
-
-                        try db.run(self.teams.insertMany([[self.id <- Int64(teamObj.id ?? 0), self.name <- teamObj.name?["rendered"] ?? "" , self.slug <- teamObj.slug, self.seasonID <- "\(String(describing: teamObj.seasonIDs))"]]))
+                        if update {
+                            let row = self.teams.filter(self.id == Int64(teamObj.id ?? 0))
+                            try db.run(row.update(self.name <- teamObj.name?["rendered"] ?? "" , self.slug <- teamObj.slug, self.seasonID <- "\(String(describing: teamObj.seasonIDs))"))
+                        }
+                        else {
+                            try db.run(self.teams.insertMany([[self.id <- Int64(teamObj.id ?? 0), self.name <- teamObj.name?["rendered"] ?? "" , self.slug <- teamObj.slug, self.seasonID <- "\(String(describing: teamObj.seasonIDs))"]]))
+                        }
                     }
                     catch {
                         print("ERROR: " , error)
@@ -115,6 +194,12 @@ class Service {
             }
             catch{
                 print("Error decoding == \(error)")
+            }
+            if update {
+                if self.updateRequests == 0 {
+                    print("line 215")
+                    self.tableView.hideSpinner()
+                }
             }
             if self.topRequests == 0 {
                 self.startLowerRequests()
@@ -222,19 +307,30 @@ class Service {
     /**
      Retrieves the Standings Data from the WNHL Wordpress site and inserts it into the DB
      */
-    func standingsRequest(endPoint: String){
+    func standingsRequest(endPoint: String, update: Bool){
         AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
             guard let data = responseData.data else{
                 return
             }
             do {
-                self.topRequests-=1
+                if update {
+                    self.updateRequests-=1
+                }
+                else{
+                    self.topRequests-=1
+                }
                 let standings = try JSONDecoder().decode([Standings].self, from: data)
                 for standing in standings {
                     do{
                         let db = try Connection("\(self.path)/wnhl.sqlite3")
-                        try db.run(self.standings.insertMany([[self.id <- Int64(standing.id), self.seasonID <- "\(standing.seasons)"]]))
+                        if update {
+                            let row = self.standings.filter(self.id == Int64(standing.id))
+                            try db.run(row.update(self.seasonID <- "\(standing.seasons)"))
+                        }
+                        else {
+                            try db.run(self.standings.insertMany([[self.id <- Int64(standing.id), self.seasonID <- "\(standing.seasons)"]]))
+                        }
                     }
                     catch {
                         print("ERROR:", error)
@@ -244,8 +340,16 @@ class Service {
             catch{
                 print("Error decoding == \(error)")
             }
-            if self.topRequests == 0 {
-                self.startLowerRequests()
+            if update {
+                if self.updateRequests == 0 {
+                    print("line 359")
+                    self.tableView.hideSpinner()
+                }
+            }
+            else {
+                if self.topRequests == 0 {
+                    self.startLowerRequests()
+                }
             }
         }
     }//standingsRequest
@@ -263,7 +367,7 @@ class Service {
         playerRequests = playerslist.count
         print("Player Requests: " , playerRequests)
         for pid in playerslist {
-            getPlayer(endPoint: "players/" , pid: pid)
+            getPlayer(endPoint: "players/" , pid: pid, update: false)
         }
     }//startLowerRequests
     
@@ -297,7 +401,7 @@ class Service {
             if self.calendarRequests == 0 {
                 self.eventRequests = self.eventIDs.count
                 for e in self.eventIDs {
-                    self.getEvent(endPoint: "events/" , eid: e)
+                    self.getEvent(endPoint: "events/" , eid: Int64(e), update: false, updateMain: false)
                 }
             }
         }
@@ -306,14 +410,19 @@ class Service {
     /**
      Downloads a single games data from the WNHL Wordpress site and inserts it into the Games table
      */
-    func getEvent(endPoint: String, eid: Int){
+    func getEvent(endPoint: String, eid: Int64, update: Bool, updateMain: Bool){
         AF.request(self.baseUrl+endPoint+String(eid), method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
             guard let data = responseData.data else{
                 return
             }
             do {
-                self.eventRequests-=1
+                if update {
+                    self.updateRequests-=1
+                }
+                else {
+                    self.eventRequests-=1
+                }
                 let game = try JSONDecoder().decode(Game.self, from: data)
                 let db = try Connection("\(self.path)/wnhl.sqlite3")
                 
@@ -342,23 +451,51 @@ class Service {
                     ven = Int64(game.venues[0])
                 }
                 
-                try db.run(self.games.insertMany([[self.id <- Int64(game.id), self.title <- game.title["rendered"], self.home <- Int64(game.teams[0]) , self.away <- Int64(game.teams[1]) , self.homeScore <- hScore , self.awayScore <- aScore , self.date <- dateString, self.time <- timeString , self.location <- ven]]))
+                if update {
+                    let row = self.games.filter(self.id == Int64(eid))
+                    try db.run(row.update(self.title <- game.title["rendered"], self.home <- Int64(game.teams[0]) , self.away <- Int64(game.teams[1]) , self.homeScore <- hScore , self.awayScore <- aScore , self.date <- dateString, self.time <- timeString , self.location <- ven))
+                }
+                else {
+                    try db.run(self.games.insertMany([[self.id <- Int64(game.id), self.title <- game.title["rendered"], self.home <- Int64(game.teams[0]) , self.away <- Int64(game.teams[1]) , self.homeScore <- hScore , self.awayScore <- aScore , self.date <- dateString, self.time <- timeString , self.location <- ven]]))
+                }
+               
             }
             catch{
                 print("ERROR DECODING!!! == \(error)")
             }
-            if self.eventRequests == 0 && self.playerRequests == 0 {
-                print("DONE")
-                //THIS IS WHERE WE WILL SET SOMETHING THAT TELLS THE MAIN VIEW CONTROLLER TO
-                //STOP SHOWING THE SPLASH SCREEN AND MOVE TO THE SCHEDULE VIEW
+            if updateMain {
+                if self.updateRequests == 0 {
+                    if self.updateAll {
+                        self.tableView.hideSpinner()
+                    }
+                    else {
+                        self.launchView.goToNext()
+                    }
+                }
             }
+            else if update {
+                if self.updateRequests == 0 {
+                    self.tableView.hideSpinner()
+                }
+            }
+            else {
+                if self.eventRequests == 0 && self.playerRequests == 0 {
+                    if self.updateAll {
+                        self.tableView.hideSpinner()
+                    }
+                    else {
+                        self.launchView.goToNext()
+                    }
+                }
+            }
+            
         }
     }//getEvent
     
     /**
      Downloads a single Player object from the WNHL Wordpress site and inserts it into the Players Table
      */
-    func getPlayer(endPoint: String, pid: String){
+    func getPlayer(endPoint: String, pid: String, update: Bool){
         var points: Int64?
         var assists: Int64?
         var goals: Int64?
@@ -370,7 +507,12 @@ class Service {
                 return
             }
             do {
-                self.playerRequests-=1
+                if update {
+                    self.updateRequests-=1
+                }
+                else {
+                    self.playerRequests-=1
+                }
                 let db = try Connection("\(self.path)/wnhl.sqlite3")
                 let player = try JSONDecoder().decode(Players.self, from: data)
                 
@@ -394,16 +536,32 @@ class Service {
                     assists = Int64(player.statistics?.three?[String(currSeason)]?.a ?? 0)
                 }
                 
-                try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)]]))
-
+                if update {
+                    let row = self.players.filter(self.id == Int64(pid))
+                    try db.run(row.update(self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)))
+                }
+                else{
+                    try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)]]))
+                }
             }
             catch{
                 print("Error decoding == \(error)")
             }
-            if self.eventRequests == 0 && self.playerRequests == 0 {
-                print("DONE")
-                //THIS IS WHERE WE WILL SET SOMETHING THAT TELLS THE MAIN VIEW CONTROLLER TO
-                //STOP SHOWING THE SPLASH SCREEN AND MOVE TO THE SCHEDULE VIEW
+            if update {
+                if self.updateRequests == 0 {
+                    print("line 557")
+                    self.tableView.hideSpinner()
+                }
+            }
+            else {
+                if self.eventRequests == 0 && self.playerRequests == 0 {
+                    if self.updateAll {
+                        self.tableView.hideSpinner()
+                    }
+                    else {
+                        self.launchView.goToNext()
+                    }
+                }
             }
         }
     }//getPlayer
@@ -431,3 +589,4 @@ class Service {
         
     }
 }
+
