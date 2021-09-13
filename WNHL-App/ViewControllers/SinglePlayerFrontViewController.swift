@@ -32,6 +32,7 @@ class SinglePlayerFrontViewController: UIViewController {
         playerNameLabel.text = playerNameString
         playerNameLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         playerNumberLabel.text = playerNumber
+        playerNameLabel.textAlignment = NSTextAlignment.right
         playerNumberLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
 
         // The white label is behind the playerNumberLabel and playerNameLabel
