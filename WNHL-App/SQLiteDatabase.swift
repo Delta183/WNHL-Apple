@@ -13,43 +13,43 @@ import SQLite
  */
 class SQLiteDatabase {
     
+    //Database path
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    //Table Column Names
+    let id = Expression<Int64>("id")
+    let name = Expression<String>("name")
+    let slug = Expression<String>("slug")
+    let seasonID = Expression<String>("seasonID")
+    let title = Expression<String>("title")
+    let home = Expression<Int64>("home")
+    let away = Expression<Int64>("away")
+    let homeScore = Expression<Int64?>("homeScore")
+    let awayScore = Expression<Int64?>("awayScore")
+    let date = Expression<String>("date")
+    let time = Expression<String>("time")
+    let location = Expression<Int64>("location")
+    let mediaID = Expression<Int64>("mediaID")
+    let mediaURL = Expression<String?>("mediaURL")
+    let content = Expression<String>("content")
+    let number = Expression<Int64>("number")
+    let currTeam = Expression<Int64>("currTeam")
+    let goals = Expression<Int64>("goals")
+    let assists = Expression<Int64>("assists")
+    let points = Expression<Int64>("points")
+    //let stats =
+    //let data =
+    
+    //Table Names
+    let venues = Table("Venues")
+    let seasons = Table("Seasons")
+    let games = Table("Games")
+    let teams = Table("Teams")
+    let players = Table("Players")
+    let standings = Table("Standings")
+    
     init(){
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        
         do {
             let db = try Connection("\(path)/wnhl.sqlite3")
-            
-            //Table Column Names
-            let id = Expression<Int64>("id")
-            let name = Expression<String>("name")
-            let slug = Expression<String>("slug")
-            let seasonID = Expression<String>("seasonID")
-            let title = Expression<String>("title")
-            let home = Expression<Int64>("home")
-            let away = Expression<Int64>("away")
-            let homeScore = Expression<Int64?>("homeScore")
-            let awayScore = Expression<Int64?>("awayScore")
-            let date = Expression<String>("date")
-            let time = Expression<String>("time")
-            let location = Expression<Int64>("location")
-            let mediaID = Expression<Int64>("mediaID")
-            let mediaURL = Expression<String?>("mediaURL")
-            let content = Expression<String>("content")
-            let number = Expression<Int64>("number")
-            let currTeam = Expression<Int64>("currTeam")
-            let goals = Expression<Int64>("goals")
-            let assists = Expression<Int64>("assists")
-            let points = Expression<Int64>("points")
-            //let stats =
-            //let data =
-            
-            //Table Names
-            let venues = Table("Venues")
-            let seasons = Table("Seasons")
-            let games = Table("Games")
-            let teams = Table("Teams")
-            let players = Table("Players")
-            let standings = Table("Standings")
             
             //Delete tables if exists
             try db.run(venues.drop(ifExists: true))

@@ -15,13 +15,16 @@ class SinglePlayerBackViewController: UIViewController {
     @IBOutlet weak var playerDescription: UITextView!
     var playerNameString:String!
     var playerImageURL:String!
-
+    var playerID: Int64!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playerNameLabel.text = playerNameString
+        playerNumberLabel.text = getPlayerNumberFromId(playerId: playerID)
+        playerDescription.text = getPlayerContentFromId(playerId: playerID).replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "&#8212;", with: "-").replacingOccurrences(of: "<p style=\"text-align:left;\">", with: "").replacingOccurrences(of: "&#8220;", with: "\"").replacingOccurrences(of: "&#8221;", with: "\"").replacingOccurrences(of: "&#8217;", with: "'")
+        playerTeamLabel.text = getPlayerCurrTeamFromId(playerId: playerID)
         playerImageView.layer.cornerRadius = 100
-        playerImageURL = "http://www.wnhlwelland.ca/wp-content/uploads/2019/09/DSC_6338.jpg"
+        playerImageURL = getPlayerImageFromId(playerId: playerID)
         let playerImage = UIImage(url: URL(string: playerImageURL))
         if playerImage == nil{
             playerImageView.image = UIImage(named: "WNHL_Logo")

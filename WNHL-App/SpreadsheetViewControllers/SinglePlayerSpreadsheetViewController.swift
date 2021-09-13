@@ -15,6 +15,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     let headerIdentifier = "headerCell"
     var fontSize:CGFloat = 12
     var backgroundColor:UIColor = UIColor.systemOrange
+    //STANDINGS DATA - player 
     var headerItems = ["Season", "Team", "P","G","A","S%","SV%","GP"]
     var positions = [
         "2030-2031", "Merritt Islanders", "11", "61", "21", "32", "15", "50",

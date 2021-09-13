@@ -19,17 +19,20 @@ class SinglePlayerFrontViewController: UIViewController {
     // This is String variable used to transfer information from the previous table view in order to populate this view with the correct specific player data.
     // This will be sent to the SinglePlayerBackViewController to allow that view to populate its data with the correct player information.
     var playerID:Int64!
+    var playerNumber:String!
     var playerNameString:String!
     var fontSize:CGFloat = 28
 
-    
     override func viewDidLoad() {
+        //Get Player Image and Number
+        playerNumber = getPlayerNumberFromId(playerId: playerID)
+        
         // This sets the values for all the labels in the view
         symbolLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         playerNameLabel.text = playerNameString
         playerNameLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        playerNumberLabel.text = playerNumber
         playerNameLabel.textAlignment = NSTextAlignment.right
-        playerNumberLabel.text = String(playerID)
         playerNumberLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
 
         // The white label is behind the playerNumberLabel and playerNameLabel
@@ -38,7 +41,7 @@ class SinglePlayerFrontViewController: UIViewController {
         whiteLabel.layer.borderColor = UIColor.systemOrange.cgColor
         
         // Setting the player image
-        playerImageURL = "http://www.wnhlwelland.ca/wp-content/uploads/2019/09/DSC_6338.jpg"
+        playerImageURL = getPlayerImageFromId(playerId: playerID)
         let playerImage = UIImage(url: URL(string: playerImageURL))
         if playerImage == nil{
             playerImageView.contentMode = .scaleAspectFit
@@ -58,6 +61,7 @@ class SinglePlayerFrontViewController: UIViewController {
         let secondVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "playerBackViewController") as! SinglePlayerBackViewController
         // Set the data of that view controller's analog string from this class with data also from this class
         secondVC.playerNameString = self.playerNameString
+        secondVC.playerID = self.playerID
         // Push that destination view controller onto the Navigation controller stack
         self.navigationController?.pushViewController(secondVC, animated: false)
         // Make the transition with the appropriate start and end points and animations.
