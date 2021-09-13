@@ -25,6 +25,7 @@ class SinglePlayerFrontViewController: UIViewController {
 
     override func viewDidLoad() {
         //Get Player Image and Number
+        playerID = getPlayerIDFromPlayerName(playerName: playerNameString)
         playerNumber = getPlayerNumberFromId(playerId: playerID)
         
         // This sets the values for all the labels in the view
