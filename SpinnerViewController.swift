@@ -8,18 +8,42 @@
 import Foundation
 import UIKit
 
-class SpinnerViewController: UIViewController {
-    var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+var aView: UIView?
+
+extension UIViewController{
     
-    override func loadView() {
-        view = UIView()
-        view.backgroundColor = UIColor(white: 0, alpha: 0.0)
+    func showSpinner(){
+        aView = UIView(frame: self.view.bounds)
+        aView?.backgroundColor = UIColor.init(red:0.5,green: 0.5,blue: 0.5, alpha: 0.5)
         
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.startAnimating()
-        view.addSubview(spinner)
+        let ai = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+        ai.center = aView!.center
+        ai.startAnimating()
+        aView?.addSubview(ai)
+        self.view.addSubview(aView!)
+    }
+    
+    func removeSpinner(){
+        aView?.removeFromSuperview()
+        aView = nil 
+    }
+}
+
+extension LaunchViewController{
+    
+    func showLaunchSpinner(){
+        aView = UIView(frame: self.view.bounds)
+        aView?.backgroundColor = UIColor.init(red:0.5,green: 0.5,blue: 0.5, alpha: 0.5)
         
-        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        let ai = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+        ai.center = aView!.center
+        ai.startAnimating()
+        aView?.addSubview(ai)
+        self.view.addSubview(aView!)
+    }
+    
+    func removeLaunchSpinner(){
+        aView?.removeFromSuperview()
+        aView = nil
     }
 }

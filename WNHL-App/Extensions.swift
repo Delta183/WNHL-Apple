@@ -267,3 +267,10 @@ extension NotificationsViewController:ChildToParentProtocol {
         }
     }
 }
+
+extension UITableViewController {
+    
+    func hideSpinner(){
+        parent?.removeSpinner()
+    }
+}

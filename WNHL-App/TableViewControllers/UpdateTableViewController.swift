@@ -14,22 +14,7 @@ class UpdateTableViewController: UITableViewController {
     var categories = ["PLAYERS","GAME SCHEDULE","TEAMS","STANDINGS","EVERYTHING",]
     var iconNames = ["person.fill", "calendar", "play.circle", "chart.bar.xaxis", "square.and.arrow.down",]
     let cellSpacingHeight: CGFloat = 10
-
-    
-    func createSpinnerView(){
-        let child = SpinnerViewController()
-        
-        addChild(child)
-        child.view.frame = view.frame
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now()+5){
-            child.willMove(toParent: nil)
-            child.view.removeFromSuperview()
-            child.removeFromParent()
-        }
-    }
+    let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,38 +32,34 @@ class UpdateTableViewController: UITableViewController {
         switch rowNumber {
         // Players
         case 0:
-            // DO WORK HERE
-            //ALERT DIALOG
-            createSpinnerView()
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updatePlayers(tableView: self)
             break
         // Game Schedule
         case 1:
-            // DO WORK HERE
-            //ALERT DIALOG
-
-            
-            
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateEvents(tableView: self)
             break
         // Teams
         case 2:
-            // DO WORK HERE
-            //ALERT DIALOG
-            
-            
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateTeams(tableView: self)
             break
         // Standings
         case 3:
-            // DO WORK HERE
-            //ALERT DIALOG
-            
-            
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateStandings(tableView: self)
             break
         // Everything
         default:
-            // DO WORK HERE
-            //ALERT DIALOG
-            
-            
+            //do nothing
+            //Alert Dialog
+            parent?.showSpinner()
+            service.updateApp(tableView: self)
             break
         }
     }
