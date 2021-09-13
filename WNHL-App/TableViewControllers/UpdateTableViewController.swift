@@ -12,7 +12,7 @@ class UpdateTableViewController: UITableViewController {
     @IBOutlet var UpdateTableView: UITableView!
     var reuseIdentifier = "updateTableCell"
     var categories = ["PLAYERS","GAME SCHEDULE","TEAMS","STANDINGS","EVERYTHING",]
-    var iconNames = ["person.fill", "calendar", "play.circle", "chart.bar.xaxis", "square.and.arrow.down",]
+    var iconNames = ["person.fill", "calendar", "hockeyStickUpdate", "chart.bar.xaxis", "square.and.arrow.down",]
     let cellSpacingHeight: CGFloat = 10
     let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/")
     
@@ -71,6 +71,9 @@ class UpdateTableViewController: UITableViewController {
         cell.updateLabel.textColor = UIColor.white
         cell.updateLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         cell.iconImage.image = UIImage(systemName: iconNames[indexPath.row])
+        if cell.iconImage.image == nil{
+            cell.iconImage.image = UIImage(named: iconNames[indexPath.row])
+        }
         cell.iconImage.tintColor = UIColor.white
         return cell
     }

@@ -28,6 +28,7 @@ class SinglePlayerFrontViewController: UIViewController {
         symbolLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         playerNameLabel.text = playerNameString
         playerNameLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        playerNameLabel.textAlignment = NSTextAlignment.right
         playerNumberLabel.text = String(playerID)
         playerNumberLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
 

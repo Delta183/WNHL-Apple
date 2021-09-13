@@ -1928,7 +1928,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="W73-Na-1mv" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="W73-Na-1mv" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="36" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LoF-jx-zrA">
@@ -2671,7 +2671,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Jonathan Johnson MacJensen" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="234-u4-a3Y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alain Robichaud" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="234-u4-a3Y">
                                 <rect key="frame" x="139" y="655" width="248" height="100"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2706,6 +2706,7 @@
                             <constraint firstItem="6ZM-HS-mUd" firstAttribute="top" secondItem="234-u4-a3Y" secondAttribute="top" id="GeX-bD-Jmb"/>
                             <constraint firstItem="6ZM-HS-mUd" firstAttribute="baseline" secondItem="Rrs-mz-tPX" secondAttribute="baseline" id="LBN-zi-rBJ"/>
                             <constraint firstItem="6ZM-HS-mUd" firstAttribute="bottom" secondItem="9O9-0i-hLt" secondAttribute="bottom" id="TDW-NU-Lgd"/>
+                            <constraint firstItem="xq7-Vy-Zgb" firstAttribute="trailing" secondItem="234-u4-a3Y" secondAttribute="trailing" constant="27" id="XIx-JP-fTC"/>
                             <constraint firstItem="234-u4-a3Y" firstAttribute="leading" secondItem="Rrs-mz-tPX" secondAttribute="trailing" id="buv-nk-a6Z"/>
                             <constraint firstItem="feW-p8-MYZ" firstAttribute="leading" secondItem="hfJ-TC-G3z" secondAttribute="leadingMargin" id="dph-Ec-tDS"/>
                             <constraint firstItem="feW-p8-MYZ" firstAttribute="top" secondItem="xq7-Vy-Zgb" secondAttribute="top" id="fgp-b2-Qfe"/>
