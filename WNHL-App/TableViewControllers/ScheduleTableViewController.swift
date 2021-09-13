@@ -79,11 +79,8 @@ class ScheduleTableViewController: UITableViewController {
                 self.defaults.setValue(false, forKey: gameIdString)
             }
             else{
-                // var dateString = String()
-                // dateString = "2021-09-08 22:15:00"
                 let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
-                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString)
-                self.defaults.setValue(true, forKey: gameIdString)
+                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
                 //self.scheduleLocalTest()
             }
         }))

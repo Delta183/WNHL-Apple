@@ -85,19 +85,43 @@ extension UIViewController{
 // extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
     
-    func scheduleLocal(dateTimeString:String, notificationId:String) {
+    func scheduleLocal(dateTimeString:String, notificationId:String, titleString:String) {
         let defaults = UserDefaults.standard
+        let currentDate = Date()
+        // game at 5:17PM tomorrow reads 22 hours when called at 6:17PM the day before.
         let date = convertStringToDate(dateStr: dateTimeString)
-        // This will make it impossible for any past games to be scheduled
+        // This will make it impossible for any past games to be scheduled by checking if the time between now and the time of the given date
         if date.timeIntervalSinceNow.isLessThanOrEqualTo(0) == false {
             let content = UNMutableNotificationContent()
-            
-            content.title = "Don't forget"
-            content.body = "Buy some milk"
+            content.title = titleString
             
             content.sound = UNNotificationSound.default
-            let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date) //log ▿ year: 2018 month: 10 day: 20 hour: 18 minute: 11 second: 0 isLeapMonth: false
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+            // Furthermore, there will be a series of checks for an more than hour, more than 10 minutes and then within those 10 minutes
+            var modifiedDate:Date!
+            var triggerDate:DateComponents!
+            var trigger:UNCalendarNotificationTrigger!
+            // If there is more than an hour left, set the alert to be an hour prior to the game
+            if date.hours(from: currentDate) > 0{
+                content.body = "1 hour until the match begins."
+//                content.body = "1 hour until the match begins."
+                modifiedDate = Calendar.current.date(byAdding: .hour, value: -1, to: date)
+                triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: modifiedDate)
+                trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                defaults.setValue(true, forKey: notificationId)
+            }
+            // If there is less than an hour left, but more than 10 minutes before the match begins, set the alert to be an hour prior to the game
+            else if date.minutes(from: currentDate) > 10{
+                content.body = "10 minutes until the match begins"
+                modifiedDate = Calendar.current.date(byAdding: .minute, value: -10, to: date)
+                triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: modifiedDate)
+                trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                defaults.setValue(true, forKey: notificationId)
+            }
+            // Otherwise the user has less than 10 minutes meaning there is no reason to set a notification
+            else{
+                content.body = "The match is in less than 10 minutes."
+                trigger = nil
+            }
             let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
                 if let error = error {
@@ -105,8 +129,6 @@ extension UITableViewController{
                     print(error)
                 }
             })
-            defaults.setValue(true, forKey: notificationId)
-
         }
     }
     
@@ -265,5 +287,47 @@ extension NotificationsViewController:ChildToParentProtocol {
         else{
             self.showToast(message: teamNameString + " Notifications OFF", font: .systemFont(ofSize: 13.0))
         }
+    }
+}
+
+extension Date {
+    /// Returns the amount of years from another date
+    func years(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
+    }
+    /// Returns the amount of months from another date
+    func months(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
+    }
+    /// Returns the amount of weeks from another date
+    func weeks(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.weekOfMonth], from: date, to: self).weekOfMonth ?? 0
+    }
+    /// Returns the amount of days from another date
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+    }
+    /// Returns the amount of hours from another date
+    func hours(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
+    }
+    /// Returns the amount of minutes from another date
+    func minutes(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
+    }
+    /// Returns the amount of seconds from another date
+    func seconds(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
+    }
+    /// Returns the a custom time interval description from another date
+    func offset(from date: Date) -> String {
+        if years(from: date)   > 0 { return "\(years(from: date))y"   }
+        if months(from: date)  > 0 { return "\(months(from: date))M"  }
+        if weeks(from: date)   > 0 { return "\(weeks(from: date))w"   }
+        if days(from: date)    > 0 { return "\(days(from: date))d"    }
+        if hours(from: date)   > 0 { return "\(hours(from: date))h"   }
+        if minutes(from: date) > 0 { return "\(minutes(from: date))m" }
+        if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
+        return ""
     }
 }

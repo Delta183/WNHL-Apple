@@ -5,7 +5,10 @@
 //  Created by Daniel Figueroa on 2021-08-26.
 //
 
+import Foundation
+import Swift
 import UIKit
+import SQLite
 
 protocol ChildToParentProtocol:AnyObject {
     
@@ -82,7 +85,9 @@ class NotificationsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         // Similarly change this to call on the userDefaults
-        teams = getTeamsFromSeasonId(seasonIdString: "34")
+        
+        teams = getTeamsFromSeasonId(seasonId: defaults.object(forKey: "currSeason") as! NSNumber)
+
         super.viewDidLoad()
     }
     

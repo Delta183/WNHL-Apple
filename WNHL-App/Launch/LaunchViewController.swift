@@ -62,6 +62,7 @@ class LaunchViewController: UIViewController {
         if isAppAlreadyLaunchedOnce() {
             //Update DB
             service.updateDatabase()
+            // service.addNewGame()
         }
         else {
             //Create DB
