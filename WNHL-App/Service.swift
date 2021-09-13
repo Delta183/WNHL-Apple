@@ -565,4 +565,27 @@ class Service {
             }
         }
     }//getPlayer
+    
+    func addNewGame(){
+        do {
+            let db = try Connection("\(self.path)/wnhl.sqlite3")
+            
+            try db.run(self.games.insertMany([
+                [id <- 1119, title <- "Game 1", home <- 1371, away <- 1370, homeScore <- 2, awayScore <- 2, date <- "2021-09-12", time <- "19:55:00", location <- 42],
+                
+                [id <- 1120, title <- "Game 2", home <- 940, away <- 1824, homeScore <- 1, awayScore <- 9, date <- "2021-09-12", time <- "20:50:30", location <- 35],
+                [id <- 1121, title <- "Game 3", home <- 1810, away <- 1822, homeScore <- 3, awayScore <- 1, date <- "2021-09-12", time <- "20:50:00", location <- 30],
+                
+                [id <- 1122, title <- "Game 4", home <- 940, away <- 1822, homeScore <- 2, awayScore <- 1, date <- "2021-09-12", time <- "19:56:30", location <- 15],
+                [id <- 1123, title <- "Game 5", home <- 1371, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-12", time <- "20:50:00", location <- 41],
+                [id <- 1124, title <- "Game 6", home <- 1824, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-12", time <- "20:51:00", location <- 41],
+                [id <- 1125, title <- "Game 7", home <- 1370, away <- 1822, homeScore <- 2, awayScore <- 3, date <- "2021-09-12", time <- "19:51:00", location <- 30],
+                [id <- 1126, title <- "Game 8", home <- 940, away <- 1822, homeScore <- 2, awayScore <- 1, date <- "2021-09-12", time <- "19:52:30", location <- 15],
+                ]))
+        }
+        catch {
+            print(error)
+        }
+        
+    }
 }

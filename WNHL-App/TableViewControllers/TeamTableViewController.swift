@@ -5,10 +5,13 @@
 //  Created by Daniel Figueroa on 2021-08-23.
 //
 
+import Foundation
+import Swift
 import UIKit
+import SQLite
 
 class TeamTableViewController: UITableViewController {
-    
+    let defaults = UserDefaults.standard
     @IBOutlet var teamTableView: UITableView!
     var SingleTeamViewController: SingleTeamViewController?
     var teams:[String] = []
@@ -57,7 +60,7 @@ class TeamTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         // Change this to call on the userdefault set for currSeason
-        teams = getTeamsFromSeasonId(seasonIdString: "34")
+        teams = getTeamsFromSeasonId(seasonId: defaults.object(forKey: "currSeason") as! NSNumber)
         super.viewDidLoad()
     }
     

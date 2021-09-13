@@ -259,7 +259,8 @@ extension UITableViewController{
         return "N/A"
     }
     
-    func getTeamsFromSeasonId(seasonIdString:String) -> [String] {
+    func getTeamsFromSeasonId(seasonId:NSNumber) -> [String] {
+        let seasonIdString:String = "\(seasonId)"
         var teamArray:[String] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -321,7 +322,7 @@ extension UITableViewController{
       
         for n in 0..<idList.count {
             // For all the games in the idList, schedule them, they will be overwritten if they are already set
-            scheduleLocal(dateTimeString: getFullDateTimeStringFromTeamId(gameId: idList[n]), notificationId: String(idList[n]))
+            scheduleLocal(dateTimeString: getFullDateTimeStringFromTeamId(gameId: idList[n]), notificationId: String(idList[n]), titleString: getTitleFromGameId(gameId: idList[n]))
         }
     }
     
@@ -330,7 +331,10 @@ extension UITableViewController{
         for n in 0..<idList.count {
             // For all the games in the idList, schedule them, they will be overwritten if they are already set
             deleteNotification(notificationId: String(idList[n]))
-            defaults.setValue(false, forKey: String(idList[n]))
+            // if there exists a key for the element, set it to false, otherwise, do not take up memory
+            if defaults.object(forKey: String(idList[n])) != nil{
+                defaults.setValue(false, forKey: String(idList[n]))
+            }
 
         }
         updateScheduledGamesFromPreferences()
@@ -339,7 +343,7 @@ extension UITableViewController{
     // This function checks all the user defaults for the teams
     func updateScheduledGamesFromPreferences(){
         let defaults = UserDefaults.standard
-        let teams = getTeamsFromSeasonId(seasonIdString: "34")
+        let teams = getTeamsFromSeasonId(seasonId: defaults.object(forKey: "currSeason") as! NSNumber)
         for n in 0..<teams.count {
             if defaults.bool(forKey: teams[n]){
                 let teamId = getTeamIdFromTeamName(teamName: teams[n])

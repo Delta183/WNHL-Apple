@@ -10,6 +10,7 @@ import SQLite
 import UserNotifications
 // View Controllers represent each screen, A basic screen is known as a View Controller but a view entirely devoted to say a TableView is a TableViewController. Thus this class is responsible for affecting strictly the table on the Schedule screen.
 class ScheduleTableViewController: UITableViewController {
+    let screenSize: CGRect = UIScreen.main.bounds
     let inputDateFormatter = DateFormatter()
     let outputDateFormatter = DateFormatter()
     let inputTimeFormatter = DateFormatter()
@@ -24,6 +25,7 @@ class ScheduleTableViewController: UITableViewController {
     @IBOutlet var ScheduleTableView: UITableView!
     // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
     var ids: [Int64] = []
+    var fontSize:CGFloat = 15
     var seasonOver = false
     
     // These are functions that act like attributes for the Table View. This responsible for the number of sections, for our purposes, all we need is 1
@@ -77,11 +79,8 @@ class ScheduleTableViewController: UITableViewController {
                 self.defaults.setValue(false, forKey: gameIdString)
             }
             else{
-                // var dateString = String()
-                // dateString = "2021-09-08 22:15:00"
                 let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
-                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString)
-                self.defaults.setValue(true, forKey: gameIdString)
+                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
                 //self.scheduleLocalTest()
             }
         }))
@@ -94,6 +93,9 @@ class ScheduleTableViewController: UITableViewController {
     
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if screenSize.width < 414 {
+            fontSize = 14
+        }
         // ScheduleTableViewCell is custom made by myself that has 2 image views one text label, highlighting and right clicking the ScheduleTableViewCell and jumping to Definition should display the outlets that the Custom cell class contains.
         // Think classes in Java, housing a bunch of elements repeatedly used in a singular class.
         let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
@@ -104,7 +106,7 @@ class ScheduleTableViewController: UITableViewController {
         let dateOutputString:String = outputDateFormatter.string(from: dateInputString!)
         cell.dateLabel.text = dateOutputString
         // Set the font of the dateLabel programmatically with a font of 15
-        cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.dateLabel.font = UIFont.systemFont(ofSize: 14)
         
         let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
         let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
@@ -114,11 +116,11 @@ class ScheduleTableViewController: UITableViewController {
         else {
             cell.pointsLabel.text = timeOutputString
         }
-        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
-        cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize)
         cell.titleLabel.text = getTitleFromGameId(gameId: self.ids[indexPath.section])
-        cell.titleLabel.font = UIFont.systemFont(ofSize: 14)
+        cell.titleLabel.font = UIFont.systemFont(ofSize: fontSize - 1)
         
         // Set the alignment of the text with respect to the placements of the labels
         cell.dateLabel.textAlignment = NSTextAlignment.center

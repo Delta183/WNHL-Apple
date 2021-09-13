@@ -9,6 +9,7 @@ import UIKit
 import SQLite
 
 class SingleTeamTableViewController: UITableViewController {
+    let screenSize: CGRect = UIScreen.main.bounds
     let inputDateFormatter = DateFormatter()
     let outputDateFormatter = DateFormatter()
     let inputTimeFormatter = DateFormatter()
@@ -20,6 +21,7 @@ class SingleTeamTableViewController: UITableViewController {
     let reuseIdentifier = "gameListingCell"
     @IBOutlet var TeamScheduleTableView: UITableView!
     let cellSpacingHeight: CGFloat = 30
+    var fontSize:CGFloat = 15
     var teamId:Int64!
     var ids: [Int64] = []
     // MARK: - Table view data source
@@ -70,12 +72,8 @@ class SingleTeamTableViewController: UITableViewController {
                 self.defaults.setValue(false, forKey: gameIdString)
             }
             else{
-                // var dateString = String()
-                // dateString = "2021-09-08 22:15:00"
                 let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
-                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString)
-                self.defaults.setValue(true, forKey: gameIdString)
-                //self.scheduleLocalTest()
+                self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
             }
         }))
         // Cancel has unique styling to denote the level of action it is.
@@ -86,12 +84,15 @@ class SingleTeamTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if screenSize.width < 414 {
+            fontSize = 14
+        }
         let cell = self.TeamScheduleTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SingleTeamTableViewCell
         let dateInputString = inputDateFormatter.date(from: getDateStringFromTeamId(gameId: self.ids[indexPath.section]))
         let dateOutputString:String = outputDateFormatter.string(from: dateInputString!)
         cell.dateLabel.text = dateOutputString
         // Set the font of the dateLabel programmatically with a font of 15
-        cell.dateLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.dateLabel.font = UIFont.systemFont(ofSize: fontSize)
         
         let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
         let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
@@ -103,11 +104,11 @@ class SingleTeamTableViewController: UITableViewController {
         else{
             cell.pointsLabel.text = getGameScoreString(gameId: self.ids[indexPath.section])
         }
-        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
-        cell.locationLabel.font = UIFont.systemFont(ofSize: 15)
+        cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize)
         cell.titleLabel.text = getTitleFromGameId(gameId: self.ids[indexPath.section])
-        cell.titleLabel.font = UIFont.systemFont(ofSize: 14)
+        cell.titleLabel.font = UIFont.systemFont(ofSize: fontSize - 1)
         
         // Set the alignment of the text with respect to the placements of the labels
         cell.dateLabel.textAlignment = NSTextAlignment.center
