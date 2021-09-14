@@ -23,6 +23,7 @@ class ScheduleTableViewCell: UITableViewCell {
     }
 }
 
+
 // The following TableViewCell is used for listing of teams in the Teams View
 class TeamTableViewCell: UITableViewCell{
     @IBOutlet weak var teamNameLabel: UILabel!
