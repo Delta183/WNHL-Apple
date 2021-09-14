@@ -87,48 +87,57 @@ extension UITableViewController{
     
     func scheduleLocal(dateTimeString:String, notificationId:String, titleString:String) {
         let defaults = UserDefaults.standard
-        let currentDate = Date()
-        // game at 5:17PM tomorrow reads 22 hours when called at 6:17PM the day before.
-        let date = convertStringToDate(dateStr: dateTimeString)
-        // This will make it impossible for any past games to be scheduled by checking if the time between now and the time of the given date
-        if date.timeIntervalSinceNow.isLessThanOrEqualTo(0) == false {
-            let content = UNMutableNotificationContent()
-            content.title = titleString
-            
-            content.sound = UNNotificationSound.default
-            // Furthermore, there will be a series of checks for an more than hour, more than 10 minutes and then within those 10 minutes
-            var modifiedDate:Date!
-            var triggerDate:DateComponents!
-            var trigger:UNCalendarNotificationTrigger!
-            // If there is more than an hour left, set the alert to be an hour prior to the game
-            if date.hours(from: currentDate) > 0{
-                content.body = "1 hour until the match begins."
-//                content.body = "1 hour until the match begins."
-                modifiedDate = Calendar.current.date(byAdding: .hour, value: -1, to: date)
-                triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: modifiedDate)
-                trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                defaults.setValue(true, forKey: notificationId)
-            }
-            // If there is less than an hour left, but more than 10 minutes before the match begins, set the alert to be an hour prior to the game
-            else if date.minutes(from: currentDate) > 10{
-                content.body = "10 minutes until the match begins"
-                modifiedDate = Calendar.current.date(byAdding: .minute, value: -10, to: date)
-                triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: modifiedDate)
-                trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                defaults.setValue(true, forKey: notificationId)
-            }
-            // Otherwise the user has less than 10 minutes meaning there is no reason to set a notification
-            else{
-                content.body = "The match is in less than 10 minutes."
-                trigger = nil
-            }
-            let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
-                if let error = error {
-                    // Something went wrong
-                    print(error)
+        if defaults.bool(forKey: notificationId) != true{
+            let currentDate = Date()
+            // game at 5:17PM tomorrow reads 22 hours when called at 6:17PM the day before.
+            let date = convertStringToDate(dateStr: dateTimeString)
+            // This will make it impossible for any past games to be scheduled by checking if the time between now and the time of the given date
+            if date.timeIntervalSinceNow.isLessThanOrEqualTo(0) == false {
+                let inputTimeFormatter = DateFormatter()
+                let outputTimeFormatter = DateFormatter()
+                inputTimeFormatter.dateFormat = "HH:mm:ss"
+                outputTimeFormatter.dateFormat = "h:mm a"
+                let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: Int64(notificationId)!))
+                let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
+                let content = UNMutableNotificationContent()
+                content.title = titleString
+                
+                content.sound = UNNotificationSound.default
+                // Furthermore, there will be a series of checks for an more than hour, more than 10 minutes and then within those 10 minutes
+                var modifiedDate:Date!
+                var triggerDate:DateComponents!
+                var trigger:UNCalendarNotificationTrigger!
+                // If there is more than an hour left, set the alert to be an hour prior to the game
+                if date.hours(from: currentDate) > 0{
+                    content.body = "1 hour until the match begins. " + titleString + " at " + timeOutputString + "."
+                    //                content.body = "1 hour until the match begins."
+                    modifiedDate = Calendar.current.date(byAdding: .hour, value: -1, to: date)
+                    triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: modifiedDate)
+                    trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                    defaults.setValue(true, forKey: notificationId)
                 }
-            })
+                // If there is less than an hour left, but more than 10 minutes before the match begins, set the alert to be an hour prior to the game
+                else if date.minutes(from: currentDate) > 10{
+                    content.body = "10 minutes until the match begins. " + titleString + " at " + timeOutputString + "."
+                    modifiedDate = Calendar.current.date(byAdding: .minute, value: -10, to: date)
+                    triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: modifiedDate)
+                    trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                    defaults.setValue(true, forKey: notificationId)
+                }
+                // Otherwise the user has less than 10 minutes meaning there is no reason to set a notification
+                else{
+                    content.body = "The match is in less than 10 minutes. " + titleString + " at " + timeOutputString + "."
+                    defaults.setValue(true, forKey: notificationId)
+                    trigger = nil
+                }
+                let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+                    if let error = error {
+                        // Something went wrong
+                        print(error)
+                    }
+                })
+            }
         }
     }
     
@@ -189,7 +198,7 @@ extension UITableViewController{
             application.open(webURL as URL)
         }
     }
-
+    
     // This function will take the user to a Twitter account given the handle represented by a String
     func goToTwitterAccount(twitterUserID:String) {
         // appURL is the url for the Twitter app in particular
@@ -206,7 +215,7 @@ extension UITableViewController{
             application.open(webURL as URL)
         }
     }
-
+    
     // This function will simply redirect the user to the Google Spreadsheet for WNHL Fantasy in browser.
     func goToFantasySpreadsheet(){
         let webURL = NSURL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true")!
@@ -221,7 +230,7 @@ extension UITableViewController{
         let dateFromString = dateFormatter.date(from: dateStr)
         return dateFromString!
     }
-
+    
 }
 
 // This extension will allow all UITableViewCells, even the customs ones made, use the functions within
