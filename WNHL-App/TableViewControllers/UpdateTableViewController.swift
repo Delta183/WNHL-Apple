@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Network
+import Alamofire
 
 class UpdateTableViewController: UITableViewController {
     
@@ -80,5 +82,26 @@ class UpdateTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        monitorNetwork()
+    }
+    
+    func monitorNetwork(){
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                DispatchQueue.main.async {
+                    //do nothing
+                    print("connected")
+                }
+            }
+            else {
+                DispatchQueue.main.async {
+                    self.showToast(message: "No Internet Connection. Try Again Later", font: .systemFont(ofSize: 12))
+                    self.parent?.removeSpinner()
+                }
+            }
+        }
+        let queue = DispatchQueue(label: "Network")
+        monitor.start(queue: queue)
     }
 }

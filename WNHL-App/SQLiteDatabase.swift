@@ -36,8 +36,16 @@ class SQLiteDatabase {
     let goals = Expression<Int64>("goals")
     let assists = Expression<Int64>("assists")
     let points = Expression<Int64>("points")
-    //let stats =
-    //let data =
+    let data = Expression<String>("data")
+    let stats = Expression<String>("stats")
+    let pos = Expression<String>("pos")
+    let gp = Expression<String>("gp")
+    let w = Expression<String>("w")
+    let l = Expression<String>("l")
+    let tie = Expression<String>("t")
+    let pts = Expression<String>("pts")
+    let gf = Expression<String>("gf")
+    let ga = Expression<String>("ga")
     
     //Table Names
     let venues = Table("Venues")
@@ -106,8 +114,15 @@ class SQLiteDatabase {
             //Create Standings Table
             try db.run(standings.create(ifNotExists: true) { t in
                 t.column(id, primaryKey: true)
-                t.column(seasonID)
-                //t.column(data)
+                t.column(pos)
+                t.column(name)
+                t.column(gp)
+                t.column(w)
+                t.column(l)
+                t.column(tie)
+                t.column(pts)
+                t.column(gf)
+                t.column(ga)
             })
         }
         catch {

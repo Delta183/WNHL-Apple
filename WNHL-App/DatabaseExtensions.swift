@@ -374,6 +374,25 @@ extension UIViewController {
         return ""
     }
     
+    func getStandings() {
+        print("GET STANDINGS")
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let standings = Table("Standings")
+            let season = Expression<String>("seasonID")
+            let data = Expression<String>("data")
+            for standing in try db.prepare(standings) {
+                print("Season: " , standing[season] , "Data: " , standing[data])
+            }
+            //return Int64(try db.scalar(standings.count))
+        }
+        catch {
+            print(error)
+        }
+        //return 0
+    }
+    
     func getPlayerIDFromPlayerName(playerName: String) -> Int64 {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -466,5 +485,61 @@ extension UIViewController {
             print(error)
         }
         return "N/A"
+    }
+    
+    func getStandingsFromTeamId(teamId: Int64) -> [String] {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        var returnArray: [String] = []
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let name = Expression<String>("name")
+            let gp = Expression<String?>("gp")
+            let w = Expression<String?>("w")
+            let l = Expression<String?>("l")
+            let t = Expression<String?>("t")
+            let ga = Expression<String?>("ga")
+            let gf = Expression<String?>("gf")
+            let pts = Expression<String?>("pts")
+            let pos = Expression<String?>("pos")
+            let id = Expression<Int64>("id")
+            //Table Names
+            let standings = Table("Standings")
+            for team in try db.prepare(standings.filter(id == teamId)){
+                returnArray.append(team[pos] ?? "0")
+                returnArray.append(team[name])
+                returnArray.append(team[gp] ?? "0")
+                returnArray.append(team[w] ?? "0")
+                returnArray.append(team[l] ?? "0")
+                returnArray.append(team[t] ?? "0")
+                returnArray.append(team[pts] ?? "0")
+                returnArray.append(team[gf] ?? "0")
+                returnArray.append(team[ga] ?? "0")
+            }
+        }
+        catch {
+            print(error)
+        }
+        return returnArray
+    }
+}
+
+extension Service {
+    func getTeamIds(seasonId:String) -> [Int64] {
+        var teamArray:[Int64] = []
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let id = Expression<Int64>("id")
+            let seasonID = Expression<String>("seasonID")
+            //Table Names
+            let teams = Table("Teams")
+            for team in try db.prepare(teams.select(id).filter(seasonID.like("%" + seasonId + "%"))){
+                teamArray.append(team[id])
+            }
+        }
+        catch {
+            print(error)
+        }
+        return teamArray
     }
 }

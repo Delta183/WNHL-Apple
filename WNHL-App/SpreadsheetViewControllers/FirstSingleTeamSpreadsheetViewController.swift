@@ -16,12 +16,11 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
     let reuseIdentifier2 = "headerCell"
     var teamId:Int64!
     var fontSize:CGFloat!
-    var headerItems = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA"]
-    var data = ["1", "Merritt Islanders", " 11", "6", "2", "3", "15", "50", "35",]
+    var data: [String] = []
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     
     
-    //var data: [String] = []
+    var headerItems: [String] = ["Pos","Team","GP","W","L","T","PTS","GF","GA"]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == singleTeamCollectionView{
@@ -63,39 +62,26 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
         if collectionView == singleTeamCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! TeamSpreadsheetCollectionViewCell1
             cell.dataLabel1.text = self.data[indexPath.row]
+            cell.backgroundColor = UIColor.white
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! headerFirstSingleTeam
             cell.headerLabel.text = self.headerItems[indexPath.row]
             cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            cell.backgroundColor = UIColor.white
             return cell
         }
        
     }
     
     override func viewDidLoad() {
-        do {
-//            let db = try Connection("\(self.path)/wnhl.sqlite3")
-//
-//            for player in try db.prepare(players){
-//                if player[currTeam] == 1824 {   //sub 1842 for teamID passed from button
-//                    data.append(player[name])
-//                    data.append(String(player[points]))
-//                    data.append(String(player[goals]))
-//                    data.append(String(player[assists]))
-//                }
-//            }
-        }
-        catch {
-            print(error)
-        }
+        data = getStandingsFromTeamId(teamId: teamId)
         super.viewDidLoad()
         singleTeamCollectionView?.delegate = self;
         singleTeamCollectionView?.dataSource = self;
         headerCollectionView?.delegate = self;
         headerCollectionView?.dataSource = self;
-
-        
     }
+
 }

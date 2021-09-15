@@ -62,8 +62,16 @@ class Service {
     let goals = Expression<Int64?>("goals")
     let assists = Expression<Int64?>("assists")
     let points = Expression<Int64?>("points")
-    //let stats =
-    //let data =
+    let stats = Expression<String?>("stats")
+    let data = Expression<String?>("data")
+    let gp = Expression<String?>("gp")
+    let w = Expression<String?>("w")
+    let l = Expression<String?>("l")
+    let t = Expression<String?>("t")
+    let ga = Expression<String?>("ga")
+    let gf = Expression<String?>("gf")
+    let pts = Expression<String?>("pts")
+    let pos = Expression<String?>("pos")
     
     //Table Names
     let venues = Table("Venues")
@@ -152,7 +160,7 @@ class Service {
     func updateStandings(tableView: UITableViewController){
         self.tableView = tableView
         updateRequests = 1
-        standingsRequest(endPoint: "teams/", update: true)
+        standingsRequest(endPoint: "tables/", update: true)
     }
     
     func updateApp(tableView: UITableViewController){
@@ -339,7 +347,9 @@ class Service {
      Retrieves the Standings Data from the WNHL Wordpress site and inserts it into the DB
      */
     func standingsRequest(endPoint: String, update: Bool){
-        AF.request(self.baseUrl+endPoint, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+        let currSeason = self.sharedPref.integer(forKey: "currSeason")
+        let prevSeason = self.sharedPref.integer(forKey: "prevSeason")
+        AF.request(self.baseUrl+endPoint+"?seasons="+String(currSeason), method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
             guard let data = responseData.data else{
                 return
@@ -348,42 +358,105 @@ class Service {
                 if update {
                     self.updateRequests-=1
                 }
-                else{
+                else {
                     self.topRequests-=1
                 }
                 let standings = try JSONDecoder().decode([Standings].self, from: data)
-                for standing in standings {
-                    do{
-                        let db = try Connection("\(self.path)/wnhl.sqlite3")
-                        if update {
-                            let row = self.standings.filter(self.id == Int64(standing.id))
-                            try db.run(row.update(self.seasonID <- "\(standing.seasons)"))
+                if standings.isEmpty {
+                    AF.request(self.baseUrl+endPoint+"?seasons="+String(prevSeason), method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+                        (responseData) in
+                        guard let data = responseData.data else{
+                            return
                         }
-                        else {
-                            try db.run(self.standings.insertMany([[self.id <- Int64(standing.id), self.seasonID <- "\(standing.seasons)"]]))
+                        do {
+                            let standings = try JSONDecoder().decode([Standings].self, from: data)
+                            let teamId = self.getTeamIds(seasonId: String(prevSeason))
+                            for standing in standings {
+                                if standing.title?["rendered"] != "" {
+                                    for team in teamId {
+                                        do {
+                                            let db = try Connection("\(self.path)/wnhl.sqlite3")
+                                            let dataArray = standing.data?[String(team)]
+                                            if update {
+                                                let row = self.standings.filter(self.id == team)
+                                                try db.run(row.update(self.name <- dataArray?.name, self.pos <- dataArray?.pos, self.gp <- dataArray?.gp, self.w <- dataArray?.w, self.l <- dataArray?.l, self.t <- dataArray?.ties, self.pts <- dataArray?.pts, self.gf <- dataArray?.gf, self.ga <- dataArray?.ga))
+                                            }//if
+                                            else {
+                                                try db.run(self.standings.insertMany([[self.id <- team, self.name <- dataArray?.name, self.pos <- dataArray?.pos, self.gp <- dataArray?.gp, self.w <- dataArray?.w, self.l <- dataArray?.l, self.t <- dataArray?.ties, self.pts <- dataArray?.pts, self.gf <- dataArray?.gf, self.ga <- dataArray?.ga]]))
+                                            }//else
+                                        }//do
+                                        catch {
+                                            print(error)
+                                        }//catch
+                                    }//for
+                                }//if
+                            }//for
+                        }//do
+                        catch {
+                            print(error)
+                        }//catch
+                    }//afrequest
+                    if update {
+                        if self.updateRequests == 0 {
+                            self.tableView.hideSpinner()
                         }
                     }
-                    catch {
-                        print("ERROR:", error)
+                    else {
+                        if self.topRequests == 0 {
+                            self.startLowerRequests()
+                        }
+                    }
+                }//if
+                else {
+                    let teamId = self.getTeamIds(seasonId: String(currSeason))
+                    for standing in standings {
+                        if standing.title?["rendered"] != "" {
+                            for team in teamId {
+                                do {
+                                    let db = try Connection("\(self.path)/wnhl.sqlite3")
+                                    let dataArray = standing.data?[String(team)]
+                                    if update {
+                                        let row = self.standings.filter(self.id == team)
+                                        try db.run(row.update(self.name <- dataArray?.name, self.pos <- dataArray?.pos, self.gp <- dataArray?.gp, self.w <- dataArray?.w, self.l <- dataArray?.l, self.t <- dataArray?.ties, self.pts <- dataArray?.pts, self.gf <- dataArray?.gf, self.ga <- dataArray?.ga))
+                                    }//if
+                                    else {
+                                        try db.run(self.standings.insertMany([[self.id <- team, self.name <- dataArray?.name, self.pos <- dataArray?.pos, self.gp <- dataArray?.gp, self.w <- dataArray?.w, self.l <- dataArray?.l, self.t <- dataArray?.ties, self.pts <- dataArray?.pts, self.gf <- dataArray?.gf, self.ga <- dataArray?.ga]]))
+                                    }//else
+                                }//do
+                                catch {
+                                    print(error)
+                                }//catch
+                            }//for
+                        }//if
+                    }//for
+                }//afrequest-else
+                if update {
+                    if self.updateRequests == 0 {
+                        self.tableView.hideSpinner()
                     }
                 }
-            }
-            catch{
-                print("Error decoding == \(error)")
-            }
-            if update {
-                if self.updateRequests == 0 {
-                    print("line 359")
-                    self.tableView.hideSpinner()
+                else {
+                    if self.topRequests == 0 {
+                        self.startLowerRequests()
+                    }
                 }
-            }
-            else {
-                if self.topRequests == 0 {
-                    self.startLowerRequests()
-                }
+            }//do
+            catch {
+                print(error)
             }
         }
     }//standingsRequest
+    
+    func jsonToString(json: AnyObject) -> String{
+        do {
+            let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) // first of all convert json to the data
+            guard let convertedString = String(data: data1, encoding: String.Encoding.utf8) else { return "" } // the data will be converted to the string
+            return convertedString
+        } catch let myJSONError {
+            print(myJSONError)
+        }
+        return ""
+    }
     
     /**
      Downloads the last 2 Tables and inserts them into the database. These tables are reliant on the other tables having

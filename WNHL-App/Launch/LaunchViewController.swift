@@ -7,11 +7,13 @@
 
 import UIKit
 import SQLite
+import Reachability
 
 class LaunchViewController: UIViewController {
     
     //Path to DB
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    let reachability = try! Reachability()
     public var downloading: Bool = true
     
     @IBOutlet weak var textLabel: UILabel!
@@ -41,6 +43,11 @@ class LaunchViewController: UIViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reachability.stopNotifier()
+    }
+    
     let loadingIndicator: ProgressView = {
         let progress = ProgressView(colors: [.white], lineWidth: 5)
         progress.translatesAutoresizingMaskIntoConstraints = false
@@ -49,17 +56,33 @@ class LaunchViewController: UIViewController {
     
     // Called once the view is prepared
     override func viewDidAppear(_ animated: Bool) {
-        do_stuff {
-            // Now the "function" has completed.
-        
+        print("view appeared")
+        if(NetworkManager.shared.isConnected() == false){
+            waitForConnection()
+        }
+        else {
+            do_stuff {
+                
+            }
         }
         //self.performSegue(withIdentifier: "mainSegue", sender: self)
         
     }
         
+    func waitForConnection(){
+        textLabel.text = "Waiting for Connection..."
+        while(NetworkManager.shared.isConnected() == false){
+            //do nothing
+        }
+        do_stuff {
+            
+        }
+    }
+    
     func do_stuff(onCompleted: () -> ()) {
+        
         let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/", launchView: self)
-        if isAppAlreadyLaunchedOnce() {
+        if self.isAppAlreadyLaunchedOnce() {
             //Update DB
             service.updateDatabase(updateMain: true)
         }

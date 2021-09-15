@@ -12,6 +12,7 @@ import Foundation
  */
 struct Standings: Decodable {
     let id: Int
+    let title: [String: String]?
     let data: [String: StandingData]?
     let seasons: [Int]
     
@@ -19,12 +20,14 @@ struct Standings: Decodable {
         case id
         case data
         case seasons
+        case title
     }//CodingKeys
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         seasons = try container.decode([Int].self, forKey: .seasons)
+        title = try container.decode([String: String].self, forKey: .title)
         do{
             data = try container.decode([String: StandingData].self, forKey: .data)
         }
@@ -34,7 +37,7 @@ struct Standings: Decodable {
     }//init
     
     struct StandingData: Decodable {
-        let pos: String?
+        let pos: String
         let name: String
         let gp: String
         let w: String
@@ -43,7 +46,7 @@ struct Standings: Decodable {
         let pts: String
         let gf: String
         let ga: String
-        
+                
         enum CodingKeys: String, CodingKey{
             case name
             case gp
