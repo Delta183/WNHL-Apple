@@ -194,7 +194,9 @@ extension UITableViewController{
     }
     
     // This function will take the string given representing a Youtube Channel ID and use it to take the user to it
-    func goToYoutubeChannel(youtubeChannelId:String) {
+    func goToYoutubeChannel() {
+        let youtubeChannelId:String = "UCklG51DEXWN6RodvW8Mj3cg"
+
         // appURL is the url for the Youtube app in particular
         let appURL = NSURL(string: "youtube://www.youtube.com/channel/\(youtubeChannelId)")!
         // webURL is the url for initializing Youtube on the browser.
@@ -210,7 +212,8 @@ extension UITableViewController{
     }
     
     // This function will take the user to a Twitter account given the handle represented by a String
-    func goToTwitterAccount(twitterUserID:String) {
+    func goToTwitterAccount() {
+        let twitterUserID:String = "WNHL2"
         // appURL is the url for the Twitter app in particular
         let appURL = NSURL(string: "twitter://user?screen_name=\(twitterUserID)")!
         // webURL is the url for the browser variant of Twitter

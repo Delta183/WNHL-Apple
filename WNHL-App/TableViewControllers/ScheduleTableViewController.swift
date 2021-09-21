@@ -13,11 +13,6 @@ class ScheduleTableViewController: UITableViewController {
     
     // This IBOutlet variable is a strong variable and is connected to the TableView component in the Schedule View though it is embedded in a container view of said class.
     @IBOutlet var ScheduleTableView: UITableView!
-    // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
-    var ids: [Int64] = []
-    var fontSize:CGFloat = 15
-    // boolean to track the current state of the season
-    var seasonOver = false
     // variable to track the size of the phone screen such that text changes can be made to smaller devices
     let screenSize: CGRect = UIScreen.main.bounds
     // DataFormatters that exist so that the date can be converted to a more human readable format as opposed to how it is stored in the database.
@@ -26,11 +21,18 @@ class ScheduleTableViewController: UITableViewController {
     // Same as above but converting the time to a more human readable format.
     let inputTimeFormatter = DateFormatter()
     let outputTimeFormatter = DateFormatter()
+    // This attribute will allow this class to access the UserDefaults of the application which is effectively persistent preferences from the user.
     let defaults = UserDefaults.standard
     // The cells are part of a table or collection. In this case it is of a table which is composed of multiple rows and populates downwards much like in the More and Teams page. Much like variables, they must have some identifier or name that is unique.
     let cellReuseIdentifier = "scheduleCell"
     // This is responsible for the height of the spacing between each row in pixels
     let cellSpacingHeight: CGFloat = 30
+    // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
+    var ids: [Int64] = []
+    var fontSize:CGFloat = 15
+    // boolean to track the current state of the season
+    var seasonOver = false
+
     
     // These are functions that act like attributes for the Table View. This responsible for the number of sections, for our purposes, all we need is 1
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -78,17 +80,24 @@ class ScheduleTableViewController: UITableViewController {
         
         // Add actions for the alert when it is called. Directions and Set Reminder have default styling
         alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+            
             // We will have to make a function that could translate these to the exact locations
             // *****
             self.showLocationOnMaps(primaryContactFullAddress: currentCell.locationLabel.text!)
+            
         }))
-        // This action will be responsible for the Set Reminder and Cancel Reminder.
+        // This action will be responsible for the Set Reminder and Cancel Reminder option of the alert
         alert.addAction(UIAlertAction(title: reminderTitle, style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+            // Check if the boolean in the defaults for the gameId (as a string) is true as that would mean it is already set.
             if self.defaults.bool(forKey: gameIdString) == true{
+                // As the title of the alert would be changed to say Cancel Reminder here, pressing it would lead to deleting the notification
                 self.deleteNotification(notificationId: gameIdString)
+                // and furthermore settting the value to the same key to be false to denote it as not currently scheduled
                 self.defaults.setValue(false, forKey: gameIdString)
             }
+            // If the boolean in that defaults is false or nil, it means the game is not scheduled anymore (false) or never was to begin with (nil)
             else{
+                // In that case, schedule the game given the dateTime object as a string, the id of the game and the titleString to provide information of which teams this game concerns.
                 let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
                 self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
             }
@@ -102,7 +111,7 @@ class ScheduleTableViewController: UITableViewController {
     
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Instantiate the cell as ScheduleTableViewCell object
+        // Instantiate the cell as the custom TableViewCell made for this collection view.
         let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
         // If the screensize is smaller than that of an iPhone 11, the font size will change to reflect that.
         if screenSize.width < 414 {
@@ -161,9 +170,14 @@ class ScheduleTableViewController: UITableViewController {
         outputDateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         inputTimeFormatter.dateFormat = "HH:mm:ss"
         outputTimeFormatter.dateFormat = "h:mm a"
+        
+        // Populate the array with the ids of the games
         getGameIds()
+        // Check all previously set notifications if there are in the past and cancel them if they were in the case and also remove them from memory.
         deletePastSetNotifications(idList: self.ids)
+        // Check all the games of the shedule and check for newer games, if they exist, add them based off the notifications preferences
         updateScheduledGamesFromPreferences()
+        // Set the delegate and dataSource for the schedule table to be that of the current view.
         ScheduleTableView.delegate = self
         ScheduleTableView.dataSource = self
         // As the app has already launched once, this can be set as true.
@@ -172,9 +186,14 @@ class ScheduleTableViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    /**
+     This function interacts with the database and queries all the game ids from the Games table and populates the ids array of ScheduleTableViewController with all the game ids such that the table view's cells can be created.
+     */
     func getGameIds(){
+        // Get the current time as an object by instantiating a Date object.
         let currentTime = Date()
         let dateFormatter = ISO8601DateFormatter()
+        // Create the path that connects to the database that will be appended to a larger string.
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
             let db = try Connection("\(path)/wnhl.sqlite3")
@@ -193,8 +212,10 @@ class ScheduleTableViewController: UITableViewController {
                     ids.append(game[id])
                 }
             }
+            // If the ids array is empty, it means all games have already happened which means the season is over.
             if ids.isEmpty {
                 seasonOver = true
+                // In that case, add all the games of that season such they can all be reviewed.
                 for game in try db.prepare(games){
                     ids.append(game[id])
                 }

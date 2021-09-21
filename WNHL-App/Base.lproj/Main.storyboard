@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BKQ-co-krb">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -15,23 +14,23 @@
             <objects>
                 <viewController title="HomeViewController" id="BYZ-38-t0r" customClass="HomeViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-Wk-Vbx">
-                                <rect key="frame" x="107" y="50" width="200" height="200"/>
+                                <rect key="frame" x="107" y="6" width="386" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="E4S-IL-O3K"/>
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcE-Zx-QMU">
-                                <rect key="frame" x="20" y="326" width="374" height="487"/>
+                                <rect key="frame" x="20" y="282" width="560" height="269"/>
                                 <connections>
                                     <segue destination="rO3-ww-gRO" kind="embed" id="SO0-Oi-4aW"/>
                                 </connections>
                             </containerView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2020-2021" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ois-um-JKd">
-                                <rect key="frame" x="115" y="258" width="184" height="24"/>
+                                <rect key="frame" x="115" y="214" width="370" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES"/>
@@ -44,7 +43,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Regular Season" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hZR-o2-idI">
-                                <rect key="frame" x="85" y="283" width="244" height="35"/>
+                                <rect key="frame" x="85" y="239" width="430" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES"/>
@@ -121,7 +120,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lincoln Street Legends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qy-au-wNH">
-                                            <rect key="frame" x="0.0" y="80" width="374" height="25"/>
+                                            <rect key="frame" x="-4" y="80" width="382" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="Fbr-Oc-V7s"/>
                                             </constraints>
@@ -139,7 +138,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H5b-b3-BKq">
-                                            <rect key="frame" x="2" y="0.0" width="80" height="80"/>
+                                            <rect key="frame" x="-2" y="0.0" width="80" height="80"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="2ab-OA-tNk"/>
                                             </constraints>
@@ -197,22 +196,22 @@
             <objects>
                 <viewController id="BKQ-co-krb" customClass="LaunchViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aia-3l-YNH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="WNHL_Logo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="oDY-sz-00s">
-                                <rect key="frame" x="79" y="320" width="256" height="256"/>
+                                <rect key="frame" x="79" y="214" width="442" height="171.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="htN-qK-ZKj">
-                                <rect key="frame" x="177" y="684" width="60" height="60"/>
+                                <rect key="frame" x="177" y="422" width="246" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="wkB-St-cPj"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking for Updates..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vA-AfK">
-                                <rect key="frame" x="96" y="779" width="222" height="24"/>
+                                <rect key="frame" x="189" y="517" width="222" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -267,13 +266,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZgR-ne-1J5">
-                                <rect key="frame" x="107" y="50" width="200" height="200"/>
+                                <rect key="frame" x="107" y="6" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="j9H-yV-WFq"/>
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IcD-aS-3DA">
-                                <rect key="frame" x="20" y="258" width="374" height="484"/>
+                                <rect key="frame" x="20" y="214" width="374" height="528"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <connections>
                                     <segue destination="u52-tc-z1s" kind="embed" id="TpU-3y-O7J"/>
@@ -308,7 +307,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="470" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0iY-Xi-Eq4">
-                                <rect key="frame" x="0.0" y="44" width="374" height="440"/>
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="484"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -384,7 +383,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="Bor-Ni-3uj" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="Bor-Ni-3uj" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="36" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SSQ-C7-kOW">
@@ -471,17 +470,17 @@
             <objects>
                 <viewController title="TeamsViewController" id="U6k-m7-M30" customClass="TeamsViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4rF-zU-LLp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="gOo-Kg-X3W">
-                                <rect key="frame" x="107" y="50" width="200" height="200"/>
+                                <rect key="frame" x="107" y="6" width="386" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="N4m-5G-pv4"/>
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sB-Nz-68R">
-                                <rect key="frame" x="0.0" y="258" width="414" height="555"/>
+                                <rect key="frame" x="0.0" y="214" width="600" height="337"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <connections>
                                     <segue destination="bQ6-4k-PXn" kind="embed" id="jvg-PK-W7F"/>
@@ -654,7 +653,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edY-vS-jll">
-                                <rect key="frame" x="20" y="44" width="55.5" height="40"/>
+                                <rect key="frame" x="20" y="0.0" width="55.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="oi1-v4-bRb"/>
                                 </constraints>
@@ -671,20 +670,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="statImage2" image="waveform.path.ecg" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yvP-KJ-6jK">
-                                <rect key="frame" x="297" y="92" width="40" height="45"/>
+                                <rect key="frame" x="297" y="48" width="40" height="45"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="wCT-l9-v8H"/>
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZ4-Fr-sYm">
-                                <rect key="frame" x="20" y="180" width="374" height="210"/>
+                                <rect key="frame" x="20" y="136" width="374" height="254"/>
                                 <connections>
                                     <segue destination="gsz-oZ-Oq4" kind="embed" id="ZNo-Ts-g47"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UD-Qd-kou">
-                                <rect key="frame" x="20" y="150" width="374" height="30"/>
+                                <rect key="frame" x="20" y="106" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ss3-qA-C5C"/>
                                 </constraints>
@@ -702,13 +701,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICV-iW-EcM">
-                                <rect key="frame" x="20" y="422" width="374" height="210"/>
+                                <rect key="frame" x="20" y="422" width="374" height="244"/>
                                 <connections>
                                     <segue destination="IZr-Tg-QD6" kind="embed" id="I9O-Av-GJx"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3v-99-bAI">
-                                <rect key="frame" x="19" y="639" width="374" height="30"/>
+                                <rect key="frame" x="19" y="673" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ylk-F1-kvN"/>
                                 </constraints>
@@ -717,7 +716,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="statImage1" image="waveform.path.ecg" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yA2-sb-yBl">
-                                <rect key="frame" x="78" y="92" width="40" height="45"/>
+                                <rect key="frame" x="78" y="48" width="40" height="45"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45.5" id="Jwp-9A-Q1r"/>
@@ -725,7 +724,7 @@
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oBN-oP-fDh">
-                                <rect key="frame" x="20" y="666" width="374" height="210"/>
+                                <rect key="frame" x="20" y="700" width="374" height="176"/>
                                 <connections>
                                     <segue destination="R2w-IT-hjS" kind="embed" id="ifR-SS-gfF"/>
                                 </connections>
@@ -1113,14 +1112,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="mAA-1i-rGT">
-                                <rect key="frame" x="107" y="50" width="200" height="200"/>
+                                <rect key="frame" x="107" y="6" width="200" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="y62-if-NJU"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTIFICATIONS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZd-a1-bTy">
-                                <rect key="frame" x="0.0" y="258" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="214" width="414" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FzK-yp-WPX"/>
                                 </constraints>
@@ -1129,7 +1128,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-QO-qzB">
-                                <rect key="frame" x="20" y="44" width="55.5" height="40"/>
+                                <rect key="frame" x="20" y="0.0" width="55.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kz0-dd-JpB"/>
                                 </constraints>
@@ -1140,13 +1139,13 @@
                                 </state>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-Cf-OUj">
-                                <rect key="frame" x="0.0" y="372" width="414" height="446"/>
+                                <rect key="frame" x="0.0" y="328" width="414" height="490"/>
                                 <connections>
                                     <segue destination="2FJ-kR-SIr" kind="embed" identifier="notificationTableSegue" id="cyb-qa-lUp"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Team.." textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOv-2c-983">
-                                <rect key="frame" x="0.0" y="296" width="414" height="68"/>
+                                <rect key="frame" x="0.0" y="252" width="414" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="68" id="5Zd-5f-4Ec"/>
                                 </constraints>
@@ -1265,7 +1264,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UPDATE APP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwL-QJ-rCj">
-                                <rect key="frame" x="0.0" y="258" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="214" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="sRZ-jF-ihC"/>
                                 </constraints>
@@ -1274,7 +1273,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check for updates from the WNHL Site." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdq-s9-iwJ">
-                                <rect key="frame" x="0.0" y="302" width="414" height="38"/>
+                                <rect key="frame" x="0.0" y="258" width="414" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="PvF-q5-7zN"/>
                                 </constraints>
@@ -1283,13 +1282,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oga-mc-qHa">
-                                <rect key="frame" x="0.0" y="348" width="414" height="319"/>
+                                <rect key="frame" x="0.0" y="304" width="414" height="363"/>
                                 <connections>
                                     <segue destination="9x2-YO-PQh" kind="embed" id="8t0-EV-YRg"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gM-9U-KnH">
-                                <rect key="frame" x="20" y="44" width="55.5" height="37"/>
+                                <rect key="frame" x="20" y="0.0" width="55.5" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="6Zf-aS-FQ6"/>
                                 </constraints>
@@ -1300,7 +1299,7 @@
                                 </state>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="TMd-Te-f6W">
-                                <rect key="frame" x="107" y="50" width="200" height="200"/>
+                                <rect key="frame" x="107" y="6" width="200" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="2IF-0Q-zks"/>
@@ -1353,10 +1352,10 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j8N-02-EF9">
-                                <rect key="frame" x="0.0" y="242" width="414" height="920"/>
+                                <rect key="frame" x="0.0" y="198" width="414" height="998"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIB-vO-McF">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="920"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="998"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Egi-2x-2mW">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1050"/>
@@ -1435,7 +1434,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPg-Pf-0WR">
-                                <rect key="frame" x="20" y="44" width="55.5" height="37"/>
+                                <rect key="frame" x="20" y="0.0" width="55.5" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="h7S-m0-S4O"/>
                                 </constraints>
@@ -1446,7 +1445,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lincoln Street Legends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcR-QH-2n6">
-                                <rect key="frame" x="20" y="215" width="374" height="31"/>
+                                <rect key="frame" x="20" y="171" width="374" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="bsx-Oc-eeh"/>
                                 </constraints>
@@ -1899,13 +1898,13 @@
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9N-Jq-m48">
-                                <rect key="frame" x="0.0" y="243" width="414" height="619"/>
+                                <rect key="frame" x="0.0" y="243" width="414" height="653"/>
                                 <connections>
                                     <segue destination="TQS-yl-Cb1" kind="embed" identifier="playerTableSegue" id="J2Q-8n-xrJ"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a Player below..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwK-l6-2Sa">
-                                <rect key="frame" x="0.0" y="162" width="414" height="22"/>
+                                <rect key="frame" x="0.0" y="118" width="414" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="KgV-ML-FPY"/>
                                 </constraints>
@@ -1923,7 +1922,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B00-ji-PPV">
-                                <rect key="frame" x="20" y="44" width="68" height="40"/>
+                                <rect key="frame" x="20" y="0.0" width="68" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dSP-yh-wXR"/>
                                 </constraints>
@@ -2024,7 +2023,7 @@
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <connections>
                                     <outlet property="chevronImage" destination="KB0-1j-rD8" id="OC4-bf-bky"/>
-                                    <outlet property="playerText" destination="Vxq-5n-Ihf" id="uiM-Ff-tqC"/>
+                                    <outlet property="playerNameLabel" destination="Vxq-5n-Ihf" id="uiM-Ff-tqC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2047,18 +2046,18 @@
             <objects>
                 <viewController id="1qo-wa-EjK" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aiq-Ts-oWx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="yf6-t4-Hs8">
-                                <rect key="frame" x="107" y="50" width="200" height="200"/>
+                                <rect key="frame" x="107" y="6" width="386" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="aMQ-KM-XaT"/>
                                 </constraints>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kn-SZ-mau">
-                                <rect key="frame" x="0.0" y="258" width="414" height="555"/>
+                                <rect key="frame" x="0.0" y="214" width="600" height="337"/>
                                 <connections>
                                     <segue destination="4f9-nc-ANL" kind="embed" id="h7D-mD-PVB"/>
                                 </connections>
@@ -2088,11 +2087,11 @@
             <objects>
                 <viewController storyboardIdentifier="SpreadsheetViewController" title="SpreadsheetViewController" automaticallyAdjustsScrollViewInsets="NO" id="LXb-M8-CbQ" customClass="StandingsSpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cht-1H-4oI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m2t-W7-kaz">
-                                <rect key="frame" x="0.0" y="24" width="414" height="838"/>
+                                <rect key="frame" x="0.0" y="24" width="600" height="576"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="rJQ-MT-DAV">
                                     <size key="itemSize" width="36" height="24"/>
@@ -2101,7 +2100,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="W73-Na-1mv" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="W73-Na-1mv" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="36" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LoF-jx-zrA">
@@ -2134,7 +2133,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xs2-e6-gof">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="24"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="jDs-rV-6KA"/>
@@ -2206,20 +2205,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="74a-H5-d5q">
-                                <rect key="frame" x="330" y="57" width="64" height="64"/>
+                                <rect key="frame" x="330" y="13" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="HOM-RZ-kmg"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Hu1-bb-Wvo">
-                                <rect key="frame" x="107" y="57" width="200" height="200"/>
+                                <rect key="frame" x="107" y="13" width="200" height="200"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="vIY-9j-1yA"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sean Boychuck " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwG-eh-3FI">
-                                <rect key="frame" x="0.0" y="262" width="414" height="21"/>
+                                <rect key="frame" x="0.0" y="218" width="414" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="z3L-Kn-UPS"/>
                                 </constraints>
@@ -2228,7 +2227,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Merritt Islanders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBs-ar-CVx">
-                                <rect key="frame" x="0.0" y="287" width="414" height="21"/>
+                                <rect key="frame" x="0.0" y="243" width="414" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Fxp-lT-C5g"/>
                                 </constraints>
@@ -2237,7 +2236,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMk-KM-qVE">
-                                <rect key="frame" x="20" y="308" width="374" height="188"/>
+                                <rect key="frame" x="20" y="264" width="374" height="188"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="188" id="Kcl-Jj-hey"/>
@@ -2248,7 +2247,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5TV-4f-ocs">
-                                <rect key="frame" x="20" y="504" width="374" height="112"/>
+                                <rect key="frame" x="20" y="460" width="374" height="156"/>
                                 <connections>
                                     <segue destination="31G-7b-0lj" kind="embed" id="GvJ-7y-GDb"/>
                                 </connections>
@@ -2300,10 +2299,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WNHL_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="aRS-eM-gwf">
-                                <rect key="frame" x="20" y="92" width="374" height="739"/>
+                                <rect key="frame" x="20" y="48" width="374" height="817"/>
                             </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="feW-p8-MYZ">
-                                <rect key="frame" x="20" y="44" width="55.5" height="40"/>
+                                <rect key="frame" x="20" y="0.0" width="55.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="pSM-Nv-cIl"/>
                                 </constraints>
@@ -2315,7 +2314,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZM-HS-mUd">
-                                <rect key="frame" x="10" y="655" width="394" height="100"/>
+                                <rect key="frame" x="10" y="689" width="394" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="kik-D7-nhz"/>
@@ -2325,19 +2324,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alain Robichaud" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="234-u4-a3Y">
-                                <rect key="frame" x="139" y="655" width="248" height="100"/>
+                                <rect key="frame" x="139" y="689" width="248" height="100"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrs-mz-tPX">
-                                <rect key="frame" x="54" y="654" width="85" height="102"/>
+                                <rect key="frame" x="54" y="688" width="85" height="102"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9O9-0i-hLt">
-                                <rect key="frame" x="31" y="655" width="26" height="100"/>
+                                <rect key="frame" x="31" y="689" width="26" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="26" id="PM3-Vu-tXL"/>
                                 </constraints>
@@ -2392,6 +2391,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bao-vQ-ZLx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fRJ-M0-JXx">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
