@@ -11,6 +11,7 @@ import UIKit
 import SQLite
 
 extension UITableViewController{
+   
     
     // This function will return a string of the image set name given a string of a team name.
     func getImageNameFromTeamId(teamId:Int) -> String {
@@ -355,6 +356,59 @@ extension UITableViewController{
 }
 
 extension UIViewController {
+    
+    func getStandingsInOrder() -> [String]{
+        var returnArray: [String] = []
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let name = Expression<String>("name")
+            let gp = Expression<String?>("gp")
+            let w = Expression<String?>("w")
+            let l = Expression<String?>("l")
+            let t = Expression<String?>("t")
+            let ga = Expression<String?>("ga")
+            let gf = Expression<String?>("gf")
+            let pts = Expression<String?>("pts")
+            let pos = Expression<String?>("pos")
+            let id = Expression<Int64>("id")
+            let standings = Table("Standings")
+            for standing in try db.prepare(standings.order(pos)) {
+                returnArray.append(standing[pos] ?? "0")
+                returnArray.append(standing[name])
+                returnArray.append(standing[gp] ?? "0")
+                returnArray.append(standing[w] ?? "0")
+                returnArray.append(standing[l] ?? "0")
+                returnArray.append(standing[t] ?? "0")
+                returnArray.append(standing[pts] ?? "0")
+                returnArray.append(standing[gf] ?? "0")
+                returnArray.append(standing[ga] ?? "0")
+            }
+        }
+        catch {
+            print(error)
+        }
+        return returnArray
+    }
+    
+    func getTeamIds(seasonId:String) -> [Int64] {
+        var teamArray:[Int64] = []
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let id = Expression<Int64>("id")
+            let seasonID = Expression<String>("seasonID")
+            //Table Names
+            let teams = Table("Teams")
+            for team in try db.prepare(teams.select(id).filter(seasonID.like("%" + seasonId + "%"))){
+                teamArray.append(team[id])
+            }
+        }
+        catch {
+            print(error)
+        }
+        return teamArray
+    }
     
     func getPlayerContentFromId(playerId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String

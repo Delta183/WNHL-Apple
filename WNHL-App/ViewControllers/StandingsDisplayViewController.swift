@@ -11,11 +11,13 @@ class StandingsDisplayViewController: UIViewController {
     // Either call the db on this or get the count of dataArrays
     var titles:[String] = []
     var dataArrays = [[String]]()
+    var data: [String] = []
+    var teams: [Int64] = []
     var data1 = [
         "1", "Welland Undertakers", "30", "14", "9", "7", "35", "189", "161",
         "2", "Welland River Rats", "30", "9", "17", "4", "22", "143", "179",
     ]
-    
+
     var data2 = [
         "1", "Atlas Steelers", "6", "6", "0", "0", "12", "38", "11",
         "2", "Townline Tunnelers", "6", "4", "2", "0", "8", "21", "20",
@@ -23,10 +25,6 @@ class StandingsDisplayViewController: UIViewController {
         "4", "Crown Room Kings", "6", "1", "5", "0", "2", "14", "29",
     ]
     var data3 = [
-        "1", "Atlas Steelers", "28", "18", "7", "3", "39", "166", "97",
-        "2", "Townline Tunnelers", "28", "18", "7", "3", "39", "159", "126",
-        "3", "Crown Room Kings", "28", "10", "13", "5", "25", "121", "141",
-        "4", "Welland Stelcobras", "28", "3", "22", "3", "9", "82", "164",
         "1", "Merritt Islanders", "11", "6", "2", "3", "15", "50", "35",
         "2", "Townline Tunnelers", "11", "5", "2", "4", "14", "30", "26",
         "3", "Lincoln Street Legends", "11", "5", "4", "2", "12", "33", "34",
@@ -46,9 +44,9 @@ class StandingsDisplayViewController: UIViewController {
     @IBOutlet var standingTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataArrays.append(getStandingsInOrder())
         // Call the database functions to populate these here
-        dataArrays = [data1, data2, data3, data4, data5]
-        titles = ["2020-2021","2021-2022","2022-2023","2023-2024","2024-2025"]
+        titles = ["2020-2021"]
     }
 }
 
