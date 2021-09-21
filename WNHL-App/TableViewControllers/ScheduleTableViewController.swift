@@ -130,7 +130,7 @@ class ScheduleTableViewController: UITableViewController {
         // Set the font of the remaining labels as set their text by calling their respective functions from the database extensions
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
-        cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize)
+        cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize - 1.5)
         cell.titleLabel.text = getTitleFromGameId(gameId: self.ids[indexPath.section])
         // Offset by -1 so that the text of the Team vs Team string doesn't truncate.
         cell.titleLabel.font = UIFont.systemFont(ofSize: fontSize - 1)

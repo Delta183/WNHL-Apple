@@ -168,10 +168,20 @@ extension UITableViewController{
     }
     
     func showLocationOnMaps(primaryContactFullAddress: String) {
+        let parts = primaryContactFullAddress.split(separator: "-")
+        var direct:String!
+        if primaryContactFullAddress.contains("Arena") || primaryContactFullAddress.contains("arena") {
+            direct = parts[1] + "+," + parts[0] + ",Canada"
+        }
+        else{
+            direct = parts[1] + "+Arena," + parts[0] + ",Canada"
+
+        }
         let testURL: NSURL = NSURL(string: "maps://maps.apple.com/?q=")!
         if UIApplication.shared.canOpenURL(testURL as URL) {
-            if let address = primaryContactFullAddress.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            if let address = direct.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
                 let directionsRequest: String = "maps://maps.apple.com/?q=" + (address)
+                print(directionsRequest)
                 let directionsURL: NSURL = NSURL(string: directionsRequest)!
                 let application:UIApplication = UIApplication.shared
                 if (application.canOpenURL(directionsURL as URL)) {
