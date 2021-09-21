@@ -8,75 +8,85 @@
 import UIKit
 
 class StandingsDisplayViewController: UIViewController {
-    // Either call the db on this or get the count of dataArrays
+    @IBOutlet var standingTableView: UITableView!
+    let screenSize: CGRect = UIScreen.main.bounds
+    // titles is the array responsible for the title of each spreadsheet on the screen.
     var titles:[String] = []
+    // dataArrays will contain all the arrays for the Standings to populate the view.
     var dataArrays = [[String]]()
-    var data: [String] = []
-    var teams: [Int64] = []
-    var data1 = [
-        "1", "Welland Undertakers", "30", "14", "9", "7", "35", "189", "161",
-        "2", "Welland River Rats", "30", "9", "17", "4", "22", "143", "179",
-    ]
 
-    var data2 = [
-        "1", "Atlas Steelers", "6", "6", "0", "0", "12", "38", "11",
-        "2", "Townline Tunnelers", "6", "4", "2", "0", "8", "21", "20",
-        "3", "Lincoln Street Legends", "6", "1", "5", "0", "2", "12", "25",
-        "4", "Crown Room Kings", "6", "1", "5", "0", "2", "14", "29",
-    ]
-    var data3 = [
+    // The "data" array is what will populate the cells in the spreadsheet.
+    var data = [
+        "1", "Atlas Steelers", "28", "18", "7", "3", "39", "166", "97",
+        "2", "Townline Tunnelers", "28", "18", "7", "3", "39", "159", "126",
+        "3", "Crown Room Kings", "28", "10", "13", "5", "25", "121", "141",
+        "4", "Welland Stelcobras", "28", "3", "22", "3", "9", "82", "164",
         "1", "Merritt Islanders", "11", "6", "2", "3", "15", "50", "35",
         "2", "Townline Tunnelers", "11", "5", "2", "4", "14", "30", "26",
-        "3", "Lincoln Street Legends", "11", "5", "4", "2", "12", "33", "34",
-        "4", "Atlas Steelers", "11", "4", "4", "3", "11", "37", "37",
-        "5", "Dain City Dusters", "11", "3", "6", "2", "8", "23", "33",
-        "6", "Crown Room Kings", "11", "1", "6", "4", "6", "22", "30",
     ]
-    var data4 = [
-        "1", "Welland Undertakers", "6", "3", "2", "1", "7", "24", "21",
-        "2", "Welland River Rats", "6", "2", "3", "1", "5", "23", "26",
-    ]
-    var data5 = [
-        "1", "Welland Undertakers", "30", "14", "9", "7", "35", "189", "161",
-        "2", "Welland River Rats", "30", "9", "17", "4", "22", "143", "179",
-    ]
+ 
 
-    @IBOutlet var standingTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         dataArrays.append(getStandingsInOrder())
         // Call the database functions to populate these here
+        dataArrays = [data]
         titles = ["2020-2021"]
+        super.viewDidLoad()
     }
 }
 
 extension StandingsDisplayViewController:UITableViewDelegate, UITableViewDataSource {
     
+    // Set the number of sections for the table
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
+    
+    // set the number of rows in each section of the table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataArrays.count
+        return 1
     }
     
+    // Build the cell at each index for the provided data in the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Instantiate the cell to be that of the StandingsSpreadsheetViewController which is a TableViewCell object
         let cell:StandingsSpreadsheetViewController = standingTableView.dequeueReusableCell(withIdentifier: "standingsCell", for: indexPath) as! StandingsSpreadsheetViewController
         // spreadsheetData is the 2d array that each array will populate a spreadsheet
         cell.spreadsheetData = dataArrays[indexPath.row]
         // This array will set the label above each spreadsheet given an array
         cell.titleLabel.text = titles[indexPath.row]
+        // noSelectionStyle denotes that there will be no highlight when an object is clicked
         cell.noSelectionStyle()
+        // this will reload the view when all the data is completely loaded in
         cell.reloadCollectionView()
         return cell
     }
     
+    // Sets the height for each row of the table or otherwise a table cell.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let numOfRows = (dataArrays[indexPath.row].count / 9)
         var height = numOfRows * 22
-        if numOfRows >= 6{
-            height = (132)
+        // Given the various different heights of the iPhones, the upper threshold for the max amount of rows to populate a single screen is different
+        // First check if the height denotes that of an 6,7,8 or below.
+        if screenSize.height < 700{
+            if numOfRows > 14 {
+                height = 308
+            }
         }
-        return CGFloat(height + 65)
+        // Otherwise check if the height denotes that of iPhone 12
+        else if screenSize.height < 850 {
+            if numOfRows > 19 {
+                height = 418
+            }
+        }
+        // Lastly, it would be and iPhone 11 or larger which means the most amount of rows can be shown on a screen.
+        else{
+            if numOfRows > 22 {
+                height = 474
+            }
+        }
+        // The 53 offset is to account for the header items and the title for the spreadsheet.
+        return CGFloat(height + 53)
     }
 }
