@@ -12,9 +12,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var yearsLabel: UITextField!
     @IBOutlet weak var scheduleTitleLabel: UITextField!
     override func viewDidLoad() {
-        super.viewDidLoad()
         yearsLabel.text = "1999-2000"
         scheduleTitleLabel.text = "Extreme Season"
+        super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 }

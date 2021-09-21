@@ -10,23 +10,27 @@ import SQLite
 import UserNotifications
 // View Controllers represent each screen, A basic screen is known as a View Controller but a view entirely devoted to say a TableView is a TableViewController. Thus this class is responsible for affecting strictly the table on the Schedule screen.
 class ScheduleTableViewController: UITableViewController {
-    let screenSize: CGRect = UIScreen.main.bounds
-    let inputDateFormatter = DateFormatter()
-    let outputDateFormatter = DateFormatter()
-    let inputTimeFormatter = DateFormatter()
-    let outputTimeFormatter = DateFormatter()
-
-    let defaults = UserDefaults.standard
-    // The cells are part of a table or collection. In this case it is of a table which is composed of multiple rows and populates downwards much like in the More and Teams page. Much like variables, they must have some identifier or name that is unique.
-    let cellReuseIdentifier = "scheduleCell"
-    // This is responsible for the height of the spacing between each row in pixels
-    let cellSpacingHeight: CGFloat = 30
+    
     // This IBOutlet variable is a strong variable and is connected to the TableView component in the Schedule View though it is embedded in a container view of said class.
     @IBOutlet var ScheduleTableView: UITableView!
     // The value that dynamically builds the table is derived from the array here, if you can fetch data from the database and populate it here with the same formatting, then that will accomplish the data population as the rest of the UI formatting lies below.
     var ids: [Int64] = []
     var fontSize:CGFloat = 15
+    // boolean to track the current state of the season
     var seasonOver = false
+    // variable to track the size of the phone screen such that text changes can be made to smaller devices
+    let screenSize: CGRect = UIScreen.main.bounds
+    // DataFormatters that exist so that the date can be converted to a more human readable format as opposed to how it is stored in the database.
+    let inputDateFormatter = DateFormatter()
+    let outputDateFormatter = DateFormatter()
+    // Same as above but converting the time to a more human readable format.
+    let inputTimeFormatter = DateFormatter()
+    let outputTimeFormatter = DateFormatter()
+    let defaults = UserDefaults.standard
+    // The cells are part of a table or collection. In this case it is of a table which is composed of multiple rows and populates downwards much like in the More and Teams page. Much like variables, they must have some identifier or name that is unique.
+    let cellReuseIdentifier = "scheduleCell"
+    // This is responsible for the height of the spacing between each row in pixels
+    let cellSpacingHeight: CGFloat = 30
     
     // These are functions that act like attributes for the Table View. This responsible for the number of sections, for our purposes, all we need is 1
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,25 +58,31 @@ class ScheduleTableViewController: UITableViewController {
     // This function monitors the selection of a row in the table
     // Depending on which game the user selected, then an alert will appear and prompt various choices. Directions, Set Reminder and Cancel
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Get the index of the selected row
         let indexPath = ScheduleTableView.indexPathForSelectedRow
+        // Using that index, get the cell at said row
         let currentCell = tableView.cellForRow(at: indexPath!) as! ScheduleTableViewCell
         
+        // fetch the gameIdString from the ids array
         let gameIdString = String(ids[indexPath!.section])
-        
-        let alertTitle:String = currentCell.titleLabel.text!
-        // Create the alert with Team vs Team String as a title and no message
-        let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
+        // Set a variable such that the name of the alert's first option defaults to Set Reminder since all games are not sent by default.
         var reminderTitle = "Set Reminder"
         if defaults.bool(forKey: gameIdString) == true{
+            // If the game is already set, the alert should say Cancel as to reflect the state of the game.
             reminderTitle = "Cancel Reminder"
         }
+        // Create a stringe object to hold the title of the alert which takes the format of Team vs Team.
+        let alertTitle:String = currentCell.titleLabel.text!
+        // Create the alert with Team vs Team String as a title and no message as the alert needs no description
+        let alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertController.Style.alert)
+        
         // Add actions for the alert when it is called. Directions and Set Reminder have default styling
         alert.addAction(UIAlertAction(title: "Directions", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
             // We will have to make a function that could translate these to the exact locations
             // *****
             self.showLocationOnMaps(primaryContactFullAddress: currentCell.locationLabel.text!)
         }))
-        // somehow delete or disable this when dateTimeString < current
+        // This action will be responsible for the Set Reminder and Cancel Reminder.
         alert.addAction(UIAlertAction(title: reminderTitle, style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
             if self.defaults.bool(forKey: gameIdString) == true{
                 self.deleteNotification(notificationId: gameIdString)
@@ -81,7 +91,6 @@ class ScheduleTableViewController: UITableViewController {
             else{
                 let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
                 self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
-                //self.scheduleLocalTest()
             }
         }))
         // Cancel has unique styling to denote the level of action it is.
@@ -93,33 +102,37 @@ class ScheduleTableViewController: UITableViewController {
     
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Instantiate the cell as ScheduleTableViewCell object
+        let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
+        // If the screensize is smaller than that of an iPhone 11, the font size will change to reflect that.
         if screenSize.width < 414 {
             fontSize = 14
         }
-        // ScheduleTableViewCell is custom made by myself that has 2 image views one text label, highlighting and right clicking the ScheduleTableViewCell and jumping to Definition should display the outlets that the Custom cell class contains.
-        // Think classes in Java, housing a bunch of elements repeatedly used in a singular class.
-        let cell = self.ScheduleTableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleTableViewCell
-        // Once the cell is fetched, modify it as needed
-        // The imageViews and text labels were given unique identifiers being HomeImage and AwayImage for the images and scheduleText for the text label.
-        // In this table, there are multiple sections with 1 row as opposed to 1 section with many rows and as a result, the indexPath is to be tracked by section and not row
+        // Create a date object given the string mathching the format of the inputDateFormatter
         let dateInputString = inputDateFormatter.date(from: getDateStringFromTeamId(gameId: self.ids[indexPath.section]))
+        // Afterwards, create a string that is converted from the previous format to the desired format of the outputDateFormatter
         let dateOutputString:String = outputDateFormatter.string(from: dateInputString!)
-        cell.dateLabel.text = dateOutputString
-        // Set the font of the dateLabel programmatically with a font of 15
-        cell.dateLabel.font = UIFont.systemFont(ofSize: 14)
-        
+        // Same as above but for the time object.
         let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
         let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
+        
+        // Set the data label to but the converted and more human readable date string.
+        cell.dateLabel.text = dateOutputString
+        // Set the font of the dateLabel programmatically with a font of 14
+        cell.dateLabel.font = UIFont.systemFont(ofSize: 14)
+        // Check if the season is over to change the values for the pointsLabel. If the game has finished, display the score, otherwise set the time as the game is upcoming.
         if seasonOver {
             cell.pointsLabel.text = getGameScoreString(gameId: self.ids[indexPath.section])
         }
         else {
             cell.pointsLabel.text = timeOutputString
         }
+        // Set the font of the remaining labels as set their text by calling their respective functions from the database extensions
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
         cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize)
         cell.titleLabel.text = getTitleFromGameId(gameId: self.ids[indexPath.section])
+        // Offset by -1 so that the text of the Team vs Team string doesn't truncate.
         cell.titleLabel.font = UIFont.systemFont(ofSize: fontSize - 1)
         
         // Set the alignment of the text with respect to the placements of the labels
@@ -128,16 +141,13 @@ class ScheduleTableViewController: UITableViewController {
         cell.locationLabel.textAlignment = NSTextAlignment.center
         cell.titleLabel.textAlignment = NSTextAlignment.center
         
-        // Setting the images of the Home Team and Away teams Logos
-        
-        // The extension functions for this needs to be changed to the query function when possible
-        // *****
+        // Setting the images of the Home Team and Away teams Logos by calling their image from the database
         cell.HomeImage.image = UIImage(named: getImageNameFromTeamId(teamId: getHomeIdFromGameId(gameId: self.ids[indexPath.section])))
         cell.AwayImage.image = UIImage(named: getImageNameFromTeamId(teamId: getAwayIdFromGameId(gameId: self.ids[indexPath.section])))
         // This makes it so that the selection of cells in the table views does not have a graphical effect.
         cell.noSelectionStyle()
+        // set the background color of the table cells to be wite
         cell.backgroundColor = UIColor.white
-        cell.layer.borderWidth = 0
         // Corner radius is used to make the edges much rounder than normal.
         cell.layer.cornerRadius = 24
         cell.clipsToBounds = true
@@ -146,6 +156,7 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        // Set the format for the input and output of the date formatter objects
         inputDateFormatter.dateFormat = "yyyy-MM-dd"
         outputDateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         inputTimeFormatter.dateFormat = "HH:mm:ss"
@@ -194,6 +205,3 @@ class ScheduleTableViewController: UITableViewController {
         }
     }
 }
-
-// This is how you make a function header in Swift
-// func methodName(parameterNAme:Type) -> return Type

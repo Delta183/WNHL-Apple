@@ -8,11 +8,14 @@
 import UIKit
 
 class SinglePlayerBackViewController: UIViewController {
-    let screenSize: CGRect = UIScreen.main.bounds
+    // Connecting the components of the view to the class.
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var playerTeamLabel: UILabel!
     @IBOutlet weak var playerImageView: UIImageView!
+    // Description is linked to the 
     @IBOutlet weak var playerDescription: UITextView!
+    // This attribute tracks the size of the screen such that text formatting can be with respect to said size
+    let screenSize: CGRect = UIScreen.main.bounds
     var playerNameString:String!
     var playerImageURL:String!
     var playerID: Int64!
@@ -20,26 +23,37 @@ class SinglePlayerBackViewController: UIViewController {
     var fontSize:CGFloat = 22
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        playerImageView.layer.cornerRadius = 100
-        playerImageURL = getPlayerImageFromId(playerId: playerID)
+        
+        // Setting the font size with respect to the size of the screen.
         if screenSize.width < 414 {
             descriptionFontSize = 13
             fontSize = 18
         }
+        
+        // Fetch image url given the playerId
+        playerImageURL = getPlayerImageFromId(playerId: playerID)
+        // Afterwards, load the image using the url into a UIImage object.
+        let playerImage = UIImage(url: URL(string: playerImageURL))
+        
+        // Set the text and font of the name, teams and description labels
         playerNameLabel.text = playerNameString + " | # 52"
         playerNameLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        // Fetch the text of the team label and description using the playerID
         playerTeamLabel.text = getPlayerCurrTeamFromId(playerId: playerID)
         playerTeamLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         playerDescription.text = getPlayerContentFromId(playerId: playerID).replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "&#8212;", with: "-").replacingOccurrences(of: "<p style=\"text-align:left;\">", with: "").replacingOccurrences(of: "&#8220;", with: "\"").replacingOccurrences(of: "&#8221;", with: "\"").replacingOccurrences(of: "&#8217;", with: "'")
         playerDescription.font = UIFont.systemFont(ofSize: descriptionFontSize)
-       
-        let playerImage = UIImage(url: URL(string: playerImageURL))
+        
+        // Setting the player image by fetching it from the database using the player Id
         if playerImage == nil{
+        // if the image is nil, then it means the image could not be loaded properly or it did not exist for the player, in which case it defaults to the WNHL Logo.
             playerImageView.image = UIImage(named: "WNHL_Logo")
         }else{
             playerImageView.image = playerImage
         }
+        // Set the corner radius of the image view to make the image view rounded so much so that it appears as a circle.
+        playerImageView.layer.cornerRadius = 100
+        super.viewDidLoad()
     }
     
     // This function is called when any spot on the screen has been touched that isn't an interactable component
