@@ -27,6 +27,8 @@ class StandingsDisplayViewController: UIViewController {
  
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        dataArrays.append(getStandingsInOrder())
         // Call the database functions to populate these here
         dataArrays = [data]
         titles = ["2020-2021"]
