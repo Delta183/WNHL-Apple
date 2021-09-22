@@ -25,6 +25,7 @@ class NotificationsTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     // the indentifier for the cell to modify.
     var reuseIdentifier = "notificationTableCell"
+    var fontSize:CGFloat = 16
     var teams:[String] = []
     
     // MARK: - Table view data source
@@ -91,7 +92,7 @@ class NotificationsTableViewController: UITableViewController {
         // Set the text of the teamLabel to be that of the teamString pulled from the database but capitalized.
         cell.teamLabel.text = teamString.uppercased()
         cell.teamLabel.textColor = UIColor.white
-        cell.teamLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        cell.teamLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         
         // Set the background image of the checkButtons to be that of a square that has an empty inside if the check button is not selected (i.e. false)
         cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)

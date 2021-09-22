@@ -18,7 +18,8 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
     var filteredPlayers: [String]!
     // this is the identifier for the cell that will be modified for the table view.
     let reuseIdentifier = "playerCell"
-    
+    var fontSize:CGFloat = 16
+
     // MARK: - Table view data source
     // Only 1 section will be needed for the table and thus 1 can be entered for the number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,7 +48,7 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
         cell.playerNameLabel.text = filteredPlayers[indexPath.row]
         // Set the text color to be white such that it will appear on the orange background better.
         cell.playerNameLabel.textColor = UIColor.white
-        cell.playerNameLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        cell.playerNameLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         
         // Set the image of the chevron images to be the same for each row as it will always be present.
         cell.chevronImage.image = UIImage(systemName: "chevron.right")

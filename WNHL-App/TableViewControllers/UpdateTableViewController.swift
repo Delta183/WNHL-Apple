@@ -16,6 +16,7 @@ class UpdateTableViewController: UITableViewController {
     // icon names for the system images for each row in addition to a custom one from assets.
     var iconNames = ["person.fill", "calendar", "hockeyStickUpdate", "chart.bar.xaxis", "square.and.arrow.down",]
     var reuseIdentifier = "updateTableCell"
+    var fontSize:CGFloat = 16
     // This is responsible for the height of the spacing between each row in pixels
     let cellSpacingHeight: CGFloat = 10
     // Service object that will provide the ability to interact with the wordpress data for WNHL
@@ -81,7 +82,7 @@ class UpdateTableViewController: UITableViewController {
         // Setting the text from the element at this index in the categories array
         cell.updateLabel.text = categories[indexPath.row]
         cell.updateLabel.textColor = UIColor.white
-        cell.updateLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        cell.updateLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
        
         // Set the imageView called iconImage to be that of an image with the name provided by the element at this index from the iconNames array
         cell.iconImage.image = UIImage(systemName: iconNames[indexPath.row])

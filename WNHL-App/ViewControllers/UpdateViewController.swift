@@ -23,11 +23,11 @@ class UpdateViewController: UIViewController {
         if screenSize.width < 414 {
             fontSize = 24
         }
+        updateAppLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         // Add functionality for when the button is selected from within its bounds
         // It will call the buttonClicked function
         let button = backButton;
         button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
-        updateAppLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         super.viewDidLoad()
     }
     

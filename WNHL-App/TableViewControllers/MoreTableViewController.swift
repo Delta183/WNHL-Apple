@@ -15,6 +15,8 @@ class MoreTableViewController: UITableViewController {
     var iconNames = ["person.fill", "waveform.path.ecg", "youtube_logo","twitter_logo", "star.circle.fill", "bell.fill","clock.arrow.circlepath"]
     // the reuseIdentifier used to refer to the tableView cell that will be repeatedly modified.
     var reuseIdentifier = "MoreCell"
+    var fontSize:CGFloat = 16
+
     
     // MARK: - Table view data source
     // This sets the number of sections for this table view. There is only one section needed.0
@@ -76,7 +78,7 @@ class MoreTableViewController: UITableViewController {
         // Set the text to be the that of the rowNames object at each index.
         cell.moreTextLabel.text = rowNames[indexPath.row]
         cell.moreTextLabel.textColor = UIColor.white
-        cell.moreTextLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        cell.moreTextLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         
         // Set the image of the chevron images to be the same for each row as it will always be present.
         cell.chevronImage.image = UIImage(systemName: "chevron.right")

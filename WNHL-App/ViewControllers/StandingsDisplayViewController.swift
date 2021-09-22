@@ -14,7 +14,7 @@ class StandingsDisplayViewController: UIViewController {
     var titles:[String] = []
     // dataArrays will contain all the arrays for the Standings to populate the view.
     var dataArrays = [[String]]()
-
+    var fontSize:CGFloat = 24
     // The "data" array is what will populate the cells in the spreadsheet.
     var data = [
         "1", "Atlas Steelers", "28", "18", "7", "3", "39", "166", "97",
@@ -54,6 +54,7 @@ extension StandingsDisplayViewController:UITableViewDelegate, UITableViewDataSou
         cell.spreadsheetData = dataArrays[indexPath.row]
         // This array will set the label above each spreadsheet given an array
         cell.titleLabel.text = titles[indexPath.row]
+        cell.titleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         // noSelectionStyle denotes that there will be no highlight when an object is clicked
         cell.noSelectionStyle()
         // this will reload the view when all the data is completely loaded in

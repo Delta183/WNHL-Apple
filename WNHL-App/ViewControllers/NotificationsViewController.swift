@@ -15,7 +15,7 @@ class NotificationsViewController: UIViewController {
     // This attribute tracks the size of the screen such that text formatting can be with respect to said size
     let screenSize: CGRect = UIScreen.main.bounds
     // The font to be used for the text by default.
-    var fontSize:CGFloat = 28
+    var titleFontSize:CGFloat = 28
     
     override func viewDidLoad() {
         // The info label is set here as opposed to setting a static text view on the Notifications View
@@ -23,10 +23,10 @@ class NotificationsViewController: UIViewController {
         // Removing the limit is done through setting number of lines to 0 as labels initially can only do one line
         infoLabel.numberOfLines = 0
         // Setting the notificationLabel's font to that of the set fontSize
-        notificationLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+        notificationLabel.font = UIFont.systemFont(ofSize: titleFontSize, weight: .bold)
         // Setting the font size of the text to fit better on smaller screens if the screen width is lower than that of iPhone 11/12
         if screenSize.width < 414 {
-            fontSize = 24
+            titleFontSize = 24
         }
         // Providing functionality to the button such that it calls the buttonClicked function on touch.
         let button = backButton;
