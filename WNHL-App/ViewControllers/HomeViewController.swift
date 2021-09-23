@@ -19,5 +19,6 @@ class HomeViewController: UIViewController {
         scheduleTitleLabel.text = "Extreme Season"
         scheduleTitleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         super.viewDidLoad()
+    }
 }
 

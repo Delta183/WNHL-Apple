@@ -44,7 +44,7 @@ class SingleTeamViewController: UIViewController {
         teamLogo.image = UIImage(named: getImageNameFromTeamName(teamName: teamNameString))
         
         // Set colour of background
-        self.view.backgroundColor = getColorFromTeamId(teamNameString: teamNameString)
+        self.view.backgroundColor = getColorFromTeamId(teamName: teamNameString)
         
         // Effectively allow the scroll view to actually scroll by increasing the size of the content to be bigger than the base height
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+250)
