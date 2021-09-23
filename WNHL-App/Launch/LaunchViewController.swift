@@ -69,6 +69,7 @@ class LaunchViewController: UIViewController {
         
     }
         
+    
     func waitForConnection(){
         textLabel.text = "Waiting for Connection..."
         while(NetworkManager.shared.isConnected() == false){
@@ -79,6 +80,9 @@ class LaunchViewController: UIViewController {
         }
     }
     
+    /**
+     Basic function with a completion handler that will run the body to completion prior to calling its completion tag and proceeding execution of the application as a whole.
+     */
     func do_stuff(onCompleted: () -> ()) {
         
         let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/", launchView: self)
@@ -97,6 +101,10 @@ class LaunchViewController: UIViewController {
         onCompleted()
     }
     
+    /**
+     Checks of the defaults of the key isAppAlreadyLaunchedOnce to check if the app is experiencing its first launch or a subsequent launch.
+     - Returns: True if the app has already launched once as the app is set true on the first run and is otherwise nil prior to that. In that case, False is returned.
+     */
     func isAppAlreadyLaunchedOnce()->Bool{
         let defaults = UserDefaults.standard
         

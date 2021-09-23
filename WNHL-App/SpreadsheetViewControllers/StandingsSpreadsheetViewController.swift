@@ -18,9 +18,11 @@ class StandingsSpreadsheetViewController: UITableViewCell, UICollectionViewDeleg
     // reuseIdentifiers for the respective cells of the collection views such that they can be referenced here
     let reuseIdentifierData = "cell"
     let reuseIdentifierHeader = "headerCell"
+    // fontSize will be used to control the font size of the data
     var fontSize:CGFloat!
     // The static set of items for the headers in the spreadsheet.
     var headerItems = ["Pos", "Team", "GP", "W", "L", "T", "PTS", "GF", "GA"]
+    // screenSize contains the dimensions of the screen so that the width and height can be referred to.
     let screenSize: CGRect = UIScreen.main.bounds
     // The arrays housing the data for each respective collection view
     var spreadsheetData:[String] = []
@@ -40,13 +42,13 @@ class StandingsSpreadsheetViewController: UITableViewCell, UICollectionViewDeleg
     }
     
     
-    // This function will set the layout the cells for the 5 spreadsheets of this class
+    // This function will set the layout the cells for the spreadsheets of this class
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         // Calculate the width of the screen as this is a subview within a subview and thus getting the parent is not achievable
         let containerWidth = screenSize.width - 40
 
-        // Max width of this component is 374
+        // Max width of this component is 374 for the iPhone 11 variant. It is the basis for determining the correct width for every device
         var cellWidth:CGFloat = CGFloat()
         // Team title
         if indexPath.row == 1 || ((indexPath.row - 1) % 9) == 0 {
@@ -70,7 +72,7 @@ class StandingsSpreadsheetViewController: UITableViewCell, UICollectionViewDeleg
     }
     
     
-    // make a cell for each cell index path
+    // make a cell for each cell at each index
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Check if the width of the screen is less than that of the iPhone 11, adjust the font to be smaller such that the text will fit.
         if screenSize.width < 414 {

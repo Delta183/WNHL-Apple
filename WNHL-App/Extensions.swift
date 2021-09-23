@@ -10,11 +10,19 @@ import Swift
 import UIKit
 import SQLite
 
-// Put to parent view
+// This extensions of the UIViewController will allow all the functions within to be used by any UIViewController classes
 extension UIViewController{
+    
+    /**
+     Creates a black label with white text to display on the bottom of the screen displaying the provided message with provided font. It is meant to resemble a toast from Android OS.
+
+     - Parameter message: Text that will be displayed in the
+     - Parameter font: The size of the font for the message
+
+     */
     func showToast(message : String, font: UIFont) {
-        // This may have to change to be 1/10 of the width
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/10 , y: self.view.frame.size.height-100, width: 325, height: 35))
+        // Setting the properties of the label
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.font = font
@@ -24,6 +32,7 @@ extension UIViewController{
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
         self.view.addSubview(toastLabel)
+        // Add the animation for the toast to fade out slowly
         UIView.animate(withDuration: 3.0, delay: 1.0, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: {(isCompleted) in
@@ -31,6 +40,13 @@ extension UIViewController{
         })
     }
     
+    /**
+     Get the image string for the team's logo given the team's name.
+
+     - Parameter teamName: The name of the team.
+
+     - Returns: The image name for the logo from the assets.
+     */
     func getImageNameFromTeamName(teamName:String) -> String {
         if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
             return "steelers_logo"
@@ -55,24 +71,30 @@ extension UIViewController{
         }
     }
     
-    // Function to give the view a special background colour dependent on the team that was selected.
-    func getColorFromTeamId(teamNameString: String) -> UIColor{
-        if teamNameString.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
+    /**
+     This function returns a color object depedent on the team name given.
+
+     - Parameter teamName: The name of the team.
+
+     - Returns: The specific color object that matches the team.
+     */
+    func getColorFromTeamId(teamName: String) -> UIColor{
+        if teamName.caseInsensitiveCompare("Atlas Steelers")  == ComparisonResult.orderedSame{
             return UIColor(red: 216.0/255.0, green: 134.0/255.0, blue: 40.0/255.0, alpha: 1.0)
         }
-        else if teamNameString.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
+        else if teamName.caseInsensitiveCompare("Townline Tunnelers") == ComparisonResult.orderedSame{
             return UIColor(red: 0.0/255.0, green: 55.0/255.0, blue: 153.0/255.0, alpha: 1.0)
         }
-        else if teamNameString.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
+        else if teamName.caseInsensitiveCompare("Crown Room Kings") == ComparisonResult.orderedSame{
             return UIColor(red: 21.0/255.0, green: 21.0/255.0, blue: 21.0/255.0, alpha: 1.0)
         }
-        else if teamNameString.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
+        else if teamName.caseInsensitiveCompare("Dain City Dusters") == ComparisonResult.orderedSame{
             return UIColor(red: 224.0/255.0, green: 76.0/255.0, blue: 28.0/255.0, alpha: 1.0)
         }
-        else if teamNameString.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
+        else if teamName.caseInsensitiveCompare("Lincoln Street Legends") == ComparisonResult.orderedSame{
             return UIColor(red: 96.0/255.0, green: 96.0/255.0, blue: 96.0/255.0, alpha: 1.0)
         }
-        else if teamNameString.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
+        else if teamName.caseInsensitiveCompare("Merritt Islanders") == ComparisonResult.orderedSame{
             return UIColor(red: 241.0/255.0, green: 104.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         }
         else{
@@ -85,6 +107,13 @@ extension UIViewController{
 // extension will allow this to be an extension to all UITableViewControllers such that they can all use this function.
 extension UITableViewController{
     
+    /**
+     Schedules a notification given a date to schedule it, an id to track the notification individually and control their state and a title for the notification. Does not schedule if the notification is set in the past or if it is already set.
+     - Parameter dateTimeString: The full date object as a string. Written in the 'yyyy-MM-dd HH:mm:ss' format.
+     - Parameter notificationId: The string version of the game id that will function as the id for this notification
+     - Parameter titleString: The text that will display as the title for the notifications.
+
+     */
     func scheduleLocal(dateTimeString:String, notificationId:String, titleString:String) {
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: notificationId) != true{
@@ -141,12 +170,23 @@ extension UITableViewController{
         }
     }
     
+    /**
+     Delete a scheduled notification matching the id of the provided notification id.
+     - Parameter notificationId: The id of the notification to delete.
+
+     */
     func deleteNotification(notificationId:String){
         let idArray:[String] = [notificationId]
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: idArray)
     }
     
+    /**
+     This function deletes all notifications that may have passed and removes the from the userDefaults to keep the stored data at a minimum.
+
+     - Parameter idList: array of the game ids to review and check if they have passed.
+    
+     */
     func deletePastSetNotifications(idList:[Int64]){
         let defaults = UserDefaults.standard
         let dateFormatter = DateFormatter()
@@ -167,6 +207,11 @@ extension UITableViewController{
         } // end of for loop
     }
     
+    /**
+     Opens Apple Maps with the query constructed from the provided string to pull up the the location of the game in Apple Maps.
+     - Parameter primaryContactFullAddress: The string holding the region and name of the arena.
+     
+     */
     func showLocationOnMaps(primaryContactFullAddress: String) {
         let parts = primaryContactFullAddress.split(separator: "-")
         var direct:String!
@@ -193,7 +238,9 @@ extension UITableViewController{
         }
     }
     
-    // This function will take the string given representing a Youtube Channel ID and use it to take the user to it
+    /**
+     This function will take the user to the Youtube channel of WNHL Welland when it is called.
+     */
     func goToYoutubeChannel() {
         let youtubeChannelId:String = "UCklG51DEXWN6RodvW8Mj3cg"
 
@@ -211,7 +258,9 @@ extension UITableViewController{
         }
     }
     
-    // This function will take the user to a Twitter account given the handle represented by a String
+    /**
+     This function will take the user to the Twitter account of WNHL Welland when it is called.
+     */
     func goToTwitterAccount() {
         let twitterUserID:String = "WNHL2"
         // appURL is the url for the Twitter app in particular
@@ -229,13 +278,22 @@ extension UITableViewController{
         }
     }
     
-    // This function will simply redirect the user to the Google Spreadsheet for WNHL Fantasy in browser.
+    /**
+     This function will take the user to the Google Spreadsheets page for the WNHL Fantasy when it is called.
+     */
     func goToFantasySpreadsheet(){
         let webURL = NSURL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8bY-Of5YbJHk0VTj0LxWyQLYkK2dzWea-2fjd899X3qWMXGysbmE2UhqCdsFBLtJ233WjsGA_IMYJ/pubhtml?gid=0&single=true")!
         let application = UIApplication.shared
         application.open(webURL as URL)
     }
     
+    /**
+     This function converts a string into a Date object entered in the proper format.
+
+     - Parameter dateStr: A string in the formate of a Date object
+
+     - Returns: The Date object constructed from that string
+     */
     func convertStringToDate(dateStr: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -248,12 +306,13 @@ extension UITableViewController{
 
 // This extension will allow all UITableViewCells, even the customs ones made, use the functions within
 extension UITableViewCell {
-    // This function simply toggles the selection style to be that of none so that there won't be a grey highlight on click.
+    /**
+     This function simply toggles the selection style to be that of none so that there won't be a grey highlight on click for cells.
+     */
     func noSelectionStyle() {
         self.selectionStyle = .none
     }
 }
-// Make all tables scroll
 
 extension UIButton {
     
@@ -302,6 +361,13 @@ extension UIImage {
 
 extension NotificationsViewController:ChildToParentProtocol {
     
+    /**
+     Calls on a toast with a message dependent selection state of the particular team's notifications.
+
+     - Parameter isNowChecked: The boolean tracking the state of the selection of the teams to opt in for all their notifications.
+     - Parameter teamNameString: The name of the team.
+
+     */
     func needToPassInfoToParent(with isNowChecked:Bool, teamNameString:String) {
         if isNowChecked{
             self.showToast(message: teamNameString + " Notifications ON", font: .systemFont(ofSize: 13.0))
@@ -313,6 +379,7 @@ extension NotificationsViewController:ChildToParentProtocol {
 }
 
 extension Date {
+    
     /// Returns the amount of years from another date
     func years(from date: Date) -> Int {
         return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
@@ -356,6 +423,9 @@ extension Date {
 
 extension UITableViewController {
     
+    /**
+     Hides the spinner that was instantiated by calling the removeSpinner function.
+     */
     func hideSpinner(){
         parent?.removeSpinner()
     }
