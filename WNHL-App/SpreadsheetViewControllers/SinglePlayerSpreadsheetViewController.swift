@@ -12,6 +12,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     @IBOutlet var headerCollectionView: UICollectionView!
     let reuseIdentifier =  "playerSpreadCell"
     let headerIdentifier = "headerCell"
+    var playerId:Int64!
     var fontSize:CGFloat = 12
     var iphoneOffsetSeasonTeam:CGFloat = 0.00
     var iphoneOffsetLabel:CGFloat = 0.00
@@ -96,6 +97,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
         SinglePlayerSpreadsheetCollectionView?.dataSource = self;
         headerCollectionView?.delegate = self;
         headerCollectionView?.dataSource = self;
+        // print(playerId!)
         super.viewDidLoad()
     }
 }

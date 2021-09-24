@@ -14,6 +14,8 @@ class SinglePlayerBackViewController: UIViewController {
     @IBOutlet weak var playerImageView: UIImageView!
     // Description is linked to the 
     @IBOutlet weak var playerDescription: UITextView!
+    
+    var SinglePlayerSpreadsheetViewController: SinglePlayerSpreadsheetViewController?
     // This attribute tracks the size of the screen such that text formatting can be with respect to said size
     let screenSize: CGRect = UIScreen.main.bounds
     var playerNameString:String!
@@ -21,6 +23,7 @@ class SinglePlayerBackViewController: UIViewController {
     var playerID: Int64!
     var descriptionFontSize:CGFloat = 14
     var fontSize:CGFloat = 22
+    
     
     override func viewDidLoad() {
         
@@ -63,5 +66,12 @@ class SinglePlayerBackViewController: UIViewController {
         navigationController?.popViewController(animated: false)
         // Settting the properties of the transition as in where the transition will begin and end in addition to the type of animation.
         UIView.transition(from: self.view, to: (firstVC?.view)!, duration: 0.85, options: [.transitionFlipFromRight])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SinglePlayerSpreadsheetViewController {
+            self.SinglePlayerSpreadsheetViewController = vc
+            self.SinglePlayerSpreadsheetViewController?.playerId = self.playerID
+        }
     }
 }
