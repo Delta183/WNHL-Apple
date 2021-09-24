@@ -215,7 +215,7 @@ class ScheduleTableViewController: UITableViewController {
             // If the ids array is empty, it means all games have already happened which means the season is over.
             if ids.isEmpty {
                 seasonOver = true
-                // In that case, add all the games of that season such they can all be reviewed.
+                // In that case, add all the games of that season so they can all be reviewed.
                 for game in try db.prepare(games){
                     ids.append(game[id])
                 }

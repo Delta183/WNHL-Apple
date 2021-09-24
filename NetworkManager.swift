@@ -6,29 +6,52 @@
 //
 
 import Foundation
-import Alamofire
+import Network
 
-class NetworkManager {
+final class NetworkManager {
     static let shared = NetworkManager()
-    private init(){}
-    var manager = NetworkReachabilityManager(host: "www.wnhlwelland.ca")
-    fileprivate var isReachable = false
     
-    //MARK:- startMonitoring
-    func startMonitoring(){
-        self.manager?.startListening(onQueue: DispatchQueue.main, onUpdatePerforming: {(networkStatus) in
-            
-            if networkStatus == .reachable(.cellular) || networkStatus == .reachable(.ethernetOrWiFi) {
-                self.isReachable = true
-            }
-            else {
-                self.isReachable = false
-            }
-        })
+    private let queue = DispatchQueue.global()
+    private let monitor: NWPathMonitor
+    
+    public private(set) var isConnected: Bool = false
+    
+    public private(set) var connectionType: ConnectionType?
+    
+    enum ConnectionType {
+        case wifi
+        case cellular
+        case ethernet
     }
     
-    func isConnected() -> Bool {
-        return self.isReachable
+    private init(){
+        monitor = NWPathMonitor()
+        
+    }
+    
+    public func startMonitoring() {
+        monitor.start(queue: queue)
+        monitor.pathUpdateHandler = { [weak self] path in
+            self?.isConnected = path.status == .satisfied
+            
+            self?.getConnectionType(path)
+        }
+    }
+    
+    public func stopMonitoring() {
+        monitor.cancel()
+    }
+    
+    private func getConnectionType(_ path: NWPath) {
+        if path.usesInterfaceType(.wifi) {
+            connectionType = .wifi
+        }
+        else if path.usesInterfaceType(.cellular) {
+            connectionType = .cellular
+        }
+        else if path.usesInterfaceType(.wiredEthernet) {
+            connectionType = .ethernet
+        }
     }
     
 }

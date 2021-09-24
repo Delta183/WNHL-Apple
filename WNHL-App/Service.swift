@@ -350,6 +350,7 @@ class Service {
      Retrieves the Standings Data from the WNHL Wordpress site and inserts it into the DB
      */
     func standingsRequest(endPoint: String, update: Bool){
+        print("STANDINGS REQUEST....")
         let currSeason = self.sharedPref.integer(forKey: "currSeason")
         let prevSeason = self.sharedPref.integer(forKey: "prevSeason")
         AF.request(self.baseUrl+endPoint+"?seasons="+String(currSeason), method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
@@ -610,8 +611,10 @@ class Service {
         var points: Int64?
         var assists: Int64?
         var goals: Int64?
+        var gp: String?
+        var currentteam: Int64? = 0
         let currSeason = self.sharedPref.integer(forKey: "currSeason")
-        let prevSeason = self.sharedPref.integer(forKey: "prevSeason")
+        
         AF.request(self.baseUrl+endPoint+pid, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
             (responseData) in
             guard let data = responseData.data else{
@@ -629,29 +632,41 @@ class Service {
                 
                 //Get Points and Assists and Goals before inserting into DB
                 if player.statistics?.three?[String(currSeason)]?.p == nil {
-                    points = Int64(player.statistics?.three?[String(prevSeason)]?.p ?? "0")
+                    points = 0
                 }
                 else{
                     points = Int64(player.statistics?.three?[String(currSeason)]?.p ?? "0")
                 }
                 if player.statistics?.three?[String(currSeason)]?.g == nil {
-                    goals = Int64(player.statistics?.three?[String(prevSeason)]?.g ?? 0)
+                    goals = 0
                 }
                 else{
                     goals = Int64(player.statistics?.three?[String(currSeason)]?.g ?? 0)
                 }
                 if player.statistics?.three?[String(currSeason)]?.a == nil {
-                    assists = Int64(player.statistics?.three?[String(prevSeason)]?.a ?? 0)
+                    assists = 0
                 }
                 else{
                     assists = Int64(player.statistics?.three?[String(currSeason)]?.a ?? 0)
                 }
-                if update {
-                    let row = self.players.filter(self.id == Int64(pid)!)
-                    try db.run(row.update(self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)))
+                if player.statistics?.three?[String(currSeason)]?.gp == nil {
+                    gp = "0"
                 }
                 else{
-                    try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- Int64(player.team?[0] ?? -1), self.goals <- goals, self.assists <- assists, self.points <- points, self.mediaID <- Int64(player.media ?? 0)]]))
+                    gp = player.statistics?.three?[String(currSeason)]?.gp ?? "0"
+                }
+                if player.team?[0] == 0 {
+                    currentteam = Int64(player.team?[1] ?? 0)
+                }
+                else{
+                    currentteam = Int64(player.team?[0] ?? 0)
+                }
+                if update {
+                    let row = self.players.filter(self.id == Int64(pid)!)
+                    try db.run(row.update(self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- currentteam, self.goals <- goals, self.assists <- assists, self.points <- points, self.gp <- gp, self.mediaID <- Int64(player.media ?? 0)))
+                }
+                else{
+                    try db.run(self.players.insertMany([[self.id <- Int64(player.id ?? 0), self.name <- String(player.name?["rendered"] ?? ""), self.content <- player.content?.rendered, self.seasonID <- "\(String(describing: player.seasons))", self.number <- Int64(player.number ?? -1), self.currTeam <- currentteam, self.goals <- goals, self.assists <- assists, self.points <- points, self.gp <- gp, self.mediaID <- Int64(player.media ?? 0)]]))
                 }
             }
             catch{

@@ -34,13 +34,6 @@ class LaunchViewController: UIViewController {
             loadingIndicator.widthAnchor.constraint(equalToConstant: 60),
             loadingIndicator.heightAnchor.constraint(equalTo: self.loadingIndicator.widthAnchor)
         ])
-        loadingIndicator.animateStroke()
-        if isAppAlreadyLaunchedOnce() {
-            textLabel.text = "Checking for Updates..."
-        }
-        else{
-            textLabel.text = "Downloading Data..."
-        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -56,25 +49,6 @@ class LaunchViewController: UIViewController {
     
     // Called once the view is prepared
     override func viewDidAppear(_ animated: Bool) {
-        print("view appeared")
-        if(NetworkManager.shared.isConnected() == false){
-            waitForConnection()
-        }
-        else {
-            do_stuff {
-                
-            }
-        }
-        //self.performSegue(withIdentifier: "mainSegue", sender: self)
-        
-    }
-        
-    
-    func waitForConnection(){
-        textLabel.text = "Waiting for Connection..."
-        while(NetworkManager.shared.isConnected() == false){
-            //do nothing
-        }
         do_stuff {
             
         }
@@ -84,19 +58,39 @@ class LaunchViewController: UIViewController {
      Basic function with a completion handler that will run the body to completion prior to calling its completion tag and proceeding execution of the application as a whole.
      */
     func do_stuff(onCompleted: () -> ()) {
-        
+        loadingIndicator.animateStroke()
+        if isAppAlreadyLaunchedOnce() {
+            textLabel.text = "Checking for Updates..."
+        }
+        else{
+            textLabel.text = "Downloading Data..."
+        }
         let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/", launchView: self)
         if self.isAppAlreadyLaunchedOnce() {
-            //Update DB
-            service.updateDatabase(updateMain: true)
-            //goToNext()
+            if NetworkManager.shared.isConnected {
+                //Update DB
+                service.updateDatabase(updateMain: true)
+            }
+            else {
+                showToast(message: "No Internet Connection. Cannot Update WNHL App.", font: .systemFont(ofSize: 12))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.performSegue(withIdentifier: "mainSegue", sender: self)
+                }
+            }
         }
         else {
-            //Create DB
-            SQLiteDatabase.init()
-            //Begin Network Calls
-            service.buildDatabase(update: false)
-            //The onCompleted flag is necessary
+            if NetworkManager.shared.isConnected {
+                //Create DB
+                SQLiteDatabase.init()
+                //Begin Network Calls
+                service.buildDatabase(update: false)
+                //The onCompleted flag is necessary
+            }
+            else {
+                showToast(message: "No Internet Connection. Cannot Download Data.", font: .systemFont(ofSize: 12))
+                textLabel.text = "Reconnect to the Internet and Try Again"
+            }
+            
         }
         onCompleted()
     }

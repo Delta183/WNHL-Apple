@@ -42,34 +42,59 @@ class UpdateTableViewController: UITableViewController {
         switch rowNumber {
         // Players
         case 0:
-            //Alert Dialog to denote that the process has begun
-            parent?.showSpinner()
-            // Call the function to update the respective aspect of data depending on which was selected.s
-            service.updatePlayers(tableView: self)
+            if NetworkManager.shared.isConnected {
+                //Alert Dialog to denote that the process has begun
+                parent?.showSpinner()
+                // Call the function to update the respective aspect of data depending on which was selected.s
+                service.updatePlayers(tableView: self)
+            }
+            else {
+                showToast(message: "No Internet Connection. Try Again Later.", font:.systemFont(ofSize: 12))
+            }
             break
         // Game Schedule
         case 1:
-            //Alert Dialog
-            parent?.showSpinner()
-            service.updateEvents(tableView: self)
+            if NetworkManager.shared.isConnected {
+                //Alert Dialog
+                parent?.showSpinner()
+                service.updateEvents(tableView: self)
+            }
+            else {
+                showToast(message: "No Internet Connection. Try Again Later.", font:.systemFont(ofSize: 12))
+            }
             break
         // Teams
         case 2:
-            //Alert Dialog
-            parent?.showSpinner()
-            service.updateTeams(tableView: self)
+            if NetworkManager.shared.isConnected {
+                //Alert Dialog
+                parent?.showSpinner()
+                service.updateTeams(tableView: self)
+            }
+            else {
+                showToast(message: "No Internet Connection. Try Again Later.", font:.systemFont(ofSize: 12))
+            }
             break
         // Standings
         case 3:
-            //Alert Dialog
-            parent?.showSpinner()
-            service.updateStandings(tableView: self)
+            if NetworkManager.shared.isConnected {
+                //Alert Dialog
+                parent?.showSpinner()
+                service.updateStandings(tableView: self)
+            }
+            else {
+                showToast(message: "No Internet Connection. Try Again Later.", font:.systemFont(ofSize: 12))
+            }
             break
         // Everything
         default:
-            //Alert Dialog
-            parent?.showSpinner()
-            service.updateApp(tableView: self)
+            if NetworkManager.shared.isConnected {
+                //Alert Dialog
+                parent?.showSpinner()
+                service.updateApp(tableView: self)
+            }
+            else {
+                showToast(message: "No Internet Connection. Try Again Later.", font:.systemFont(ofSize: 12))
+            }
             break
         }
     }

@@ -501,6 +501,7 @@ extension UIViewController {
 
      */
     func getStandingsInOrder() -> [String]{
+        print("getstandingsinorder")
         var returnArray: [String] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do {
@@ -516,7 +517,9 @@ extension UIViewController {
             let pos = Expression<String?>("pos")
             let id = Expression<Int64>("id")
             let standings = Table("Standings")
+        
             for standing in try db.prepare(standings.order(pos)) {
+                print(standing[pos])
                 returnArray.append(standing[pos] ?? "0")
                 returnArray.append(standing[name])
                 returnArray.append(standing[gp] ?? "0")
@@ -778,7 +781,9 @@ extension UIViewController {
             let id = Expression<Int64>("id")
             //Table Names
             let standings = Table("Standings")
+        
             for team in try db.prepare(standings.filter(id == teamId)){
+                print(team[pos] , team[name], team[gp])
                 returnArray.append(team[pos] ?? "0")
                 returnArray.append(team[name])
                 returnArray.append(team[gp] ?? "0")
