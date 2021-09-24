@@ -17,6 +17,7 @@ class TeamTableViewController: UITableViewController {
     // This attribute will allow this class to access the UserDefaults of the application which is effectively persistent preferences from the user.
     let defaults = UserDefaults.standard
     var teams:[String] = []
+    var fontSize:CGFloat = 16
     // This string will be used to preserve the string from the teams array such that it can be sent to the child view controller.
     var passedTeamNameString:String!
     var passedTeamId:Int64!
@@ -54,7 +55,7 @@ class TeamTableViewController: UITableViewController {
         // Setting the color to be white to ensure the label can be seen on the background.
         cell.teamNameLabel.textColor = UIColor.white
         // Setting the font of the rows in the TableView.
-        cell.teamNameLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        cell.teamNameLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         
         // Setting the image using the system designation for the built in chevron image.
         cell.chevronImage.image = UIImage(systemName: "chevron.right")

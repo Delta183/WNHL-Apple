@@ -47,7 +47,7 @@ class MoreTableViewCell: UITableViewCell {
 
 // The following TableViewCell is used for the listing of players in the Players view through the More View
 class PlayerTableViewCell: UITableViewCell {
-    @IBOutlet weak var playerText: UILabel!
+    @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var chevronImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

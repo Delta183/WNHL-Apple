@@ -201,7 +201,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="WNHL_Logo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="oDY-sz-00s">
-                                <rect key="frame" x="79" y="320" width="256" height="256"/>
+                                <rect key="frame" x="79" y="319" width="256" height="257"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -2024,7 +2024,7 @@
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <connections>
                                     <outlet property="chevronImage" destination="KB0-1j-rD8" id="OC4-bf-bky"/>
-                                    <outlet property="playerText" destination="Vxq-5n-Ihf" id="uiM-Ff-tqC"/>
+                                    <outlet property="playerNameLabel" destination="Vxq-5n-Ihf" id="uiM-Ff-tqC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

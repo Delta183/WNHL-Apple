@@ -18,13 +18,12 @@ class StatisticsViewController: UIViewController {
     var fontSize:CGFloat = 28
 
     override func viewDidLoad() {
-        // Setting the font of the label holding the title.
-        statsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
-
         // Checking the width to see if the phone is not that of an iPhone 11/12 such that the text fits on smaller devices.
         if screenSize.width < 414 {
             fontSize = 22
         }
+        // Setting the font of the label holding the title.
+        statsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         // Providing functionality to the button such that it calls the buttonClicked function on touch.
         let button = backButton;
         // The button will be called specifically when the inside of the button is clicked

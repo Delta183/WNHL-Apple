@@ -8,20 +8,29 @@
 import UIKit
 import SQLite
 
+// This spreadsheet refers to the first spreadsheet in the SingleTeamSpreadsheetViewController that is immediately below the title of that view
 class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate{
-    let screenSize: CGRect = UIScreen.main.bounds
+    // singleTeamCollectionView will hold the data containing the data of the standings which go here
     @IBOutlet var singleTeamCollectionView: UICollectionView!
+    // headerCollectionView is the spreadsheet that is identical to size as the one with the actual data and exists to act as the row for the titles of each column.
     @IBOutlet var headerCollectionView: UICollectionView!
+    // reuseIdentifier for the cells of the actual spreadsheets with the data
     let reuseIdentifier = "teamSpreadsheetCell"
-    let reuseIdentifier2 = "headerCell"
+    // reuseIdentifierHeader for the cells of the header collection view
+    let reuseIdentifierHeader = "headerCell"
+    // teamId is the passed variable from the previous view such that this spreadsheet can fetch the correct data
     var teamId:Int64!
     var fontSize:CGFloat!
-    var data: [String] = []
+    // screenSize contains the dimensions of the screen so that the width and height can be referred to.
+    let screenSize: CGRect = UIScreen.main.bounds
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-    
-    
+    // The strings that will go in each cell of the header collection view
     var headerItems: [String] = ["Pos","Team","GP","W","L","T","PTS","GF","GA"]
+    // data is the array holding the information for the spreadsheet to display
+    var data: [String] = []
+
     
+    // Set the number of items in the sole section, in other words, tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == singleTeamCollectionView{
             return self.data.count
@@ -31,9 +40,11 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
         }
     }
     
+    // This function will set the layout the cells for the spreadsheets of this class in regard to width and height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        // containerWidth tracks the wideth of the specific containerView holding this class.
         let containerWidth = view.frame.size.width
-        // Max width of this component is 374
+        // Max width of this component is 374 for the iPhone 11 variant. It is the basis for determining the correct width for every device
         var cellWidth:CGFloat = CGFloat()
         // Team title
         if indexPath.row == 1 || ((indexPath.row - 1) % 9) == 0 {
@@ -52,13 +63,16 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
         return CGSize(width: cellWidth, height: 22)
     }
     
+    // make a cell for each cell at each index
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // Check if the width of the screen is less than that of the iPhone 11, adjust the font to be smaller such that the text will fit.
         if screenSize.width < 414 {
             fontSize = 10
         }
         else{
             fontSize = 12
         }
+        // Check for the correct collection view prior to populating the cell.
         if collectionView == singleTeamCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! TeamSpreadsheetCollectionViewCell1
             cell.dataLabel1.text = self.data[indexPath.row]
@@ -66,7 +80,7 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
             return cell
         }
         else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier2, for: indexPath as IndexPath) as! headerFirstSingleTeam
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader, for: indexPath as IndexPath) as! headerFirstSingleTeam
             cell.headerLabel.text = self.headerItems[indexPath.row]
             cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
             cell.backgroundColor = UIColor.white
@@ -76,12 +90,14 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
     }
     
     override func viewDidLoad() {
+        // Populate the array of the data array with the Standings information from the database
         data = getStandingsFromTeamId(teamId: teamId)
-        super.viewDidLoad()
+        // Set the delegate and datasource of all collectionViews to be this class.
         singleTeamCollectionView?.delegate = self;
         singleTeamCollectionView?.dataSource = self;
         headerCollectionView?.delegate = self;
         headerCollectionView?.dataSource = self;
+        super.viewDidLoad()
     }
 
 }

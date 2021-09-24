@@ -9,26 +9,36 @@ import UIKit
 import SQLite
 
 class SingleTeamTableViewController: UITableViewController {
+   
+    @IBOutlet var TeamScheduleTableView: UITableView!
+    // variable to track the size of the phone screen such that text changes can be made to smaller devices
     let screenSize: CGRect = UIScreen.main.bounds
+    // DataFormatters that exist so that the date can be converted to a more human readable format as opposed to how it is stored in the database.
     let inputDateFormatter = DateFormatter()
     let outputDateFormatter = DateFormatter()
+    // Same as above but converting the time to a more human readable format.
     let inputTimeFormatter = DateFormatter()
     let outputTimeFormatter = DateFormatter()
     let dateFormatter = ISO8601DateFormatter()
-    
+    // Get the current time by instantiating a Date object with no parameters.
     let currentTime = Date()
+    // This attribute will allow this class to access the UserDefaults of the application which is effectively persistent preferences from the user.
     let defaults = UserDefaults.standard
+    // identifier fot the cell to be modified of this TableView
     let reuseIdentifier = "gameListingCell"
-    @IBOutlet var TeamScheduleTableView: UITableView!
+    // This is responsible for the height of the spacing between each row in pixels
     let cellSpacingHeight: CGFloat = 30
+    // Setting the font size for the text of the elements in the table view cells.
     var fontSize:CGFloat = 15
+    // Variable tracking the teamId that is passed in from a previous view so that the stats and games information can be populated given the correct team id.
     var teamId:Int64!
-    var ids: [Int64] = []
+    // Array holding the ids for all the games that will be displayed to the table view.
+    var gameIds: [Int64] = []
     // MARK: - Table view data source
     
     // Set the number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.ids.count
+        return self.gameIds.count
     }
     
     // Set the number of rows in each section
@@ -51,7 +61,7 @@ class SingleTeamTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = TeamScheduleTableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRow(at: indexPath!) as! SingleTeamTableViewCell
-        let gameIdString = String(ids[indexPath!.section])
+        let gameIdString = String(gameIds[indexPath!.section])
         
         let alertTitle:String = currentCell.titleLabel.text!
         // Create the alert with Team vs Team String as a title and no message
@@ -72,7 +82,7 @@ class SingleTeamTableViewController: UITableViewController {
                 self.defaults.setValue(false, forKey: gameIdString)
             }
             else{
-                let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
+                let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.gameIds[indexPath!.section])
                 self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
             }
         }))
@@ -84,30 +94,38 @@ class SingleTeamTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Instantiate the cell as the custom TableViewCell made for this collection view.
+        let cell = self.TeamScheduleTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SingleTeamTableViewCell
         if screenSize.width < 414 {
+            // Set the font of the dateLabel programmatically with a font of 15 or 14 if the width of the screen is lesser that that of iPhone 11
             fontSize = 14
         }
-        let cell = self.TeamScheduleTableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SingleTeamTableViewCell
-        let dateInputString = inputDateFormatter.date(from: getDateStringFromTeamId(gameId: self.ids[indexPath.section]))
+        // Convert the full date object from the database into a more human readable string using the input and output DateFormatters
+        let dateInputString = inputDateFormatter.date(from: getDateStringFromTeamId(gameId: self.gameIds[indexPath.section]))
         let dateOutputString:String = outputDateFormatter.string(from: dateInputString!)
-        cell.dateLabel.text = dateOutputString
-        // Set the font of the dateLabel programmatically with a font of 15
-        cell.dateLabel.font = UIFont.systemFont(ofSize: fontSize)
-        
-        let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.ids[indexPath.section]))
+        // Same as above but for the time object.
+        let timeInputString = inputTimeFormatter.date(from: getTimeStringFromTeamId(gameId: self.gameIds[indexPath.section]))
         let timeOutputString: String = outputTimeFormatter.string(from: timeInputString!) //pass Date here
-        let isoDate = getGameDateString(gameId: self.ids[indexPath.section])+"T"+getGameTimeString(gameId: self.ids[indexPath.section])+"+0000"
+        let isoDate = getGameDateString(gameId: self.gameIds[indexPath.section])+"T"+getGameTimeString(gameId: self.gameIds[indexPath.section])+"+0000"
         let gameDate = dateFormatter.date(from: isoDate)!
+        
+        // Set the dateLabel's text to be that fo the dateOutputString that was converted
+        cell.dateLabel.text = dateOutputString
+        cell.dateLabel.font = UIFont.systemFont(ofSize: fontSize)
+        // Check if the current time of the game, if it has already passed then set the score for that game
         if currentTime < gameDate {
             cell.pointsLabel.text = timeOutputString
         }
+        // Otherwise, set the time for the game since it would be upcoming if it fails the first case
         else{
-            cell.pointsLabel.text = getGameScoreString(gameId: self.ids[indexPath.section])
+            cell.pointsLabel.text = getGameScoreString(gameId: self.gameIds[indexPath.section])
         }
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
-        cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.ids[indexPath.section]))
+        // Set the locationLabel with the name from the database given the game id.
+        cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.gameIds[indexPath.section]))
         cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize)
-        cell.titleLabel.text = getTitleFromGameId(gameId: self.ids[indexPath.section])
+        // The same for the title of the game given the gameId
+        cell.titleLabel.text = getTitleFromGameId(gameId: self.gameIds[indexPath.section])
         cell.titleLabel.font = UIFont.systemFont(ofSize: fontSize - 1)
         
         // Set the alignment of the text with respect to the placements of the labels
@@ -116,12 +134,10 @@ class SingleTeamTableViewController: UITableViewController {
         cell.locationLabel.textAlignment = NSTextAlignment.center
         cell.titleLabel.textAlignment = NSTextAlignment.center
         
-        // Setting the images of the Home Team and Away teams Logos
-        
-        // The extension functions for this needs to be changed to the query function when possible
-        // *****
-        cell.homeImage.image = UIImage(named: getImageNameFromTeamId(teamId: getHomeIdFromGameId(gameId: self.ids[indexPath.section])))
-        cell.awayImage.image = UIImage(named: getImageNameFromTeamId(teamId: getAwayIdFromGameId(gameId: self.ids[indexPath.section])))
+        // Setting the images of the Home Team and Away teams Logos by fetching their respective images.
+        // Fetch the game id of the work to get the home team's id from that game and finally get the imageName given the teamId.
+        cell.homeImage.image = UIImage(named: getImageNameFromTeamId(teamId: getHomeIdFromGameId(gameId: self.gameIds[indexPath.section])))
+        cell.awayImage.image = UIImage(named: getImageNameFromTeamId(teamId: getAwayIdFromGameId(gameId: self.gameIds[indexPath.section])))
         // This makes it so that the selection of cells in the table views does not have a graphical effect.
         cell.noSelectionStyle()
         cell.backgroundColor = UIColor.white
@@ -129,22 +145,28 @@ class SingleTeamTableViewController: UITableViewController {
         // Corner radius is used to make the edges much rounder than normal.
         cell.layer.cornerRadius = 24
         cell.clipsToBounds = true
-        
         return cell
     }
     
     override func viewDidLoad() {
+        // Set the format for the input and output of the date formatter objects
         inputDateFormatter.dateFormat = "yyyy-MM-dd"
         outputDateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         inputTimeFormatter.dateFormat = "HH:mm:ss"
         outputTimeFormatter.dateFormat = "h:mm a"
+        // Populate the array with the ids of the games that involve specifically this team.
         getGameIds()
-        deletePastSetNotifications(idList: ids)
+        // Check all previously set notifications if there are in the past and cancel them if they were in the case and also remove them from memory.
+        deletePastSetNotifications(idList: gameIds)
+        // Set the delegate and dataSource for the schedule table to be that of the current view.
         TeamScheduleTableView.delegate = self
         TeamScheduleTableView.dataSource = self
         super.viewDidLoad()
     }
     
+    /**
+     This function interacts with the database and queries all the game ids from the Games table and populates the ids array of SingleTeamTableViewController with all the game ids such that the table view's cells can be created. The query checks for if the team exists as a home or away team for every match to populate the schedule.
+     */
     func getGameIds(){
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -158,7 +180,7 @@ class SingleTeamTableViewController: UITableViewController {
             for game in try db.prepare(games){
                 //if home or away id matches the team id add the game to the list
                 if game[home] == teamId || game[away] == teamId{
-                    ids.append(game[id])
+                    gameIds.append(game[id])
                 }
             }
         }

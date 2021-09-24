@@ -10,29 +10,36 @@ import SQLite
 
 // This class will create and populate the spreadsheets for the Statistics View
 class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    let screenSize: CGRect = UIScreen.main.bounds
+    // GoalsCollectionView, AssistsCollectionView and PointsCollectionView are the collection views containing the data for the spreadsheets
     @IBOutlet var GoalsCollectionView: UICollectionView?
     @IBOutlet var AssistsCollectionView: UICollectionView?
     @IBOutlet var PointsCollectionView: UICollectionView?
+    // The 3 headerCollectionViews will be the titles for the 4 columns of the spreadsheets
     @IBOutlet var headerCollectionView1: UICollectionView!
     @IBOutlet var headerCollectionView2: UICollectionView!
     @IBOutlet var headerCollectionView3: UICollectionView!
+    // reuseIdentifiers for the cells of the actual spreadsheets with the data
     var reuseIdentifier1 = "goalsCell"
     var reuseIdentifier2 = "assistsCell"
     var reuseIdentifier3 = "pointsCell"
+    // reuseIdentifiers for the header collection views such that their cells can be modified
     var reuseIdentifierHeader1 = "headerCell1"
     var reuseIdentifierHeader2 = "headerCell2"
     var reuseIdentifierHeader3 = "headerCell3"
+    // CGFloat object to track the font of all the text
     var fontSize:CGFloat!
-
-
+    // screenSize contains the dimensions of the screen so that the width and height can be referred to.
+    let screenSize: CGRect = UIScreen.main.bounds
+    // The strings that will go in each cell of the header collection views
     var headerItems1 = ["Rank","Player","Team","G"]
     var headerItems2 = ["Rank","Player","Team","A"]
     var headerItems3 = ["Rank","Player","Team","P"]
 
+    // Path string connecting to the database
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    // Table name
     let players = Table("Players")
+    // Column names of the table
     let name = Expression<String>("name")
     let currTeam = Expression<Int64>("currTeam")
     let goal = Expression<Int64>("goals")
@@ -43,6 +50,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     var assists: [String] = []
     var points: [String] = []
     
+    // Set the number of items in the sole section, in other words, tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == GoalsCollectionView{
             return self.goals.count
@@ -58,10 +66,12 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         }
     }
     
+    // This function will set the layout the cells for the spreadsheets of this class in regard to width and height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
+        // containerWidth tracks the wideth of the specific containerView holding this class.
         let containerWidth = view.frame.size.width
-        // Max width of this component is 374
+        // Max width of this component is 374 for the iPhone 11 variant. It is the basis for determining the correct width for every device
         var cellWidth:CGFloat = CGFloat()
         // Rank Column 45
         if indexPath.row == 0 || ((indexPath.row) % 4) == 0 {
@@ -82,13 +92,16 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         return CGSize(width: cellWidth, height: 22)
     }
     
+    // make a cell for each cell at each index
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // Check if the width of the screen is less than that of the iPhone 11, adjust the font to be smaller such that the text will fit.
         if screenSize.width < 414 {
             fontSize = 10
         }
         else{
             fontSize = 12
         }
+        // Check for the correct collection view prior to populating the cell.
         if collectionView == self.GoalsCollectionView {
             // get a reference to our storyboard cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath as IndexPath) as! GoalsCollectionViewCell
@@ -131,7 +144,31 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
             return cell
         }
     }
+   
+    override func viewDidLoad() {
+        // Populate the goals, assists and points arrays with the respective pertinent data
+        getGoals()
+        getAssists()
+        getPoints()
+        // Set the delegate and datasource of all collectionViews to be this class.
+        GoalsCollectionView?.delegate = self;
+        GoalsCollectionView?.dataSource = self;
+        AssistsCollectionView?.delegate = self;
+        AssistsCollectionView?.dataSource = self;
+        PointsCollectionView?.delegate = self;
+        PointsCollectionView?.dataSource = self;
+        headerCollectionView1?.delegate = self;
+        headerCollectionView1?.dataSource = self;
+        headerCollectionView2?.delegate = self;
+        headerCollectionView2?.dataSource = self;
+        headerCollectionView3?.delegate = self;
+        headerCollectionView3?.dataSource = self;
+        super.viewDidLoad()
+    }
     
+    /**
+     Query the database and fetch the information for all the goals from the Players Table and populates the array in StatisticsSpreadsheetViewController with the result of the query.
+     */
     func getGoals(){
         do {
             let db = try Connection("\(path)/wnhl.sqlite3")
@@ -154,6 +191,9 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         }
     }
     
+    /**
+     Query the database and fetch the information for all the assists from the Players Table and populates the array in StatisticsSpreadsheetViewController with the result of the query.
+     */
     func getAssists(){
         do {
             let db = try Connection("\(path)/wnhl.sqlite3")
@@ -176,6 +216,9 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         }
     }
     
+    /**
+     Query the database and fetch the information for all the points from the Players Table and populates the array in StatisticsSpreadsheetViewController with the result of the query.
+     */
     func getPoints(){
         do {
             let db = try Connection("\(path)/wnhl.sqlite3")
@@ -196,25 +239,5 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         catch {
             print(error)
         }
-    }
-    
-    override func viewDidLoad() {
-        // Populate the arrays with the pertinent data
-        getGoals()
-        getAssists()
-        getPoints()
-        super.viewDidLoad()
-        GoalsCollectionView?.delegate = self;
-        GoalsCollectionView?.dataSource = self;
-        AssistsCollectionView?.delegate = self;
-        AssistsCollectionView?.dataSource = self;
-        PointsCollectionView?.delegate = self;
-        PointsCollectionView?.dataSource = self;
-        headerCollectionView1?.delegate = self;
-        headerCollectionView1?.dataSource = self;
-        headerCollectionView2?.delegate = self;
-        headerCollectionView2?.dataSource = self;
-        headerCollectionView3?.delegate = self;
-        headerCollectionView3?.dataSource = self;
     }
 }

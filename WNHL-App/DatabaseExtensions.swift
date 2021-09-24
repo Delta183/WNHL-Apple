@@ -13,7 +13,13 @@ import SQLite
 extension UITableViewController{
    
     
-    // This function will return a string of the image set name given a string of a team name.
+    /**
+     Get the image string for the team's logo given the team's id.
+
+     - Parameter teamId: The id of the team.
+
+     - Returns: A string representing the image name for the logo from the assets.
+     */
     func getImageNameFromTeamId(teamId:Int) -> String {
         // Each check of team name is case insensitive.
         if teamId == 940{
@@ -34,12 +40,19 @@ extension UITableViewController{
         else if teamId == 1824{
             return "islanders_logo"
         }
+        // if there is no match for the team's logo, set it to be the WNHL Logo
         else{
             return "WNHL_Logo"
         }
     }
     
-    
+    /**
+     Get the full name of the location given the id of the location from the database.
+
+     - Parameter locationId: The id of the location.
+
+     - Returns: A string representing the name of the location.
+     */
     func getLocationNameFromId(locationId:Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -62,6 +75,13 @@ extension UITableViewController{
         return "N/A"
     }
    
+    /**
+     Get the string form of the date object of a game from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The full date object as a string.
+     */
     func getGameDateString(gameId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -80,6 +100,13 @@ extension UITableViewController{
         return "N/A"
     }
     
+    /**
+     Get the string form of the time from the date object of a game from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The time part of the Date object as a string.
+     */
     func getGameTimeString(gameId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -98,6 +125,13 @@ extension UITableViewController{
         return "N/A"
     }
     
+    /**
+     Get the score of a game from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The score results in the form of a string.
+     */
     func getGameScoreString(gameId: Int64) -> String {
         var returnstring = ""
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
@@ -133,6 +167,13 @@ extension UITableViewController{
         return "No Score Available"
     }
     
+    /**
+     Get the id of the home team of a game from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The id of the home team from the game as an interger.
+     */
     func getHomeIdFromGameId(gameId:Int64) -> Int {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -151,6 +192,13 @@ extension UITableViewController{
         return 0
     }
     
+    /**
+     Get the id of the away team of a game from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The id of the away team from the game as an integer.
+     */
     func getAwayIdFromGameId(gameId:Int64) -> Int {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -169,6 +217,13 @@ extension UITableViewController{
         return 0
     }
     
+    /**
+     Get the title of a game from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The title of the game as a string.
+     */
     func getTitleFromGameId(gameId:Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -187,6 +242,13 @@ extension UITableViewController{
         return "N/A"
     }
     
+    /**
+     Get the location id of a game from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The id for the location of the game as an integer.
+     */
     func getLocationIdFromGameId(gameId:Int64) -> Int64 {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -205,6 +267,13 @@ extension UITableViewController{
         return 0
     }
     
+    /**
+     Get the date (and not the time) of a game as a string from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The string representing the date of the game.
+     */
     func getDateStringFromTeamId(gameId:Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -223,6 +292,13 @@ extension UITableViewController{
         return "N/A"
     }
     
+    /**
+     Get the time (and not the date) of a game as a string from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The string representing the time of the game.
+     */
     func getTimeStringFromTeamId(gameId:Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -241,6 +317,13 @@ extension UITableViewController{
         return "N/A"
     }
     
+    /**
+     Get the full date and time of a game as a string from the database given the game id.
+
+     - Parameter gameId: The id of the game.
+
+     - Returns: The string representing the date and time of the game.
+     */
     func getFullDateTimeStringFromTeamId(gameId:Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -260,6 +343,13 @@ extension UITableViewController{
         return "N/A"
     }
     
+    /**
+     Get all the games of a specific season from the database given the season id.
+
+     - Parameter seasonId: The id of the current season.
+
+     - Returns: An array of strings representing the names of the teams that are participating in the current season.
+     */
     func getTeamsFromSeasonId(seasonId:NSNumber) -> [String] {
         let seasonIdString:String = "\(seasonId)"
         var teamArray:[String] = []
@@ -280,6 +370,13 @@ extension UITableViewController{
         return teamArray
     }
     
+    /**
+     Get the id of a team given the name of the team.
+
+     - Parameter teamName: The name of the team.
+
+     - Returns: The id belonging to that specific team as an integer.
+     */
     func getTeamIdFromTeamName(teamName:String) -> Int64 {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -298,6 +395,13 @@ extension UITableViewController{
         return 0
     }
     
+    /**
+     Get all ids of the games involving a particular team given the id of the team.
+
+     - Parameter teamId: The id of the team.
+
+     - Returns: A list of game ids tracking all the games that involve the team.
+     */
     func getAllGameIdsFromTeamId(teamId:Int64) -> [Int64]{
         var gameIdList:[Int64] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
@@ -319,14 +423,26 @@ extension UITableViewController{
         return gameIdList
     }
     
+    /**
+     Schedules reminders of all the games of a team given an array of all their games. This is specifically used when the user opts in for notifications of a particular team.
+
+     - Parameter idList: List of integers representing the game ids for a team.
+
+     */
     func scheduleAllTeamGames(idList:[Int64]){
       
         for n in 0..<idList.count {
-            // For all the games in the idList, schedule them, they will be overwritten if they are already set
+            // For all the games in the idList, schedule them
             scheduleLocal(dateTimeString: getFullDateTimeStringFromTeamId(gameId: idList[n]), notificationId: String(idList[n]), titleString: getTitleFromGameId(gameId: idList[n]))
         }
     }
     
+    /**
+     Deletes all set notifications of the games of a team given an array of all their games. This is specifically used when the user opts out of notifications of a particular team.
+
+     - Parameter idList: Array of integers representing the ids of the games for a team.
+
+     */
     func deleteAllNotificationsOfTeamGames(idList:[Int64]){
         let defaults = UserDefaults.standard
         for n in 0..<idList.count {
@@ -338,10 +454,13 @@ extension UITableViewController{
             }
 
         }
+        // Upon deletion of the games involving a team, ensure to schedule all games based off the preferences so that games involving other preferences aren't also cancelled.
         updateScheduledGamesFromPreferences()
     }
     
-    // This function checks all the user defaults for the teams
+    /**
+     This function checks all the user defaults for the teams and updates the notifications for those games as well. This is in the case when a new game is added that fits a preference and thus need to ensure that game is also added without requiring user input.
+     */
     func updateScheduledGamesFromPreferences(){
         let defaults = UserDefaults.standard
         let teams = getTeamsFromSeasonId(seasonId: defaults.object(forKey: "currSeason") as! NSNumber)
@@ -375,6 +494,12 @@ extension UIViewController {
         return "N/A"
     }
     
+    /**
+     Get the data to populate the standings spreadsheets.
+     
+     - Returns: An array of the strings matching the order of the data for the spreadsheet.
+
+     */
     func getStandingsInOrder() -> [String]{
         var returnArray: [String] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
@@ -409,6 +534,14 @@ extension UIViewController {
         return returnArray
     }
     
+    
+    /**
+     Get all the games of a specific season from the database given the season id.
+
+     - Parameter seasonId: The id of the current season.
+
+     - Returns: An array of integers representing the ids of the teams that are participating in the current season.
+     */
     func getTeamIds(seasonId:String) -> [Int64] {
         var teamArray:[Int64] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
@@ -428,6 +561,13 @@ extension UIViewController {
         return teamArray
     }
     
+    /**
+     Get the content/description of the player from the database given a player id.
+     
+     - Parameter playerId: The id of the player.
+
+     - Returns: The content of the player as a string.
+     */
     func getPlayerContentFromId(playerId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -464,6 +604,33 @@ extension UIViewController {
 //        //return 0
 //    }
     
+
+    func getStandings() {
+        print("GET STANDINGS")
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do {
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let standings = Table("Standings")
+            let season = Expression<String>("seasonID")
+            let data = Expression<String>("data")
+            for standing in try db.prepare(standings) {
+                print("Season: " , standing[season] , "Data: " , standing[data])
+            }
+            //return Int64(try db.scalar(standings.count))
+        }
+        catch {
+            print(error)
+        }
+        //return 0
+    }
+    
+    /**
+     Get the player id from the database given the name of the player to compare to.
+
+     - Parameter playerName: The name of the player.
+
+     - Returns: An integer representing the player id corresponding to the given player name.
+     */
     func getPlayerIDFromPlayerName(playerName: String) -> Int64 {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -482,6 +649,13 @@ extension UIViewController {
         return -1
     }
     
+    /**
+     Get all the image url for the player from the database given the player id.
+
+     - Parameter playerId: The id of the player.
+
+     - Returns: An string representing the image url of the player
+     */
     func getPlayerImageFromId(playerId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -500,6 +674,13 @@ extension UIViewController {
         return ""
     }
     
+    /**
+    Get the current team of the player from the database given player id.
+
+     - Parameter playerId: The id of the player.
+
+     - Returns: A string representing the current team of player.
+     */
     func getPlayerCurrTeamFromId(playerId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -522,6 +703,14 @@ extension UIViewController {
         return "N/A"
     }
     
+    /**
+    Get the the number of the player from the database given the player id.
+
+     - Parameter playerId: The id of the player.
+
+     - Returns: A string representing the player's number.
+     */
+
     func getPlayerNumberFromId(playerId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -540,6 +729,13 @@ extension UIViewController {
         return "00"
     }
     
+    /**
+    Get the name of the team from the database given the team's id.
+
+     - Parameter teamId: The id of the team.
+
+     - Returns: A string representing the name of the team.
+     */
     func getTeamNameFromTeamId(teamId: Int64) -> String {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do{
@@ -557,7 +753,14 @@ extension UIViewController {
         }
         return "N/A"
     }
-    
+
+    /**
+    Get the data to populate the standings through querying the database for the pertinent information given the team id.
+
+     - Parameter teamId: The id of the team.
+
+     - Returns: An array of strings representing the data for the standings of the team.
+     */
     func getStandingsFromTeamId(teamId: Int64) -> [String] {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         var returnArray: [String] = []
@@ -595,6 +798,13 @@ extension UIViewController {
 }
 
 extension Service {
+    /**
+     Get all the games of a specific season from the database given the season id.
+
+     - Parameter seasonId: The id of the current season.
+
+     - Returns: An array of integers representing the ids of the team that are participating in the current season.
+     */
     func getTeamIds(seasonId:String) -> [Int64] {
         var teamArray:[Int64] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
