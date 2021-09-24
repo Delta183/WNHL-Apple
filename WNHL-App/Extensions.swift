@@ -215,13 +215,21 @@ extension UITableViewController{
     func showLocationOnMaps(primaryContactFullAddress: String) {
         let parts = primaryContactFullAddress.split(separator: "-")
         var direct:String!
-        if primaryContactFullAddress.contains("Arena") || primaryContactFullAddress.contains("arena") {
-            direct = parts[1] + "+," + parts[0] + ",Canada"
+        var arenaName = parts[1]
+        var regionName = parts[0]
+        arenaName.remove(at: arenaName.startIndex)
+        regionName = regionName.dropLast()
+        if arenaName == "Accipiter" || arenaName == "Duliban" {
+            direct = "100+Meridian+Way,+Fonthill"
+        }
+        else if primaryContactFullAddress.contains("Arena") || primaryContactFullAddress.contains("arena") {
+            direct = arenaName + ",+" + regionName
         }
         else{
-            direct = parts[1] + "+Arena," + parts[0] + ",Canada"
+            direct = arenaName + "+Arena,+" + regionName
 
         }
+        print(direct!)
         let testURL: NSURL = NSURL(string: "maps://maps.apple.com/?q=")!
         if UIApplication.shared.canOpenURL(testURL as URL) {
             if let address = direct.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
