@@ -9,6 +9,8 @@ import UIKit
 
 class StandingsDisplayViewController: UIViewController {
     @IBOutlet var standingTableView: UITableView!
+    //Shared Preferences
+    let sharedPref = UserDefaults.standard
     let screenSize: CGRect = UIScreen.main.bounds
     // titles is the array responsible for the title of each spreadsheet on the screen.
     var titles:[String] = []
@@ -27,11 +29,11 @@ class StandingsDisplayViewController: UIViewController {
  
 
     override func viewDidLoad() {
+        let currSeason = self.sharedPref.integer(forKey: "currSeason")
         super.viewDidLoad()
         dataArrays.append(getStandingsInOrder())
         // Call the database functions to populate these here
-        dataArrays = [data]
-        titles = ["2020-2021"]
+        titles.append(getCurrentSeasonName(seasonId: Int64(currSeason)))
         super.viewDidLoad()
     }
 }

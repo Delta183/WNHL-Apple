@@ -107,9 +107,9 @@ class SQLiteDatabase {
                 t.column(goals)
                 t.column(assists)
                 t.column(points)
+                t.column(gp)
                 t.column(mediaID)
                 t.column(mediaURL)
-                //t.column(stats)
             })
             //Create Standings Table
             try db.run(standings.create(ifNotExists: true) { t in

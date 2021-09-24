@@ -476,6 +476,24 @@ extension UITableViewController{
 
 extension UIViewController {
     
+    func getCurrentSeasonName(seasonId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let name = Expression<String>("name")
+            let id = Expression<Int64>("id")
+            //Table Name
+            let seasons = Table("Seasons")
+            for season in try db.prepare(seasons.select(name).filter(id == seasonId)){
+                return season[name]
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "N/A"
+    }
+    
     /**
      Get the data to populate the standings spreadsheets.
      
@@ -483,6 +501,7 @@ extension UIViewController {
 
      */
     func getStandingsInOrder() -> [String]{
+        print("getstandingsinorder")
         var returnArray: [String] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do {
@@ -498,7 +517,9 @@ extension UIViewController {
             let pos = Expression<String?>("pos")
             let id = Expression<Int64>("id")
             let standings = Table("Standings")
+        
             for standing in try db.prepare(standings.order(pos)) {
+                print(standing[pos])
                 returnArray.append(standing[pos] ?? "0")
                 returnArray.append(standing[name])
                 returnArray.append(standing[gp] ?? "0")
@@ -567,6 +588,24 @@ extension UIViewController {
         }
         return ""
     }
+//
+//    func getStandings() {
+//        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+//        do {
+//            let db = try Connection("\(path)/wnhl.sqlite3")
+//            let standings = Table("Standings")
+//            let season = Expression<String>("seasonID")
+//            let data = Expression<String>("data")
+//            for standing in try db.prepare(standings) {
+//                print("Season: " , standing[season] , "Data: " , standing[data])
+//            }
+//            //return Int64(try db.scalar(standings.count))
+//        }
+//        catch {
+//            print(error)
+//        }
+//        //return 0
+//    }
     
 
     func getStandings() {
@@ -742,7 +781,9 @@ extension UIViewController {
             let id = Expression<Int64>("id")
             //Table Names
             let standings = Table("Standings")
+        
             for team in try db.prepare(standings.filter(id == teamId)){
+                print(team[pos] , team[name], team[gp])
                 returnArray.append(team[pos] ?? "0")
                 returnArray.append(team[name])
                 returnArray.append(team[gp] ?? "0")
