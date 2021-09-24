@@ -71,7 +71,7 @@ class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionV
     // make a cell for each cell at each index
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Check if the width of the screen is less than that of the iPhone 11, adjust the font to be smaller such that the text will fit.
-        if screenSize.width < 414 {
+        if screenSize.width < 390 {
             fontSize = 10
         }
         else{
@@ -81,12 +81,13 @@ class SecondSingleTeamSpreadsheetViewController: UIViewController, UICollectionV
         if collectionView == singleTeamCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! TeamSpreadsheetCollectionViewCell2
             cell.dataLabel2.text = self.data[indexPath.row] // The row value is the same as the index of the desired text within the array.
+            cell.dataLabel2.font = UIFont.systemFont(ofSize: fontSize)
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader, for: indexPath as IndexPath) as! headerSecondSingleTeam
             cell.headerLabel.text = self.headerItems[indexPath.row] // The row value is the same as the index of the desired text within the array.
-            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            cell.headerLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
             return cell
         }
     }

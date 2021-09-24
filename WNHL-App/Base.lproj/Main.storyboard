@@ -384,7 +384,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="Bor-Ni-3uj" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="Bor-Ni-3uj" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="36" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SSQ-C7-kOW">
@@ -1709,8 +1709,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FhG-wa-3Xz">
-                                <rect key="frame" x="0.0" y="26" width="374" height="26"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FhG-wa-3Xz">
+                                <rect key="frame" x="0.0" y="26" width="374" height="24"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BFw-QV-OlB">
                                     <size key="itemSize" width="36" height="24"/>
@@ -1747,11 +1747,11 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1gt-DA-Ank">
-                                <rect key="frame" x="0.0" y="3" width="374" height="24"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1gt-DA-Ank">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="27"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="bp1-hv-O4z"/>
+                                    <constraint firstAttribute="height" constant="27" id="bp1-hv-O4z"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BBY-fw-kXm">
                                     <size key="itemSize" width="36" height="24"/>
@@ -1794,14 +1794,14 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h3j-JO-C2i"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="1gt-DA-Ank" secondAttribute="trailing" id="57v-aC-Kjf"/>
                             <constraint firstItem="1gt-DA-Ank" firstAttribute="top" secondItem="gKF-Ot-2tn" secondAttribute="top" id="5Qm-bY-iER"/>
                             <constraint firstItem="1gt-DA-Ank" firstAttribute="trailing" secondItem="FhG-wa-3Xz" secondAttribute="trailing" id="8ag-S3-bzW"/>
                             <constraint firstItem="1gt-DA-Ank" firstAttribute="leading" secondItem="FhG-wa-3Xz" secondAttribute="leading" id="cyS-MH-zuj"/>
                             <constraint firstItem="FhG-wa-3Xz" firstAttribute="bottom" secondItem="h3j-JO-C2i" secondAttribute="bottom" id="iNe-dZ-8TX"/>
-                            <constraint firstItem="FhG-wa-3Xz" firstAttribute="top" secondItem="1gt-DA-Ank" secondAttribute="bottom" id="lLT-og-Mop"/>
+                            <constraint firstItem="FhG-wa-3Xz" firstAttribute="top" secondItem="1gt-DA-Ank" secondAttribute="bottom" constant="-1" id="lLT-og-Mop"/>
                             <constraint firstItem="1gt-DA-Ank" firstAttribute="leading" secondItem="gKF-Ot-2tn" secondAttribute="leading" id="tfw-wY-UbQ"/>
                         </constraints>
                     </view>
@@ -1812,7 +1812,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UdL-JP-Hgs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4439" y="952"/>
+            <point key="canvasLocation" x="4437.68115942029" y="951.5625"/>
         </scene>
         <!--notificationsTableViewController-->
         <scene sceneID="faO-mh-lbI">
@@ -2101,7 +2101,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="W73-Na-1mv" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="W73-Na-1mv" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="36" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LoF-jx-zrA">

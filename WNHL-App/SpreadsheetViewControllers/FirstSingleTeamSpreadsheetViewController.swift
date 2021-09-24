@@ -25,9 +25,11 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
     let screenSize: CGRect = UIScreen.main.bounds
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     // The strings that will go in each cell of the header collection view
-    var headerItems: [String] = ["Pos","Team","GP","W","L","T","PTS","GF","GA"]
+    var headerItems: [String] = ["Pos","GP","W","L","T","PTS","GF","GA"]
     // data is the array holding the information for the spreadsheet to display
-    var data: [String] = []
+    var data: [String] = [
+        "1", "11", "11", "61", "15", "50",  "13", "12"
+    ]
 
     
     // Set the number of items in the sole section, in other words, tell the collection view how many cells to make
@@ -45,28 +47,13 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
         // containerWidth tracks the wideth of the specific containerView holding this class.
         let containerWidth = view.frame.size.width
         // Max width of this component is 374 for the iPhone 11 variant. It is the basis for determining the correct width for every device
-        var cellWidth:CGFloat = CGFloat()
-        // Team title
-        if indexPath.row == 1 || ((indexPath.row - 1) % 9) == 0 {
-            cellWidth = containerWidth * 0.387
-        }
-        // 1 Letter titles (W, L, T)
-        else if indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5 ||
-                    ((indexPath.row - 3) % 9) == 0 || ((indexPath.row - 4) % 9) == 0 || ((indexPath.row - 5) % 9) == 0{
-            cellWidth = containerWidth * 0.0625
-        }
-        // 3 letter titles (Pos, PTS)
-        // 2 letter titles (GP, GF, GA)
-        else{
-            cellWidth = containerWidth * 0.085
-        }
-        return CGSize(width: cellWidth, height: 22)
+        return CGSize(width: containerWidth * 0.125, height: 22)
     }
     
     // make a cell for each cell at each index
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Check if the width of the screen is less than that of the iPhone 11, adjust the font to be smaller such that the text will fit.
-        if screenSize.width < 414 {
+        if screenSize.width < 390 {
             fontSize = 10
         }
         else{
@@ -76,13 +63,14 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
         if collectionView == singleTeamCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! TeamSpreadsheetCollectionViewCell1
             cell.dataLabel1.text = self.data[indexPath.row]
+            cell.dataLabel1.font = UIFont.systemFont(ofSize: fontSize)
             cell.backgroundColor = UIColor.white
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader, for: indexPath as IndexPath) as! headerFirstSingleTeam
             cell.headerLabel.text = self.headerItems[indexPath.row]
-            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            cell.headerLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
             cell.backgroundColor = UIColor.white
             return cell
         }
