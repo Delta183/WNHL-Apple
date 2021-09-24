@@ -357,6 +357,24 @@ extension UITableViewController{
 
 extension UIViewController {
     
+    func getCurrentSeasonName(seasonId: Int64) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let name = Expression<String>("name")
+            let id = Expression<Int64>("id")
+            //Table Name
+            let seasons = Table("Seasons")
+            for season in try db.prepare(seasons.select(name).filter(id == seasonId)){
+                return season[name]
+            }
+        }
+        catch {
+            print(error)
+        }
+        return "N/A"
+    }
+    
     func getStandingsInOrder() -> [String]{
         var returnArray: [String] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
@@ -427,25 +445,24 @@ extension UIViewController {
         }
         return ""
     }
-    
-    func getStandings() {
-        print("GET STANDINGS")
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        do {
-            let db = try Connection("\(path)/wnhl.sqlite3")
-            let standings = Table("Standings")
-            let season = Expression<String>("seasonID")
-            let data = Expression<String>("data")
-            for standing in try db.prepare(standings) {
-                print("Season: " , standing[season] , "Data: " , standing[data])
-            }
-            //return Int64(try db.scalar(standings.count))
-        }
-        catch {
-            print(error)
-        }
-        //return 0
-    }
+//
+//    func getStandings() {
+//        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+//        do {
+//            let db = try Connection("\(path)/wnhl.sqlite3")
+//            let standings = Table("Standings")
+//            let season = Expression<String>("seasonID")
+//            let data = Expression<String>("data")
+//            for standing in try db.prepare(standings) {
+//                print("Season: " , standing[season] , "Data: " , standing[data])
+//            }
+//            //return Int64(try db.scalar(standings.count))
+//        }
+//        catch {
+//            print(error)
+//        }
+//        //return 0
+//    }
     
     func getPlayerIDFromPlayerName(playerName: String) -> Int64 {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String

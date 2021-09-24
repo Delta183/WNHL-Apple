@@ -113,6 +113,9 @@ class Service {
             let db = try Connection("\(path)/wnhl.sqlite3")
             updateRequests = try db.scalar(games.count) + 1
             seasonRequest(endPoint: "seasons/", update: true, updateMain: updateMain)
+            //if last game in table has not happened, update like normal
+            //if last game HAS happened, delete games table, get new games table
+            
             for event in try db.prepare(games) {
                 getEvent(endPoint: "events/", eid: event[self.id] , update: true, updateMain: updateMain)
             }

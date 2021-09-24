@@ -34,9 +34,9 @@ class LaunchViewController: UIViewController {
             loadingIndicator.widthAnchor.constraint(equalToConstant: 60),
             loadingIndicator.heightAnchor.constraint(equalTo: self.loadingIndicator.widthAnchor)
         ])
-        //loadingIndicator.animateStroke()
+        loadingIndicator.animateStroke()
         if isAppAlreadyLaunchedOnce() {
-           // textLabel.text = "Checking for Updates..."
+            textLabel.text = "Checking for Updates..."
         }
         else{
             textLabel.text = "Downloading Data..."
@@ -84,8 +84,8 @@ class LaunchViewController: UIViewController {
         let service = Service(baseUrl: "http://www.wnhlwelland.ca/wp-json/sportspress/v2/", launchView: self)
         if self.isAppAlreadyLaunchedOnce() {
             //Update DB
-            //service.updateDatabase(updateMain: true)
-            goToNext()
+            service.updateDatabase(updateMain: true)
+            //goToNext()
         }
         else {
             //Create DB
@@ -108,9 +108,9 @@ class LaunchViewController: UIViewController {
     }
     
     func goToNext(){
-        //self.textLabel.text = "Finishing Up..."
+        self.textLabel.text = "Finishing Up..."
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            //self.textLabel.text = "Complete!"
+            self.textLabel.text = "Complete!"
             self.performSegue(withIdentifier: "mainSegue", sender: self)
         }
     }

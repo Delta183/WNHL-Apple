@@ -9,29 +9,21 @@ import UIKit
 
 class StandingsDisplayViewController: UIViewController {
     @IBOutlet var standingTableView: UITableView!
+    //Shared Preferences
+    let sharedPref = UserDefaults.standard
     let screenSize: CGRect = UIScreen.main.bounds
     // titles is the array responsible for the title of each spreadsheet on the screen.
     var titles:[String] = []
     // dataArrays will contain all the arrays for the Standings to populate the view.
     var dataArrays = [[String]]()
-
-    // The "data" array is what will populate the cells in the spreadsheet.
-    var data = [
-        "1", "Atlas Steelers", "28", "18", "7", "3", "39", "166", "97",
-        "2", "Townline Tunnelers", "28", "18", "7", "3", "39", "159", "126",
-        "3", "Crown Room Kings", "28", "10", "13", "5", "25", "121", "141",
-        "4", "Welland Stelcobras", "28", "3", "22", "3", "9", "82", "164",
-        "1", "Merritt Islanders", "11", "6", "2", "3", "15", "50", "35",
-        "2", "Townline Tunnelers", "11", "5", "2", "4", "14", "30", "26",
-    ]
  
 
     override func viewDidLoad() {
+        let currSeason = self.sharedPref.integer(forKey: "currSeason")
         super.viewDidLoad()
         dataArrays.append(getStandingsInOrder())
         // Call the database functions to populate these here
-        dataArrays = [data]
-        titles = ["2020-2021"]
+        titles.append(getCurrentSeasonName(seasonId: Int64(currSeason)))
         super.viewDidLoad()
     }
 }

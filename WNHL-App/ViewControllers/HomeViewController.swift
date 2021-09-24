@@ -15,5 +15,6 @@ class HomeViewController: UIViewController {
         yearsLabel.text = "1999-2000"
         scheduleTitleLabel.text = "Extreme Season"
         super.viewDidLoad()
+    }
 }
 
