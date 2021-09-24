@@ -123,7 +123,7 @@ class SingleTeamTableViewController: UITableViewController {
         cell.pointsLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         // Set the locationLabel with the name from the database given the game id.
         cell.locationLabel.text = getLocationNameFromId(locationId: getLocationIdFromGameId(gameId: self.gameIds[indexPath.section]))
-        cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize)
+        cell.locationLabel.font = UIFont.systemFont(ofSize: fontSize - 1.5)
         // The same for the title of the game given the gameId
         cell.titleLabel.text = getTitleFromGameId(gameId: self.gameIds[indexPath.section])
         cell.titleLabel.font = UIFont.systemFont(ofSize: fontSize - 1)

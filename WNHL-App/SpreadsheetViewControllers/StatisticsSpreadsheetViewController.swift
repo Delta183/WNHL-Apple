@@ -95,7 +95,7 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
     // make a cell for each cell at each index
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Check if the width of the screen is less than that of the iPhone 11, adjust the font to be smaller such that the text will fit.
-        if screenSize.width < 414 {
+        if screenSize.width < 390 {
             fontSize = 10
         }
         else{
@@ -128,19 +128,19 @@ class StatisticsSpreadsheetViewController: UIViewController, UICollectionViewDel
         else if collectionView == self.headerCollectionView1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader1, for: indexPath as IndexPath) as! headerGoals
             cell.headerLabel.text = self.headerItems1[indexPath.row]
-            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            cell.headerLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
             return cell
         }
         else if collectionView == self.headerCollectionView2{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader2, for: indexPath as IndexPath) as! headerAssists
             cell.headerLabel.text = self.headerItems2[indexPath.row]
-            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            cell.headerLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierHeader3, for: indexPath as IndexPath) as! headerPoints
             cell.headerLabel.text = self.headerItems3[indexPath.row]
-            cell.headerLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
+            cell.headerLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
             return cell
         }
     }
