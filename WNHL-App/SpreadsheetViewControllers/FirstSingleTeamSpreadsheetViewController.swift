@@ -25,7 +25,7 @@ class FirstSingleTeamSpreadsheetViewController: UIViewController, UICollectionVi
     let screenSize: CGRect = UIScreen.main.bounds
     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
     // The strings that will go in each cell of the header collection view
-    var headerItems: [String] = ["Pos","Team","GP","W","L","T","PTS","GF","GA"]
+    var headerItems: [String] = ["Pos","GP","W","L","T","PTS","GF","GA"]
     // data is the array holding the information for the spreadsheet to display
     var data: [String] = []
 

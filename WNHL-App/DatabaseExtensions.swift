@@ -501,7 +501,6 @@ extension UIViewController {
 
      */
     func getStandingsInOrder() -> [String]{
-        print("getstandingsinorder")
         var returnArray: [String] = []
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         do {
@@ -519,7 +518,6 @@ extension UIViewController {
             let standings = Table("Standings")
         
             for standing in try db.prepare(standings.order(pos)) {
-                print(standing[pos])
                 returnArray.append(standing[pos] ?? "0")
                 returnArray.append(standing[name])
                 returnArray.append(standing[gp] ?? "0")
@@ -588,44 +586,8 @@ extension UIViewController {
         }
         return ""
     }
-//
-//    func getStandings() {
-//        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-//        do {
-//            let db = try Connection("\(path)/wnhl.sqlite3")
-//            let standings = Table("Standings")
-//            let season = Expression<String>("seasonID")
-//            let data = Expression<String>("data")
-//            for standing in try db.prepare(standings) {
-//                print("Season: " , standing[season] , "Data: " , standing[data])
-//            }
-//            //return Int64(try db.scalar(standings.count))
-//        }
-//        catch {
-//            print(error)
-//        }
-//        //return 0
-//    }
-    
 
-    func getStandings() {
-        print("GET STANDINGS")
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        do {
-            let db = try Connection("\(path)/wnhl.sqlite3")
-            let standings = Table("Standings")
-            let season = Expression<String>("seasonID")
-            let data = Expression<String>("data")
-            for standing in try db.prepare(standings) {
-                print("Season: " , standing[season] , "Data: " , standing[data])
-            }
-            //return Int64(try db.scalar(standings.count))
-        }
-        catch {
-            print(error)
-        }
-        //return 0
-    }
+   
     
     /**
      Get the player id from the database given the name of the player to compare to.
@@ -769,7 +731,6 @@ extension UIViewController {
         var returnArray: [String] = []
         do{
             let db = try Connection("\(path)/wnhl.sqlite3")
-            let name = Expression<String>("name")
             let gp = Expression<String?>("gp")
             let w = Expression<String?>("w")
             let l = Expression<String?>("l")
@@ -783,9 +744,7 @@ extension UIViewController {
             let standings = Table("Standings")
         
             for team in try db.prepare(standings.filter(id == teamId)){
-                print(team[pos] , team[name], team[gp])
                 returnArray.append(team[pos] ?? "0")
-                returnArray.append(team[name])
                 returnArray.append(team[gp] ?? "0")
                 returnArray.append(team[w] ?? "0")
                 returnArray.append(team[l] ?? "0")
