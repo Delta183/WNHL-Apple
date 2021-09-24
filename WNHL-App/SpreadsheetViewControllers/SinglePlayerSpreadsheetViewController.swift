@@ -13,6 +13,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     let reuseIdentifier =  "playerSpreadCell"
     let headerIdentifier = "headerCell"
     var fontSize:CGFloat = 12
+    var playerID: Int64!
     var iphoneOffsetSeasonTeam:CGFloat = 0.00
     var iphoneOffsetLabel:CGFloat = 0.00
     var backgroundColor:UIColor = UIColor.systemOrange
@@ -21,10 +22,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     var headerItems = ["Season", "Team", "P","G","A","GP"]
     // This array holds the data that will display on the spreadsheet
     // They will be entered in the same order as the header items
-    var spreadsheetData = [
-        "2020-2021", "Lincoln Street Legends", "11", "61", "15", "50"
-    ]
-    
+    var spreadsheetData: [String] = [] 
     // Set the number of items in the sole section, in other words, tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.SinglePlayerSpreadsheetCollectionView{
@@ -91,6 +89,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     }
     
     override func viewDidLoad() {
+        spreadsheetData = getPlayerData(pid: playerID)
         // Set the delegate and datasource of all collectionViews to be this class.
         SinglePlayerSpreadsheetCollectionView?.delegate = self;
         SinglePlayerSpreadsheetCollectionView?.dataSource = self;

@@ -761,6 +761,42 @@ extension UIViewController {
     }
 }
 
+extension SinglePlayerSpreadsheetViewController {
+    
+    
+    func getPlayerData(pid: Int64) -> [String] {
+        let sharedPref = UserDefaults.standard
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let currSeason = sharedPref.integer(forKey: "currSeason")
+        var returnArray: [String] = []
+        do{
+            let db = try Connection("\(path)/wnhl.sqlite3")
+            let team = Expression<Int64>("currTeam")
+            let g = Expression<Int64>("goals")
+            let a = Expression<Int64>("assists")
+            let gp = Expression<String?>("gp")
+            let pts = Expression<String?>("points")
+            let id = Expression<Int64>("id")
+            //Table Names
+            let players = Table("Players")
+        
+            for player in try db.prepare(players.filter(id == pid)){
+                returnArray.append(getCurrentSeasonName(seasonId: Int64(currSeason)))
+                returnArray.append(getTeamNameFromTeamId(teamId: player[team]) )
+                returnArray.append(String(player[g]) )
+                returnArray.append(String(player[a]) )
+                returnArray.append(player[pts] ?? "0")
+                returnArray.append(player[gp] ?? "0")
+            }
+        }
+        catch {
+            print(error)
+        }
+        return returnArray
+    }
+    
+}
+
 extension Service {
     /**
      Get all the games of a specific season from the database given the season id.
