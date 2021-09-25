@@ -76,7 +76,7 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
         // Get the navigation controller holding the View Controllers for Single Player selection
         let navigationController = segue.destination as! UINavigationController
         // Get a reference to the second view controller now that we have the Navigation controller that contains it
-        let secondViewController = navigationController.viewControllers.first as! SinglePlayerFrontViewController
+        let secondViewController = navigationController.viewControllers.first as! SinglePlayerBackViewController
         
         // Set a variable in the second view controller with the playerNameString from this class.
         secondViewController.playerNameString = playerNameString
@@ -84,7 +84,7 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
     
     /**
      This function modifies the filteredPlayers array and updates it to reflect the results of the search and reloads the view to update the UI accordingly.
-     - Parameter searchText: The string of the text in the search bar.
+     - Parameter searchText: The string of the text in the search bar. 
      */
     func searchTableView(searchText:String){
         // When there is no text, filteredData is the same as the original data
