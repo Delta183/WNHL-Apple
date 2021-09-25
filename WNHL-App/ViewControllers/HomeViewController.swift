@@ -9,13 +9,10 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var yearsLabel: UITextField!
-    @IBOutlet weak var scheduleTitleLabel: UITextField!
     var fontSize:CGFloat = 28
-
+    @IBOutlet weak var scheduleTitleLabel: UILabel!
+    
     override func viewDidLoad() {
-        yearsLabel.text = ""
-        yearsLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         scheduleTitleLabel.text = "UPCOMING GAMES"
         scheduleTitleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         super.viewDidLoad()
