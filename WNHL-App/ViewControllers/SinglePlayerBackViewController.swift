@@ -68,10 +68,4 @@ class SinglePlayerBackViewController: UIViewController {
         UIView.transition(from: self.view, to: (firstVC?.view)!, duration: 0.85, options: [.transitionFlipFromRight])
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? SinglePlayerSpreadsheetViewController {
-            self.SinglePlayerSpreadsheetViewController = vc
-            self.SinglePlayerSpreadsheetViewController?.playerId = self.playerID
-        }
-    }
 }
