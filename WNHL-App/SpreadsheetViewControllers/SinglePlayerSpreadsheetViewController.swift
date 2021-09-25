@@ -14,7 +14,6 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     let headerIdentifier = "headerCell"
     var playerId:Int64!
     var fontSize:CGFloat = 12
-    var playerID: Int64!
     var iphoneOffsetSeasonTeam:CGFloat = 0.00
     var iphoneOffsetLabel:CGFloat = 0.00
     var backgroundColor:UIColor = UIColor.systemOrange
@@ -90,7 +89,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     }
     
     override func viewDidLoad() {
-        spreadsheetData = getPlayerData(pid: playerID)
+        spreadsheetData = getPlayerData(pid: playerId)
         // Set the delegate and datasource of all collectionViews to be this class.
         SinglePlayerSpreadsheetCollectionView?.delegate = self;
         SinglePlayerSpreadsheetCollectionView?.dataSource = self;
