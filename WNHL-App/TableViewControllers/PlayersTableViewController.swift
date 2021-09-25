@@ -10,6 +10,7 @@ import SQLite
 
 class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet var PlayerTableView: UITableView!
+    let defaults = UserDefaults()
     // playerNameString refers to the string containing the name of the player which will be passed onto a subview.
     var playerNameString:String!
     // playersArray holds the name of all the players into an array to display to the table. It is the initial table used.
@@ -36,6 +37,8 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
         let currentCell = self.PlayerTableView.cellForRow(at:indexPath!) as! PlayerTableViewCell
         // Set a the passing variable to that of the player name which is in the playerText label of the cell.
         playerNameString = currentCell.playerNameLabel.text
+        // Pass the playerId to the pertinent pages by setting it as a defaults.
+        defaults.set(getPlayerIDFromPlayerName(playerName: playerNameString), forKey: "playerId") 
         // This will segue to the Navigation controller for the Single Player Front and Back Views
         self.performSegue(withIdentifier: "singlePlayerSegue", sender: self)
     }
