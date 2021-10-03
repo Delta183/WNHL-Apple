@@ -204,7 +204,7 @@ class ScheduleTableViewController: UITableViewController {
             //Table Names
             let games = Table("Games")
             //Check if the game has happened or not
-            for game in try db.prepare(games){
+            for game in try db.prepare(games.order(date)){
                 //Get the Game Date and Time
                 let isoDate = game[date]+"T"+game[time]+"+0000"
                 let gameDate = dateFormatter.date(from: isoDate)!
