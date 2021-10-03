@@ -76,7 +76,7 @@ class PlayersTableViewController: UITableViewController, UISearchBarDelegate {
         // Get the navigation controller holding the View Controllers for Single Player selection
         let navigationController = segue.destination as! UINavigationController
         // Get a reference to the second view controller now that we have the Navigation controller that contains it
-        let secondViewController = navigationController.viewControllers.first as! SinglePlayerBackViewController
+        let secondViewController = navigationController.viewControllers.first as! SinglePlayerFrontViewController
         
         // Set a variable in the second view controller with the playerNameString from this class.
         secondViewController.playerNameString = playerNameString

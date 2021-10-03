@@ -33,7 +33,12 @@ class SinglePlayerFrontViewController: UIViewController {
         playerNumber = getPlayerNumberFromId(playerId: playerID)
         // Setting the player image by fetching it from the database using the player Id
         playerImageURL = getPlayerImageFromId(playerId: playerID)
-        let playerImage = UIImage(url: URL(string: playerImageURL))
+        if playerImageURL == "" || playerImageURL == "N/A" {
+            // if the image is nil, then it means the image could not be loaded properly or it did not exist for the player, in which case it defaults to the WNHL Logo.
+            playerImageView.image = UIImage(named: "WNHL_Logo")
+        }else{
+            playerImageView.kf.setImage(with: URL(string: playerImageURL))
+        }
         
         // This sets the values for all the labels in the view
         symbolLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
@@ -48,13 +53,6 @@ class SinglePlayerFrontViewController: UIViewController {
         whiteLabel.layer.borderWidth = 10.0
         whiteLabel.layer.borderColor = UIColor.systemOrange.cgColor
         
-        // if the image is nil, then it means the image could not be loaded properly or it did not exist for the player, in which case it defaults to the WNHL Logo.
-        if playerImage == nil{
-            playerImageView.contentMode = .scaleAspectFit
-            playerImageView.image = UIImage(named: "WNHL_Logo")
-        }else{
-            playerImageView.image = playerImage
-        }
         // Providing functionality to the button such that it calls the buttonClicked function on touch.
         let button = backButton;
         button?.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
