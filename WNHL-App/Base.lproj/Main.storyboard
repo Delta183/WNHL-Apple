@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BKQ-co-krb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BKQ-co-krb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -73,7 +74,7 @@
                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="scheduleCell" id="JJR-w0-K1v" customClass="ScheduleTableViewCell" customModule="WNHL_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="374" height="105"/>
+                                <rect key="frame" x="0.0" y="44.5" width="374" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JJR-w0-K1v" id="L5a-op-Bbk">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="105"/>
@@ -290,7 +291,7 @@
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="standingsCell" id="sWo-BY-2lR" customClass="StandingsSpreadsheetViewController" customModule="WNHL_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="374" height="470"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="470"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sWo-BY-2lR" id="DHS-gy-G10">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="470"/>
@@ -361,7 +362,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="Bor-Ni-3uj" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="Bor-Ni-3uj" customClass="SpreadsheetCollectionViewCell1" customModule="WNHL_App" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="36" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SSQ-C7-kOW">
@@ -496,7 +497,7 @@
                         <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="teamCell" id="jtd-f8-qsg" customClass="TeamTableViewCell" customModule="WNHL_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jtd-f8-qsg" id="Pcn-wt-h2U">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -557,7 +558,7 @@
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MoreCell" rowHeight="50" id="sdJ-jQ-iKa" customClass="MoreTableViewCell" customModule="WNHL_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sdJ-jQ-iKa" id="OOF-Nc-iD0">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -1174,7 +1175,7 @@
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="updateTableCell" rowHeight="50" id="QZB-Af-bH3" customClass="UpdateTableViewCell" customModule="WNHL_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QZB-Af-bH3" id="SrC-x3-fpN">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -1586,7 +1587,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="gameListingCell" id="Exs-cw-Zsm" customClass="SingleTeamTableViewCell" customModule="WNHL_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="374" height="105"/>
+                                <rect key="frame" x="0.0" y="44.5" width="374" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Exs-cw-Zsm" id="qGd-Ny-MMk">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="105"/>
@@ -1801,7 +1802,7 @@
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationTableCell" id="Mub-dK-11k" customClass="NotificationTableViewCell" customModule="WNHL_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mub-dK-11k" id="FWR-MI-dkM">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -1969,7 +1970,7 @@
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="playerCell" id="1wW-Co-0ib" customClass="PlayerTableViewCell" customModule="WNHL_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1wW-Co-0ib" id="Ffo-Sx-3aF">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -2116,18 +2117,6 @@
                                     <segue destination="31G-7b-0lj" kind="embed" id="GvJ-7y-GDb"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sM-ww-10k">
-                                <rect key="frame" x="20" y="44" width="55.5" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="2xa-Lc-s4M"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <imageReference key="image" image="chevron.left" catalog="system" symbolScale="default"/>
-                                </state>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WvF-A3-7ma"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
@@ -2136,7 +2125,6 @@
                             <constraint firstAttribute="bottom" secondItem="5TV-4f-ocs" secondAttribute="bottom" constant="51" id="86Y-7V-Ar7"/>
                             <constraint firstItem="TMk-KM-qVE" firstAttribute="trailing" secondItem="5TV-4f-ocs" secondAttribute="trailing" id="8rP-zP-KzB"/>
                             <constraint firstItem="Hu1-bb-Wvo" firstAttribute="top" secondItem="WvF-A3-7ma" secondAttribute="top" constant="13" id="Axd-Lc-vxt"/>
-                            <constraint firstItem="7sM-ww-10k" firstAttribute="top" secondItem="WvF-A3-7ma" secondAttribute="top" id="EGL-QM-END"/>
                             <constraint firstItem="cBs-ar-CVx" firstAttribute="centerX" secondItem="TMk-KM-qVE" secondAttribute="centerX" id="FHb-CP-RGk"/>
                             <constraint firstItem="Hu1-bb-Wvo" firstAttribute="centerX" secondItem="GwG-eh-3FI" secondAttribute="centerX" id="HSr-KG-xcV"/>
                             <constraint firstItem="74a-H5-d5q" firstAttribute="trailing" secondItem="TMk-KM-qVE" secondAttribute="trailing" id="L8N-rK-vLW"/>
@@ -2147,7 +2135,6 @@
                             <constraint firstItem="TMk-KM-qVE" firstAttribute="leading" secondItem="ahV-LE-r6v" secondAttribute="leadingMargin" id="dlg-PD-ct6"/>
                             <constraint firstItem="Hu1-bb-Wvo" firstAttribute="leading" secondItem="WvF-A3-7ma" secondAttribute="leading" constant="107" id="fyd-CQ-qhO"/>
                             <constraint firstItem="GwG-eh-3FI" firstAttribute="leading" secondItem="ahV-LE-r6v" secondAttribute="leading" id="hyf-zf-T5z"/>
-                            <constraint firstItem="7sM-ww-10k" firstAttribute="leading" secondItem="TMk-KM-qVE" secondAttribute="leading" id="l1V-jM-cu6"/>
                             <constraint firstAttribute="trailing" secondItem="GwG-eh-3FI" secondAttribute="trailing" id="n5f-oW-5pq"/>
                             <constraint firstItem="GwG-eh-3FI" firstAttribute="top" secondItem="Hu1-bb-Wvo" secondAttribute="bottom" constant="5" id="nQH-s4-eUi"/>
                             <constraint firstItem="74a-H5-d5q" firstAttribute="leading" secondItem="Hu1-bb-Wvo" secondAttribute="trailing" constant="23" id="nkU-5Y-TQu"/>
@@ -2158,7 +2145,6 @@
                     <navigationItem key="navigationItem" id="K8H-Qi-71a"/>
                     <size key="freeformSize" width="414" height="667"/>
                     <connections>
-                        <outlet property="backButton" destination="7sM-ww-10k" id="TEV-YG-mhn"/>
                         <outlet property="playerDescription" destination="TMk-KM-qVE" id="VGV-Ge-BLD"/>
                         <outlet property="playerImageView" destination="Hu1-bb-Wvo" id="HXW-E1-hIm"/>
                         <outlet property="playerNameLabel" destination="GwG-eh-3FI" id="Xxx-59-CCN"/>
@@ -2262,7 +2248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZN-WR-l4M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6983" y="1457"/>
+            <point key="canvasLocation" x="6987" y="1930"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GVi-Sv-ijH">
@@ -2274,7 +2260,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="hfv-Yb-3NB" kind="relationship" relationship="rootViewController" id="DQj-lt-HpD"/>
+                        <segue destination="gSS-HE-0Hr" kind="relationship" relationship="rootViewController" id="mUN-W9-z1D"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a9a-3H-2EP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
