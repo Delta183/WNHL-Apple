@@ -90,13 +90,13 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     }
     
     override func viewDidLoad() {
+        playerId = Int64(defaults.integer(forKey: "playerId"))
         spreadsheetData = getPlayerData(pid: playerId)
         // Set the delegate and datasource of all collectionViews to be this class.
         SinglePlayerSpreadsheetCollectionView?.delegate = self;
         SinglePlayerSpreadsheetCollectionView?.dataSource = self;
         headerCollectionView?.delegate = self;
         headerCollectionView?.dataSource = self;
-        playerId = Int64(defaults.integer(forKey: "playerId"))
         // print(playerId!)
         super.viewDidLoad()
     }

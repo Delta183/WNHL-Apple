@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2444DD93270A5C0400066B70 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 2444DD92270A5C0400066B70 /* Nuke */; };
+		2444DD96270A627F00066B70 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2444DD95270A627F00066B70 /* Kingfisher */; };
 		249395FD26E869480037CD8E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249395FC26E869480037CD8E /* Service.swift */; };
 		249395FF26E86A400037CD8E /* Standings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249395FE26E86A400037CD8E /* Standings.swift */; };
 		2493960126E86AB90037CD8E /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493960026E86AB90037CD8E /* Games.swift */; };
@@ -156,7 +158,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2444DD96270A627F00066B70 /* Kingfisher in Frameworks */,
 				BB9198F50CADA4575A846E02 /* Pods_WNHL_App.framework in Frameworks */,
+				2444DD93270A5C0400066B70 /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +362,10 @@
 			dependencies = (
 			);
 			name = "WNHL-App";
+			packageProductDependencies = (
+				2444DD92270A5C0400066B70 /* Nuke */,
+				2444DD95270A627F00066B70 /* Kingfisher */,
+			);
 			productName = "WNHL-App";
 			productReference = 9810CF4B26AF6E6900442CD1 /* WNHL-App.app */;
 			productType = "com.apple.product-type.application";
@@ -432,6 +440,10 @@
 				Base,
 			);
 			mainGroup = 9810CF4226AF6E6900442CD1;
+			packageReferences = (
+				2444DD91270A5C0400066B70 /* XCRemoteSwiftPackageReference "Nuke" */,
+				2444DD94270A627F00066B70 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 9810CF4C26AF6E6900442CD1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -963,6 +975,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2444DD91270A5C0400066B70 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.4.1;
+			};
+		};
+		2444DD94270A627F00066B70 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2444DD92270A5C0400066B70 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2444DD91270A5C0400066B70 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		2444DD95270A627F00066B70 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2444DD94270A627F00066B70 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9810CF4326AF6E6900442CD1 /* Project object */;
 }

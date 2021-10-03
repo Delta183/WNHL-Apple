@@ -740,11 +740,13 @@ extension UIViewController {
             let pts = Expression<String?>("pts")
             let pos = Expression<String?>("pos")
             let id = Expression<Int64>("id")
+            let name = Expression<String>("name")
             //Table Names
             let standings = Table("Standings")
         
             for team in try db.prepare(standings.filter(id == teamId)){
                 returnArray.append(team[pos] ?? "0")
+                //returnArray.append(team[name] ?? "n/a")
                 returnArray.append(team[gp] ?? "0")
                 returnArray.append(team[w] ?? "0")
                 returnArray.append(team[l] ?? "0")
@@ -775,7 +777,7 @@ extension SinglePlayerSpreadsheetViewController {
             let g = Expression<Int64>("goals")
             let a = Expression<Int64>("assists")
             let gp = Expression<String?>("gp")
-            let pts = Expression<String?>("points")
+            let pts = Expression<Int64>("points")
             let id = Expression<Int64>("id")
             //Table Names
             let players = Table("Players")
@@ -783,9 +785,9 @@ extension SinglePlayerSpreadsheetViewController {
             for player in try db.prepare(players.filter(id == pid)){
                 returnArray.append(getCurrentSeasonName(seasonId: Int64(currSeason)))
                 returnArray.append(getTeamNameFromTeamId(teamId: player[team]) )
-                returnArray.append(String(player[g]) )
-                returnArray.append(String(player[a]) )
-                returnArray.append(player[pts] ?? "0")
+                returnArray.append(String(player[pts]))
+                returnArray.append(String(player[g]))
+                returnArray.append(String(player[a]))
                 returnArray.append(player[gp] ?? "0")
             }
         }
