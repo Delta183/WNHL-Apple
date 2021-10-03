@@ -23,10 +23,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     var headerItems = ["Season", "Team", "P","G","A","GP"]
     // This array holds the data that will display on the spreadsheet
     // They will be entered in the same order as the header items
-    var spreadsheetData = [
-        "2020-2021", "Lincoln Street Legends", "11", "61", "15", "50"
-    ]
-    
+    var spreadsheetData: [String] = [] 
     // Set the number of items in the sole section, in other words, tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.SinglePlayerSpreadsheetCollectionView{
@@ -93,12 +90,13 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     }
     
     override func viewDidLoad() {
+        playerId = Int64(defaults.integer(forKey: "playerId"))
+        spreadsheetData = getPlayerData(pid: playerId)
         // Set the delegate and datasource of all collectionViews to be this class.
         SinglePlayerSpreadsheetCollectionView?.delegate = self;
         SinglePlayerSpreadsheetCollectionView?.dataSource = self;
         headerCollectionView?.delegate = self;
         headerCollectionView?.dataSource = self;
-        playerId = Int64(defaults.integer(forKey: "playerId"))
         // print(playerId!)
         super.viewDidLoad()
     }

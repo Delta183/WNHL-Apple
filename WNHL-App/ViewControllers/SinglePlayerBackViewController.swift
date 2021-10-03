@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SinglePlayerBackViewController: UIViewController {
     // Connecting the components of the view to the class.
@@ -38,7 +39,7 @@ class SinglePlayerBackViewController: UIViewController {
         // Fetch image url given the playerId
         playerImageURL = getPlayerImageFromId(playerId: playerID)
         // Afterwards, load the image using the url into a UIImage object.
-        let playerImage = UIImage(url: URL(string: playerImageURL))
+        //let playerImage = UIImage(url: URL(string: playerImageURL))
         
         // Set the text and font of the name, teams and description labels
         playerNameLabel.text = playerNameString + " | # 52"
@@ -50,11 +51,11 @@ class SinglePlayerBackViewController: UIViewController {
         playerDescription.font = UIFont.systemFont(ofSize: descriptionFontSize)
         
         // Setting the player image by fetching it from the database using the player Id
-        if playerImage == nil{
+        if playerImageURL == "" || playerImageURL == "N/A" {
         // if the image is nil, then it means the image could not be loaded properly or it did not exist for the player, in which case it defaults to the WNHL Logo.
             playerImageView.image = UIImage(named: "WNHL_Logo")
         }else{
-            playerImageView.image = playerImage
+            playerImageView.kf.setImage(with: URL(string: playerImageURL))
         }
         // Set the corner radius of the image view to make the image view rounded so much so that it appears as a circle.
         playerImageView.layer.cornerRadius = 100

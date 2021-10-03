@@ -9,6 +9,7 @@ target 'WNHL-App' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SQLite.swift', '~> 0.13.0'
   pod 'ReachabilitySwift'
+  pod 'Kingfisher' , '~> 7.0'
 
   # Pods for WNHL-App
 
