@@ -23,12 +23,14 @@ class SinglePlayerBackViewController: UIViewController {
     var playerNameString:String!
     var playerImageURL:String!
     var playerID: Int64!
+    var playerNumber:String!
     var descriptionFontSize:CGFloat = 14
     var fontSize:CGFloat = 22
     
     
     override func viewDidLoad() {
         playerID = Int64(defaults.integer(forKey: "playerId"))
+        playerNumber = getPlayerNumberFromId(playerId: playerID)
         // Setting the font size with respect to the size of the screen.
         if screenSize.width < 414 {
             descriptionFontSize = 13
@@ -41,7 +43,7 @@ class SinglePlayerBackViewController: UIViewController {
         //let playerImage = UIImage(url: URL(string: playerImageURL))
         
         // Set the text and font of the name, teams and description labels
-        playerNameLabel.text = playerNameString + " | # 52"
+        playerNameLabel.text = playerNameString + " | # " + playerNumber
         playerNameLabel.font = UIFont.boldSystemFont(ofSize: fontSize)
         // Fetch the text of the team label and description using the playerID
         playerTeamLabel.text = getPlayerCurrTeamFromId(playerId: playerID)
