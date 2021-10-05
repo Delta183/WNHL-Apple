@@ -8,6 +8,8 @@
 import UIKit
 import SQLite
 import UserNotifications
+
+
 // View Controllers represent each screen, A basic screen is known as a View Controller but a view entirely devoted to say a TableView is a TableViewController. Thus this class is responsible for affecting strictly the table on the Schedule screen.
 class ScheduleTableViewController: UITableViewController {
     
@@ -94,12 +96,14 @@ class ScheduleTableViewController: UITableViewController {
                 self.deleteNotification(notificationId: gameIdString)
                 // and furthermore settting the value to the same key to be false to denote it as not currently scheduled
                 self.defaults.setValue(false, forKey: gameIdString)
+                self.parent?.showToast(message: "Reminder Cancelled", font: UIFont.systemFont(ofSize: 13.0))
             }
             // If the boolean in that defaults is false or nil, it means the game is not scheduled anymore (false) or never was to begin with (nil)
             else{
                 // In that case, schedule the game given the dateTime object as a string, the id of the game and the titleString to provide information of which teams this game concerns.
                 let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.ids[indexPath!.section])
                 self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
+                self.parent?.showToast(message: "Reminder Set", font: UIFont.systemFont(ofSize: 13.0))
             }
         }))
         // Cancel has unique styling to denote the level of action it is.

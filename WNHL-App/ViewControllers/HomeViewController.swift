@@ -17,5 +17,6 @@ class HomeViewController: UIViewController {
         scheduleTitleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         super.viewDidLoad()
     }
+    
 }
 

@@ -226,7 +226,7 @@
                         <color key="backgroundColor" red="0.99314123389999998" green="0.98654168840000001" blue="0.94288051129999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Uax-uA-tmq"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" destinationCreationSelector="scheduleTableSegue" id="Uax-uA-tmq"/>
                         <segue destination="U57-3e-aNJ" kind="relationship" relationship="viewControllers" id="Rzv-jj-RlN"/>
                         <segue destination="U6k-m7-M30" kind="relationship" relationship="viewControllers" id="L72-0F-m2W"/>
                         <segue destination="1qo-wa-EjK" kind="relationship" relationship="viewControllers" id="g9C-0M-U5a"/>

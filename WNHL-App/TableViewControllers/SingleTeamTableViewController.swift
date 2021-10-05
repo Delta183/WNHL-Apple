@@ -80,10 +80,12 @@ class SingleTeamTableViewController: UITableViewController {
             if self.defaults.bool(forKey: gameIdString) == true{
                 self.deleteNotification(notificationId: gameIdString)
                 self.defaults.setValue(false, forKey: gameIdString)
+                self.parent?.showToast(message: "Reminder Cancelled", font: UIFont.systemFont(ofSize: 13.0))
             }
             else{
                 let dateTimeString = self.getFullDateTimeStringFromTeamId(gameId: self.gameIds[indexPath!.section])
                 self.scheduleLocal(dateTimeString: dateTimeString, notificationId: gameIdString, titleString: alertTitle)
+                self.parent?.showToast(message: "Reminder Set", font: UIFont.systemFont(ofSize: 13.0))
             }
         }))
         // Cancel has unique styling to denote the level of action it is.

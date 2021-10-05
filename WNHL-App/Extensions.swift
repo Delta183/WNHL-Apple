@@ -21,9 +21,13 @@ extension UIViewController{
 
      */
     func showToast(message : String, font: UIFont) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/10 , y: self.view.frame.size.height-100, width: 325, height: 35))
+        var toastOffset:CGFloat! = 0.0
+        if self.view.frame.size.width <= 375 {
+            toastOffset = 10.0
+        }
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/10 - toastOffset , y: self.view.frame.size.height-125, width: 325, height: 35))
         // Setting the properties of the label
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(1.0)
         toastLabel.textColor = UIColor.white
         toastLabel.font = font
         toastLabel.textAlignment = .center;
@@ -385,6 +389,7 @@ extension NotificationsViewController:ChildToParentProtocol {
         }
     }
 }
+
 
 extension Date {
     
