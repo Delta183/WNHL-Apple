@@ -17,7 +17,7 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     var fontSize:CGFloat = 12
     var iphoneOffsetSeasonTeam:CGFloat = 0.00
     var iphoneOffsetLabel:CGFloat = 0.00
-    var backgroundColor:UIColor = UIColor.systemOrange
+    var backgroundColor:UIColor = UIColor(red: 216.0/255.0, green: 134.0/255.0, blue: 40.0/255.0, alpha: 1.0)
     let screenSize: CGRect = UIScreen.main.bounds
     // The strings that will go in each cell of the header collection view
     var headerItems = ["Season", "Team", "P","G","A","GP"]

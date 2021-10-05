@@ -51,7 +51,7 @@ class SinglePlayerFrontViewController: UIViewController {
         // The white label is behind the playerNumberLabel and playerNameLabel
         // It has a thick border with an orange colour to simulate a sort of cell
         whiteLabel.layer.borderWidth = 10.0
-        whiteLabel.layer.borderColor = UIColor.systemOrange.cgColor
+        whiteLabel.layer.borderColor = UIColor(red: 216.0/255.0, green: 134.0/255.0, blue: 40.0/255.0, alpha: 1.0).cgColor
         
         // Providing functionality to the button such that it calls the buttonClicked function on touch.
         let button = backButton;

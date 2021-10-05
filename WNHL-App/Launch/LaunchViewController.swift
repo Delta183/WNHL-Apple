@@ -23,9 +23,7 @@ class LaunchViewController: UIViewController {
         super.viewDidLoad()
         textLabel.text = ""
         overrideUserInterfaceStyle = .light
-        
-        self.view.backgroundColor = .systemOrange
-        
+                
         self.view.addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
