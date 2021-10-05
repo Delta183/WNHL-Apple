@@ -35,9 +35,11 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        if screenSize.width > 375 && screenSize.width < 414 {
+        if screenSize.width > 375 {
                  iphoneOffsetSeasonTeam = 0.001
-                 iphoneOffsetLabel = 0.00016
+        }
+        else if screenSize.width <= 375{
+            iphoneOffsetLabel = 0.0002
         }
         // Calculate an offset for the iPhone 12 to ensure no clipping occurs for the orange background since the clipping issue only exists with that device
         let containerWidth = view.frame.size.width
@@ -45,18 +47,18 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
         var cellWidth:CGFloat = CGFloat()
         // Season Title = 73
         if indexPath.row == 0 || ((indexPath.row ) % 6) == 0 {
-            cellWidth = containerWidth * (0.195  + iphoneOffsetSeasonTeam)
+            cellWidth = containerWidth * (0.195  + iphoneOffsetSeasonTeam + iphoneOffsetLabel)
         }
         // Team title = 133
         else if indexPath.row == 1 || ((indexPath.row - 1) % 6) == 0 {
-            cellWidth = containerWidth * (0.355 )
+            cellWidth = containerWidth * (0.355 + iphoneOffsetLabel)
         }
         // 1 letter title (P,G,A) = 42
         // 2-3 letter title ( GP) = 42
         else{
             // 0.0748 to 0.07496
             //
-            cellWidth = containerWidth * (0.1122)
+            cellWidth = containerWidth * (0.1122 + iphoneOffsetLabel)
         }
         return CGSize(width: cellWidth, height: 22)
     }
@@ -65,9 +67,8 @@ class SinglePlayerSpreadsheetViewController: UIViewController, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Check if the width of the screen is less than that of the iPhone 11, adjust the font to be smaller such that the text will fit though not to change the background color in this case
         // i.e. iPhone 12
-        if screenSize.width <= 375 {
+        if screenSize.width < 375 {
             fontSize = 10
-
             backgroundColor = UIColor.white
         }
         else if screenSize.width < 414{
